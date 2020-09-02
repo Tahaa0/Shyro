@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Minezoner.IO</title>
+	<title>CF APP</title>
 	<link rel="stylesheet" href="/views/global.css">
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -24,7 +24,7 @@
 			<button class='otherbtn' id='switchreg'>Create an account</button>
 	</div>
 	<div id="reg" style='display:none'>
-		<h1>Join MineZoner</h1>
+		<h1>Join</h1>
 		<span id='regError' class="error"></span>
 		<form id="regform">
 			<input type="text" name='username' id="r_username" placeholder="Username">
@@ -98,7 +98,8 @@ if(regform){
 			'lastName' : r_ln.value
 		}
 		$.post('/api/auth/register',data,function(data,status,xhr){
-			alert(status+' : '+data.responseText);
+			alert("We sent you a link for verification on your email please verify.");
+			window.location.reload();
 		}).fail(function(data,status,xhr){
 			alert(status+' : '+data.responseText);
 		});

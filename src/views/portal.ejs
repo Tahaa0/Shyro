@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>MineZoner.IO</title>
+	<title>CF APP</title>
 	<link rel="stylesheet" href="/views/global.css">
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -11,13 +11,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 </head>
 <body>
-		<a class='slink' id='logout'>Logout</a>
+		<a class='slink' id='logout'><button>Logout</button></a>
 
 	<div id="main">
 		<div id="reglog">
+			<input type="text" placeholder="Step URL (Stripe Order Form)" id='stripeURL'>
+			<input type="text" placeholder="Step URL (Paypal)" id='paypalURL'>
+			<button id='usertoken'>Generate Script</button>
 			<textarea name="" id="script" disabled>
 				
 			</textarea>
+			<img src="/views/ex.png" class='eximg' alt="">
 		</div>
 		<div id="inside">
 			
@@ -61,7 +65,8 @@
 		alert(data.message);
 	});
 
-	$('#script').val("<script></"+"script>")
+	
+
 
 	$('#logout').click(function(){
 		logout(function(err,data){
@@ -74,6 +79,29 @@
 		});
 	})
 
+	$('#usertoken').click(function(){
+		$('#script').val('');
+		$.ajax({
+		  url: $("#paypalURL").val(),
+		  type: "GET",
+		  data: {},
+		  error: function(err) {
+		    alert(err);
+		    console.log(err);
+		  },
+		  success: function(data) {
+		    var secondHalf = data.split("var page_key = '")[1];
+		    var pkey = secondHalf.split("'")[0];
+		    console.log(pkey);
+		    var pathParts = $('#stripeURL').val().split('/');
+			var endURL = pathParts[pathParts.length-1];
+
+			var code = '<script>\r\nvar END_URL = \"'+endURL+'\";\r\nvar PAYPAL_URL = \"'+pkey+'\";\r\n<\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\">'
+			$('#script').val(code);
+
+		  }
+		});
+	});
 </script>
 </body>
 </html>

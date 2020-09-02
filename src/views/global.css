@@ -461,8 +461,13 @@ button{
 	font-family: 'Montserrat';
 	font-weight: 500;
 	resize: none;
-	overflow: hidden;
 	margin-top: 15px;
 	height: 80px;
 
+}
+#paypalURL,#stripeURL{
+	width: 90%;
+}
+.eximg{
+	width: 100%;
 }
