@@ -94,7 +94,7 @@
 		    var pkey = secondHalf.split("'")[0];
 		    console.log(pkey);
 		    var pathParts = $('#stripeURL').val().split('/');
-			var endURL = pathParts[pathParts.length-1];
+			var endURL = pathParts[pathParts.length-1].trim();
 
 			var code = '<script>\r\nvar END_URL = \"'+endURL+'\";\r\nvar PAYPAL_URL = \"'+pkey+'\";\r\n<\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\">'
 			$('#script').val(code);
