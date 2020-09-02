@@ -6,10 +6,121 @@ window.onload = function(){
 
 	if(pathParts[pathParts.length-1] == END_URL){
 		
-		var code = "<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>\r\n<script>\r\n    \r\n        \r\n        $(\'.o2step_step2 .elCreditCardForm\').remove();\r\n        window.buyButton = $(\"a[href=\'#submit-form\'], a[href=\'#submit-form-2step-order\']\");\r\n        var $parentDiv = window.buyButton.parent();\r\n        \/\/window.buyButton.hide();\r\n        $parentDiv.addClass(\'paypal-button\');\r\n      \r\n      var anc = $parentDiv.parent();\r\n      anc.append(window.buyButton);\r\n      $parentDiv.hide();\r\n  \r\n      var ccForm = $(\'.elCreditCardForm\');\r\n        var parDOM = ccForm.parent();\r\n      console.log(parDOM);\r\n        var ccTab = $(\'<div id=\"ccTab\" class=\"a_tab\"><span class=\"ttl\">Credit Card<\/span><\/div>\');\r\n      var ccBody = $(\'<div id=\"ccBody\" class=\"a_body\"><\/div>\');\r\n      var ppTab = $(\'<div id=\"paypalTab\" class=\"a_tab\"><span class=\"ttl\">PayPal<\/span><\/div>\');\r\n      var ppBody = $(\'<div id=\"paypalBody\" class=\"a_body\"><p class=\"a_p\">After submitting, you will be redirected to paypal to purchase securely.<\/p><\/div>\');\r\n      ccTab.on(\'click\',function(){\r\n          console.log(\'E\');\r\n      ppBody.slideUp(200);\r\n            ccBody.slideDown(200);\r\n            ppTab.removeClass(\'nobottom\');\r\n            window.buyButton.show();\r\n            $parentDiv.hide();\r\n        });\r\n        ppTab.click(function(){\r\n      ccBody.slideUp(200);\r\n            ppBody.slideDown(200);\r\n            ppTab.addClass(\'nobottom\');\r\n            window.buyButton.hide();\r\n          $parentDiv.show();\r\n        });\r\n        parDOM.prepend(ppBody);\r\n      parDOM.prepend(ppTab);\r\n        parDOM.prepend(ccBody);\r\n      parDOM.prepend(ccTab);\r\n      ccBody.prepend(ccForm);\r\n        \r\n      \r\n<\/script>\r\n\r\n<script>\r\n  \r\n      $(function () {\r\n        function isPayPalSubscription() {\r\n          return $(\'.activeRadioProduct input\').data(\'product-payment-type\') == \'subscription\';\r\n        }\r\n\r\n        var CREATE_PAYMENT_URL  = \'https:\/\/imadbitgold.clickfunnels.com\/pages\/"+PAYPAL_URL+"\/payment_gateways\/paypal\/payment\/create\/\';\r\n        var EXECUTE_PAYMENT_URL = \'https:\/\/imadbitgold.clickfunnels.com\/pages\/"+PAYPAL_URL+"\/payment_gateways\/paypal\/payment\/execute\/\';\r\n        var CREATE_SUBSCRIPTION_PAYMENT_URL  = \'https:\/\/imadbitgold.clickfunnels.com\/pages\/"+PAYPAL_URL+"\/payment_gateways\/paypal\/subscription\/create\/\';\r\n        var EXECUTE_SUBSCRIPTION_PAYMENT_URL = \'https:\/\/imadbitgold.clickfunnels.com\/pages\/"+PAYPAL_URL+"\/payment_gateways\/paypal\/subscription\/execute\/\';\r\n\r\n        paypal.Button.render({\r\n          env: \'production\',\r\n          commit: true, \/\/ Show a \'Pay Now\' button\r\n          style: {\r\n            size:  \'responsive\',\r\n            shape: \'rect\',\r\n            color: \'blue\',\r\n            layout: \'vertical\'\r\n          },\r\n          funding: {\r\n            allowed: [ paypal.FUNDING.CREDIT ],\r\n            disallowed: [ paypal.FUNDING.CARD ]\r\n          },\r\n          payment: function(resolve, reject) {\r\n            \/\/ Set a variable that will prevent the normal on-submit handler\r\n            \/\/ from submitting the form. (But allow it to do validations.) After\r\n            \/\/ we\'ve obtained a token from PayPal we\'ll submit the form directly.\r\n            window.isPayPalOrderForm = true;\r\n            \/\/ Trigger a click on the now-hidden buyButton so that validations and other\r\n            \/\/ on-submit type actions are fired\r\n            window.buyButton.trigger(\"click\", function(){\r\n\r\n              if(window.cfARIsValid){\r\n                $(\'#cf_contact_email\').val($(\'input[name=\"email\"]\').val());\r\n                if(isPayPalSubscription()) {\r\n                  return $.post(CREATE_SUBSCRIPTION_PAYMENT_URL, $(\'#cfAR\').serialize()).then(function(data) {\r\n                    var link = data.links[0].href;\r\n                    var token = link.split(\"token=\")[1];\r\n                    resolve(token);\r\n                  });\r\n                } else {\r\n                  return $.post(CREATE_PAYMENT_URL, $(\'#cfAR\').serialize()).then(function(data) {\r\n                    resolve(data.id);\r\n                  });\r\n                }\r\n              }else{\r\n                \/\/ TODO : Should we somehow handle this?\r\n                \/\/ We have to `reject` in order to make PayPal do the right thing\r\n                \/\/ but this error surfaces in console. Maybe that\'s OK?\r\n                reject(\'The order form has not validated. Please correct any errors.\');\r\n              }\r\n            });\r\n          },\r\n\r\n          onAuthorize: function(data) {\r\n            if(isPayPalSubscription()) {\r\n              return paypal.request.post(EXECUTE_SUBSCRIPTION_PAYMENT_URL, data).then(function() {\r\n                \/\/ The payment is complete!\r\n                var $form = $(\'#cfAR\');\r\n                $form.append($(\'<input type=\"hidden\" name=\"purchase[payment_gateway_token]\" \/>\').val(data.paymentToken));\r\n                $form.append($(\'<a href=\"#submit-form\"><\/a>\'));\r\n                $form.submit();\r\n              });\r\n            } else {\r\n              return paypal.request.post(EXECUTE_PAYMENT_URL, {\r\n                  paymentID: data.paymentID,\r\n                  payerID:   data.payerID\r\n              }).then(function() {\r\n                \/\/ The payment is complete!\r\n                var $form = $(\'#cfAR\');\r\n                $form.append($(\'<input type=\"hidden\" name=\"purchase[payment_gateway_token]\" \/>\').val(data.paymentID));\r\n                $form.submit();\r\n              });\r\n            }\r\n          }\r\n        }, \'.paypal-button\');\r\n      });\r\n    \r\n<\/script>";
+		$('.o2step_step2 .elCreditCardForm').remove();
+        window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
+        var $parentDiv = window.buyButton.parent();
+        //window.buyButton.hide();
+        $parentDiv.addClass('paypal-button');
+      
+      var anc = $parentDiv.parent();
+      anc.append(window.buyButton);
+      $parentDiv.hide();
+  
+      var ccForm = $('.elCreditCardForm');
+        var parDOM = ccForm.parent();
+      console.log(parDOM);
+        var ccTab = $('<div id="ccTab" class="a_tab"><span class="ttl">Credit Card</span></div>');
+      var ccBody = $('<div id="ccBody" class="a_body"></div>');
+      var ppTab = $('<div id="paypalTab" class="a_tab"><span class="ttl">PayPal</span></div>');
+      var ppBody = $('<div id="paypalBody" class="a_body"><p class="a_p">After submitting, you will be redirected to paypal to purchase securely.</p></div>');
+      ccTab.on('click',function(){
+          console.log('E');
+      ppBody.slideUp(200);
+            ccBody.slideDown(200);
+            ppTab.removeClass('nobottom');
+            window.buyButton.show();
+            $parentDiv.hide();
+        });
+        ppTab.click(function(){
+      ccBody.slideUp(200);
+            ppBody.slideDown(200);
+            ppTab.addClass('nobottom');
+            window.buyButton.hide();
+          $parentDiv.show();
+        });
+        parDOM.prepend(ppBody);
+      parDOM.prepend(ppTab);
+        parDOM.prepend(ccBody);
+      parDOM.prepend(ccTab);
+      ccBody.prepend(ccForm);
+		
+		$(function () {
+        function isPayPalSubscription() {
+          return $('.activeRadioProduct input').data('product-payment-type') == 'subscription';
+        }
 
-		document.getElementsByTagName('body')[0].innerHTML += code;
-		console.log(true);
+        var CREATE_PAYMENT_URL  = 'https://imadbitgold.clickfunnels.com/pages/'+PAYPAL_URL+'/payment_gateways/paypal/payment/create/';
+        var EXECUTE_PAYMENT_URL = 'https://imadbitgold.clickfunnels.com/pages/'+PAYPAL_URL+'/payment_gateways/paypal/payment/execute/';
+        var CREATE_SUBSCRIPTION_PAYMENT_URL  = 'https://imadbitgold.clickfunnels.com/pages/'+PAYPAL_URL+'/payment_gateways/paypal/subscription/create/';
+        var EXECUTE_SUBSCRIPTION_PAYMENT_URL = 'https://imadbitgold.clickfunnels.com/pages/'+PAYPAL_URL+'/payment_gateways/paypal/subscription/execute/';
+
+        paypal.Button.render({
+          env: 'production',
+          commit: true, // Show a 'Pay Now' button
+          style: {
+            size:  'responsive',
+            shape: 'rect',
+            color: 'blue',
+            layout: 'vertical'
+          },
+          funding: {
+            allowed: [ paypal.FUNDING.CREDIT ],
+            disallowed: [ paypal.FUNDING.CARD ]
+          },
+          payment: function(resolve, reject) {
+            // Set a variable that will prevent the normal on-submit handler
+            // from submitting the form. (But allow it to do validations.) After
+            // we've obtained a token from PayPal we'll submit the form directly.
+            window.isPayPalOrderForm = true;
+            // Trigger a click on the now-hidden buyButton so that validations and other
+            // on-submit type actions are fired
+            window.buyButton.trigger("click", function(){
+
+              if(window.cfARIsValid){
+                $('#cf_contact_email').val($('input[name="email"]').val());
+                if(isPayPalSubscription()) {
+                  return $.post(CREATE_SUBSCRIPTION_PAYMENT_URL, $('#cfAR').serialize()).then(function(data) {
+                    var link = data.links[0].href;
+                    var token = link.split("token=")[1];
+                    resolve(token);
+                  });
+                } else {
+                  return $.post(CREATE_PAYMENT_URL, $('#cfAR').serialize()).then(function(data) {
+                    resolve(data.id);
+                  });
+                }
+              }else{
+                // TODO : Should we somehow handle this?
+                // We have to `reject` in order to make PayPal do the right thing
+                // but this error surfaces in console. Maybe that's OK?
+                reject('The order form has not validated. Please correct any errors.');
+              }
+            });
+          },
+
+          onAuthorize: function(data) {
+            if(isPayPalSubscription()) {
+              return paypal.request.post(EXECUTE_SUBSCRIPTION_PAYMENT_URL, data).then(function() {
+                // The payment is complete!
+                var $form = $('#cfAR');
+                $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentToken));
+                $form.append($('<a href="#submit-form"></a>'));
+                $form.submit();
+              });
+            } else {
+              return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                  paymentID: data.paymentID,
+                  payerID:   data.payerID
+              }).then(function() {
+                // The payment is complete!
+                var $form = $('#cfAR');
+                $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
+                $form.submit();
+              });
+            }
+          }
+        }, '.paypal-button');
+      });
 	}else{
 		console.log(false);
 	};
