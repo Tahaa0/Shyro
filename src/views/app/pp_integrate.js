@@ -9,6 +9,9 @@ window.onload = function(){
 		var head = document.getElementsByTagName('head')[0];
 		head.appendChild(styleElement);
 
+		console.log(PAYPAL_URL);
+		console.log(END_URL);
+
 		$('.o2step_step2 .elCreditCardForm').remove();
         window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
         var $parentDiv = window.buyButton.parent();
