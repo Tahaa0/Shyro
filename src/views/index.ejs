@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Minezoner.IO</title>
+	<link rel="stylesheet" href="/views/global.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="reglog">
+	<div id="log">
+		<h1>Log In</h1>
+		<span id='logError' class="error"></span>
+		<form id='logform'>
+			<input type="text" id="email" placeholder="Email">
+			<input type="password" id="pwd" placeholder="Password">
+			<br>
+			<button class='classicbtn' type="submit" id="submit">Log In</button>
+		</form>
+			<h3 class="gray">OR</h3>
+			<button class='otherbtn' id='switchreg'>Create an account</button>
+	</div>
+	<div id="reg" style='display:none'>
+		<h1>Join MineZoner</h1>
+		<span id='regError' class="error"></span>
+		<form id="regform">
+			<input type="text" name='username' id="r_username" placeholder="Username">
+			<input type="text" name='email' id="r_email" placeholder="Email">
+			<input type="text" name='firstName' id="r_fn" placeholder="First Name">
+			<input type="text" name='lastName' id="r_ln" placeholder="Last Name">
+			<input type="password"  name='password' id="r_pwd" placeholder="Password">
+			<input type="password"  name='password_confirm' id="r_pwd_confirm" placeholder="Confirm Password">
+			<br>
+			<button class='classicbtn' type="submit" id="r_submit">Sign Up</button>
+		</form>
+		<h3 class="gray">OR</h3>
+		<button class='otherbtn' id='switchlog'>Log In to existing account</button>
+	</div>
+	<button class='otherbtn' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
+	</div>
+	
+<script>
+	$('#switchreg').click(function() {
+		$('#log').hide();
+		$('#reg').show();
+	});
+	$('#switchlog').click(function() {
+		$('#reg').hide();
+		$('#log').show();
+	});
+
+	var logform = document.getElementById('logform');
+	var regform = document.getElementById('regform');
+
+	var r_username = document.getElementById('r_username');
+	var r_email = document.getElementById('r_email');
+	var r_fn = document.getElementById('r_fn');
+	var r_ln = document.getElementById('r_ln');
+	var r_pwd = document.getElementById('r_pwd');
+	var r_pwd_confirm = document.getElementById('r_pwd_confirm');
+
+	var r_username = document.getElementById('r_username');
+	var r_email = document.getElementById('r_email');
+	var r_fn = document.getElementById('r_fn');
+	var r_ln = document.getElementById('r_ln');
+	var r_pwd = document.getElementById('r_pwd');
+	var r_pwd_confirm = document.getElementById('r_pwd_confirm');
+
+	var email = document.getElementById('email');
+	var pwd = document.getElementById('pwd');
+
+if(logform){
+	logform.addEventListener('submit',function(e){
+		e.preventDefault();
+		var data = {
+			'email' : email.value,
+			'password' : pwd.value,
+		}
+		$.post('/api/auth/login',data,function(data,status,xhr){
+			localStorage.setItem("token",data.token);
+			window.location = '/';
+		}).fail(function(data,status,xhr){
+			alert(status+' : '+data.responseText);
+		});
+	});
+}
+if(regform){
+	regform.addEventListener('submit',function(e){
+		e.preventDefault();
+		var data = {
+			'username' : r_username.value,
+			'email' : r_email.value,
+			'password' : r_pwd.value,
+			'firstName' : r_fn.value,
+			'lastName' : r_ln.value
+		}
+		$.post('/api/auth/register',data,function(data,status,xhr){
+			alert(status+' : '+data.responseText);
+		}).fail(function(data,status,xhr){
+			alert(status+' : '+data.responseText);
+		});
+	});
+}
+
+/*$('#usertoken').click(function(){
+	$.ajax({
+	  url: "/api/user",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    alert(err);
+	    console.log(err);
+	  },
+	  success: function(data) {
+	    alert(data);
+	    console.log(data);
+	  }
+	});
+});*/
+</script>
+</body>
+</html>

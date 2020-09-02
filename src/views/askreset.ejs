@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="/views/global.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+</head>
+<body>
+	<a class='slink' href="/">Home</a>
+	<h1>Reset Forgotten Password</h1>
+	<span id='resError' class="error"></span>
+	<form id="resform">
+		<input type="text" name='email' id="email" placeholder="Email">
+		<br>
+		<button class='classicbtn' type="submit" id="submit">Send Email</button>
+	</form>
+<script>
+	document.getElementById("resform").onsubmit = function(e){
+		e.preventDefault();
+		$.post('/api/auth/recover',{email:$('#email').val()},function(data,status,xhr){
+			alert(status+' : '+data.responseText);
+		}).fail(function(data,status,xhr){
+			alert(status+' : '+data.responseText);
+		});
+	}
+</script>
+</body>
+</html>

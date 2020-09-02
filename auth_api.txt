@@ -1,0 +1,45 @@
+/api/auth - Authentication
+
+	POST /api/auth/register - Register
+
+		x-www-form-urlencoded : email,password,username,firstName,lastName
+
+	POST /api/auth/login - Login
+
+		x-www-form-urlencoded : email,password
+
+	*POST /api/auth/recover - Password Recovery
+
+		x-www-form-urlencoded : email
+
+/api/user - User
+	
+	*GET /api/user - Returns all users index 
+
+	*GET /api/user/:id - Return specific user
+
+
+*Requires Bearer Token
+	
+
+
+MAP INFO
+
+1 Playable Zone
+0 Empty
+-1 Block
+10 Spawn Zone
+20 Gold Nugget
+30 Dead Rot
+31 Active Rot
+
+MAPCONTENT INFO
+
+-1 Empty Playable Zone
+-9 Non-Playable Zone
+-2 Block
+0 1 2 3.. Player Tiles
+100 101 102.. Player Bombs
+200 Gold Nugget
+210 Dead Rot
+211 Active Rot

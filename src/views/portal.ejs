@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MineZoner.IO</title>
+	<link rel="stylesheet" href="/views/global.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+</head>
+<body>
+		<a class='slink' id='logout'>Logout</a>
+
+	<div id="main">
+		<div id="reglog">
+			<textarea name="" id="script" disabled>
+				
+			</textarea>
+		</div>
+		<div id="inside">
+			
+		</div>
+		
+	</div>
+<div id="realOverlay"></div>
+<div id="realOverlay2"></div>
+<div id="createContainer">
+	<div id="createBox">	
+		<input type="text" id='lobbyTitle' placeholder="Lobby Title">
+		<select name="boardSize" id="boardSize">
+			<option value="2">2 Players</option>
+			<option value="3">3 Players</option>
+			<option value="4" active>4 Players</option>
+			<option value="5">5 Players</option>
+			<option value="6">6 Players</option>
+			<option value="7">7 Players</option>
+			<option value="8">8 Players</option>
+		</select>
+<!--		<input type="hidden" id='mapId'>
+		<button id='chooseMap'>Choose Map</button>
+		<input type="text" id='mapTitle' value='No Map Chosen' disabled> -->
+		<button class='otherbtn' id='createLobby'>Create Lobby</button>
+	</div>
+</div>
+
+<!--<div id="mapContainer">
+	<div id="mapBox">
+		<div id="maps"></div>
+		<button class='otherbtn' id='mapSubmit'>Choose Map</button>
+	</div>
+</div>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/views/utils.js"></script>
+<script>
+	var socket = io();
+	socket.on('err',function(data){
+		console.log(data);
+		alert(data.message);
+	});
+
+	$('#script').val("<script></"+"script>")
+
+	$('#logout').click(function(){
+		logout(function(err,data){
+			if(!err) {
+				localStorage.removeItem("token");
+				window.location = '/';
+			}else{
+				alert(err);
+			}
+		});
+	})
+
+</script>
+</body>
+</html>
