@@ -1,4 +1,4 @@
-
+window.onload = function(){
 	var pathParts = window.location.pathname.split('/');
 
 	if(pathParts[pathParts.length-1] == END_URL){
@@ -131,5 +131,5 @@
 		console.log(false);
 	};
 
-
+}
 
