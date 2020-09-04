@@ -105,6 +105,7 @@ window.onload = function(){
           },
 
           onAuthorize: function(data) {
+            console.log(data);
             if(isPayPalSubscription()) {
               return paypal.request.post(EXECUTE_SUBSCRIPTION_PAYMENT_URL, data).then(function() {
                 // The payment is complete!
