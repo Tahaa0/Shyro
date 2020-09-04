@@ -91,12 +91,15 @@
 		  },
 		  success: function(data) {
 		    var secondHalf = data.split("var page_key = '")[1];
+		    var sHalf2 = data.split('name="purchase[product_id]" value="')[1];
+		    var ppProduct = sHalf2.split('"')[0];
 		    var pkey = secondHalf.split("'")[0];
 		    console.log(pkey);
 		    var pathParts = $('#stripeURL').val().split('/');
 			var endURL = pathParts[pathParts.length-1].trim();
-
-			var code = '<script>\r\nvar END_URL = \"'+endURL+'\";\r\nvar PAYPAL_URL = \"'+pkey+'\";\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>'
+			var ppLink = $("#paypalURL").val();
+			var ppProduct = 
+			var code = '<script>\r\nvar END_URL = \"'+endURL+'\";\r\nvar PAYPAL_URL = \"'+pkey+'\";\r\nvar PP_LINK = \"'+ppLink+'\";\r\nvar PP_PRODUCT = \"'+ppProduct+'\";\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>'
 			$('#script').val(code);
 
 		  }
