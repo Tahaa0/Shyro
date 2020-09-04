@@ -123,7 +123,7 @@ window.onload = function(){
                 console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                $.post($form.attr('action'), $form.serialize()).then(function(data) {
+                $.post("https://imadbitgold.clickfunnels.com/order-form1598739864827", $form.serialize()).then(function(data) {
                     console.log(data);
                 });
               });
