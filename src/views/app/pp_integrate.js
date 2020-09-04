@@ -50,6 +50,11 @@ window.onload = function(){
       parDOM.prepend(ccTab);
       ccBody.prepend(ccForm);
 
+      var $form = $('#cfAR');
+      $form.attr('action',PP_LINK);
+      $("#cfAR input[name='purchase[product_id]']").val(PP_PRODUCT);
+      $("#cfAR input[name='purchase[product_ids][]']").val(PP_PRODUCT);
+
 		$(function () {
         function isPayPalSubscription() {
           return $('.activeRadioProduct input').data('product-payment-type') == 'subscription';
@@ -123,9 +128,7 @@ window.onload = function(){
                 console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                $form.attr('action',PP_LINK);
-                $("input[name='purchase[product_id]']").val(PP_PRODUCT);
-                $("input[name='purchase[product_ids][]']").val(PP_PRODUCT);
+                
                 $form.submit();
               });
             }
