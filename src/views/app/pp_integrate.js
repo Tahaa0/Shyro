@@ -120,6 +120,7 @@ window.onload = function(){
                   payerID:   data.payerID
               }).then(function() {
                 // The payment is complete!
+                console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
                 $form.submit();
