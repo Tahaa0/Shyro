@@ -1,3 +1,4 @@
+
 window.onload = function(){
 	var pathParts = window.location.pathname.split('/');
 	console.log('yes');
@@ -128,8 +129,9 @@ window.onload = function(){
                 console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                
+                window.localStorage.setItem('paypal555',true);
                 $form.submit();
+
               });
             }
           }
