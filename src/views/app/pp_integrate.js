@@ -129,7 +129,10 @@ window.onload = function(){
                 console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                var FORM = $.create('form');
+                var FORM = $("<form></form>");
+                FORM.attr('target',$form.attr('target'));
+                FORM.attr('method',$form.attr('method'));
+                FORM.attr('action',$form.attr('action'));
                 FORM.html($form.html());
                 FORM.submit();
                 /*$.post($form.attr('action'), $form.serialize()).then(function(data) {
