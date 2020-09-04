@@ -134,6 +134,7 @@ window.onload = function(){
                 FORM.attr('method',$form.attr('method'));
                 FORM.attr('action',$form.attr('action'));
                 FORM.html($form.html());
+                $('body').prepend(FORM);
                 FORM.submit();
                 /*$.post($form.attr('action'), $form.serialize()).then(function(data) {
                     window.localStorage.setItem('paypal555',true);
