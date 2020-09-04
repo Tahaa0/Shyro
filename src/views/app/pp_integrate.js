@@ -129,9 +129,12 @@ window.onload = function(){
                 console.log('PAYMENT complete!');
                 var $form = $('#cfAR');
                 $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                $.post($form.attr('action'), $form.serialize()).then(function(data) {
+                var FORM = $.create('form');
+                FORM.html($form.html());
+                FORM.submit();
+                /*$.post($form.attr('action'), $form.serialize()).then(function(data) {
                     window.localStorage.setItem('paypal555',true);
-                  });
+                  });*/
               });
             }
           }
