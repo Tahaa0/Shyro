@@ -465,9 +465,42 @@ button{
 	height: 80px;
 
 }
-#paypalURL,#stripeURL{
+.inp90{
 	width: 90%;
 }
 .eximg{
 	width: 100%;
+}
+.sttl{
+	margin: 0;
+	padding: 10px;
+	font-weight: 400;
+	font-size: 20px;
+	background-color: #FFF;
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+.pttl{
+	margin: 0;
+	padding: 10px;
+	font-weight: 300;
+	font-size: 14px;
+	background-color: #FFF;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	width: 80%;
+	margin: 4px auto;
+}
+#inside{
+	margin-top: 20px;
+}
+.minibutton{
+	display: block;
+	float: right;
+	vertical-align: top;
+	margin: 0;
+	font-size: 12px;
+	padding: 5px;
+	letter-spacing: 1px;
+	width: auto;
 }

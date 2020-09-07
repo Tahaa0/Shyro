@@ -15,46 +15,31 @@
 
 	<div id="main">
 		<div id="reglog">
-			<input type="text" placeholder="Step URL (Stripe Order Form)" id='stripeURL'>
-			<input type="text" placeholder="Step URL (Paypal)" id='paypalURL'>
-			<button id='usertoken'>Generate Script</button>
-			<textarea name="" id="script" disabled>
-				
-			</textarea>
-			<img src="/views/ex.png" class='eximg' alt="">
+			<input type="text" placeholder="Step Title" id='stepTitle' class="inp90">
+			<input type="text" placeholder="Step URL" id='stepURL' class="inp90">
+			<button id='addStep'>+ Add Step</button>
+			
+			<!--<img src="/views/ex.png" class='eximg' alt="">-->
 		</div>
 		<div id="inside">
 			
 		</div>
-		
+		<button id='generateScript'>Generate Script</button>
+		<textarea name="" id="script" disabled>
+				
+		</textarea>
 	</div>
 <div id="realOverlay"></div>
 <div id="realOverlay2"></div>
 <div id="createContainer">
-	<div id="createBox">	
-		<input type="text" id='lobbyTitle' placeholder="Lobby Title">
-		<select name="boardSize" id="boardSize">
-			<option value="2">2 Players</option>
-			<option value="3">3 Players</option>
-			<option value="4" active>4 Players</option>
-			<option value="5">5 Players</option>
-			<option value="6">6 Players</option>
-			<option value="7">7 Players</option>
-			<option value="8">8 Players</option>
-		</select>
-<!--		<input type="hidden" id='mapId'>
-		<button id='chooseMap'>Choose Map</button>
-		<input type="text" id='mapTitle' value='No Map Chosen' disabled> -->
-		<button class='otherbtn' id='createLobby'>Create Lobby</button>
+	<div id="createBox">
+		<input type="text" id='prodIndex' value=0 disabled style='display:none'>
+		<input type="text" id='prodTitle' placeholder="Product Name">
+		<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
+		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">
+		<button class='otherbtn' id='createProduct'>Add Product</button>
 	</div>
 </div>
-
-<!--<div id="mapContainer">
-	<div id="mapBox">
-		<div id="maps"></div>
-		<button class='otherbtn' id='mapSubmit'>Choose Map</button>
-	</div>
-</div>-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="/views/utils.js"></script>
@@ -65,8 +50,44 @@
 		alert(data.message);
 	});
 
-	
+	var funnelSteps = [];
 
+	function updateFunnelSteps(){
+		var code = "";
+		for(var i =0;i<funnelSteps.length;i++){
+			var step = funnelSteps[i];
+			code += "<h2 class='sttl'>"+step.title+"<button class='minibutton' onclick='addproduct("+i+")'>+ Add Product</button></h2>";
+			for(var j=0;j<funnelSteps[i].products.length;j++){
+				var product = funnelSteps[i].products[j];
+				code += "<h3 class='pttl'>"+product.title+"</h3>";
+			}
+		}
+		$("#inside").html(code);
+	}
+
+	function addproduct(index){
+		$('#prodIndex').val(index);
+		$('#realOverlay').fadeIn(400).click(function(){
+			$('#createContainer').fadeOut(300);
+			$('#realOverlay').fadeOut(300);
+		});
+		$('#createContainer').fadeIn(400);
+	}
+
+	$('#createProduct').click(function(){
+		var product = {};
+		product.title = $('#prodTitle').val();
+		product.stripe = $('#prodStripe').val();
+		product.paypal = $('#prodPaypal').val();
+		var index = parseInt($('#prodIndex').val());
+		funnelSteps[index].products.push(product);
+		$('#prodTitle').val('');
+		$('#prodStripe').val('');
+		$('#prodPaypal').val('');
+		$('#createContainer').fadeOut(300);
+		$('#realOverlay').fadeOut(300);
+		updateFunnelSteps();
+	});	
 
 	$('#logout').click(function(){
 		logout(function(err,data){
@@ -79,30 +100,26 @@
 		});
 	})
 
-	$('#usertoken').click(function(){
-		$('#script').val('');
-		$.ajax({
-		  url: $("#paypalURL").val(),
-		  type: "GET",
-		  data: {},
-		  error: function(err) {
-		    alert(err);
-		    console.log(err);
-		  },
-		  success: function(data) {
-		    var secondHalf = data.split("var page_key = '")[1];
-		    var sHalf2 = data.split('name="purchase[product_id]" value="')[1];
-		    var ppProduct = sHalf2.split('"')[0];
-		    var pkey = secondHalf.split("'")[0];
-		    console.log(pkey);
-		    var pathParts = $('#stripeURL').val().split('/');
-			var endURL = pathParts[pathParts.length-1].trim();
-			var ppLink = $("#paypalURL").val();
-			var code = '<script>\r\nvar END_URL = \"'+endURL+'\";\r\nvar PAYPAL_URL = \"'+pkey+'\";\r\nvar PP_LINK = \"'+ppLink+'\";\r\nvar PP_PRODUCT = \"'+ppProduct+'\";\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>';
-			$('#script').val(code);
+	$('#addStep').click(function(){
+		var step = {};
+		step.title = $('#stepTitle').val();
+		step.url = $('#stepURL').val();
+		step.products = [];
+		$('#stepURL').val('');
+		$('#stepTitle').val('');
+		funnelSteps.push(step);
+		updateFunnelSteps();
+	});
 
-		  }
-		});
+	$('#generateScript').click(function(){
+		$('#script').val('');
+		var stepURLs = [];
+		for(var i=0;i<funnelSteps.length;i++){
+			var pathParts = funnelSteps[i].url.split('/');
+			stepURLs.push(pathParts[pathParts.length-1].trim());
+		}
+		var code = '<script>\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>';
+			$('#script').val(code);
 	});
 </script>
 </body>
