@@ -13,7 +13,7 @@ var pathParts = window.location.pathname.split('/');
 
 console.log(STEP);
 
-for(var i=0;i<STEP.products;i++){
+for(var i=0;i<STEP.products.length;i++){
   var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
   console.log(PARENT_);
   PARENT_.addClass('hide');
