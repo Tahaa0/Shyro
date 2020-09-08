@@ -30,6 +30,7 @@ var cForm = $('.elCreditCard');
         console.log(formClone);
       cPrevious.after(formClone);
         bButton.show();
+        console.log($('#cfAR').serializeArray());
      });
   
 
@@ -42,8 +43,10 @@ var cForm = $('.elCreditCard');
     FORM.attr('method',$form.attr('method'));
     FORM.attr('action',$form.attr('action'));
     FORM.html($form.html());
+    console.log(FORM.serializeArray());
+    //FORM.find("input[name='purchase[product_id]'], input[name='purchase[product_ids][]']").remove();
     $('body').prepend(FORM);
-    FORM.submit();
+    //FORM.submit();
   });
 
 }

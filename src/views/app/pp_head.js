@@ -37,6 +37,7 @@ window.onload = function(){
     var ppBody = $('<div id="paypalBody" class="a_body"><p class="a_p">After submitting, you will be redirected to paypal to purchase securely.</p></div>');
     
     ccTab.on('click',function(){
+      isPAYPAL = false;
       ppBody.slideUp(200);
       ccBody.slideDown(200);
       ppTab.removeClass('nobottom');
@@ -44,6 +45,7 @@ window.onload = function(){
       $parentDiv.hide();
     });
     ppTab.click(function(){
+      isPAYPAL = true;
       ccBody.slideUp(200);
       ppBody.slideDown(200);
       ppTab.addClass('nobottom');
