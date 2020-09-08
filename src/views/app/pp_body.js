@@ -12,7 +12,9 @@ var pathParts = window.location.pathname.split('/');
   if(VALID){
 
 for(var i=0;i<STEP.products;i++){
-  $('#pid-'+STEP.products[i].paypal+'-0').parent().parent().addClass('hide');
+  var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
+  console.log(PARENT_);
+  PARENT_.addClass('hide');
 }
 
 var cForm = $('.elCreditCard');
