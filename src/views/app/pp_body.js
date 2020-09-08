@@ -11,6 +11,8 @@ var pathParts = window.location.pathname.split('/');
   }
   if(VALID){
 
+console.log(STEP);
+
 for(var i=0;i<STEP.products;i++){
   var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
   console.log(PARENT_);
