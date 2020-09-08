@@ -114,11 +114,12 @@
 	$('#generateScript').click(function(){
 		$('#script').val('');
 		var stepURLs = [];
+		var steps = funnelSteps;
 		for(var i=0;i<funnelSteps.length;i++){
 			var pathParts = funnelSteps[i].url.split('/');
 			stepURLs.push(pathParts[pathParts.length-1].trim());
 		}
-		var code = '<script>\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>';
+		var code = '<script>\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\nvar STEPS = '+JSON.stringify(steps)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>';
 			$('#script').val(code);
 	});
 </script>

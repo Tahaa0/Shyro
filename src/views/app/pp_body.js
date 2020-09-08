@@ -1,3 +1,20 @@
+var pathParts = window.location.pathname.split('/');
+  var endPath = pathParts[pathParts.length-1].trim();
+  var VALID = false;
+  var STEP;
+  for(var i=0;i<STEP_URLS.length;i++){
+    if(STEP_URLS[i] == endPath){
+      VALID = true;
+      STEP = STEPS[i];
+      break;
+    }
+  }
+  if(VALID){
+
+for(var i=0;i<STEP.products;i++){
+  $('#pid-'+STEP.products[i].paypal+'-0').parent().parent().addClass('hide');
+}
+
 var cForm = $('.elCreditCard');
     var bButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
     var formClone = cForm.clone();
@@ -24,3 +41,5 @@ var cForm = $('.elCreditCard');
     $('body').prepend(FORM);
     FORM.submit();
   });
+
+}

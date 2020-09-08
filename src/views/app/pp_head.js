@@ -1,8 +1,15 @@
 
 window.onload = function(){
 	var pathParts = window.location.pathname.split('/');
-  console.log(pathParts);
-	if(STEP_URLS.indexOf(pathParts[pathParts.length-1].trim()) != -1){
+  var endPath = pathParts[pathParts.length-1].trim();
+  var VALID = false;
+  for(var i=0;i<STEP_URLS.length;i++){
+    if(STEP_URLS[i] == endPath){
+      VALID = true;
+      break;
+    }
+  }
+	if(VALID){
 		
     //ADD STYLE
     var styleCode= ".a_tab{\r\n        border: 1px solid #E0E0E0;\r\n        width: 100%;\r\n        padding: 10px;\r\n        font-family: \'Lato\';\r\n        cursor:pointer;\r\n    }\r\n    .a_body{\r\n        width: 100%;\r\n        height: 80px;\r\n        border-right: 1px solid #E0E0E0;\r\n        border-left: 1px solid #E0E0E0;\r\n        padding: 10px;\r\n        background-color: #F8F8F9;\r\n        display:none;\r\n    }\r\n    .ttl{\r\n        font-weight: 500;\r\n    }\r\n    #paypalTab{\r\n        border-radius: 0 0 5px 5px;\r\n        box-shadow: 0px 1px 1px #E0E0E0;\r\n        margin-top: -1px;\r\n    }  \r\n    #ccTab{\r\n        border-radius: 5px 5px 0px 0px;\r\n        padding-bottom: 11px;\r\n    }\r\n    #paypalBody{\r\n        border-radius: 0 0 5px 5px;\r\n        box-shadow: 0px 1px 1px #E0E0E0;\r\n    }\r\n  \t#ccBody{\r\n    \tdisplay:block;\r\n    }\r\n    .nobottom{\r\n        border-radius: 0 !important;\r\n        box-shadow: 0 !important;\r\n    }\r\n    .a_p{\r\n        color:#737376;\r\n        font-family: \'Lato\';\r\n        text-align: center; \r\n    }\r\n  \ta[href=\'#submit-form\'], a[href=\'#submit-form-2step-order\']{\r\n      margin-top:10px;\r\n    }\r\n";
@@ -43,7 +50,7 @@ window.onload = function(){
       window.buyButton.hide();
       $parentDiv.show();
     });
-    
+
     parDOM.prepend(ppBody);
     parDOM.prepend(ppTab);
     parDOM.prepend(ccBody);
