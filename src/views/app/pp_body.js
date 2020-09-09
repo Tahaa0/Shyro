@@ -16,7 +16,8 @@ console.log(STEP);
 for(var i=0;i<STEP.products.length;i++){
   var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
   console.log(PARENT_);
-  PARENT_.addClass('hide');
+  PARENT_.remove();
+  $('#pid-'+STEP.products[i].stripe+'-0').attr('id','xx-'+STEP.products[i].stripe);
 }
 
 var cForm = $('.elCreditCard');
@@ -43,7 +44,7 @@ var cForm = $('.elCreditCard');
     FORM.attr('method',$form.attr('method'));
     FORM.attr('action',$form.attr('action'));
     FORM.html($form.html());
-    var sARR = FORM.serializeArray();
+    /*var sARR = FORM.serializeArray();
     var prodVal = '';
     var prod = '';
     for(var i=0;i<sARR.length;i++){
@@ -61,7 +62,7 @@ var cForm = $('.elCreditCard');
           }
       }
     }
-    FORM.append("<input name='purchase[product_id]' value='"+prod+"'>");
+    FORM.append("<input name='purchase[product_id]' value='"+prod+"'>");*/
     $('body').prepend(FORM);
     FORM.submit();
   });

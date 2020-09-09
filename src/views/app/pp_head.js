@@ -46,6 +46,7 @@ window.onload = function(){
     });
     ppTab.click(function(){
       isPAYPAL = true;
+
       ccBody.slideUp(200);
       ppBody.slideDown(200);
       ppTab.addClass('nobottom');
@@ -59,6 +60,7 @@ window.onload = function(){
     parDOM.prepend(ccTab);
     ccBody.prepend(ccForm);
     //---------------------------
+    //$("#cfAR input[name='purchase[product_ids][]'], #cfAR input[name='purchase[product_id]']").removeAttr('checked');
   }
 
 }
