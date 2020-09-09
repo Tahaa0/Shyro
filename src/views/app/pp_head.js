@@ -1,6 +1,26 @@
-
 window.onload = function(){
-	var pathParts = window.location.pathname.split('/');
+
+	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
+
+  function calculateID() {
+    for(var i=0;i<STEP.products.length;i++){
+      if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
+          if(isPAYPAL){
+              return STEP.products[i].paypal;
+          }else{
+              return STEP.products[i].stripe;
+          }
+      }
+    }
+  }
+
+  function checkProd(id){
+    $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
+    $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+  }
+
+  
+  var pathParts = window.location.pathname.split('/');
   var endPath = pathParts[pathParts.length-1].trim();
   var VALID = false;
   for(var i=0;i<STEP_URLS.length;i++){
@@ -43,6 +63,7 @@ window.onload = function(){
       ppTab.removeClass('nobottom');
       window.buyButton.show();
       $parentDiv.hide();
+      checkProd(calculateID());
     });
     ppTab.click(function(){
       isPAYPAL = true;
@@ -52,6 +73,7 @@ window.onload = function(){
       ppTab.addClass('nobottom');
       window.buyButton.hide();
       $parentDiv.show();
+      checkProd(calculateID());
     });
 
     parDOM.prepend(ppBody);
