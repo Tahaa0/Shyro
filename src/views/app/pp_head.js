@@ -25,7 +25,7 @@ window.onload = function(){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
     FORM.html($form.html());
-    console.log(FORM.serializeArray());
+    console.log($form.serializeArray());
   }
 
   
