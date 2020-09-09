@@ -108,7 +108,8 @@ window.onload = function(){
     ccBody.prepend(ccForm);
     //---------------------------
     $('#cfAR').on('submit',function(e){
-      e.preventDefault(); 
+      e.preventDefault();
+      FORM.html(serializeToForm($form.serializeArray()));
       $('body').prepend(FORM);
       FORM.submit();
     });
