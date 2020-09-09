@@ -26,6 +26,7 @@ window.onload = function(){
     for(var i=0;i<arr.length;i++){
       html += "<input name='"+arr[i].name+"' value='"+arr[i].value+"'>";
     }
+    return html;
   }
 
   function checkProd(id){
