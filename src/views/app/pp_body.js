@@ -33,40 +33,10 @@ var cForm = $('.elCreditCard');
         console.log(formClone);
       cPrevious.after(formClone);
         bButton.show();
-        console.log(    );
      });
   
 
     
-  $('#cfAR').on('submit',function(e){
-    e.preventDefault();
-    var $form = $('#cfAR');
-    var FORM = $("<form></form>");
-    FORM.attr('target',$form.attr('target'));
-    FORM.attr('method',$form.attr('method'));
-    FORM.attr('action',$form.attr('action'));
-    FORM.html($form.html());
-    /*var sARR = FORM.serializeArray();
-    var prodVal = '';
-    var prod = '';
-    for(var i=0;i<sARR.length;i++){
-      if(sARR[i].name == "purchase[product_ids][]" || sARR[i].name == "purchase[product_id]"){
-          prodVal = sARR[i].value;
-      }
-    }
-    FORM.find("input[name='purchase[product_id]'], input[name='purchase[product_ids][]']").remove();
-    for(var i=0;i<STEP.products.length;i++){
-      if(STEP.products[i].paypal == prodVal || STEP.products[i].stripe == prodVal){
-          if(isPAYPAL){
-              prod = STEP.products[i].paypal;
-          }else{
-              prod = STEP.products[i].stripe;
-          }
-      }
-    }
-    FORM.append("<input name='purchase[product_id]' value='"+prod+"'>");*/
-    $('body').prepend(FORM);
-    FORM.submit();
-  });
+  
 
 }

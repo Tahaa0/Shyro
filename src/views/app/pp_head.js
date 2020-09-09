@@ -2,6 +2,13 @@ window.onload = function(){
 
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
 
+  var $form = $('#cfAR');
+    var FORM = $("<form></form>");
+    FORM.attr('target',$form.attr('target'));
+    FORM.attr('method',$form.attr('method'));
+    FORM.attr('action',$form.attr('action'));
+    FORM.html($form.html());
+
   function calculateID() {
     for(var i=0;i<STEP.products.length;i++){
       if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
@@ -17,6 +24,7 @@ window.onload = function(){
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+    FORM.html($form.html());
   }
 
   
@@ -41,7 +49,9 @@ window.onload = function(){
     //-----------------
     //ADD FORM / BUTTON
     checkProd(calculateID());
-    
+
+
+
     window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
     var $parentDiv = window.buyButton.parent();
       
@@ -88,7 +98,11 @@ window.onload = function(){
     parDOM.prepend(ccTab);
     ccBody.prepend(ccForm);
     //---------------------------
-    //$("#cfAR input[name='purchase[product_ids][]'], #cfAR input[name='purchase[product_id]']").removeAttr('checked');
+    $('#cfAR').on('submit',function(e){
+      e.preventDefault();
+      $('body').prepend(FORM);
+      FORM.submit();
+    });
   }
 
 }
