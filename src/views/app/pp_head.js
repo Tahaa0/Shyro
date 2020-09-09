@@ -7,7 +7,7 @@ window.onload = function(){
     FORM.attr('target',$form.attr('target'));
     FORM.attr('method',$form.attr('method'));
     FORM.attr('action',$form.attr('action'));
-    FORM.html($form.html());
+    FORM.html(serializeToForm($form.serializeArray()));
 
   function calculateID() {
     for(var i=0;i<STEP.products.length;i++){
@@ -21,11 +21,18 @@ window.onload = function(){
     }
   }
 
+  function serializeToForm(arr){
+    var html = "";
+    for(var i=0;i<arr.length;i++){
+      html += "<input name='"+arr[i].name+"' value='"+arr[i].value+"'>";
+    }
+  }
+
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
-    FORM.html($form.html());
-    console.log($form.serializeArray());
+    FORM.html(serializeToForm($form.serializeArray()));
+    console.log(FORM.html());
   }
 
   
