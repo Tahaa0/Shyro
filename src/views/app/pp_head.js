@@ -40,7 +40,8 @@ window.onload = function(){
     
     //-----------------
     //ADD FORM / BUTTON
-
+    checkProd(calculateID());
+    
     window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
     var $parentDiv = window.buyButton.parent();
       
@@ -80,7 +81,7 @@ window.onload = function(){
       CHOSEN_ID = $('input[name=xxprod]:checked').val();
       checkProd(calculateID());
     });
-    
+
     parDOM.prepend(ppBody);
     parDOM.prepend(ppTab);
     parDOM.prepend(ccBody);
