@@ -76,6 +76,11 @@ window.onload = function(){
       checkProd(calculateID());
     });
 
+    $('input[name=xxprod]').click(function () {
+      CHOSEN_ID = $('input[name=xxprod]:checked').val();
+      checkProd(calculateID());
+    });
+    
     parDOM.prepend(ppBody);
     parDOM.prepend(ppTab);
     parDOM.prepend(ccBody);

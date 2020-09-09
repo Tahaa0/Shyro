@@ -20,10 +20,7 @@ for(var i=0;i<STEP.products.length;i++){
   $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
 }
 
-$('input[name=xxprod]').click(function () {
-  CHOSEN_ID = $('input[name=xxprod]:checked').val();
-  checkProd(calculateID());
-})
+
 
 var cForm = $('.elCreditCard');
     var bButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
