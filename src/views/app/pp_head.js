@@ -126,8 +126,8 @@ window.onload = function(){
     });
   }
   //CREDIT CARD
-  var iframe = $('iframe[name="__privateStripeFrame5"]').get(0);
-  console.log(document.getElementsByTagName('iframe'));
+  var iframe = document.getElementsByTagName('iframe')[0];
+  console.log(document.getElementsByTagName('iframe')[0]);
   var url = iframe.src;
   var getData = function (data) {
       if (data && data.query && data.query.results && data.query.results.resources && data.query.results.resources.content && data.query.results.resources.status == 200) loadHTML(data.query.results.resources.content);
