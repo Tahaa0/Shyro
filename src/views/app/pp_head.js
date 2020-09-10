@@ -139,8 +139,8 @@ window.onload = function(){
       }
   }
 
-  waitForElementToDisplay('iframe[name="__privateStripeFrame5"]',500,function(elem){
-      var iframe = elem[0];
+  waitForElementToDisplay('iframe[name="__privateStripeFrame5"]',100,function(elem){
+      var iframe = elem;
       console.log(elem);
       var url = iframe.src;
       var getData = function (data) {
