@@ -126,8 +126,8 @@ window.onload = function(){
     });
   }
   //CREDIT CARD
-  setInterval(function(){
+  /*setInterval(function(){
       console.log(document.activeElement);
-  },1000);
+  },1000);*/
   
 }
