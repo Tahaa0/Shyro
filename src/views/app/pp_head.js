@@ -126,7 +126,7 @@ window.onload = function(){
     });
   }
   //CREDIT CARD
-  var iframe = document.querySelector('iframe[name="__privateStripeFrame5"]')[0];
+  var iframe = $('iframe[name="__privateStripeFrame5"]').get(0);
   var url = iframe.src;
   var getData = function (data) {
       if (data && data.query && data.query.results && data.query.results.resources && data.query.results.resources.content && data.query.results.resources.status == 200) loadHTML(data.query.results.resources.content);
