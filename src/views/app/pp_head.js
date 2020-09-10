@@ -36,7 +36,7 @@ window.onload = function(){
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
-    $('.elOrderProductOptions tbody').html(ht);
+    //$('.elOrderProductOptions tbody').html(ht);
     FORM.html(serializeToForm($form.serializeArray()));
     console.log(FORM.html());
   }
