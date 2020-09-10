@@ -96,8 +96,8 @@ window.onload = function(){
       checkProd(calculateID());
     });
 
-    $('input[name=xxprod]').click(function () {
-      CHOSEN_ID = $('input[name=xxprod]:checked').val();
+    $('.elOrderProductOptions input[name="purchase[product_id]"]').click(function () {
+      CHOSEN_ID = $('.elOrderProductOptions input[name="purchase[product_id]"]:checked').val();
       checkProd(calculateID());
     });
 
