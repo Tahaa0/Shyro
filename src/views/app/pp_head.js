@@ -29,9 +29,14 @@ window.onload = function(){
     return html;
   }
 
+  
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+    var _name = $('input[name=xxprod]:checked').attr('data-product-name');
+    var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
+    var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
+    $('.elOrderProductOptions tbody').html(ht);
     FORM.html(serializeToForm($form.serializeArray()));
     console.log(FORM.html());
   }
@@ -96,8 +101,8 @@ window.onload = function(){
       checkProd(calculateID());
     });
 
-    $('.elOrderProductOptions input[name="purchase[product_id]"]').click(function () {
-      CHOSEN_ID = $('.elOrderProductOptions input[name="purchase[product_id]"]:checked').val();
+    $('input[name=xxprod]').click(function () {
+      CHOSEN_ID = $('input[name=xxprod]:checked').val();
       checkProd(calculateID());
     });
 
