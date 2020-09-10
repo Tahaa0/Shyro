@@ -35,8 +35,9 @@ window.onload = function(){
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
+    var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
-    //$('.elOrderProductOptions tbody').html(ht);
+    $('.elOrderProductOptions tbody').html(hh+ht);
     FORM.html(serializeToForm($form.serializeArray()));
     console.log(FORM.html());
   }
