@@ -46,7 +46,7 @@ h1,h3{
 #lobbies{
 	margin: 0;
 }
-input[type=text],select{
+input[type=text],input[type=password],select{
 	display: block;
 	padding: 14px;
 	width: 200px;
