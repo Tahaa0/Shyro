@@ -46,7 +46,7 @@ h1,h3{
 #lobbies{
 	margin: 0;
 }
-input,select{
+input[type=text],select{
 	display: block;
 	padding: 14px;
 	width: 200px;
