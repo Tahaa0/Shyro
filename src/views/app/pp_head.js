@@ -125,7 +125,7 @@ window.onload = function(){
     });
 
     $('#bump-offer').click(function (){
-      if(('#bump-offer').is(':checked')){
+      if($('#bump-offer').is(':checked')){
         BUMP = true;
       }else{
         BUMP = false;
