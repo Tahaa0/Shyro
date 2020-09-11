@@ -130,6 +130,7 @@ window.onload = function(){
       }else{
         BUMP = false;
       }
+      checkProd(calculateID());
     });
     parDOM.prepend(ppBody);
     parDOM.prepend(ppTab);
