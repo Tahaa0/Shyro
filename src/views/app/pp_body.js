@@ -13,6 +13,7 @@ var pathParts = window.location.pathname.split('/');
 
 console.log(STEP);
 
+$('#bump-offer').attr('name','xxprod');
 for(var i=0;i<STEP.products.length;i++){
   var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
   console.log(PARENT_);

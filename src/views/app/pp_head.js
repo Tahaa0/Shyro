@@ -1,13 +1,13 @@
 window.onload = function(){
 
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
-  var BUMP = false;
+  /*var BUMP = false;
   var BUMP_PRODUCT;
   for(var i=0;i<STEP.products.length;i++){
     if(STEP.products[i].bump){
       BUMP_PRODUCT = STEP.products[i];        
     }
-  }
+  }*/
   var HOST = "http://cfapp20.herokuapp.com";
   var $form = $('#cfAR');
     var FORM = $("<form></form>");
@@ -40,18 +40,22 @@ window.onload = function(){
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+    /*var hb = "";
     if(BUMP){
       if(isPAYPAL){
         $('#cfAR input[name="purchase[product_ids][]"][value="'+BUMP_PRODUCT.paypal+'"]').attr('checked','checked');
       }else{
         $('#cfAR input[name="purchase[product_ids][]"][value="'+BUMP_PRODUCT.stripe+'"]').attr('checked','checked');
       }
-    }
+      var b_name = "";
+      var b_price = "";
+    }*/
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
-    $('.elOrderProductOptions tbody').html(hh+ht);
+    
+    $('.elOrderProductOptions tbody').html(hh+ht+hb);
     FORM.html(serializeToForm($form.serializeArray()));
     console.log(FORM.html());
   }
