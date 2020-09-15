@@ -41,10 +41,13 @@ window.onload = function(){
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
-    
+    var hb = "";
     for(var j=0;j<BUMPS.length;j++){
       for(var i=0;i<STEP.products.length;i++){
         if(STEP.products[i].paypal == BUMPS[j] || STEP.products[i].stripe == BUMPS[j]){
+          var b_name = STEP.products[i].name;
+          var b_price = STEP.products[i].price;
+          hb += "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+b_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">$"+b_price+"<\/td><\/tr>";
             if(isPAYPAL){
                 $('#pid-'+STEP.products[i].paypal+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
             }else{
@@ -59,7 +62,7 @@ window.onload = function(){
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
     
-    $('.elOrderProductOptions tbody').html(hh+ht);
+    $('.elOrderProductOptions tbody').html(hh+ht+hb);
     FORM.html(serializeToForm($form.serializeArray()));
   }
 
