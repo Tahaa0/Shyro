@@ -133,7 +133,7 @@ window.onload = function(){
       CHOSEN_ID = $('input[name=xxprod]:checked').val();
       checkProd(calculateID());
     });
-
+    $('input[name=xxprod]:first').attr('checked','checked');
     $('input[name=xxbump]').click(function (){
       BUMPS = [];
       $('input[name=xxbump]').each(function(index){
