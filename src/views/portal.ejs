@@ -62,12 +62,15 @@
 			for(var j=0;j<funnelSteps[i].products.length;j++){
 				var product = funnelSteps[i].products[j];
 				code += "<h3 class='pttl'>"+product.title+"</h3>";
-				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-				txtarea.val('<label for=\'bump-'+product.stripe+'\'><input type=\'checkbox\' id=\'bump-'+product.stripe+'\' name=\'xxbump\' value=\''+product.stripe+'\'> '+product.title+'<\/label>');
+				if(product.bump){
+					txtarea = $("<textarea class='bumpscript' disabled></textarea>");
+					txtarea.val('<label for=\'bump-'+product.stripe+'\'><input type=\'checkbox\' id=\'bump-'+product.stripe+'\' name=\'xxbump\' value=\''+product.stripe+'\'> '+product.title+'<\/label>');
+					code += $("<div />").append(txtarea.clone()).html();
+				}
+				
 			}
 		}
 		$("#inside").html(code);
-		$("#inside").append(txtarea);
 	}
 
 	function addproduct(index){
