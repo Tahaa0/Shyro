@@ -37,6 +37,7 @@
 		<input type="text" id='prodTitle' placeholder="Product Name">
 		<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
 		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">
+		<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
 		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
 		<button class='otherbtn' id='createProduct'>Add Product</button>
 	</div>
@@ -75,11 +76,20 @@
 		$('#createContainer').fadeIn(400);
 	}
 
+	$('#orderBump').click(function (){
+        if($(this).is(':checked')){
+          $('#prodPrice').show();
+        }else{
+        	$('#prodPrice').hide();
+        }
+    });
+
 	$('#createProduct').click(function(){
 		var product = {};
 		product.title = $('#prodTitle').val();
 		product.stripe = $('#prodStripe').val();
 		product.paypal = $('#prodPaypal').val();
+		product.price = $('#prodPrice').val();
 		if($('#orderBump').is(':checked')){
 			product.bump = true;
 		}else{
@@ -90,7 +100,9 @@
 		$('#prodTitle').val('');
 		$('#prodStripe').val('');
 		$('#prodPaypal').val('');
+		$('#prodPrice').val('');
 		$("#orderBump").prop("checked", false);
+		$('#prodPrice').hide();
 		$('#createContainer').fadeOut(300);
 		$('#realOverlay').fadeOut(300);
 		updateFunnelSteps();
