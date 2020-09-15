@@ -1,6 +1,7 @@
 window.onload = function(){
 
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
+  var BUMPS = [];
   /*var BUMP = false;
   var BUMP_PRODUCT;
   for(var i=0;i<STEP.products.length;i++){
@@ -40,16 +41,9 @@ window.onload = function(){
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
-    /*var hb = "";
-    if(BUMP){
-      if(isPAYPAL){
-        $('#cfAR input[name="purchase[product_ids][]"][value="'+BUMP_PRODUCT.paypal+'"]').attr('checked','checked');
-      }else{
-        $('#cfAR input[name="purchase[product_ids][]"][value="'+BUMP_PRODUCT.stripe+'"]').attr('checked','checked');
-      }
-      var b_name = "";
-      var b_price = "";
-    }*/
+    
+    console.log(BUMPS);
+
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
@@ -128,14 +122,16 @@ window.onload = function(){
       checkProd(calculateID());
     });
 
-    $('#bump-offer').click(function (){
-      if($('#bump-offer').is(':checked')){
-        BUMP = true;
-      }else{
-        BUMP = false;
-      }
+    $('input[name=xxbump]').click(function (){
+      BUMPS = [];
+      $('input[name=xxbump]').each(function(index){
+        if($(this).is(':checked')){
+          BUMPS.push($(this).val());
+        }
+      });
       checkProd(calculateID());
     });
+
     parDOM.prepend(ppBody);
     parDOM.prepend(ppTab);
     parDOM.prepend(ccBody);
