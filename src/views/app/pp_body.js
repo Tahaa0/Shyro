@@ -13,10 +13,12 @@ var pathParts = window.location.pathname.split('/');
 
 console.log(STEP);
 
-$('#bump-offer').attr('name','xxprod');
+//$('#bump-offer').attr('name','xxprod');
 for(var i=0;i<STEP.products.length;i++){
   var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
-  console.log(PARENT_);
+  if(STEP.products[i].bump){
+    $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
+  }
   PARENT_.remove();
   $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
 }
