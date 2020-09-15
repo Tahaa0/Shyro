@@ -42,7 +42,17 @@ window.onload = function(){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
     
-    console.log(BUMPS);
+    for(var j=0;j<BUMPS.length;j++){
+      for(var i=0;i<STEP.products.length;i++){
+        if(STEP.products[i].paypal == BUMPS[j] || STEP.products[i].stripe == BUMPS[j]){
+            if(isPAYPAL){
+                $('#pid-'+STEP.products[i].paypal+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+            }else{
+                $('#pid-'+STEP.products[i].stripe+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
+            }
+        }
+      }
+    }
 
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
@@ -51,7 +61,6 @@ window.onload = function(){
     
     $('.elOrderProductOptions tbody').html(hh+ht);
     FORM.html(serializeToForm($form.serializeArray()));
-    console.log(FORM.html());
   }
 
   
