@@ -45,7 +45,7 @@ window.onload = function(){
     for(var j=0;j<BUMPS.length;j++){
       for(var i=0;i<STEP.products.length;i++){
         if(STEP.products[i].paypal == BUMPS[j] || STEP.products[i].stripe == BUMPS[j]){
-          var b_name = STEP.products[i].name;
+          var b_name = STEP.products[i].title;
           var b_price = STEP.products[i].price;
           hb += "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+b_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">$"+b_price+"<\/td><\/tr>";
             if(isPAYPAL){
