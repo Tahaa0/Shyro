@@ -55,7 +55,7 @@ window.onload = function(){
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
     
-    $('.elOrderProductOptions tbody').html(hh+ht+hb);
+    $('.elOrderProductOptions tbody').html(hh+ht);
     FORM.html(serializeToForm($form.serializeArray()));
     console.log(FORM.html());
   }
