@@ -17,6 +17,10 @@
 		<div id="reglog">
 			<input type="text" placeholder="Step Title" id='stepTitle' class="inp90">
 			<input type="text" placeholder="Step URL" id='stepURL' class="inp90">
+			<select name="steptype" id="stepType" class='inp90'>
+				<option value="form">Order Form</option>
+				<option value="upsell">Upsell</option>
+			</select>
 			<button id='addStep'>+ Add Step</button>
 			
 			<!--<img src="/views/ex.png" class='eximg' alt="">-->
@@ -129,6 +133,7 @@
 		var step = {};
 		step.title = $('#stepTitle').val();
 		step.url = $('#stepURL').val();
+		step.type = $('#stepType').val();
 		step.products = [];
 		$('#stepURL').val('');
 		$('#stepTitle').val('');
