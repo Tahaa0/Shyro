@@ -102,7 +102,7 @@ window.onload = function(){
       var ccBody = $('<div id="ccBody" class="a_body"></div>');
       var ppTab = $('<div id="paypalTab" class="a_tab"><label class="radlab"><input type="radio" name="ispp" id="ppRadio"><span class="checkmark"></span></label><span class="ttl"><img id="log_pp" src="'+HOST+'/views/app/paypal.png"></span></div>');
       var ppBody = $('<div id="paypalBody" class="a_body"><p class="a_p">After submitting, you will be redirected to paypal to purchase securely.</p></div>');
-      
+      localStorage.setItem('pmethod555','stripe');
       ccTab.on('click',function(){
         isPAYPAL = false;
         $('#ccRadio').attr('checked', 'checked');
@@ -165,12 +165,17 @@ window.onload = function(){
 
       $("a[href*='#yes-link'], .elIMG[data-imagelink*='#yes-link']").each(function(index, link){
           $link = $(link);
-          $links.push($link.clone());
-          $link.show();
-      });
 
-      $('.paypal-button').hide();
+          if(localStorage.getItem('pmethod555') != 'paypal'){
+            $link.show();
+          }
+          
+      });
+      if(localStorage.getItem('pmethod555') != 'paypal'){
+        $('.paypal-button').hide();
+      }
       
+
       console.log(localStorage.getItem('pmethod555'));
 
     }
