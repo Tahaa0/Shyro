@@ -156,9 +156,9 @@ window.onload = function(){
         $('body').prepend(FORM);
         FORM.submit();
       });
-    }
+    
   }else if(STEP.type == 'upsell'){
     console.log('upsell!1!!');
   }
-  
+  }
 }
