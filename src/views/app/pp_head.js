@@ -158,14 +158,8 @@ window.onload = function(){
       });
     
     }else if(STEP.type == 'upsell'){
-      $('#cfAR').on('submit',function(e){
-        e.preventDefault();
-        var ARR = $form.serializeArray();
-        console.log(ARR);
-        FORM.html(serializeToForm(ARR));
-        $('body').prepend(FORM);
-        FORM.submit();
-      });
+      $('#cfAR input[name="purchase[product_ids][]"]').val(STEP.products[0].stripe);
+      $('#cfAR input[name="purchase[product_ids][]"]').attr('checked','checked');
     }
   }
 }
