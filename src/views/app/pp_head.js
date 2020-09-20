@@ -157,8 +157,13 @@ window.onload = function(){
         FORM.submit();
       });
     
-  }else if(STEP.type == 'upsell'){
-    console.log('upsell!1!!');
-  }
+    }else if(STEP.type == 'upsell'){
+      $('#cfAR').on('submit',function(e){
+        e.preventDefault();
+        FORM.html(serializeToForm($form.serializeArray()));
+        $('body').prepend(FORM);
+        FORM.submit();
+      });
+    }
   }
 }
