@@ -169,6 +169,8 @@ window.onload = function(){
           $link.show();
       });
 
+      $('.paypal-button').hide();
+      
       console.log(localStorage.getItem('pmethod555'));
 
     }
