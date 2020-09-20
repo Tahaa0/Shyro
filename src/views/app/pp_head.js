@@ -160,7 +160,9 @@ window.onload = function(){
     }else if(STEP.type == 'upsell'){
       $('#cfAR').on('submit',function(e){
         e.preventDefault();
-        FORM.html(serializeToForm($form.serializeArray()));
+        var ARR = $form.serializeArray();
+        console.log(ARR);
+        FORM.html(serializeToForm(ARR));
         $('body').prepend(FORM);
         FORM.submit();
       });
