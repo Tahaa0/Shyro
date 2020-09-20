@@ -106,6 +106,7 @@ window.onload = function(){
       ccTab.on('click',function(){
         isPAYPAL = false;
         $('#ccRadio').attr('checked', 'checked');
+        localStorage.setItem('pmethod555','stripe');
         ppBody.slideUp(200);
         ccBody.slideDown(200);
         ppTab.removeClass('nobottom');
@@ -115,6 +116,7 @@ window.onload = function(){
       });
       ppTab.click(function(){
         isPAYPAL = true;
+        localStorage.setItem('pmethod555','paypal');
         $('#ppRadio').attr('checked', 'checked');
         ccBody.slideUp(200);
         ppBody.slideDown(200);
@@ -158,8 +160,15 @@ window.onload = function(){
       });
     
     }else if(STEP.type == 'upsell'){
-      $('#cfAR input[name="purchase[product_ids][]"]').val(STEP.products[0].stripe);
-      $('#cfAR input[name="purchase[product_ids][]"]').attr('checked','checked');
+      
+      window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
+      var $parentDiv = window.buyButton.parent();
+      var anc = $parentDiv.parent();
+      anc.append(window.buyButton);
+      $parentDiv.hide();
+
+      console.log(localStorage.getItem('pmethod555'));
+
     }
   }
 }
