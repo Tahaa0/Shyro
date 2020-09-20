@@ -168,15 +168,18 @@ window.onload = function(){
 
           if(localStorage.getItem('pmethod555') != 'paypal'){
             $link.show();
+          }else{
+            $link.removeAttr('data-purchase');
+            $link.removeAttr('data-upsell');
           }
           
       });
       if(localStorage.getItem('pmethod555') != 'paypal'){
         $('.paypal-button').hide();
+      }else{
+        $('#cfAR').append('<input type="hidden" name="purchase[product_id]" value="'+STEP.products[0].paypal+'"><input type="hidden" name="upsell" value="1">')
       }
-      
 
-      console.log(localStorage.getItem('pmethod555'));
 
     }
   }
