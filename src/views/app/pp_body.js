@@ -13,7 +13,7 @@
 if(VALID){
 
   console.log(STEP);
-  if(STEP.type = 'form'){
+  if(STEP.type == 'form'){
 
 
     //change name and remove paypal products from checkout (form)
@@ -41,7 +41,7 @@ if(VALID){
             bButton.show();
          });
     
-  }else if(STEP.type = 'upsell'){
+  }else if(STEP.type == 'upsell'){
     console.log('upselll');
   }
     
