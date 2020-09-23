@@ -503,4 +503,8 @@ button{
 	padding: 5px;
 	letter-spacing: 1px;
 	width: auto;
+	margin-left: 5px;
+}
+.bumpscript{
+	height: 55px !important;
 }

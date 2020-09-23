@@ -19,7 +19,7 @@
 			<input type="text" placeholder="Step URL" id='stepURL' class="inp90">
 			<select name="steptype" id="stepType" class='inp90'>
 				<option value="form">Order Form</option>
-				<option value="upsell">Upsell</option>
+				<option value="upsell">Upsell / Downsell / Cross-sell</option>
 			</select>
 			<button id='addStep'>+ Add Step</button>
 			
@@ -29,7 +29,12 @@
 			
 		</div>
 		<button id='generateScript'>Generate Script</button>
+		<h3>Head Tracking Code</h3>
 		<textarea name="" id="script" disabled>
+				
+		</textarea>
+		<h3>Body Tracking Code</h3>
+		<textarea name="" id="scriptbody" disabled>
 				
 		</textarea>
 	</div>
@@ -40,9 +45,9 @@
 		<input type="text" id='prodIndex' value=0 disabled style='display:none'>
 		<input type="text" id='prodTitle' placeholder="Product Name">
 		<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
-		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">
-		<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
+		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">	
 		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
+		<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
 		<button class='otherbtn' id='createProduct'>Add Product</button>
 	</div>
 </div>
@@ -58,17 +63,19 @@
 
 	var funnelSteps = [];
 
+	$('#script, #scriptbody').val('');
+
 	function updateFunnelSteps(){
 		var code = "";
 		for(var i =0;i<funnelSteps.length;i++){
 			var step = funnelSteps[i];
-			code += "<h2 class='sttl'>"+step.title+"<button class='minibutton' onclick='addproduct("+i+")'>+ Add Product</button></h2>";
+			code += "<h2 class='sttl'>"+step.title+"<button class='minibutton' onclick='deletestep("+i+")'>Delete</button><button class='minibutton' onclick='addproduct("+i+")'>+ Add Product</button></h2>";
 			for(var j=0;j<funnelSteps[i].products.length;j++){
 				var product = funnelSteps[i].products[j];
-				code += "<h3 class='pttl'>"+product.title+"</h3>";
+				code += "<h3 class='pttl'>"+product.title+"<button class='minibutton' onclick='deleteproduct("+i+","+j+")'>Delete</button></h3>";
 				if(product.bump){
 					txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-					txtarea.val('<label for=\'bump-'+product.stripe+'\'><input type=\'checkbox\' id=\'bump-'+product.stripe+'\' name=\'xxbump\' value=\''+product.stripe+'\'> '+product.title+'<\/label>');
+					txtarea.text('<!-- Order Bump Implementation Code -->\r\n<label for=\'bump-'+product.stripe+'\'><input type=\'checkbox\' id=\'bump-'+product.stripe+'\' name=\'xxbump\' value=\''+product.stripe+'\'> '+product.title+'<\/label>');
 					code += $("<div />").append(txtarea.clone()).html();
 				}
 				
@@ -84,6 +91,16 @@
 			$('#realOverlay').fadeOut(300);
 		});
 		$('#createContainer').fadeIn(400);
+	}
+
+	function deletestep(index){
+		funnelSteps.splice(index,1);
+		updateFunnelSteps();
+	}
+
+	function deleteproduct(i,j){
+		funnelSteps[i].products.splice(j,1);
+		updateFunnelSteps();
 	}
 
 	$('#orderBump').click(function (){
@@ -149,8 +166,9 @@
 			var pathParts = funnelSteps[i].url.split('/');
 			stepURLs.push(pathParts[pathParts.length-1].trim());
 		}
-		var code = '<script>\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\nvar STEPS = '+JSON.stringify(steps)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_integrate.js\"><\/script>\r\n<script src=\'https:\/\/www.paypalobjects.com\/api\/checkout.js\'><\/script>';
+		var code = '<script>\r\nvar isPAYPAL = false;\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\nvar STEPS = '+JSON.stringify(steps)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_head.js\"><\/script>\r\n';
 			$('#script').val(code);
+			$('#scriptbody').val('<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_body.js\"><\/script>');
 	});
 </script>
 </body>
