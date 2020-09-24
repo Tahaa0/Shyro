@@ -137,6 +137,7 @@ window.onload = function(){
       CHOSEN_ID = $('input[name=xxprod]:first').val();
       for(var i=0;i<STEP.products.length;i++){
         if(STEP.products[i].highlight){
+          $('#pid-'+STEP.products[i].stripe+'-0').attr('checked','checked');
           CHOSEN_ID = $('#pid-'+STEP.products[i].stripe+'-0').val();
           $('#pid-'+STEP.products[i].stripe+'-0').parent().addClass('highlighted');
         }
