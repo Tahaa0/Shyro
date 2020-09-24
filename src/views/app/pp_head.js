@@ -133,16 +133,15 @@ window.onload = function(){
       });
       
       $('input[name=xxprod]:first').attr('checked','checked');
-      CHOSEN_ID = $('input[name=xxprod]:first').val();
-      checkProd(calculateID());
 
+      CHOSEN_ID = $('input[name=xxprod]:first').val();
       for(var i=0;i<STEP.products.length;i++){
         if(STEP.products[i].highlight){
           CHOSEN_ID = $('#pid-'+STEP.products[i].stripe+'-0').val();
-          checkProd(calculateID());
           $('#pid-'+STEP.products[i].stripe+'-0').parent().addClass('highlighted');
         }
       }
+      checkProd(calculateID());
 
       $('input[name=xxbump]').click(function (){
         BUMPS = [];
