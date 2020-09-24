@@ -47,6 +47,7 @@
 		<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
 		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">	
 		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
+		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='highlight' name="highlight"><label for="highlight">Highlight</label></div>
 		<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
 		<button class='otherbtn' id='createProduct'>Add Product</button>
 	</div>
@@ -122,6 +123,11 @@
 		}else{
 			product.bump = false;
 		}
+		if($('#highlight').is(':checked')){
+			product.highlight = true;
+		}else{
+			product.highlight = false;
+		}
 		var index = parseInt($('#prodIndex').val());
 		funnelSteps[index].products.push(product);
 		$('#prodTitle').val('');
@@ -129,6 +135,7 @@
 		$('#prodPaypal').val('');
 		$('#prodPrice').val('');
 		$("#orderBump").prop("checked", false);
+		$("#highlight").prop("checked", false);
 		$('#prodPrice').hide();
 		$('#createContainer').fadeOut(300);
 		$('#realOverlay').fadeOut(300);
