@@ -140,6 +140,9 @@ window.onload = function(){
           $('#pid-'+STEP.products[i].stripe+'-0').attr('checked','checked');
           CHOSEN_ID = $('#pid-'+STEP.products[i].stripe+'-0').val();
           $('#pid-'+STEP.products[i].stripe+'-0').parent().addClass('highlighted');
+          var code = "<span style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:11px; color:white; background-color:red; padding:3px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n\r\n<span style=\"width:20px; display:inline-block\"><\/span>";
+          code += $('#pid-'+STEP.products[i].stripe+'-0').parent().html();
+          $('#pid-'+STEP.products[i].stripe+'-0').parent().html(code);
         }
       }
       checkProd(calculateID());
