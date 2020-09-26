@@ -144,7 +144,7 @@ window.onload = function(){
           $('#pid-'+STEP.products[i].stripe+'-0').css('display','inline-block');
           $('#pid-'+STEP.products[i].stripe+'-0').css('vertical-align','top');
           $('#pid-'+STEP.products[i].stripe+'-0').css('margin-top','18px');
-          var code = "<span class=\'noticeon\' style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:11px; color:white; background-color:red; padding:3px 7px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n";
+          var code = "<span class=\'noticeon\' style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:13px; color:white; background-color:red; padding:3px 7px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n";
           code += $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html();
           $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html(code);
         }
