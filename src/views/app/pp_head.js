@@ -140,12 +140,22 @@ window.onload = function(){
           $('#pid-'+STEP.products[i].stripe+'-0').attr('checked','checked');
           CHOSEN_ID = $('#pid-'+STEP.products[i].stripe+'-0').val();
           $('#pid-'+STEP.products[i].stripe+'-0').parent().addClass('highlighted');
-          var code = "<span style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:11px; color:white; background-color:red; padding:3px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n\r\n<span style=\"width:20px; display:inline-block\"><\/span>";
+          var code = "<span class=\'noticeon\' style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:11px; color:white; background-color:red; padding:3px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n\r\n<span style=\"width:20px; display:inline-block\"><\/span>";
           code += $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html();
           $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html(code);
         }
       }
       checkProd(calculateID());
+
+      var NOTICE_ON = true;
+      setInterval(function(){
+        NOTICE_ON = !NOTICE_ON;
+        if(NOTICE_ON){
+          $('.noticeon').show();
+        }else{
+          $('.noticeon').hide();
+        }
+      },500);
 
       $('input[name=xxbump]').click(function (){
         BUMPS = [];
