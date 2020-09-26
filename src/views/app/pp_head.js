@@ -78,7 +78,7 @@ window.onload = function(){
       var styleElement = document.createElement('style');
       var customStyle = "\r\n.ccStripeElementCard {\r\n    float: none;\r\n} #log_pp{height:28px} #log_cc{height:21px; float:right; padding-right: 4px;}";
       var radioStyle = "\/* The container *\/\r\n.radlab {\r\n  position: relative;\r\n  padding-left: 35px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 22px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n\/* Hide the browser\'s default radio button *\/\r\n.radlab input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\r\n}\r\n\r\n\/* Create a custom radio button *\/\r\n.checkmark {\r\n  position: absolute;\r\n  top: -2px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #eee;\r\n  border-radius: 50%;\r\n}\r\n\r\n\/* On mouse-over, add a grey background color *\/\r\n.radlab:hover input ~ .checkmark {\r\n  background-color: #ccc;\r\n}\r\n\r\n\/* When the radio button is checked, add a blue background *\/\r\n.radlab input:checked ~ .checkmark {\r\n  background-color: #2196F3;\r\n}\r\n\r\n\/* Create the indicator (the dot\/circle - hidden when not checked) *\/\r\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\r\n}\r\n\r\n\/* Show the indicator (dot\/circle) when checked *\/\r\n.radlab input:checked ~ .checkmark:after {\r\n  display: block;\r\n}\r\n\r\n\/* Style the indicator (dot\/circle) *\/\r\n.radlab .checkmark:after {\r\n \ttop: 5px;\r\n\tleft: 5px;\r\n\twidth: 8px;\r\n\theight: 8px;\r\n\tborder-radius: 50%;\r\n\tbackground: white;\r\n}";
-      var highlightStyle = ".highlighted{\r\n  background-color:#FEFF04;\r\n  border-radius:5px;\r\n  width: 105%;\r\n  padding:15px;\r\n  margin-left: -15px;\r\n  border: 1px solid #A0A0A0;\r\n  box-shadow: 0 2px 1px #E0E0E0;\r\n}";
+      var highlightStyle = ".highlighted{\r\n  background-color:#FEFF04;\r\n  border-radius:5px;\r\n  width: 105% !important;\r\n  padding:15px;\r\n  margin-left: -15px;\r\n  border: 1px solid #A0A0A0;\r\n  box-shadow: 0 1px 1px #A0A0A0;\r\n}";
       styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle;
       var head = document.getElementsByTagName('head')[0];
       head.appendChild(styleElement);
@@ -141,8 +141,8 @@ window.onload = function(){
           CHOSEN_ID = $('#pid-'+STEP.products[i].stripe+'-0').val();
           $('#pid-'+STEP.products[i].stripe+'-0').parent().addClass('highlighted');
           var code = "<span style=\" display:inline-block; margin-top:-5px; border-radius:4px; font-size:11px; color:white; background-color:red; padding:3px;\">BEST SELLER<\/span><br style=\"margin-bottom:5px;\">\r\n\r\n<span style=\"width:20px; display:inline-block\"><\/span>";
-          code += $('#pid-'+STEP.products[i].stripe+'-0').parent().html();
-          $('#pid-'+STEP.products[i].stripe+'-0').parent().html(code);
+          code += $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html();
+          $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html(code);
         }
       }
       checkProd(calculateID());
