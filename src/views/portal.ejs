@@ -3,15 +3,82 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CF APP</title>
-	<link rel="stylesheet" href="/views/global.css">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<link rel="stylesheet" href="/views/global.css">
 </head>
 <body>
-		<a class='slink' id='logout'><button>Logout</button></a>
+	<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>
+<div class="container-fluid" id='maincont'>
+	<div id="innerCont">
+		<h1 style="text-align: center;">Steps</h1>
+		<hr>	
+		<div class="row" style="min-height: 200px;">
+			<div class="col-md-8">
+				<div id="buttonbar" class="buttonbar">
+					<button onclick='addstep()'>+ Add Step</button>
+				</div>
+				<div id="stepBox" style="display: none;">
+					<input type="text" placeholder="Step Title" id='stepTitle'>
+					<input type="text" placeholder="Step URL" id='stepURL'>
+					<select name="steptype" id="stepType">
+						<option value="form">Order Form</option>
+						<option value="upsell">Upsell / Downsell / Cross-sell</option>
+					</select>
+					<button id='addStep' class='purplebutton'>+ Add Step</button>
+					<button id='updateStep' class='purplebutton' style="display: none;">Update Step</button>
+				</div>
+				<div id="inside">
+				
+				
+			</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div id="buttonbar2" class="buttonbar">
+					<button onclick='addproductX()'>+ Add Product</button>
+					<button class='infobutton' id='infobutton'>Selected : None</button>
+				</div>
+				<div id="createBox" style="display: none;">
+					<input type="text" id='prodIndex' value=0 disabled style='display:none'>
+					<input type="text" id='prodTitle' placeholder="Product Name"  style="width: 97%;">
+					<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
+					<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">	
+					<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
+					<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='highlight' name="highlight"><label for="highlight">Highlight</label></div>
+					<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
+					<button class='purplebutton' id='createProduct'>+ Add Product</button>
+					<button id='updateProduct' class='purplebutton' style="display: none;">Update Product</button>
+				</div>
+				<div id="insideProd">
+				
+				
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="row" id='genrow' style="display: none;">
+			<button id='generateScript'>Generate Script</button>
+			<div class="col">
+				
+				<h3>Head Tracking Code</h3>
+				<textarea name="" id="script" disabled></textarea>
+				
+			</div>
+			<div class="col">
+				<h3>Body Tracking Code</h3>
+				<textarea name="" id="scriptbody" disabled></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+<!--		
 
 	<div id="main">
 		<div id="reglog">
@@ -23,7 +90,7 @@
 			</select>
 			<button id='addStep'>+ Add Step</button>
 			
-			<!--<img src="/views/ex.png" class='eximg' alt="">-->
+			
 		</div>
 		<div id="inside">
 			
@@ -38,20 +105,13 @@
 				
 		</textarea>
 	</div>
+-->
 <div id="realOverlay"></div>
 <div id="realOverlay2"></div>
-<div id="createContainer">
-	<div id="createBox">
-		<input type="text" id='prodIndex' value=0 disabled style='display:none'>
-		<input type="text" id='prodTitle' placeholder="Product Name">
-		<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
-		<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">	
-		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
-		<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='highlight' name="highlight"><label for="highlight">Highlight</label></div>
-		<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
-		<button class='otherbtn' id='createProduct'>Add Product</button>
-	</div>
-</div>
+
+
+	
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="/views/utils.js"></script>
@@ -64,34 +124,92 @@
 
 	var funnelSteps = [];
 
+	var SELECTED_STEP = 0;
+	var SELECTED_PRODUCT = 0;
+
 	$('#script, #scriptbody').val('');
 
 	function updateFunnelSteps(){
 		var code = "";
 		for(var i =0;i<funnelSteps.length;i++){
 			var step = funnelSteps[i];
-			code += "<h2 class='sttl'>"+step.title+"<button class='minibutton' onclick='deletestep("+i+")'>Delete</button><button class='minibutton' onclick='addproduct("+i+")'>+ Add Product</button></h2>";
-			for(var j=0;j<funnelSteps[i].products.length;j++){
-				var product = funnelSteps[i].products[j];
-				code += "<h3 class='pttl'>"+product.title+"<button class='minibutton' onclick='deleteproduct("+i+","+j+")'>Delete</button></h3>";
-				if(product.bump){
-					txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-					txtarea.text('<!-- Order Bump Implementation Code -->\r\n<label for=\'bump-'+product.stripe+'\'><input type=\'checkbox\' id=\'bump-'+product.stripe+'\' name=\'xxbump\' value=\''+product.stripe+'\'> '+product.title+'<\/label>');
-					code += $("<div />").append(txtarea.clone()).html();
-				}
-				
-			}
+			code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>Step "+(i+1)+' : '+step.title+"</span><button class='minibutton' onclick='deletestep("+i+")'>Delete</button><button class='minibutton' onclick='editstep("+i+")'>Edit</button><div class='sttdesc'><span><strong>Type : </strong>"+step.type+"</span><br><strong>Url : </strong>"+step.url+"</div></div>";
 		}
 		$("#inside").html(code);
+		selectStep();
+		$('.sttl').click(function(e){
+			SELECTED_STEP = parseInt($(this).data('index'));
+			selectStep();
+		});
+		if(funnelSteps.length>0){
+			$('#genrow').slideDown(400);
+		}else{
+			$('#genrow').slideUp(400);
+		}
+	}
+
+	function selectStep(){
+		$('.sttl').removeClass('sttl_selected');
+		$('#sttl_'+SELECTED_STEP).addClass('sttl_selected');
+		$('#infobutton').html('Selected : Step '+(SELECTED_STEP+1));
+		var code = "";
+		for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
+			var product = funnelSteps[SELECTED_STEP].products[j];
+			code += "<div class='pttl'><span style='padding-left:4px;'>"+product.title+"</span><button class='minibutton' onclick='deleteproduct("+SELECTED_STEP+","+j+")'>Delete</button><button class='minibutton' onclick='editproduct("+SELECTED_STEP+","+j+")'>Edit</button><div class='sttdesc'><span><strong>Order Bump : </strong>"+product.bump+"</span><br><strong>Highlight : </strong>"+product.highlight+"<br><strong>Product ID (Stripe) : </strong>"+product.stripe+"<br><strong>Product ID (Paypal) : </strong>"+product.paypal+"</div>";
+			if(product.bump){
+				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
+				txtarea.text('<div class=\'bump1\'>\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Yes, add it to my order<\/label>\r\n\t\t<p>Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong><\/p>\r\n\t<\/div>');
+				code += $("<div />").append(txtarea.clone()).html();
+				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button>';
+			}
+			
+		}
+		$("#insideProd").html(code+"</div>");
+	}
+
+	function addproductX(){
+		addproduct(SELECTED_STEP);
 	}
 
 	function addproduct(index){
-		$('#prodIndex').val(index);
-		$('#realOverlay').fadeIn(400).click(function(){
-			$('#createContainer').fadeOut(300);
-			$('#realOverlay').fadeOut(300);
-		});
-		$('#createContainer').fadeIn(400);
+		$('#createProduct').show();
+		$('#updateProduct').hide();
+		$('#createBox').slideDown(400);
+	}
+
+	function editstep(index){
+		SELECTED_STEP = index;
+		selectStep();
+		$('#addStep').hide();
+		$('#updateStep').show();
+		$('#stepBox').slideDown(400);
+		$('#stepTitle').val(funnelSteps[index].title);
+		$('#stepURL').val(funnelSteps[index].url);
+		$('#stepType').val(funnelSteps[index].type);
+	}
+
+	function editproduct(i,j){
+		SELECTED_STEP = i;
+		SELECTED_PRODUCT = j;
+		$('#createProduct').hide();
+		$('#updateProduct').show();
+		$('#createBox').slideDown(400);
+		$('#prodTitle').val(funnelSteps[i].products[j].title);
+		$('#prodStripe').val(funnelSteps[i].products[j].stripe);
+		$('#prodPaypal').val(funnelSteps[i].products[j].paypal);
+		$('#prodPrice').val(funnelSteps[i].products[j].price);
+		$("#orderBump").prop("checked", funnelSteps[i].products[j].bump);
+		$("#highlight").prop("checked", funnelSteps[i].products[j].highlight);
+		if(funnelSteps[i].products[j].bump){
+			$('#prodPrice').show();
+		}
+	}
+
+	function addstep(){
+		$('#addStep').show();
+		$('#updateStep').hide();
+		$('#stepBox').slideDown(400);
+
 	}
 
 	function deletestep(index){
@@ -128,7 +246,7 @@
 		}else{
 			product.highlight = false;
 		}
-		var index = parseInt($('#prodIndex').val());
+		var index = parseInt(SELECTED_STEP);
 		funnelSteps[index].products.push(product);
 		$('#prodTitle').val('');
 		$('#prodStripe').val('');
@@ -137,10 +255,36 @@
 		$("#orderBump").prop("checked", false);
 		$("#highlight").prop("checked", false);
 		$('#prodPrice').hide();
-		$('#createContainer').fadeOut(300);
-		$('#realOverlay').fadeOut(300);
 		updateFunnelSteps();
+		$('#createBox').slideUp(400);
 	});	
+
+	$('#updateProduct').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title = $('#prodTitle').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe = $('#prodStripe').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal = $('#prodPaypal').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price = $('#prodPrice').val();
+		if($('#orderBump').is(':checked')){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
+		}else{
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
+		}
+		if($('#highlight').is(':checked')){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = true;
+		}else{
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = false;
+		}
+		var index = parseInt(SELECTED_STEP);
+		$('#prodTitle').val('');
+		$('#prodStripe').val('');
+		$('#prodPaypal').val('');
+		$('#prodPrice').val('');
+		$("#orderBump").prop("checked", false);
+		$("#highlight").prop("checked", false);
+		$('#prodPrice').hide();
+		updateFunnelSteps();
+		$('#createBox').slideUp(400);
+	});
 
 	$('#logout').click(function(){
 		logout(function(err,data){
@@ -163,6 +307,17 @@
 		$('#stepTitle').val('');
 		funnelSteps.push(step);
 		updateFunnelSteps();
+		$('#stepBox').slideUp(400);
+	});
+
+	$('#updateStep').click(function(){
+		funnelSteps[SELECTED_STEP].title = $('#stepTitle').val();
+		funnelSteps[SELECTED_STEP].url = $('#stepURL').val();
+		funnelSteps[SELECTED_STEP].type = $('#stepType').val();
+		$('#stepURL').val('');
+		$('#stepTitle').val('');
+		updateFunnelSteps();
+		$('#stepBox').slideUp(400);
 	});
 
 	$('#generateScript').click(function(){

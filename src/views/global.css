@@ -1,33 +1,35 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:100,300,500,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Nunito|Montserrat:100,300,500,700');
 html,body{
 	margin: 0;
 	padding: 0;
 	font-family: 'Montserrat';
-	color: #44484A;
+	color: #F3F4F5;
 }
 body{
-	background-color: #DEE1EA;
+	background-color: #192233;
 background-attachment: fixed;
 }
-h1,h3{
+h3{
 	font-weight: 300;
 	text-align: center;
 }
-
+h1{
+	font-weight: 900;
+	font-family: 'Nunito';
+	color: white;
+	text-align: center;
+}
 #reglog{
 	width: 30%;
-	background-color: #FAFAFA;
-	color: #44484A;
+	background-color: #212C42;
 	font-weight: 700;
 	margin: 0 auto;
 	padding-bottom: 30px;
 	padding-top: 5px;
 	margin-top: 40px;
+	border-radius: 20px
 }
-#inside{
-	width: 70%;
-	margin: 0 auto;
-}
+
 .spacing{
 	height: 35px;
 }
@@ -49,17 +51,25 @@ h1,h3{
 input[type=text],input[type=password],select{
 	display: block;
 	padding: 14px;
-	width: 200px;
+	width: 80%;
 	margin: 5px auto;
-	background-color: #EEEEEE;
+	background-color: transparent;
 	border: none;
-	color: #44484A;
+	color: #FFF;
 	font-family: 'Montserrat';
 	font-weight: 500;
+	border-radius: 15px;
+	border: 2px solid #8B97AE;
+	-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+
 }
-select{
-	width: 228px;
+input[type=text]:focus,input[type=password]:focus,select:focus{
+	color: #FFF;
+	border: 2px solid #DB6AB5;
 }
+
 #chatbox{
 	
 }
@@ -69,13 +79,13 @@ button{
 	width: 200px;
 	margin: 5px auto;
 	border: none;
-	background-color: #4AA3DF;
+	background-color: #6079E6;
 	color: #FFFFFF;
 	cursor: pointer;
 	font-family: 'Montserrat';
 	font-weight: 500;
-	text-transform: uppercase;
-	letter-spacing: 2px;
+	
+	border-radius: 11px;
 }
 .leader{
 	color: 'green';
@@ -247,9 +257,9 @@ button{
     display: none;
 }
 #realOverlay2{
-	z-index: 85;
+	z-index: 75;
 }
-#saveContainer,#createContainer,#mapContainer,#endgameContainer{
+#saveContainer,#createContainer,#mapContainer,#endgameContainer,#stepContainer{
 	z-index: 80;
 	position: absolute;
     top: 0;
@@ -262,7 +272,7 @@ button{
 #mapContainer{
 	z-index: 90;
 }
-#saveBox,#createBox,#mapBox,#endgameBox{
+#saveBox,#mapBox,#endgameBox{
 	background-color: white;
 	margin: 0 auto;	
 	margin-top: 100px;
@@ -463,6 +473,11 @@ button{
 	resize: none;
 	margin-top: 15px;
 	height: 80px;
+	border-radius: 10px;
+	background-color: transparent;
+	font-size: 12px;
+	border: 2px solid #8B97AE;
+	color: #EEE;
 
 }
 .inp90{
@@ -472,28 +487,36 @@ button{
 	width: 100%;
 }
 .sttl{
-	margin: 0;
+	margin: 10px 20px;
 	padding: 10px;
 	font-weight: 400;
 	font-size: 20px;
-	background-color: #FFF;
-	margin-top: 4px;
-	margin-bottom: 4px;
+	background-color: #1D273A;
+	border-radius: 20px;
+	height: auto;
+	margin-right: 0;
+	-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+	cursor: pointer;
+	border: 2px solid #1D273A;
 }
 .pttl{
-	margin: 0;
+	margin: 10px 20px;
 	padding: 10px;
-	font-weight: 300;
-	font-size: 14px;
-	background-color: #FFF;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	width: 80%;
-	margin: 4px auto;
+	font-weight: 400;
+	font-size: 20px;
+	background-color: #1D273A;
+	border-radius: 20px;
+	height: auto;
+	margin-right: 0;
+	-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+	cursor: pointer;
+	border: 2px solid #1D273A;
 }
-#inside{
-	margin-top: 20px;
-}
+
 .minibutton{
 	display: block;
 	float: right;
@@ -504,7 +527,85 @@ button{
 	letter-spacing: 1px;
 	width: auto;
 	margin-left: 5px;
+	background-color: #6E3DC8;
 }
 .bumpscript{
 	height: 55px !important;
+	border-radius: 10px;
+	background-color: transparent !important;
+	font-size: 12px;
+	border: 2px solid #8B97AE !important;
+	color: #EEE !important;
 }
+#innerCont{
+	background-color: #212C42;
+	min-height: 200px;
+	border-radius: 40px;
+	padding: 30px 40px;
+	padding-right: 20px;
+}
+.buttonbar>button{
+	display: inline-block;	
+}
+.buttonbar{
+	padding: 5px 20px;
+}
+hr{
+	border-top: 1px solid #192233;
+}
+#inprods{
+	background-color: #1D273A;
+	min-height: 150px;
+	border-radius: 20px;
+}
+#inprods>h3,h3{
+	font-family: 'Nunito';
+	font-weight: 900;
+	font-size: 25px;padding: 10px;
+	letter-spacing: 0.5px;
+}
+#stepBox input[type=text], #stepBox select{
+	display: inline-block;
+	margin-right: 3px;
+	margin-left: 3px;
+	width: 200px;
+}
+#createBox input[type=text], #createBox select{
+	display: inline-block;
+	margin-right: 3px;
+	margin-left: 3px;
+	width: 200px;
+}
+#stepBox,#createBox{
+	text-align: center;
+	background-color: #1D273A;
+	border-radius: 20px;
+	padding: 10px;	
+	margin-left: 20px;
+}
+.purplebutton{
+	background-color: #6E3DC8;
+}
+.sttl:hover{
+	background-color: #1C2536;
+}
+.sttl_selected{
+	border: 2px solid #DB6AB5;
+}
+.sttdesc{
+	font-size: 	15px;
+	color: #707D96;
+	padding-left: 20px;
+}
+.infobutton{
+	cursor: initial !important;
+	background-color: #1D273A;
+	border: 2px solid #707d96;
+}
+.custombump{
+	float: none !important;
+	display: block;
+	margin: 0 auto;
+}
+
+
