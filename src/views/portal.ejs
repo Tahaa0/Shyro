@@ -158,7 +158,7 @@
 			code += "<div class='pttl'><span style='padding-left:4px;'>"+product.title+"</span><button class='minibutton' onclick='deleteproduct("+SELECTED_STEP+","+j+")'>Delete</button><button class='minibutton' onclick='editproduct("+SELECTED_STEP+","+j+")'>Edit</button><div class='sttdesc'><span><strong>Order Bump : </strong>"+product.bump+"</span><br><strong>Highlight : </strong>"+product.highlight+"<br><strong>Product ID (Stripe) : </strong>"+product.stripe+"<br><strong>Product ID (Paypal) : </strong>"+product.paypal+"</div>";
 			if(product.bump){
 				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-				txtarea.text('<div class=\'bump1\'>\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Yes, add it to my order<\/label>\r\n\t\t<p>Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong><\/p>\r\n\t<\/div>');
+				txtarea.text('<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>');
 				code += $("<div />").append(txtarea.clone()).html();
 				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button>';
 			}
