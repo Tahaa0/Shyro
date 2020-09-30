@@ -459,7 +459,7 @@ button{
 	font-size: 20px;	
 }
 
-#script,textarea[disabled]{
+#script,textarea[disabled],#bumpCode{
 
 	display: block;
 	padding: 5px;
@@ -576,7 +576,13 @@ hr{
 	margin-left: 3px;
 	width: 200px;
 }
-#stepBox,#createBox{
+#bumpBox input[type=text], #bumpBox select{
+	display: inline-block;
+	margin-right: 3px;
+	margin-left: 3px;
+	width: 200px;
+}
+#stepBox,#createBox,#bumpBox{
 	text-align: center;
 	background-color: #1D273A;
 	border-radius: 20px;
@@ -607,31 +613,11 @@ hr{
 	display: block;
 	margin: 0 auto;
 }
-
-
-.bump1{
-	border: 3px solid #BE386D;
-	border-radius: 5px;
-	width: 400px;
-	background-color: white;
-	color: black;
-	padding: 8px;
-}
-.bump1 label{
-	background-color: black;
-	color: white;
-	width: 100%;
-	display: inline-block;	
-	text-align: center;
-	padding: 5px 0;
-}
-.bump1 .x1{
-	font-weight: bold;	
-	text-decoration: underline;
-}
-.bump1 h4{
+#bumpBox h3{
 	margin: 0;
-	text-align: center;	
 	font-size: 18px;
-	padding: 0 10px 10px 10px;	
+}
+#bumpCode{
+	margin-top: 5px;
+	margin-bottom: 17px;
 }
