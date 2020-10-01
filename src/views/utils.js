@@ -28,6 +28,96 @@ function indexUsers(cb){
 	});
 }
 
+function indexFunnels(cb){
+	$.ajax({
+	  url: "/api/funnel/",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+function getFunnel(id,cb){
+	$.ajax({
+	  url: "/api/funnel/"+id,
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+function createFunnel(title,cb){
+	$.ajax({
+	  url: "/api/funnel/",
+	  type: "POST",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'title':title,'steps':'{}'},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+function updateFunnel(id,title,steps,cb){
+	$.ajax({
+	  url: "/api/funnel/"+id,
+	  type: "PUT",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'title':title,'steps':steps},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+function deleteFunnel(id,cb){
+	$.ajax({
+	  url: "/api/funnel/"+id,
+	  type: "DELETE",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+function logout(cb){
+	$.ajax({
+	  url: "/api/auth/logout",
+	  type: "POST",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+/*
 function getLobby(id,cb){
 	$.ajax({
 	  url: "/api/lobby/data/"+id,
@@ -148,3 +238,4 @@ function getMap(id,cb){
 	  }
 	});
 }
+*/

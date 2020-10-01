@@ -69,7 +69,11 @@
 		</div>
 		<hr>
 		<div class="row" id='genrow' style="display: none;">
-			<button id='generateScript'>Generate Script</button>
+			<div class="col-md-2">
+				<button id='save'>Save</button>
+				<button id='generateScript'>Save & Generate Script</button>
+			</div>
+			
 			<div class="col">
 				
 				<h3>Head Tracking Code</h3>
@@ -127,11 +131,15 @@
 		alert(data.message);
 	});
 
+	const FUNNEL_ID = "<%= id %>";
+
 	var funnelSteps = [];
+	var funnelTitle = "Funnel";
 
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
-	var bumpCodes = {};
+
+	refreshFunnel();
 
 	$('#script, #scriptbody').val('');
 
@@ -164,11 +172,11 @@
 			code += "<div class='pttl'><span style='padding-left:4px;'>"+product.title+"</span><button class='minibutton' onclick='deleteproduct("+SELECTED_STEP+","+j+")'>Delete</button><button class='minibutton' onclick='editproduct("+SELECTED_STEP+","+j+")'>Edit</button><div class='sttdesc'><span><strong>Order Bump : </strong>"+product.bump+"</span><br><strong>Highlight : </strong>"+product.highlight+"<br><strong>Product ID (Stripe) : </strong>"+product.stripe+"<br><strong>Product ID (Paypal) : </strong>"+product.paypal+"</div>";
 			if(product.bump){
 				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-				if(!bumpCodes[SELECTED_STEP+'-'+j]){
+				if(!product.bumpCode){
 					var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
-					bumpCodes[SELECTED_STEP+'-'+j] = orderBumpCode;
+					product.bumpCode = orderBumpCode;
 				}
-				txtarea.text(bumpCodes[SELECTED_STEP+'-'+j]);
+				txtarea.text(product.bumpCode);
 				code += $("<div />").append(txtarea.clone()).html();
 				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button>';
 			}
@@ -219,7 +227,7 @@
 		SELECTED_STEP = i;
 		SELECTED_PRODUCT = j;
 		$('#bumpBox').slideDown(400);
-		$("#bumpCode").val(bumpCodes[i+'-'+j]);
+		$("#bumpCode").val(funnelSteps[i].products[j].bumpCode);
 	}
 
 	function addstep(){
@@ -306,7 +314,7 @@
 	});
 
 	$('#updateBump').click(function(){
-		bumpCodes[SELECTED_STEP+'-'+SELECTED_PRODUCT] = $('#bumpCode').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#bumpCode').val();
 		$('#bumpCode').val('');
 		updateFunnelSteps();
 		$('#bumpBox').slideUp(400);
@@ -346,7 +354,12 @@
 		$('#stepBox').slideUp(400);
 	});
 
+	$('#save').click(function(){
+		saveFunnel();
+	});
+
 	$('#generateScript').click(function(){
+		saveFunnel();
 		$('#script').val('');
 		var stepURLs = [];
 		var steps = funnelSteps;
@@ -358,6 +371,28 @@
 			$('#script').val(code);
 			$('#scriptbody').val('<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_body.js\"><\/script>');
 	});
+
+	function refreshFunnel(){
+		getFunnel(FUNNEL_ID,function(err,data){
+			if(!err) {
+				funnelSteps = data.funnel_.steps;
+				funnelTitle = data.funnel_.title;
+				updateFunnelSteps();
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+	function saveFunnel(){
+		updateFunnel(FUNNEL_ID,funnelTitle,JSON.stringify(funnelSteps),function(err,data){
+			if(!err) {
+				//
+			}else{
+				console.log(err);
+			}
+		});
+	}
 </script>
 </body>
 </html>

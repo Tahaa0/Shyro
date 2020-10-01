@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CF APP</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<link rel="stylesheet" href="/views/global.css">
+</head>
+<body>
+	<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>
+<div class="container-fluid" id='maincont'>
+	<div id="innerCont">
+		<h1 style="text-align: center;">Steps</h1>
+		<hr>	
+		<div class="row" style="min-height: 200px;">
+			<div class="col-md-8">
+				<div id="buttonbar" class="buttonbar">
+					<button onclick='addfunnel()'>+ Add Funnel</button>
+				</div>
+				<div id="stepBox" style="display: none;">
+					<input type="text" placeholder="Funnel Title" id='funnelTitle'>
+					<button id='addFunnel' class='purplebutton'>+ Add Funnel</button>
+					<button id='cancelFunnel'>Cancel</button>
+				</div>
+				<div id="inside">
+				
+				
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div id="buttonbar2" class="buttonbar">
+					
+				</div>
+				<div id="insideProd">
+				
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/views/utils.js"></script>
+<script>
+	var socket = io();
+	socket.on('err',function(data){
+		console.log(data);
+		alert(data.message);
+	});
+
+	var FUNNELS = [];
+	funnelRefresh();
+
+	function updateFunnels(){
+		var code = '';
+		for(var i =0;i<FUNNELS.length;i++){
+			var funnel = FUNNELS[i];
+			code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>"+funnel.title+"</span><button class='minibutton' onclick='deletefunnel("+i+")'>Delete</button><button class='minibutton' onclick='editfunnel("+i+")'>Edit</button></div>";
+		}
+		$("#inside").html(code);
+	}
+
+	function addfunnel(){
+		$('#stepBox').slideDown(400);
+	}
+
+	function editfunnel(index){
+		window.location = '/funnel/'+FUNNELS[index]._id;
+	}
+
+	function deletefunnel(index){
+		deleteFunnel(FUNNELS[index]._id,function(err,data){
+			if(!err) {
+				funnelRefresh();
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+	$('#addFunnel').click(function(){
+		createFunnel($('#funnelTitle').val(),function(err,data){
+			if(!err) {
+				funnelRefresh();
+			}else{
+				console.log(err);
+			}
+		});
+		$('#funnelTitle').val('');
+		$('#stepBox').slideUp(400);
+	});
+
+	$('#cancelFunnel').click(function(){
+		$('#funnelTitle').val('');
+		$('#stepBox').slideUp(400);
+	});
+
+	$('#logout').click(function(){
+		logout(function(err,data){
+			if(!err) {
+				localStorage.removeItem("token");
+				window.location = '/';
+			}else{
+				alert(err);
+			}
+		});
+	})
+	
+	function funnelRefresh(){
+		indexFunnels(function(err,data){
+			if(!err) {
+				FUNNELS = data.funnels;
+				updateFunnels();
+			}else{
+				console.log(err);
+			}
+		});
+	}
+	
+</script>
+</body>
+</html>
