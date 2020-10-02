@@ -52,6 +52,12 @@ if(VALID){
             var _name = STEP.products[i].title + '_' + STEP.products[i].variants[j].title + '_' + getTimeNow();
             HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
             $('#cfAR').html(HTML);
+
+            var HTML2 = "";
+            for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
+              HTML2 += "<button class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</button>";
+            }
+            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
           }
         }
       }

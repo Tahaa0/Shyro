@@ -178,11 +178,7 @@ window.onload = function(){
           if(STEP.products[i].variants.length > 0){
             for(var j=0;j<STEP.products[i].variants.length;j++){
               //xxvari_j
-              var HTML = "";
-              for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
-                HTML += "<button class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</button>";
-              }
-              $('#pid-'+STEP.products[i].stripe+'-0').after(HTML);
+              
             }
           }
         }
