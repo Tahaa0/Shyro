@@ -136,6 +136,7 @@ window.onload = function(){
       $('input[name=xxprod]:first').attr('checked','checked');
 
       CHOSEN_ID = $('input[name=xxprod]:first').val();
+      //HIGHLIGHT
       for(var i=0;i<STEP.products.length;i++){
         if(STEP.products[i].highlight){
           $('#pid-'+STEP.products[i].stripe+'-0').attr('checked','checked');
@@ -171,7 +172,21 @@ window.onload = function(){
         });
         checkProd(calculateID());
       });
-
+      //VARIANTS
+      for(var i=0;i<STEP.products.length;i++){
+        if(STEP.products[i].variants){
+          if(STEP.products[i].variants.length > 0){
+            for(var j=0;j<STEP.products[i].variants.length;j++){
+              //xxvari_j
+              var HTML = "";
+              for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
+                HTML += "<button class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</button>";
+              }
+              $('#pid-'+STEP.products[i].stripe+'-0').after(HTML);
+            }
+          }
+        }
+      }
       parDOM.prepend(ppBody);
       parDOM.prepend(ppTab);
       parDOM.prepend(ccBody);
