@@ -61,6 +61,12 @@
 					<textarea id='bumpCode'></textarea>
 					<button id='updateBump' class='purplebutton'>Update Order Bump</button>
 				</div>
+				<div id="varBox" style="display: none;">
+					<h3>Add Variant</h3>
+					<input type="text" id='varTitle' placeholder="Product Name"  style="width: 97%;">
+					<input type="text" id='varOptions' placeholder="Variant Options"  style="width: 97%;">
+					<button id='addVariant' class='purplebutton'>Save</button>
+				</div>
 				<div id="insideProd">
 				
 				
@@ -178,11 +184,12 @@
 				}
 				txtarea.text(product.bumpCode);
 				code += $("<div />").append(txtarea.clone()).html();
-				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button>';
+				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button><button class="minibutton custombump" onclick="editvar('+SELECTED_STEP+','+j+')" >Add Variations</button>';
 			}
+			code += "</div>";
 			
 		}
-		$("#insideProd").html(code+"</div>");
+		$("#insideProd").html(code);
 	}
 
 	function addproductX(){
@@ -230,6 +237,12 @@
 		$("#bumpCode").val(funnelSteps[i].products[j].bumpCode);
 	}
 
+	function editvar(i,j){
+		SELECTED_STEP = i;
+		SELECTED_PRODUCT = j;
+		$('#varBox').slideDown(400);
+	}
+
 	function addstep(){
 		$('#addStep').show();
 		$('#updateStep').hide();
@@ -263,6 +276,7 @@
 		product.stripe = $('#prodStripe').val();
 		product.paypal = $('#prodPaypal').val();
 		product.price = $('#prodPrice').val();
+		product.variants = [];
 		if($('#orderBump').is(':checked')){
 			product.bump = true;
 		}else{
@@ -318,6 +332,17 @@
 		$('#bumpCode').val('');
 		updateFunnelSteps();
 		$('#bumpBox').slideUp(400);
+	});
+
+	$('#addVariant').click(function(){
+		var variant = {};
+		variant.title = $('#varTitle').val();
+		variant.options = $('#varOptions').val().split(',');
+		$('#varTitle').val('');
+		$('#varOptions').val('');
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.push(variant);
+		updateFunnelSteps();
+		$('#varBox').slideUp(400);
 	});
 
 	$('#logout').click(function(){
