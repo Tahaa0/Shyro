@@ -173,16 +173,12 @@ window.onload = function(){
         checkProd(calculateID());
       });
       //VARIANTS
-      for(var i=0;i<STEP.products.length;i++){
-        if(STEP.products[i].variants){
-          if(STEP.products[i].variants.length > 0){
-            for(var j=0;j<STEP.products[i].variants.length;j++){
-              //xxvari_j
-              
-            }
-          }
-        }
-      }
+      $('.xxvar').click(function(){
+        var I = $(this).data('prod');
+        var J = $(this).data('var');
+        $("#xxvar"+I+'_'+J).val($(this).html());
+      });
+      
       parDOM.prepend(ppBody);
       parDOM.prepend(ppTab);
       parDOM.prepend(ccBody);

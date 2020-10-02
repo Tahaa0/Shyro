@@ -55,7 +55,7 @@ if(VALID){
 
             var HTML2 = "";
             for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
-              HTML2 += "<button class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</button>";
+              HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
             }
             $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
           }
