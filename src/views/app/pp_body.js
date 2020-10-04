@@ -45,6 +45,7 @@ if(VALID){
       }
       PARENT_.remove();
       $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
+      //VARIANTS
       if(STEP.products[i].variants){
         if(STEP.products[i].variants.length > 0){
           for(var j=0;j<STEP.products[i].variants.length;j++){
@@ -58,6 +59,14 @@ if(VALID){
               HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
             }
             $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
+          }
+        }
+      }
+      //QUANTITY
+      if(STEP.products[i].quantity){
+        if(STEP.products[i].quantity.length > 0){
+          for(var j=0;j<STEP.products[i].quantity.length;j++){
+              var HTML = "<span class='xxqm' data-prod="+i+" data-var="+j+">-</span><span class='xxquantity' data-prod="+i+" data-var="+j+">1</span><span class='xxqp' data-prod="+i+" data-var="+j+">+</span>"
           }
         }
       }
