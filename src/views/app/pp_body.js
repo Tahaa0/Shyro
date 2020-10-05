@@ -67,7 +67,7 @@ if(VALID){
         if(STEP.products[i].quantity.length > 0){
           for(var j=0;j<STEP.products[i].quantity.length;j++){
               var HTML = "<span class='xxqm' data-prod="+i+" data-var="+j+">-</span><span class='xxquantity' data-prod="+i+" data-var="+j+">1</span><span class='xxqp' data-prod="+i+" data-var="+j+">+</span>";
-              $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
+              $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
           }
         }
       }
