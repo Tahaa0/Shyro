@@ -15,10 +15,18 @@ window.onload = function(){
   function calculateID() {
     for(var i=0;i<STEP.products.length;i++){
       if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
-          if(isPAYPAL){
+          if(QUANTITY == 1){
+            if(isPAYPAL){
               return STEP.products[i].paypal;
-          }else{
+            }else{
               return STEP.products[i].stripe;
+            }
+          }else{
+            if(isPAYPAL){
+              return STEP.products[i].quantity[QUANTITY-2].paypal;
+            }else{
+              return STEP.products[i].quantity[QUANTITY-2].stripe;
+            }
           }
       }
     }
