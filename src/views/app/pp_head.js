@@ -64,7 +64,7 @@ window.onload = function(){
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     if($('input[name=xxprod]:checked').data('quantity') > 1){
-      _name += "x "+$('input[name=xxprod]:checked').data('quantity');
+      _name += " (x"+$('input[name=xxprod]:checked').data('quantity')+")";
       _price = "$"+$('input[name=xxprod]:checked').data('price');
     }
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
