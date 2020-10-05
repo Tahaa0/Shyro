@@ -695,17 +695,3 @@ body{
 	width: 80%;
 	font-size: 15px;
 }
-
-
-.xxqm,.xxqp{
-	display: inline-block;
-	padding: 10px;
-	border-radius: 3px;
-	border: 2px solid #EEE;
-}
-.xxquantity{
-	padding: 10px;
-}
-.xxqm{
-	margin-right: 20px;
-}

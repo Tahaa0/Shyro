@@ -82,7 +82,7 @@ window.onload = function(){
       var bumpStyle = ".bump1{\r\n\tborder: 3px solid #BE386D;\r\n\tborder-radius: 5px;\r\n\twidth: auto;\r\n\tcolor: black;\r\n\tpadding: 8px;\r\n       font-family:\'Montserrat\';\r\n       font-size:16px;\r\n}\r\n.bump1 label{\r\n\tbackground-color: black;\r\n\tcolor: white;\r\n\twidth: 100%;\r\n\tdisplay: inline-block;\t\r\n\ttext-align: center;\r\n\tpadding: 5px 0;\r\n}\r\n.bump1 .x1{\r\n\tfont-weight: bold;\t\r\n\ttext-decoration: underline;\r\n}\r\n.bump1 h4{\r\n\tmargin: 0;\r\n\ttext-align: center;\t\r\n\tfont-size: 18px;\r\n\tpadding: 0 10px 10px 10px;\r\n\tfont-weight:700;\r\n}";
       var varStyle = ".xxvar{\r\n\tdisplay: inline-block;\r\n\tborder: 2px solid #E0E0E0;\r\n\tpadding: 10px;\r\n\tborder-radius: 4px;\r\n\tmargin-left: 3px;\r\n\tmargin-right: 3px;\r\n\tcursor: pointer;\r\n}\r\n.varActive{\r\n\tbackground-color: yellow;\r\n\r\n}";
       var qStyle = ".xxqm,.xxqp{\r\n\tdisplay: inline-block;\r\n\tpadding: 10px;\r\n\tborder-radius: 3px;\r\n\tborder: 2px solid #EEE;\r\n}\r\n.xxquantity{\r\n\tpadding: 10px;\r\n}\r\n.xxqm{\r\n\tmargin-right: 20px;\r\n}";
-      styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle+bumpStyle+varStyle;
+      styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle+bumpStyle+varStyle+qStyle;
       var head = document.getElementsByTagName('head')[0];
       head.appendChild(styleElement);
       
@@ -182,7 +182,12 @@ window.onload = function(){
         var J = $(this).data('var');
         $("#xxvar"+I+'_'+J).val($(this).html());
       });
+      //quantity
+      $('.xxqm').click(function(){
+        var I = $(this).data('prod');
+        var J = $(this).data('var');
 
+      });
       parDOM.prepend(ppBody);
       parDOM.prepend(ppTab);
       parDOM.prepend(ccBody);
