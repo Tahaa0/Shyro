@@ -197,7 +197,7 @@ window.onload = function(){
         }else{
           var q = 1;
         }
-        if(q >= 1){
+        if(q > 1){
           q--;
         }
         $("#pid-"+STEP.products[I].stripe+"-0").data('quantity',q);
