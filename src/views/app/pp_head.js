@@ -1,6 +1,7 @@
 window.onload = function(){
 
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
+  var QUANTITY = 1;
   var BUMPS = [];
   
   var HOST = "http://cfapp20.herokuapp.com";
@@ -81,7 +82,7 @@ window.onload = function(){
       var highlightStyle = ".highlighted{\r\n  background-color:#FEFF04;\r\n  border-radius:5px;\r\n  width: 105% !important;\r\n  padding:17px;\r\n  margin-left: -15px;\r\n  border: 1px solid #A0A0A0;\r\n  box-shadow: 0 1px 1px #A0A0A0;\r\n  font-weight:bold;\r\n}\r\n";
       var bumpStyle = ".bump1{\r\n\tborder: 3px solid #BE386D;\r\n\tborder-radius: 5px;\r\n\twidth: auto;\r\n\tcolor: black;\r\n\tpadding: 8px;\r\n       font-family:\'Montserrat\';\r\n       font-size:16px;\r\n}\r\n.bump1 label{\r\n\tbackground-color: black;\r\n\tcolor: white;\r\n\twidth: 100%;\r\n\tdisplay: inline-block;\t\r\n\ttext-align: center;\r\n\tpadding: 5px 0;\r\n}\r\n.bump1 .x1{\r\n\tfont-weight: bold;\t\r\n\ttext-decoration: underline;\r\n}\r\n.bump1 h4{\r\n\tmargin: 0;\r\n\ttext-align: center;\t\r\n\tfont-size: 18px;\r\n\tpadding: 0 10px 10px 10px;\r\n\tfont-weight:700;\r\n}";
       var varStyle = ".xxvar{\r\n\tdisplay: inline-block;\r\n\tborder: 2px solid #E0E0E0;\r\n\tpadding: 10px;\r\n\tborder-radius: 4px;\r\n\tmargin-left: 3px;\r\n\tmargin-right: 3px;\r\n\tcursor: pointer;\r\n}\r\n.varActive{\r\n\tbackground-color: yellow;\r\n\r\n}";
-      var qStyle = ".xxqm,.xxqp{\r\n\tdisplay: inline-block;\r\n\tpadding: 10px;\r\n\tborder-radius: 3px;\r\n\tborder: 2px solid #EEE;\r\n}\r\n.xxquantity{\r\n\tpadding: 10px;\r\n}\r\n.xxqm{\r\n\tmargin-right: 20px;\r\n}";
+      var qStyle = ".xxqm,.xxqp{\r\n\tdisplay: inline-block;\r\n\tpadding: 10px;\r\n\tborder-radius: 3px;\r\n\tborder: 2px solid #EEE;\r\n}\r\n.xxquantity{\r\n\tpadding: 10px;\r\n}\r\n.xxqm{\r\n\tmargin-left: 20px;\r\n}";
       styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle+bumpStyle+varStyle+qStyle;
       var head = document.getElementsByTagName('head')[0];
       head.appendChild(styleElement);
@@ -132,6 +133,11 @@ window.onload = function(){
 
       $('input[name=xxprod]').click(function () {
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
+        if($('input[name=xxprod]:checked').data('quantity')){
+          QUANTITY = $('input[name=xxprod]:checked').data('quantity');
+        }else{
+          QUANTITY = 1;
+        }
         checkProd(calculateID());
       });
       
@@ -186,7 +192,11 @@ window.onload = function(){
       $('.xxqm').click(function(){
         var I = $(this).data('prod');
         var J = $(this).data('var');
-
+        if($("#pid-"+STEP.products[I].stripe+"-0").data('quantity')){
+          var q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
+        }else{
+          var q = 1;
+        }
       });
       parDOM.prepend(ppBody);
       parDOM.prepend(ppTab);
