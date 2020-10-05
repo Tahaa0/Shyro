@@ -39,7 +39,7 @@ if(VALID){
 
     //change name and remove paypal products from checkout (form)
     for(var i=0;i<STEP.products.length;i++){
-      var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent()
+      var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent();
       if(STEP.products[i].bump){
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
       }
@@ -66,6 +66,8 @@ if(VALID){
       if(STEP.products[i].quantity){
         if(STEP.products[i].quantity.length > 0){
           for(var j=0;j<STEP.products[i].quantity.length;j++){
+              $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
+              $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
               var HTML = "<span class='xxqm' data-prod="+i+" data-var="+j+">-</span><span class='xxquantity' data-prod="+i+" data-var="+j+">1</span><span class='xxqp' data-prod="+i+" data-var="+j+">+</span>";
               $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
           }
