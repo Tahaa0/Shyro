@@ -63,6 +63,10 @@ window.onload = function(){
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
+    if($('input[name=xxprod]:checked').data('quantity') > 1){
+      _name += "x "+$('input[name=xxprod]:checked').data('quantity');
+      _price = "$"+$('input[name=xxprod]:checked').data('price');
+    }
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
     
     $('.elOrderProductOptions tbody').html(hh+ht+hb);
@@ -214,6 +218,7 @@ window.onload = function(){
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
         if($('input[name=xxprod]:checked').data('quantity')){
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
+          $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[J].price);
         }else{
           QUANTITY = 1;
         }
@@ -237,6 +242,7 @@ window.onload = function(){
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
         if($('input[name=xxprod]:checked').data('quantity')){
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
+          $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[J].price);
         }else{
           QUANTITY = 1;
         }
