@@ -11,12 +11,131 @@
 			  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
 	<link rel="stylesheet" href="/views/global.css">
 </head>
 <body>
-	<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>
+<div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
-	<div id="innerCont">
+	<div id="sidebar">
+		<div id="sidebar_logo">
+			<h1>LOGO</h1>
+		</div>
+		<div id="sidebar_menu">
+			<h4>Admin tools</h4>
+			<div class="item"  href='/dashboard'>
+				<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+			</div>
+			<div class="item active_item" href='/funnels'>
+				<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+			</div>
+			<div class="item"  href='/apps'>
+				<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+			</div>
+			<div class="item"  href='/documentation'>
+				<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+			</div>
+			<div class="item"  href='/subscriptions'>
+				<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+			</div>
+			<div class="item"  href='/support'>
+				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+			</div>
+		</div>
+	</div>
+	<div id="page_wrapper">
+		<div class="row">
+			<div class="col-md-8 center_page">
+				<div class="inside">
+					<div class="welcome_box">
+						<button class='back_button link_button' href='/funnels/'><i class="fas fa-reply"></i></button>
+						<h4>Funnel Steps</h4>
+						<h1 id='funnel_title'>Kinobody Funnel</h1>
+					</div>
+					<div class="funnels">
+						<div id="addStepBox" style="display: none;">
+							<input type="text" class='standard_input' id="step_title" placeholder="Step Name">
+							<input type="text" class='standard_input' id="step_url" placeholder="Step URL">
+							<div class="select_type" id='step_type'>
+								<div class="select_tab active" data-type='form'>
+									<div class="select_icon">
+										<i class="fas fa-shopping-cart"></i>
+									</div>
+									<div class="select_text">
+										Order Form
+									</div>
+								</div>
+								<div class="select_tab" data-type='upsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-up"></i>
+									</div>
+									<div class="select_text">
+										Upsell
+									</div>
+								</div>
+								<div class="select_tab" data-type='downsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-down"></i>
+									</div>
+									<div class="select_text">
+										Downsell
+									</div>
+								</div>
+							</div>
+						</div>
+						<span class='black_button' id='addStep' style="display: none;">Submit</span>
+						<span class='black_button' id='toggleAdd'>+ Add Step</span>
+						<div id="myfunnels">
+							<div class="step_item pink active">
+								<div class="s_icon">
+									<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
+								<div class="s_details">
+									<div class="s_title">Step 1<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+									<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+								</div>
+							</div>
+							<div class="step_item purple">
+								<div class="s_icon">
+									<div class="s_iconcap">Upsell</div><i class="fas fa-arrow-up"></i></div>
+								<div class="s_details">
+									<div class="s_title">up<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+									<div class="s_caption">Type : Upsell<br>Url : ww.ww.ww</div>
+								</div>
+							</div>
+							<div class="step_item cyan">
+								<div class="s_icon">
+									<div class="s_iconcap">Downsell</div><i class="fas fa-arrow-down"></i></div>
+								<div class="s_details">
+									<div class="s_title">down<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+									<div class="s_caption">Type : Downsell<br>Url : ww.ww.ww</div>
+								</div>
+							</div>
+							<div class="step_item yellow">
+								<div class="s_icon">
+									<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
+								<div class="s_details">
+									<div class="s_title">Step Last<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+									<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-4">
+				<div class="rightbar">
+					<div class="navbar">
+						
+					</div>
+					<div class="logs">
+						<h2>Update Logs</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--<div id="innerCont">
 		<h1 style="text-align: center;">Steps</h1>
 		<hr>	
 		<div class="row" style="min-height: 200px;">
@@ -92,7 +211,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>-->
 <!--		
 
 	<div id="main">
@@ -137,6 +256,42 @@
 		alert(data.message);
 	});
 
+	$('.item').click(function(){
+		window.location = $(this).attr('href');
+	});
+
+	$('.link_button').click(function(){
+		window.location = $(this).attr('href');
+	});
+
+	function toggleAddStep(){
+		$("#addStepBox").slideToggle(300);
+		$('#addStep').toggle();
+		$('#step_title').val('');
+		$('#step_url').val('');
+		if(toggleAdd){
+			$('#toggleAdd').html('Cancel');
+		}else{
+			$('#toggleAdd').html('+ Add Step');
+		}
+		toggleAdd = !toggleAdd;
+
+	}
+
+	$('#toggleAdd').click(function(){
+		toggleAddStep();
+	});
+
+	$('.select_tab').click(function(){
+		$('.select_tab').removeClass('active');
+		$(this).addClass('active');
+	});
+
+	$('.step_item').click(function(){
+		$('.step_item').removeClass('active');
+		$(this).addClass('active');
+	});
+
 	const FUNNEL_ID = "<%= id %>";
 
 	var funnelSteps = [];
@@ -145,7 +300,7 @@
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
 
-	refreshFunnel();
+	//refreshFunnel();
 
 	$('#script, #scriptbody').val('');
 
@@ -155,7 +310,8 @@
 			var step = funnelSteps[i];
 			code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>Step "+(i+1)+' : '+step.title+"</span><button class='minibutton' onclick='deletestep("+i+")'>Delete</button><button class='minibutton' onclick='editstep("+i+")'>Edit</button><div class='sttdesc'><span><strong>Type : </strong>"+step.type+"</span><br><strong>Url : </strong>"+step.url+"</div></div>";
 		}
-		$("#inside").html(code);
+		console.log(funnelSteps);
+		$("#myfunnels").html(code);
 		selectStep();
 		$('.sttl').click(function(e){
 			SELECTED_STEP = parseInt($(this).data('index'));
@@ -358,9 +514,10 @@
 
 	$('#addStep').click(function(){
 		var step = {};
-		step.title = $('#stepTitle').val();
-		step.url = $('#stepURL').val();
-		step.type = $('#stepType').val();
+		step.title = $('#step_title').val();
+		step.url = $('#step_url').val();
+		step.type = $('.select_tab.active').data('type');
+		console.log()
 		step.products = [];
 		$('#stepURL').val('');
 		$('#stepTitle').val('');
@@ -402,6 +559,7 @@
 			if(!err) {
 				funnelSteps = data.funnel_.steps;
 				funnelTitle = data.funnel_.title;
+				$('#funnel_title').html(funnelTitle);
 				updateFunnelSteps();
 			}else{
 				console.log(err);
@@ -418,6 +576,7 @@
 			}
 		});
 	}
+
 </script>
 </body>
 </html>

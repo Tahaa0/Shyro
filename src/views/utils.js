@@ -63,7 +63,7 @@ function createFunnel(title,cb){
 	  url: "/api/funnel/",
 	  type: "POST",
 	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
-	  data: {'title':title,'steps':'{}'},
+	  data: {'title':title,'steps':'[]'},
 	  error: function(err) {
 	    cb(err,{});
 	  },

@@ -22,6 +22,46 @@ module.exports = app => {
         }
     });
 
+    app.get('/funnels', (req,res)=>{
+        if(req.session['token']){
+            res.render('funnels.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+    app.get('/apps', (req,res)=>{
+        if(req.session['token']){
+            res.render('apps.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+    app.get('/documentation', (req,res)=>{
+        if(req.session['token']){
+            res.render('documentation.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+    app.get('/subscriptions', (req,res)=>{
+        if(req.session['token']){
+            res.render('subscriptions.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+    app.get('/support', (req,res)=>{
+        if(req.session['token']){
+            res.render('support.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
     app.get('/funnel/:id', (req,res)=>{
         if(req.session['token']){
             res.render('portal.ejs',{id:req.params.id});
