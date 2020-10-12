@@ -42,6 +42,9 @@
 			<div class="item active_item"  href='/support'>
 				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 			</div>
+			<div class="item" id='logout'  href='/'>
+				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			</div>
 		</div>
 	</div>
 	<div id="page_wrapper">
@@ -108,6 +111,17 @@
 		alert(data.message);
 	});
 
+	$('#logout').click(function(){
+		logout(function(err,data){
+			if(!err) {
+				localStorage.removeItem("token");
+				window.location = '/';
+			}else{
+				alert(err);
+			}
+		});
+	})
+	
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});

@@ -43,7 +43,9 @@
 			<div class="item"  href='/support'>
 				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 			</div>
-			
+			<div class="item" id='logout'  href='/'>
+				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			</div>
 		
 		</div>
 	</div>
@@ -116,6 +118,17 @@
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});
+
+	$('#logout').click(function(){
+		logout(function(err,data){
+			if(!err) {
+				localStorage.removeItem("token");
+				window.location = '/';
+			}else{
+				alert(err);
+			}
+		});
+	})
 	/*
 	var FUNNELS = [];
 	funnelRefresh();

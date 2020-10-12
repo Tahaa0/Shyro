@@ -3,56 +3,88 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CF APP</title>
-	<link rel="stylesheet" href="/views/global.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
+	<link rel="stylesheet" href="/views/global.css">
 </head>
 <body>
-	<div id="reglog">
+	<div id="logcont">
+	<div id="reglog" class="dbox">
 	<div id="log">
-		<h1>Log In</h1>
+		<div class="field"><h1>Sign In</h1></div>
+		
 		<span id='logError' class="error"></span>
 		<form id='logform'>
-			<input type="text" id="email" placeholder="Email">
-			<input type="password" id="pwd" placeholder="Password">
+			<div class="field">
+				<div class="field_label">Your Email</div>
+				<div class="field_input"><input type="text" id="email"></div>
+			</div>
+			<div class="field">
+				<div class="field_label">Your Password</div>
+				<div class="field_input"><input type="password" id="pwd"></div>
+			</div>
+			
+			
 			<br>
-			<button class='classicbtn' type="submit" id="submit">Log In</button>
+			<button class='black_button central' type="submit" id="submit">Log In</button>
 		</form>
-			<h3 class="">OR</h3>
-			<button class='otherbtn' id='switchreg'>Create an account</button>
+			<div style="text-align: center;">
+				<button class='fbutton' id='switchreg'>Create an account</button>
+				<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
+			</div>
 	</div>
 	<div id="reg" style='display:none'>
-		<h1>Join</h1>
+		<div class="field"><h1>Sign Up</h1></div>
 		<span id='regError' class="error"></span>
 		<form id="regform">
-			<input type="text" name='username' id="r_username" placeholder="Username">
-			<input type="text" name='email' id="r_email" placeholder="Email">
-			<input type="text" name='firstName' id="r_fn" placeholder="First Name">
-			<input type="text" name='lastName' id="r_ln" placeholder="Last Name">
-			<input type="password"  name='password' id="r_pwd" placeholder="Password">
-			<input type="password"  name='password_confirm' id="r_pwd_confirm" placeholder="Confirm Password">
+			<div class="field">
+				<div class="field_label">Username</div>
+				<div class="field_input"><input type="text" name='username' id="r_username" ></div>
+			</div>
+			<div class="field">
+				<div class="field_label">Email</div>
+				<div class="field_input"><input type="text" name='email' id="r_email" ></div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="field_label">First Name</div>
+					<div class="field_input"><input type="text" name='firstName' id="r_fn"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="field_label">Last Name</div>
+					<div class="field_input"><input type="text" name='lastName' id="r_ln"></div>
+				</div>
+				
+			</div>
+			<div class="field">	</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="field_label">Password</div>
+					<div class="field_input"><input type="password"  name='password' id="r_pwd"></div>
+				</div>
+				<div class="col-md-6">
+					<div class="field_label">Confirm Password</div>
+					<div class="field_input"><input type="password"  name='password_confirm' id="r_pwd_confirm"></div>
+				</div>
+				
+			</div>
 			<br>
-			<button class='classicbtn' type="submit" id="r_submit">Sign Up</button>
+			<button class='black_button central' type="submit" id="r_submit">Sign Up</button>
 		</form>
-		<h3 class="gray">OR</h3>
-		<button class='otherbtn' id='switchlog'>Log In to existing account</button>
+			<div style="text-align: center;">
+				<button class='fbutton' id='switchlog'>Log In to existing account</button>
+				<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
+			</div>
 	</div>
-	<button class='otherbtn' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
+	
 	</div>
-	<div class="bump2">
-		<img src="https://www.vippng.com/png/detail/108-1083370_products-hair-repair-combo-front-cosmetics.png" alt="">
-		<div class="desc_">
-			<span class='smt'>Special One Time Offer :</span>
-			<span class="smt2"><strong>My Awesome Box Set</strong> - Just 97$ + Shipping</span>
-			<p>Get the entire My Awesome Box series for just one payment of 97$ + Shipping (14.95$US or 29.95$ Intl.) - The box set comes in a box and is a set.</p>
-		</div>
-		<div class="action">
-			<button>+ ADD</button>
-		</div>
-  
 	</div>
 <script>
 	$('#switchreg').click(function() {

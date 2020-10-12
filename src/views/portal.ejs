@@ -41,11 +41,14 @@
 			<div class="item"  href='/support'>
 				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 			</div>
+			<div class="item" id='logout'  href='/'>
+				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			</div>
 		</div>
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-12 center_page">
 				<div class="inside">
 					<div class="welcome_box">
 						<button class='back_button link_button' href='/funnels/'><i class="fas fa-reply"></i></button>
@@ -85,37 +88,79 @@
 						</div>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='toggleAdd'>+ Add Step</span>
-						<div id="myfunnels">
-							<div class="step_item pink active">
-								<div class="s_icon">
-									<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
-								<div class="s_details">
-									<div class="s_title">Step 1<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-									<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+						<span class='black_button' id='toggleAdd'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+						<span class='black_button' id='toggleAdd'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
+						<div id="myfunnels" class="row">
+							<div class="col-md-4">
+								<div class="dbox">
+								<div class="step_item pink active">
+									<div class="s_icon">
+										<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
+									<div class="s_details">
+										<div class="s_title">Step 1<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+										<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+									</div>
+								</div>
+								<div class="step_item purple">
+									<div class="s_icon">
+										<div class="s_iconcap">Upsell</div><i class="fas fa-arrow-up"></i></div>
+									<div class="s_details">
+										<div class="s_title">up<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+										<div class="s_caption">Type : Upsell<br>Url : ww.ww.ww</div>
+									</div>
+								</div>
+								<div class="step_item cyan">
+									<div class="s_icon">
+										<div class="s_iconcap">Downsell</div><i class="fas fa-arrow-down"></i></div>
+									<div class="s_details">
+										<div class="s_title">down<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+										<div class="s_caption">Type : Downsell<br>Url : ww.ww.ww</div>
+									</div>
+								</div>
+								<div class="step_item yellow">
+									<div class="s_icon">
+										<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
+									<div class="s_details">
+										<div class="s_title">Step Last<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
+										<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+									</div>
+								</div>
 								</div>
 							</div>
-							<div class="step_item purple">
-								<div class="s_icon">
-									<div class="s_iconcap">Upsell</div><i class="fas fa-arrow-up"></i></div>
-								<div class="s_details">
-									<div class="s_title">up<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-									<div class="s_caption">Type : Upsell<br>Url : ww.ww.ww</div>
-								</div>
-							</div>
-							<div class="step_item cyan">
-								<div class="s_icon">
-									<div class="s_iconcap">Downsell</div><i class="fas fa-arrow-down"></i></div>
-								<div class="s_details">
-									<div class="s_title">down<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-									<div class="s_caption">Type : Downsell<br>Url : ww.ww.ww</div>
-								</div>
-							</div>
-							<div class="step_item yellow">
-								<div class="s_icon">
-									<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
-								<div class="s_details">
-									<div class="s_title">Step Last<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-									<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
+							<div class="col-md-8" id='products'>
+								<div class="dbox">
+									<h2>Products</h2>
+									<div class="f_buttons">	
+										<button><i class="fas fa-plus"></i></button>
+										<button><i class="far fa-edit"></i></button>
+										<button><i class="far fa-trash-alt"></i></button>
+									</div>
+									<div class="prod_table">
+										<div class="prod_headrow">
+											<div class="prod_cell">Name</div>
+											<div class="prod_cell">Stripe ID</div>
+											<div class="prod_cell">Paypal ID</div>
+											<div class="prod_cell">Price</div>
+										</div>
+										<div class="prod_row">	
+											<div class="prod_cell">Product 1</div>
+											<div class="prod_cell">6518132</div>
+											<div class="prod_cell">1358475</div>
+											<div class="prod_cell">1 USD</div>
+										</div>
+										<div class="prod_row">	
+											<div class="prod_cell">Prodd 2</div>
+											<div class="prod_cell">9845612</div>
+											<div class="prod_cell">1581123</div>
+											<div class="prod_cell">19.45 USD</div>
+										</div>
+										<div class="prod_row">	
+											<div class="prod_cell">Pro Bump</div>
+											<div class="prod_cell">4255552</div>
+											<div class="prod_cell">5582523</div>
+											<div class="prod_cell">1 USD</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -123,16 +168,7 @@
 				</div>
 				
 			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	<!--<div id="innerCont">

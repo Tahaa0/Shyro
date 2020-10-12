@@ -11,13 +11,23 @@
 </head>
 <body>
 	<a class='slink' href="/">Home</a>
-	<h1>Reset Forgotten Password</h1>
-	<span id='resError' class="error"></span>
-	<form id="resform">
-		<input type="text" name='email' id="email" placeholder="Email">
+	<div id="reglog" class="dbox">
+	
+		<div class="field"><h1>Reset Password</h1></div>
+		
+		
+		<span id='resError' class="error"></span>
+		<form id="resform">
+			<div class="field">
+				<div class="field_label">Your Email</div>
+				<div class="field_input"><input type="text" name='email' id="email"></div>
+			</div>
 		<br>
-		<button class='classicbtn' type="submit" id="submit">Send Email</button>
-	</form>
+		<button class='black_button central' type="submit" id="submit">Send Email</button>
+		</form>
+		
+	</div>
+	
 <script>
 	document.getElementById("resform").onsubmit = function(e){
 		e.preventDefault();

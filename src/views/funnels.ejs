@@ -42,11 +42,14 @@
 			<div class="item"  href='/support'>
 				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 			</div>
+			<div class="item" id='logout'  href='/'>
+				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			</div>
 		</div>
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-11 center_page">
 				<div class="inside">
 					<div class="welcome_box">
 						<h4>Funnel Editor</h4>
@@ -58,22 +61,63 @@
 						</div>
 						<span class='black_button' id='addFunnel' style="display: none;">Submit</span>
 						<span class='black_button' id='toggleAdd'>+ Add Funnel</span>
-						<div id="myfunnels">
-							
+						<div id="myfunnels" class="dbox">
+							<div class="funnel_item purple">
+								<div class="f_icon"><img src="/views/gfx/funnel.png" alt=""></div>
+								<div class="f_details">
+									<div class="f_title">azeaze</div>
+									<div class="f_caption">Active</div>
+									<div class="f_buttons" style="display: none;">
+										<button class='close_btn' onclick="window.location = '/funnel/abc'"><i class="far fa-edit"></i></button>
+										<button class='close_btn'><i class="far fa-trash-alt"></i></button>
+									</div>
+								</div>
+								<div class="f_details">
+									<div class="f_caption2">3 Steps</div>
+								</div>
+								<div class="f_details2">
+									<div class="f_caption2">Updated 1h ago</div>
+								</div>
+							</div>
+							<div class="funnel_item yellow">
+								<div class="f_icon"><img src="/views/gfx/funnel.png" alt=""></div>
+								<div class="f_details">
+									<div class="f_title">azeaze</div>
+									<div class="f_caption">Active</div>
+									<div class="f_buttons" style="display: none;">
+										<button class='close_btn' onclick="window.location = '/funnel/abc'"><i class="far fa-edit"></i></button>
+										<button class='close_btn'><i class="far fa-trash-alt"></i></button>
+									</div>
+								</div>
+								<div class="f_details">
+									<div class="f_caption2">3 Steps</div>
+								</div>
+								<div class="f_details2">
+									<div class="f_caption2">Updated 1h ago</div>
+								</div>
+							</div>
+							<div class="funnel_item blue">
+								<div class="f_icon"><img src="/views/gfx/funnel.png" alt=""></div>
+								<div class="f_details">
+									<div class="f_title">azeaze</div>
+									<div class="f_caption">Active</div>
+									<div class="f_buttons" style="display: none;">
+										<button class='close_btn' onclick="window.location = '/funnel/abc'"><i class="far fa-edit"></i></button>
+										<button class='close_btn'><i class="far fa-trash-alt"></i></button>
+									</div>
+								</div>
+								<div class="f_details">
+									<div class="f_caption2">3 Steps</div>
+								</div>
+								<div class="f_details2">
+									<div class="f_caption2">Updated 1h ago</div>
+								</div>
+							</div>
 						</div>
+
 					</div>
 				</div>
 				
-			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -145,15 +189,20 @@
 
 	var FUNNELS = [];
 	
-	
-	funnelRefresh();
+	$('.funnel_item').click(function(){
+			$('.funnel_item').removeClass('active_funnel');
+			$(".f_buttons").slideUp(200);
+			$(this).addClass('active_funnel');
+			$(this).find(".f_buttons").slideDown(200);
+		});
+	//funnelRefresh();
 
 	function updateFunnels(){
 		var code = '';
 		for(var i =0;i<FUNNELS.length;i++){
 			var funnel = FUNNELS[i];
 			/*code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>"+funnel.title+"</span><button class='minibutton' onclick='deletefunnel("+i+")'>Delete</button><button class='minibutton' onclick='editfunnel("+i+")'>Edit</button></div>";*/
-			code += "<div class=\"funnel_item\"><div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div><div class=\"f_details\"><div class=\"f_title\">"+funnel.title+"<\/div><div class=\"f_caption\">Random Caption<\/div><div class=\"f_buttons\" style='display:none;'><button  class=\'close_btn\'>Apps<\/button><button onclick='editfunnel("+i+")' class=\'close_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'close_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div><\/div><\/div>";
+			code += "<div class=\"funnel_item\"><div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div><div class=\"f_details\"><div class=\"f_title\">"+funnel.title+"<\/div><div class=\"f_caption\">Active<\/div><div class=\"f_buttons\" style='display:none;'><button onclick='editfunnel("+i+")' class=\'close_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'close_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div><\/div><div class=\"f_details\"><div class=\"f_caption2\">3 Steps<\/div><\/div><div class=\"f_details2\"><div class=\"f_caption2\">Updated 12h ago<\/div><\/div><\/div>";
 		}
 		$("#myfunnels").html(code);
 		//EFFECTS

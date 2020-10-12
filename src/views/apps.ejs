@@ -42,29 +42,70 @@
 			<div class="item"  href='/support'>
 				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 			</div>
+			<div class="item" id='logout'  href='/'>
+				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			</div>
 		</div>
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-12 center_page">
 				<div class="inside">
 					<div class="welcome_box">
 						<h4>Enable/Disable apps</h4>
 						<h1>My Apps</h1>
 					</div>
-					
+					<div id="myapps" class="row">
+					<div class="dbox col-md-4" id="applist">
+						<h2>Apps</h2>
+						<div class="app_item">
+							<div class="app_icon blue">
+								<i class="fab fa-paypal"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Paypal</div>
+								<div class="app_caption">Integrate Paypal with Stripe</div>
+							</div>
+						</div>
+						<div class="app_item">
+							<div class="app_icon yellow">
+								<i class="fas fa-euro-sign"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Currency Converter</div>
+								<div class="app_caption">Support Worldwide Currencies</div>
+							</div>
+						</div>
+						<div class="app_item">
+							<div class="app_icon pink">
+								<i class="fas fa-plus-square"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Quantity Selector</div>
+								<div class="app_caption">Select product quantity</div>
+							</div>
+						</div>
+						<div class="app_item">
+							<div class="app_icon blue">
+								<i class="fas fa-tshirt"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Variants</div>
+								<div class="app_caption">Support Product Variations</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8" id='app_desc'>
+						<div id="app_desc" class="dbox">
+							<h1>Paypal</h1>
+							<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at ligula at ex scelerisque viverra. Morbi ipsum sapien, pharetra eu enim ac, hendrerit tempus purus. Praesent egestas odio sit amet nisl lobortis dictum sed in justo. Suspendisse enim mi, mattis id nisl id, laoreet hendrerit mi. Maecenas eu enim et ex convallis dictum. Pellentesque convallis, tellus ut vestibulum luctus, metus neque bibendum tortor, sit amet hendrerit metus elit ultricies neque. Aliquam ut purus nibh. Praesent non justo commodo enim ullamcorper varius ac eget tellus. </p>
+							<p> Nam tincidunt bibendum libero, vitae pharetra justo ullamcorper in. In at malesuada nibh. Vestibulum semper eleifend ligula et viverra. Ut sit amet nulla sed tortor dignissim suscipit ut nec dolor. Aliquam tristique facilisis lorem, varius malesuada dui varius ac. Nunc sed convallis magna, vitae auctor lectus. Donec efficitur, mi quis bibendum tempus, est risus interdum erat, nec mattis odio felis id enim. Donec eu felis nulla. Praesent et sem nunc. Sed sit amet sem scelerisque libero iaculis euismod ac nec lectus. Morbi bibendum, magna nec hendrerit egestas, turpis nisi lacinia mi, eu consequat sapien tortor id ligula. </p>
+						</div>
+					</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	<!--<div id="innerCont">
@@ -111,6 +152,22 @@
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});
+
+	$('.app_item').click(function(){
+			$('.app_item').removeClass('active');
+			$(this).addClass('active');
+		});
+
+	$('#logout').click(function(){
+		logout(function(err,data){
+			if(!err) {
+				localStorage.removeItem("token");
+				window.location = '/';
+			}else{
+				alert(err);
+			}
+		});
+	})
 	/*
 	var FUNNELS = [];
 	funnelRefresh();
