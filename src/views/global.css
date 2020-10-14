@@ -689,7 +689,7 @@ hr{
 	padding: 18px;
 	border-radius: 12px;
 	font-size: 14px;
-	font-weight: 400;
+	font-weight: 600;
 	cursor: pointer;
 	-webkit-transition: 	400ms all;
 	-o-transition: 	400ms all;
@@ -697,6 +697,9 @@ hr{
 	font-family: 'Poppins';
 }
 #sidebar_menu .item:hover{
+	color: #6C5DD3;
+}
+#sidebar_menu .item:hover .icon{
 	color: #6C5DD3;
 }
 #sidebar_menu .active_item{
@@ -714,7 +717,7 @@ hr{
 }
 #sidebar_menu .item .icon{
 	margin-right: 16px;
-	font-size: 15px;
+	font-size: 17px;
 	color: #BBBCBD;
 }
 #maincont{
@@ -795,6 +798,7 @@ hr{
 }
 .standard_input{
 	color: black;
+	background-color: #fff !important;
 }
 #addFunnelBox,#addStepBox{
 	padding-bottom: 15px;
@@ -875,6 +879,15 @@ hr{
 	background-color: black;
 	color: #FFF;
 }
+
+.delete_btn{
+	background-color: #E04A3A !important;
+	color: #FFF !important;
+}
+.delete_btn:hover{
+	background-color: #A63126 !important;
+	color: #FFF !important;
+}
 .f_title{
 	font-size: 16px;
 	font-weight: 600;
@@ -894,8 +907,20 @@ hr{
 	font-weight: 500;
 	margin-top: 23px;
 }
-.f_details{
-	width: 250px;
+
+.f_details,.f_details2{
+	flex: 0 33.33%;
+}
+.f_details2{
+	text-align: right;
+	padding-right: 30px;	
+}
+.flex{
+	display: flex;	
+	flex-grow: 1;
+}
+.textcenter{
+	text-align: center !important;	
 }
 .f_title.f_title_info{
 	color: #555;

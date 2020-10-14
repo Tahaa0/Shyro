@@ -88,43 +88,12 @@
 						</div>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='toggleAdd'>+ Add Step</span>
-						<span class='black_button' id='toggleAdd'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
-						<span class='black_button' id='toggleAdd'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
+						<span class='black_button' id='editStep'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
 						<div id="myfunnels" class="row">
 							<div class="col-md-4">
-								<div class="dbox">
-								<div class="step_item pink active">
-									<div class="s_icon">
-										<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
-									<div class="s_details">
-										<div class="s_title">Step 1<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-										<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
-									</div>
-								</div>
-								<div class="step_item purple">
-									<div class="s_icon">
-										<div class="s_iconcap">Upsell</div><i class="fas fa-arrow-up"></i></div>
-									<div class="s_details">
-										<div class="s_title">up<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-										<div class="s_caption">Type : Upsell<br>Url : ww.ww.ww</div>
-									</div>
-								</div>
-								<div class="step_item cyan">
-									<div class="s_icon">
-										<div class="s_iconcap">Downsell</div><i class="fas fa-arrow-down"></i></div>
-									<div class="s_details">
-										<div class="s_title">down<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-										<div class="s_caption">Type : Downsell<br>Url : ww.ww.ww</div>
-									</div>
-								</div>
-								<div class="step_item yellow">
-									<div class="s_icon">
-										<div class="s_iconcap">Order Form</div><i class="fas fa-shopping-cart"></i></div>
-									<div class="s_details">
-										<div class="s_title">Step Last<div class="icc"><i class="fas fa-chevron-right"></i></div></div>
-										<div class="s_caption">Type : Order Form<br>Url : ww.ww.ww</div>
-									</div>
-								</div>
+								<div class="dbox" id='myf'>
+								
 								</div>
 							</div>
 							<div class="col-md-8" id='products'>
@@ -292,6 +261,18 @@
 		alert(data.message);
 	});
 
+	const COLORS = ['','purple','cyan','yellow'];
+	const ICONS = {
+		'form': 'fas fa-shopping-cart',
+		'upsell': 'fas fa-arrow-up',
+		'downsell': 'fas fa-arrow-down'
+	}
+	const TYPE_TEXT = {
+		'form': 'Order Form',
+		'upsell': 'Upsell',
+		'downsell': 'Downsell'
+	}
+
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});
@@ -300,9 +281,16 @@
 		window.location = $(this).attr('href');
 	});
 
+	function stepHTML(s,i){
+		var HTML = '<div class=\"step_item '+COLORS[i%4]+'\">\r\n<div class=\"s_icon\">\r\n<div class=\"s_iconcap\">'+TYPE_TEXT[s.type]+'<\/div><i class=\"'+ICONS[s.type]+'\"><\/i><\/div>\r\n<div class=\"s_details\">\r\n<div class=\"s_title\">'+s.title+'<div class=\"icc\"><i class=\"fas fa-chevron-right\"><\/i><\/div><\/div>\r\n<div class=\"s_caption\">Type : '+TYPE_TEXT[s.type]+'<br>Url : '+s.url+'<\/div>\r\n<\/div>\r\n<\/div>';
+		return HTML;
+	}
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
 		$('#addStep').toggle();
+		$('#editStep').toggle();
+		$('#deleteStep').toggle();
 		$('#step_title').val('');
 		$('#step_url').val('');
 		if(toggleAdd){
@@ -323,10 +311,7 @@
 		$(this).addClass('active');
 	});
 
-	$('.step_item').click(function(){
-		$('.step_item').removeClass('active');
-		$(this).addClass('active');
-	});
+	
 
 	const FUNNEL_ID = "<%= id %>";
 
@@ -336,7 +321,7 @@
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
 
-	//refreshFunnel();
+	refreshFunnel();
 
 	$('#script, #scriptbody').val('');
 
@@ -344,10 +329,18 @@
 		var code = "";
 		for(var i =0;i<funnelSteps.length;i++){
 			var step = funnelSteps[i];
-			code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>Step "+(i+1)+' : '+step.title+"</span><button class='minibutton' onclick='deletestep("+i+")'>Delete</button><button class='minibutton' onclick='editstep("+i+")'>Edit</button><div class='sttdesc'><span><strong>Type : </strong>"+step.type+"</span><br><strong>Url : </strong>"+step.url+"</div></div>";
+			code += stepHTML(step,i);
 		}
 		console.log(funnelSteps);
-		$("#myfunnels").html(code);
+		$("#myf").html(code);
+		//EFFECTS
+		$('.step_item').click(function(){
+			$('.step_item').removeClass('active');
+			$(this).addClass('active');
+			SELECTED_STEP = parseInt($(this).data('index'));
+			selectStep();
+		});
+		// /EFFECTS
 		selectStep();
 		$('.sttl').click(function(e){
 			SELECTED_STEP = parseInt($(this).data('index'));
@@ -553,13 +546,10 @@
 		step.title = $('#step_title').val();
 		step.url = $('#step_url').val();
 		step.type = $('.select_tab.active').data('type');
-		console.log()
 		step.products = [];
-		$('#stepURL').val('');
-		$('#stepTitle').val('');
 		funnelSteps.push(step);
 		updateFunnelSteps();
-		$('#stepBox').slideUp(400);
+		toggleAddStep();
 	});
 
 	$('#updateStep').click(function(){
