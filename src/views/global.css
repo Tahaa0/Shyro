@@ -1117,6 +1117,16 @@ hr{
 	color: #B2B3BD;
 }
 
+.prod_row{
+	cursor: pointer;
+	-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+}
+.prod_row.active{
+	background-color: #E2F3F8;
+}
+
 .dbox{
 	padding: 32px 32px 38px;
 	background-color: #ffffff;
@@ -1207,6 +1217,22 @@ hr{
 }
 #logcont{
 	z-index: 10;
+}
+
+#addProductBox{
+	
+	border-radius: 16px;
+	border: 1px solid #E4E4E4;
+	padding: 20px;
+	max-width: 500px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#addProductBox .f_buttons{
+	margin-top: 15px;
+}
+#addProductBox .row{
+	margin-bottom: 15px;
 }
 /*
 .varActive{

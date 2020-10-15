@@ -87,48 +87,58 @@
 							</div>
 						</div>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
+						<span class='black_button' id='updateStep' style="display: none;">Update</span>
 						<span class='black_button' id='toggleAdd'>+ Add Step</span>
-						<span class='black_button' id='editStep'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
 						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
 						<div id="myfunnels" class="row">
 							<div class="col-md-4">
 								<div class="dbox" id='myf'>
-								
+									
 								</div>
 							</div>
 							<div class="col-md-8" id='products'>
 								<div class="dbox">
 									<h2>Products</h2>
-									<div class="f_buttons">	
-										<button><i class="fas fa-plus"></i></button>
-										<button><i class="far fa-edit"></i></button>
-										<button><i class="far fa-trash-alt"></i></button>
+									<div id="addProductBox" style="display: none;">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Product Name</div>
+												<div class="field_input"><input type="text" name='p_title' id="p_title" ></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">Price</div>
+												<div class="field_input"><input type="text" name='p_price' id="p_price" ></div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Stripe ID</div>
+												<div class="field_input"><input type="text" name='p_stripe' id="p_stripe"></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">PayPal ID</div>
+												<div class="field_input"><input type="text" name='p_paypal' id="p_paypal"></div>
+											</div>
+											
+										</div>
+										<div class="f_buttons" id='p_addbuttons' style="display: none;">	
+											<button id='addProduct'>Submit</button>
+											<button id='cancelAddProduct'>Cancel</button>
+										</div>
+										<div class="f_buttons" id='p_editbuttons' style="display: none;">	
+											<button id='updateProduct'>Update</button>
+											<button id='cancelEditProduct'>Cancel</button>
+										</div>
 									</div>
-									<div class="prod_table">
-										<div class="prod_headrow">
-											<div class="prod_cell">Name</div>
-											<div class="prod_cell">Stripe ID</div>
-											<div class="prod_cell">Paypal ID</div>
-											<div class="prod_cell">Price</div>
-										</div>
-										<div class="prod_row">	
-											<div class="prod_cell">Product 1</div>
-											<div class="prod_cell">6518132</div>
-											<div class="prod_cell">1358475</div>
-											<div class="prod_cell">1 USD</div>
-										</div>
-										<div class="prod_row">	
-											<div class="prod_cell">Prodd 2</div>
-											<div class="prod_cell">9845612</div>
-											<div class="prod_cell">1581123</div>
-											<div class="prod_cell">19.45 USD</div>
-										</div>
-										<div class="prod_row">	
-											<div class="prod_cell">Pro Bump</div>
-											<div class="prod_cell">4255552</div>
-											<div class="prod_cell">5582523</div>
-											<div class="prod_cell">1 USD</div>
-										</div>
+									<div class="f_buttons">	
+										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
+										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
+										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
+									</div>
+									<div class="prod_table" id='prod_table'>
+										
 									</div>
 								</div>
 							</div>
@@ -273,6 +283,8 @@
 		'downsell': 'Downsell'
 	}
 
+
+
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});
@@ -282,15 +294,28 @@
 	});
 
 	function stepHTML(s,i){
-		var HTML = '<div class=\"step_item '+COLORS[i%4]+'\">\r\n<div class=\"s_icon\">\r\n<div class=\"s_iconcap\">'+TYPE_TEXT[s.type]+'<\/div><i class=\"'+ICONS[s.type]+'\"><\/i><\/div>\r\n<div class=\"s_details\">\r\n<div class=\"s_title\">'+s.title+'<div class=\"icc\"><i class=\"fas fa-chevron-right\"><\/i><\/div><\/div>\r\n<div class=\"s_caption\">Type : '+TYPE_TEXT[s.type]+'<br>Url : '+s.url+'<\/div>\r\n<\/div>\r\n<\/div>';
+		var HTML = '<div class=\"step_item '+COLORS[i%4]+'\" id=\"step_'+i+'\" data-index=\"'+i+'\">\r\n<div class=\"s_icon\">\r\n<div class=\"s_iconcap\">'+TYPE_TEXT[s.type]+'<\/div><i class=\"'+ICONS[s.type]+'\"><\/i><\/div>\r\n<div class=\"s_details\">\r\n<div class=\"s_title\">'+s.title+'<div class=\"icc\"><i class=\"fas fa-chevron-right\"><\/i><\/div><\/div>\r\n<div class=\"s_caption\">Type : '+TYPE_TEXT[s.type]+'<br>Url : '+s.url+'<\/div>\r\n<\/div>\r\n<\/div>';
 		return HTML;
 	}
 
+	function productHTML(p,i,j){
+		var HTML = "<div class=\"prod_row\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
+		return HTML;
+	}
+
+	var toggleAdd = true;
+	var toggleEdit = true;
+
+	var p_toggleAdd = true;
+	var p_toggleEdit = true;
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
+
 		$('#addStep').toggle();
-		$('#editStep').toggle();
+		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
+
 		$('#step_title').val('');
 		$('#step_url').val('');
 		if(toggleAdd){
@@ -302,16 +327,99 @@
 
 	}
 
+	function toggleEditStep(){
+		$("#addStepBox").slideToggle(300);
+
+		$('#updateStep').toggle();
+		$('#toggleAdd').toggle();
+		$('#deleteStep').toggle();
+
+		$('#step_title').val('');
+		$('#step_url').val('');
+		if(toggleEdit){
+			$('#toggleEdit').html('Cancel');
+			$('#step_title').val(funnelSteps[SELECTED_STEP].title);
+			$('#step_url').val(funnelSteps[SELECTED_STEP].url);
+
+			$('.select_tab').removeClass('active');
+			$('.select_tab[data-type='+funnelSteps[SELECTED_STEP].type+']').addClass('active');
+		}else{
+			$('#toggleEdit').html('<i style=\'font-size: 14px; margin-right: \t2px;\' class=\"fas fa-pencil-alt\"><\/i> Edit Step');
+		}
+		toggleEdit = !toggleEdit;
+	}
+
+	function toggleAddProduct(){
+		$("#addProductBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#deleteProduct').toggle();
+
+		$('#p_addbuttons').toggle();
+
+		$('#p_title').val('');
+		$('#p_price').val('');
+		$('#p_stripe').val('');
+		$('#p_paypal').val('');
+
+		if(p_toggleAdd){
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleAdd = !p_toggleAdd;
+	}
+
+	function toggleEditProduct(){
+		$("#addProductBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#deleteProduct').toggle();
+
+		$('#p_editbuttons').toggle();
+
+		$('#p_title').val('');
+		$('#p_price').val('');
+		$('#p_stripe').val('');
+		$('#p_paypal').val('');
+
+		if(p_toggleEdit){
+			$('#p_title').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title);
+			$('#p_price').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price);
+			$('#p_stripe').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe);
+			$('#p_paypal').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal);
+
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleEdit = !p_toggleEdit;
+	}
+
 	$('#toggleAdd').click(function(){
 		toggleAddStep();
+	});
+
+	$('#toggleEdit').click(function(){
+		toggleEditStep();
+	});
+
+	$('#toggleAddProduct, #cancelAddProduct').click(function(){
+		toggleAddProduct();
+	});
+
+	$('#toggleEditProduct, #cancelEditProduct').click(function(){
+		toggleEditProduct();
 	});
 
 	$('.select_tab').click(function(){
 		$('.select_tab').removeClass('active');
 		$(this).addClass('active');
 	});
-
-	
 
 	const FUNNEL_ID = "<%= id %>";
 
@@ -326,6 +434,7 @@
 	$('#script, #scriptbody').val('');
 
 	function updateFunnelSteps(){
+
 		var code = "";
 		for(var i =0;i<funnelSteps.length;i++){
 			var step = funnelSteps[i];
@@ -342,26 +451,19 @@
 		});
 		// /EFFECTS
 		selectStep();
-		$('.sttl').click(function(e){
-			SELECTED_STEP = parseInt($(this).data('index'));
-			selectStep();
-		});
-		if(funnelSteps.length>0){
-			$('#genrow').slideDown(400);
-		}else{
-			$('#genrow').slideUp(400);
-		}
+		
 	}
 
 	function selectStep(){
-		$('.sttl').removeClass('sttl_selected');
-		$('#sttl_'+SELECTED_STEP).addClass('sttl_selected');
-		$('#infobutton').html('Selected : Step '+(SELECTED_STEP+1));
-		var code = "";
+		
+
+		$('.step_item').removeClass('active');
+		$('#step_'+SELECTED_STEP).addClass('active');
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<\/div>";
 		for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
 			var product = funnelSteps[SELECTED_STEP].products[j];
-			code += "<div class='pttl'><span style='padding-left:4px;'>"+product.title+"</span><button class='minibutton' onclick='deleteproduct("+SELECTED_STEP+","+j+")'>Delete</button><button class='minibutton' onclick='editproduct("+SELECTED_STEP+","+j+")'>Edit</button><div class='sttdesc'><span><strong>Order Bump : </strong>"+product.bump+"</span><br><strong>Highlight : </strong>"+product.highlight+"<br><strong>Product ID (Stripe) : </strong>"+product.stripe+"<br><strong>Product ID (Paypal) : </strong>"+product.paypal+"</div>";
-			if(product.bump){
+			code += productHTML(product,SELECTED_STEP,j);
+			/*if(product.bump){
 				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
 				if(!product.bumpCode){
 					var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
@@ -371,11 +473,77 @@
 				code += $("<div />").append(txtarea.clone()).html();
 				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button><button class="minibutton custombump" onclick="editvar('+SELECTED_STEP+','+j+')" >Add Variations</button>';
 			}
-			code += "</div>";
+			code += "</div>";*/
 			
 		}
-		$("#insideProd").html(code);
+		$("#prod_table").html(code);
+		//Effects
+		$('.prod_row').click(function(){
+			$('.prod_row').removeClass('active');
+			$(this).addClass('active');
+			SELECTED_PRODUCT = parseInt($(this).data('j'));
+		});
+
+		
 	}
+
+	$('#addStep').click(function(){
+		var step = {};
+		step.title = $('#step_title').val();
+		step.url = $('#step_url').val();
+		step.type = $('.select_tab.active').data('type');
+		step.products = [];
+		funnelSteps.push(step);
+		saveFunnel();
+		updateFunnelSteps();
+		toggleAddStep();
+	});
+
+	$('#updateStep').click(function(){
+		funnelSteps[SELECTED_STEP].title = $('#step_title').val();
+		funnelSteps[SELECTED_STEP].url = $('#step_url').val();
+		funnelSteps[SELECTED_STEP].type = $('.select_tab.active').data('type');
+		saveFunnel();
+		updateFunnelSteps();
+		toggleEditStep();
+	});
+
+	$('#deleteStep').click(function(){
+		funnelSteps.splice(SELECTED_STEP,1);
+		saveFunnel();
+		updateFunnelSteps();
+	});
+
+
+	$('#addProduct').click(function(){
+		var product = {};
+		product.title = $('#p_title').val();
+		product.stripe = $('#p_stripe').val();
+		product.paypal = $('#p_paypal').val();
+		product.price = $('#p_price').val();
+
+		var index = parseInt(SELECTED_STEP);
+		funnelSteps[index].products.push(product);
+		saveFunnel();
+		updateFunnelSteps();
+		toggleAddProduct();
+	});
+
+	$('#updateProduct').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title = $('#p_title').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe = $('#p_stripe').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal = $('#p_paypal').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price = $('#p_price').val();
+		saveFunnel();
+		updateFunnelSteps();
+		toggleEditProduct();
+	});
+
+	$('#deleteProduct').click(function(){
+		funnelSteps[SELECTED_STEP].products.splice(SELECTED_PRODUCT,1);
+		saveFunnel();
+		updateFunnelSteps();
+	});
 
 	function addproductX(){
 		addproduct(SELECTED_STEP);
@@ -455,7 +623,7 @@
         }
     });
 
-	$('#createProduct').click(function(){
+	/*$('#createProduct').click(function(){
 		var product = {};
 		product.title = $('#prodTitle').val();
 		product.stripe = $('#prodStripe').val();
@@ -528,7 +696,7 @@
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.push(variant);
 		updateFunnelSteps();
 		$('#varBox').slideUp(400);
-	});
+	});*/
 
 	$('#logout').click(function(){
 		logout(function(err,data){
@@ -541,26 +709,6 @@
 		});
 	})
 
-	$('#addStep').click(function(){
-		var step = {};
-		step.title = $('#step_title').val();
-		step.url = $('#step_url').val();
-		step.type = $('.select_tab.active').data('type');
-		step.products = [];
-		funnelSteps.push(step);
-		updateFunnelSteps();
-		toggleAddStep();
-	});
-
-	$('#updateStep').click(function(){
-		funnelSteps[SELECTED_STEP].title = $('#stepTitle').val();
-		funnelSteps[SELECTED_STEP].url = $('#stepURL').val();
-		funnelSteps[SELECTED_STEP].type = $('#stepType').val();
-		$('#stepURL').val('');
-		$('#stepTitle').val('');
-		updateFunnelSteps();
-		$('#stepBox').slideUp(400);
-	});
 
 	$('#save').click(function(){
 		saveFunnel();
