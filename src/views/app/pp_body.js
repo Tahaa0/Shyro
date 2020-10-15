@@ -90,7 +90,7 @@ if(VALID){
             bButton.show();
          });
     
-  }else if(STEP.type == 'upsell'){
+  }else if(STEP.type == 'upsell' || STEP.type == 'downsell'){
     console.log('upselll');
   }
     

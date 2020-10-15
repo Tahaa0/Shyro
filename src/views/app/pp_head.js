@@ -263,7 +263,7 @@ window.onload = function(){
         FORM.submit();
       });
     
-    }else if(STEP.type == 'upsell'){
+    }else if(STEP.type == 'upsell' || STEP.type == 'downsell'){
       
       var $links = [];
 

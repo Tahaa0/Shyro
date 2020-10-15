@@ -143,6 +143,20 @@
 								</div>
 							</div>
 						</div>
+
+					</div>
+					<div class="dbox" id='genbox'>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="field_label">Head Script :</div>
+								<div class="field_input"><input type="text" name='script_head' id="scripthead" disabled=""></div>
+							</div>
+							<div class="col-md-6">
+								<div class="field_label">Body Script :</div>
+								<div class="field_input"><input type="text" name='script_body' id="scriptbody" disabled=""></div>
+							</div>
+							
+						</div>
 					</div>
 				</div>
 				
@@ -429,9 +443,10 @@
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
 
+	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
+	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
 	refreshFunnel();
 
-	$('#script, #scriptbody').val('');
 
 	function updateFunnelSteps(){
 
@@ -725,7 +740,7 @@
 		}
 		var code = '<script>\r\nvar isPAYPAL = false;\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\nvar STEPS = '+JSON.stringify(steps)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_head.js\"><\/script>\r\n';
 			$('#script').val(code);
-			$('#scriptbody').val('<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_body.js\"><\/script>');
+			//$('#scriptbody').val('<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_body.js\"><\/script>');
 	});
 
 	function refreshFunnel(){

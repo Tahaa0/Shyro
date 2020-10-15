@@ -6,7 +6,7 @@ html,body{
 	color: #808191;
 }
 body{
-	background-color: #F7F8FB;
+	background-color: #F1F3F5;
 }
 h3{
 	font-weight: 300;
@@ -1233,6 +1233,10 @@ hr{
 }
 #addProductBox .row{
 	margin-bottom: 15px;
+}
+
+#genbox{
+	margin-top: 20px;
 }
 /*
 .varActive{
