@@ -69,6 +69,23 @@ h1{
 	transition: all .25s;
 	width: 100%;	
 }
+.field_input>textarea{
+	height: 100px;
+	padding: 10px 10px !important;
+	border-radius: 8px !important;
+	border-radius: 8px;
+	background: rgba(228, 228, 228, 0.3);
+	border: 2px solid transparent;
+	font-family: 'Inter', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	color: #11142D;
+	-webkit-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+	width: 100%;
+	resize: none;
+}
 .spacing{
 	height: 35px;
 }
@@ -874,6 +891,7 @@ hr{
 	-o-transition: 	400ms all;
 	transition: 	400ms all;
 	margin-right: 5px;
+	cursor: pointer;
 }
 .f_buttons button:hover,.fbutton:hover{
 	background-color: black;
@@ -1152,7 +1170,9 @@ hr{
 	border-radius: 12px;
 	padding: 10px;
 }
-
+.app_item:hover{
+	background-color: #F5F6F9;
+}
 .app_item.active{
 	background-color: #6C5DD3;
 }
@@ -1168,7 +1188,7 @@ hr{
 	border-radius: 12px;
 	font-size: 32px;
 	text-align: center;
-	margin-right: 12px;
+	
 }
 .app_icon.blue{
 	background: rgba(160, 215, 231, 0.3);
@@ -1193,6 +1213,10 @@ hr{
 	font-size: 12px;
 	font-weight: 500;
 	color:#808191;
+}
+.app_details{
+	flex-grow: 1;
+	margin-left: 12px;
 }
 #app_desc h1{
 	text-align: left;
@@ -1219,24 +1243,141 @@ hr{
 	z-index: 10;
 }
 
-#addProductBox{
-	
+.box_2{
+	display: inline-block;
+	vertical-align: top;
 	border-radius: 16px;
 	border: 1px solid #E4E4E4;
 	padding: 20px;
 	max-width: 500px;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	width: 500px;
 }
-#addProductBox .f_buttons{
+.box_2 .f_buttons{
 	margin-top: 15px;
 }
-#addProductBox .row{
+.box_2 .row{
 	margin-bottom: 15px;
 }
 
 #genbox{
 	margin-top: 20px;
+}
+
+.switchbox{
+	padding-right: 10px;
+}
+#appsBox .app_item:first-child{
+	margin-top: 0;
+}
+#appsBox .app_item{
+	margin-top: 10px;
+}
+
+#appsBox{
+	
+}
+
+.editbox{
+	visibility: hidden;
+}
+.editbox .fbutton{
+	margin: 0;
+	padding: 7px 12px;
+	border-radius: 10px;
+	font-size: 14px;
+	margin-top: 6px;
+	margin-right: 10px;
+}
+.editbox .fbutton:hover{
+	background-color: #BBB;
+	color: black;
+}
+
+#toggleEdit,#deleteStep,#toggleEditProduct,#deleteProduct,#toggleApps{
+	visibility: hidden;
+}
+/* /////////// SWITCH W3SCHOOLS CODE /////////////// */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+  margin-top: 13.5px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 1.5px;
+  bottom: 1.5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #90C38C;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #90C38C;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(17px);
+  -ms-transform: translateX(17px);
+  transform: translateX(17px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* //////////////// END SWITCH W3SCHOOLS CODE ///////////////////// */
+
+.box_2 h4{
+	font-size: 16px;
+	font-weight: 600;
+	color: #000;
+	font-family: 'Inter';
+}
+
+#orderBumpCode{
+	font-size: 12px;
+	background-color: #1D1E22;
+	color: #BACA63;
+	margin-bottom: 10px;
+}
+#appSettingsBox_2 .field{
+	margin-bottom: 0;
 }
 /*
 .varActive{

@@ -9,6 +9,10 @@
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			  crossorigin="anonymous"></script>
+	<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
 	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
@@ -100,7 +104,7 @@
 							<div class="col-md-8" id='products'>
 								<div class="dbox">
 									<h2>Products</h2>
-									<div id="addProductBox" style="display: none;">
+									<div id="addProductBox" class='box_2' style="display: none;">
 										<div class="row">
 											<div class="col-md-6">
 												<div class="field_label">Product Name</div>
@@ -132,9 +136,102 @@
 											<button id='cancelEditProduct'>Cancel</button>
 										</div>
 									</div>
+									<div id="appsBox" class="box_2" style="display: none;">
+										<div class="app_item" id='app_item_1'>
+											<div class="app_icon yellow">
+												<i class="fas fa-highlighter"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Highlight</div>
+												<div class="app_caption">Highlight this Product</div>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_highlight'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+										</div>
+										<div class="app_item editable" id='app_item_2'>
+											<div class="app_icon blue">
+												<i class="fas fa-cart-plus"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Order Bump</div>
+												<div class="app_caption">Make this product an Order Bump</div>
+											</div>
+											<div class="editbox">
+												<button id='editOrderBump' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_bump'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item editable" id='app_item_3'>
+											<div class="app_icon pink">
+												<i class="fas fa-plus-square"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Quantity</div>
+												<div class="app_caption">Add the possibility to choose a quantity</div>
+											</div>
+											<div class="editbox">
+												<button id='editQuantity' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_quantity'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item editable" id='app_item_4'>
+											<div class="app_icon yellow">
+												<i class="fas fa-tshirt"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Variants</div>
+												<div class="app_caption">Add variations to this product (Size, Color etc..) </div>
+											</div>
+											<div class="editbox">
+												<button id='editVariants' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_variants'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+										
+										<div class="f_buttons">
+											<button id="cancelApps">Done</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="field">
+											<div class="field_label">Order Bump Embed Code :</div>
+											<div class="field_input"><textarea id='orderBumpCode'></textarea></div>
+											
+
+										</div>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id="orderBumpSave">Update</button>
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
 									<div class="f_buttons">	
 										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
 										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
+										<button id='toggleApps'>Apps</button>
 										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
 									</div>
 									<div class="prod_table" id='prod_table'>
@@ -323,6 +420,9 @@
 	var p_toggleAdd = true;
 	var p_toggleEdit = true;
 
+	var p_toggleApps = true;
+	var p_toggleAppSettings = true;
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
 
@@ -368,6 +468,7 @@
 
 		$("#toggleAddProduct").toggle();
 		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
 		$('#deleteProduct').toggle();
 
 		$('#p_addbuttons').toggle();
@@ -391,6 +492,7 @@
 
 		$("#toggleAddProduct").toggle();
 		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
 		$('#deleteProduct').toggle();
 
 		$('#p_editbuttons').toggle();
@@ -414,6 +516,85 @@
 		p_toggleEdit = !p_toggleEdit;
 	}
 
+	function updateApps(){
+
+		$('#app_highlight').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight);
+		$('#app_bump').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump);
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump){
+			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+		
+	}
+
+	function toggleApps(){
+		$("#appsBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
+		$('#deleteProduct').toggle();
+
+		if(p_toggleApps){
+			updateApps();
+
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleApps = !p_toggleApps;
+	}
+
+	function toggleAppSettings(n){
+		SELECTED_APP = n;
+		if(p_toggleAppSettings){
+			switch(n){
+				case 2:
+					$('#orderBumpCode').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode);
+					break;
+				default:
+					break;
+			}
+
+			$('#appsBox .app_details, #appsBox .editbox, #appsBox .switchbox, #appsBox .f_buttons').fadeOut(100);
+			$('#appsBox').animate({'width':'90px','padding':'10px'},350);
+			$('#appSettingsBox_'+n).show().animate({'width':'500px'},350);
+			$("#app_item_"+n).addClass('active');
+		}else{
+			$('#appsBox .app_details, #appsBox .editbox, #appsBox .switchbox, #appsBox .f_buttons').delay(250).fadeIn(100);
+			$('#appsBox').animate({'width':'500px','padding':'20px'},350)
+			$('#appSettingsBox_'+n).animate({'width':'0px'},350).hide();
+			$('#appsBox .app_item').removeClass('active');
+		}
+		p_toggleAppSettings = !p_toggleAppSettings;
+	
+	}
+
+	function switchOrderBumpOn(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
+		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
+		if(!product.bumpCode){
+			var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
+			product.bumpCode = orderBumpCode;
+		}
+		saveFunnel();
+	}
+
+	function switchOrderBumpOff(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
+		saveFunnel();
+	}
+
+	$('#editOrderBump').click(function(){
+		toggleAppSettings(2);
+	});
+
+	$('.cancelAppSettings').click(function(){
+		toggleAppSettings(SELECTED_APP);
+	});
+
 	$('#toggleAdd').click(function(){
 		toggleAddStep();
 	});
@@ -430,9 +611,19 @@
 		toggleEditProduct();
 	});
 
+	$('#toggleApps, #cancelApps').click(function(){
+		toggleApps();
+	});
+
 	$('.select_tab').click(function(){
 		$('.select_tab').removeClass('active');
 		$(this).addClass('active');
+	});
+
+	$('.app_icon').click(function(){
+		if(!p_toggleAppSettings){
+			toggleAppSettings(SELECTED_APP);
+		}
 	});
 
 	const FUNNEL_ID = "<%= id %>";
@@ -442,6 +633,7 @@
 
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
+	var SELECTED_APP = 2;
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
 	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
@@ -450,6 +642,14 @@
 
 	function updateFunnelSteps(){
 
+		if(funnelSteps.length == 0){
+			$('#toggleEdit').css('visibility','hidden');
+			$('#deleteStep').css('visibility','hidden');
+		}else{
+			$('#toggleEdit').css('visibility','visible');
+			$('#deleteStep').css('visibility','visible');
+		}
+		
 		var code = "";
 		for(var i =0;i<funnelSteps.length;i++){
 			var step = funnelSteps[i];
@@ -471,24 +671,23 @@
 
 	function selectStep(){
 		
+		if(funnelSteps[SELECTED_STEP].products.length == 0){
+			$('#toggleEditProduct').css('visibility','hidden');
+			$('#toggleApps').css('visibility','hidden');
+			$('#deleteProduct').css('visibility','hidden');
+		}else{
+			$('#toggleEditProduct').css('visibility','visible');
+			$('#toggleApps').css('visibility','visible');
+			$('#deleteProduct').css('visibility','visible');
+		}
 
 		$('.step_item').removeClass('active');
 		$('#step_'+SELECTED_STEP).addClass('active');
+		
 		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<\/div>";
 		for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
 			var product = funnelSteps[SELECTED_STEP].products[j];
 			code += productHTML(product,SELECTED_STEP,j);
-			/*if(product.bump){
-				txtarea = $("<textarea class='bumpscript' disabled></textarea>");
-				if(!product.bumpCode){
-					var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
-					product.bumpCode = orderBumpCode;
-				}
-				txtarea.text(product.bumpCode);
-				code += $("<div />").append(txtarea.clone()).html();
-				code += '<button class="minibutton custombump" onclick="editbump('+SELECTED_STEP+','+j+')" >Customize Order Bump</button><button class="minibutton custombump" onclick="editvar('+SELECTED_STEP+','+j+')" >Add Variations</button>';
-			}
-			code += "</div>";*/
 			
 		}
 		$("#prod_table").html(code);
@@ -497,8 +696,18 @@
 			$('.prod_row').removeClass('active');
 			$(this).addClass('active');
 			SELECTED_PRODUCT = parseInt($(this).data('j'));
-		});
+			updateApps();
+			if(!p_toggleAppSettings){
+				toggleAppSettings(SELECTED_APP);
+			}
+			if(!p_toggleApps){
+				toggleApps();
+			}
 
+		});
+		$('.prod_row').removeClass('active');
+		$('#product_'+SELECTED_STEP+'_'+SELECTED_PRODUCT).addClass('active');
+		updateApps();
 		
 	}
 
@@ -560,6 +769,34 @@
 		updateFunnelSteps();
 	});
 
+	//APPS
+	$('.editable .switch input[type=checkbox]').change(function(){
+		if($(this).is(':checked')){
+			$(this).parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$(this).parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+	});
+
+	$('#app_highlight').change(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = $(this).is(':checked');
+		saveFunnel();
+	});
+
+	$('#app_bump').change(function(){
+		if($(this).is(':checked')){
+			switchOrderBumpOn();
+		}else{
+			switchOrderBumpOff();
+		}
+	});
+
+	$('#orderBumpSave').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#orderBumpCode').val();
+		saveFunnel();
+		toggleAppSettings(SELECTED_APP);
+	});
+	/*
 	function addproductX(){
 		addproduct(SELECTED_STEP);
 	}
