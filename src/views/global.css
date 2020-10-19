@@ -1376,8 +1376,30 @@ input:checked + .slider:before {
 	color: #BACA63;
 	margin-bottom: 10px;
 }
+#scriptbody,#scripthead{
+	font-size: 13px;
+	background-color: #1D1E22;
+	color: #BACA63;
+	cursor: pointer;
+}
 #appSettingsBox_2 .field{
 	margin-bottom: 0;
+}
+
+#var_table .prod_cell{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.varbuttons{
+	text-align: right;
+}
+.varbuttons .fbutton{
+	padding: 3px 6px;
+	border-radius: 2px;
+	visibility: hidden;
+}
+#var_table .prod_row:hover .fbutton{
+	visibility: visible;
 }
 /*
 .varActive{

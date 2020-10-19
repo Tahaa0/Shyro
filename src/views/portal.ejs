@@ -161,7 +161,7 @@
 												<div class="app_caption">Make this product an Order Bump</div>
 											</div>
 											<div class="editbox">
-												<button id='editOrderBump' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+												<button id='editOrderBump' class="editButton fbutton" data-index='2'><i class="fas fa-pencil-alt"></i></button>
 											</div>
 											<div class="switchbox">
 												<label class="switch">
@@ -181,7 +181,7 @@
 												<div class="app_caption">Add the possibility to choose a quantity</div>
 											</div>
 											<div class="editbox">
-												<button id='editQuantity' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+												<button id='editQuantity' class="editButton fbutton" data-index='3'><i class="fas fa-pencil-alt"></i></button>
 											</div>
 											<div class="switchbox">
 												<label class="switch">
@@ -201,7 +201,7 @@
 												<div class="app_caption">Add variations to this product (Size, Color etc..) </div>
 											</div>
 											<div class="editbox">
-												<button id='editVariants' class="fbutton"><i class="fas fa-pencil-alt"></i></button>
+												<button id='editVariants' class="editButton fbutton" data-index='4'><i class="fas fa-pencil-alt"></i></button>
 											</div>
 											<div class="switchbox">
 												<label class="switch">
@@ -228,6 +228,47 @@
 											<button class="cancelAppSettings">Cancel</button>
 										</div>
 									</div>
+									<div id="appSettingsBox_3" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="field">
+											<div class="field_label">Quantity :</div>
+											
+											
+
+										</div>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_4" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id='toggleAddVariant'>+ Add Variant</button>
+										</div>
+										<div id="addVariantBox" style="display: none;">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="field_label">Name :</div>
+													<div class="field_input"><input type="text" name='v_title' placeholder="Size" id="v_title" ></div>
+												</div>
+												<div class="col-md-6">
+													<div class="field_label">Options :</div>
+													<div class="field_input"><input type="text" name='v_options' placeholder="S, M, L, XL" id="v_options" ></div>
+												</div>
+											</div>
+											<div class="f_buttons">
+												<button id='addVariant'>Add Variant</button>
+												<button id='updateVariant' style="display:none">Update</button>
+												<button id="cancelAddVariant">Cancel</button>
+												<button id="cancelEditVariant"  style="display:none">Cancel</button>
+											</div>
+										</div>
+										<div class="prod_table" id='var_table'>
+										
+										</div>
+										<div class="f_buttons" style="margin-top: 20px;">
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+
 									<div class="f_buttons">	
 										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
 										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
@@ -423,6 +464,9 @@
 	var p_toggleApps = true;
 	var p_toggleAppSettings = true;
 
+	var a_toggleAddVariant = true;
+	var a_toggleEditVariant = true;
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
 
@@ -518,14 +562,39 @@
 
 	function updateApps(){
 
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp = false;
+		}
+
 		$('#app_highlight').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight);
 		$('#app_bump').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump);
+		$('#app_quantity').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp);
+		$('#app_variants').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp);
+
 		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump){
 			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
 		}else{
 			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
 		}
-		
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp){
+			$('#app_quantity').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_quantity').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp){
+			$('#app_variants').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_variants').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
 	}
 
 	function toggleApps(){
@@ -554,6 +623,9 @@
 				case 2:
 					$('#orderBumpCode').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode);
 					break;
+				case 4:
+					updateVarTable();
+					break;
 				default:
 					break;
 			}
@@ -572,6 +644,53 @@
 	
 	}
 
+	function toggleAddVariant(){
+		
+		$('#addVariantBox').slideToggle(300);
+
+		$('#toggleAddVariant').parent().toggle();
+		$('#appSettingsBox_4 .cancelAppSettings').parent().toggle();
+		$('#var_table').toggle();
+
+		$('#v_title').val('');
+		$('#v_options').val('');
+
+		a_toggleAddVariant = !a_toggleAddVariant;
+	
+	}
+
+	function toggleEditVariant(k=SELECTED_VARIANT){
+		
+		SELECTED_VARIANT = k;
+
+		$('#addVariantBox').slideToggle(300);
+
+		$('#toggleAddVariant').parent().toggle();
+		$('#appSettingsBox_4 .cancelAppSettings').parent().toggle();
+		$('#var_table').toggle();
+
+		$('#v_title').val('');
+		$('#v_options').val('');
+
+		if(a_toggleEditVariant){
+			$('#v_title').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].title);
+			$('#v_options').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].options);
+
+			$('#updateVariant').show();
+			$('#cancelEditVariant').show();
+			$('#addVariant').hide();
+			$('#cancelAddVariant').hide();
+		}else{
+			$('#updateVariant').hide();
+			$('#cancelEditVariant').hide();
+			$('#addVariant').show();
+			$('#cancelAddVariant').show();
+		}
+
+		a_toggleEditVariant = !a_toggleEditVariant;
+	
+	}
+
 	function switchOrderBumpOn(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
 		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
@@ -587,8 +706,32 @@
 		saveFunnel();
 	}
 
-	$('#editOrderBump').click(function(){
-		toggleAppSettings(2);
+	function updateVarTable(){
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Options<\/div>\r\n<div class=\"prod_cell\"><\/div>\r\n<\/div>";
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants = [];
+		}
+		for(var k=0;k<funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.length;k++){
+			var variant = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[k];
+			code +=  "<div class=\"prod_row\"  id=\"variant_"+SELECTED_STEP+"_"+SELECTED_PRODUCT+"_"+k+"\" data-i=\""+SELECTED_STEP+"\" data-j=\""+SELECTED_PRODUCT+"'\" data-k=\""+k+"'\">\t\r\n<div class=\"prod_cell\">"+variant.title+"<\/div>\r\n<div class=\"prod_cell\">"+variant.options+"<\/div>\r\n<div class=\"prod_cell varbuttons\"><button class='fbutton editVariant'><i class='fas fa-pencil-alt'></i></button><button class='fbutton deleteVariant delete_btn'><i class='far fa-trash-alt'></i></button><\/div>\r\n<\/div>";
+			
+		}
+		$("#var_table").html(code);
+		//EFFECTS
+		deleteVariantListener();
+		editVariantListener();
+	}
+
+	$('#toggleAddVariant, #cancelAddVariant').click(function(){
+		toggleAddVariant();
+	});
+
+	$('#cancelEditVariant').click(function(){
+		toggleEditVariant();
+	});
+
+	$('.editButton').click(function(){
+		toggleAppSettings(parseInt($(this).data('index')));
 	});
 
 	$('.cancelAppSettings').click(function(){
@@ -634,6 +777,7 @@
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
 	var SELECTED_APP = 2;
+	var SELECTED_VARIANT = 0;
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
 	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
@@ -791,11 +935,66 @@
 		}
 	});
 
+	$('#app_quantity').change(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp = $(this).is(':checked');
+		saveFunnel();
+	});
+
+	$('#app_variants').change(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp = $(this).is(':checked');
+		saveFunnel();
+	});
+	
+	//APP SETTINGS
+
 	$('#orderBumpSave').click(function(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#orderBumpCode').val();
 		saveFunnel();
 		toggleAppSettings(SELECTED_APP);
 	});
+
+	$('#addVariant').click(function(){
+		var variant = {};
+		variant.title = $('#v_title').val();
+		variant.options = $('#v_options').val().trim().split(',');
+
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.push(variant);
+		saveFunnel();
+		updateVarTable();
+		toggleAddVariant();
+	});
+
+	$('#updateVariant').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].title = $('#v_title').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].options = $('#v_options').val().trim().split(',');
+
+		saveFunnel();
+		updateVarTable();
+		toggleEditVariant(SELECTED_VARIANT);
+	});
+
+	function deleteVariantListener(){
+		$('.deleteVariant').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			console.log(K);
+			funnelSteps[I].products[J].variants.splice(K,1);
+			saveFunnel();
+			updateVarTable();
+		});
+	}
+
+	function editVariantListener(){
+		$('.editVariant').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			
+			toggleEditVariant(K);
+		});
+	}
+	
 	/*
 	function addproductX(){
 		addproduct(SELECTED_STEP);
