@@ -1386,20 +1386,24 @@ input:checked + .slider:before {
 	margin-bottom: 0;
 }
 
-#var_table .prod_cell{
+#var_table .prod_cell, #qty_table .prod_cell{
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
-.varbuttons{
+.varbuttons, .qtybuttons{
 	text-align: right;
 }
-.varbuttons .fbutton{
+.varbuttons .fbutton, .qtybuttons .fbutton{
 	padding: 3px 6px;
 	border-radius: 2px;
 	visibility: hidden;
 }
-#var_table .prod_row:hover .fbutton{
+#var_table .prod_row:hover .fbutton, #qty_table .prod_row:hover .fbutton{
 	visibility: visible;
+}
+#q_qty{
+	text-align: center;	
+	background-color: #f0f0f0;
 }
 /*
 .varActive{

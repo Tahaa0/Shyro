@@ -229,13 +229,44 @@
 										</div>
 									</div>
 									<div id="appSettingsBox_3" class="box_2 appsettingsbox" style='width:0px;display: none;'>
-										<div class="field">
-											<div class="field_label">Quantity :</div>
-											
-											
-
-										</div>
 										<div class="f_buttons" style="margin-top: 0;">
+											<button id='toggleAddQuantity'>+ Add Quantity</button>
+										</div>
+										<div id="addQuantityBox" style="display: none;">
+											<div class="row">
+												<div class="col-md-3">
+													<div class="field_label">Quantity :</div>
+													<div class="field_input"><input type="text" name='q_qty' id="q_qty" disabled=""></div>
+												</div>
+												<div class="col-md-9">
+													<div class="field_label">Price :</div>
+													<div class="field_input"><input type="text" name='q_price' id="q_price" ></div>
+												</div>
+												
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="field_label">Stripe ID :</div>
+													<div class="field_input"><input type="text" name='q_stripe'id="q_stripe" ></div>
+												</div>
+												<div class="col-md-6">
+													<div class="field_label">Paypal ID :</div>
+													<div class="field_input"><input type="text" name='q_paypal' id="q_paypal" ></div>
+												</div>
+												
+											</div>
+											
+											<div class="f_buttons">
+												<button id='addQuantity'>Add Variant</button>
+												<button id='updateQuantity' style="display:none">Update</button>
+												<button id="cancelAddQuantity">Cancel</button>
+												<button id="cancelEditQuantity"  style="display:none">Cancel</button>
+											</div>
+										</div>
+										<div class="prod_table" id='qty_table'>
+										
+										</div>
+										<div class="f_buttons" style="margin-top: 20px;">
 											<button class="cancelAppSettings">Cancel</button>
 										</div>
 									</div>
@@ -467,6 +498,9 @@
 	var a_toggleAddVariant = true;
 	var a_toggleEditVariant = true;
 
+	var a_toggleAddQuantity = true;
+	var a_toggleEditQuantity = true;
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
 
@@ -623,6 +657,9 @@
 				case 2:
 					$('#orderBumpCode').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode);
 					break;
+				case 3:
+					updateQtyTable();
+					break;
 				case 4:
 					updateVarTable();
 					break;
@@ -691,6 +728,58 @@
 	
 	}
 
+	function toggleAddQuantity(){
+		
+		$('#addQuantityBox').slideToggle(300);
+
+		$('#toggleAddQuantity').parent().toggle();
+		$('#appSettingsBox_3 .cancelAppSettings').parent().toggle();
+		$('#qty_table').toggle();
+
+		$('#q_paypal').val('');
+		$('#q_stripe').val('');
+		$('#q_price').val('');
+		$('#q_qty').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.length+2);
+
+		a_toggleAddQuantity = !a_toggleAddQuantity;
+	
+	}
+
+	function toggleEditQuantity(k=SELECTED_QUANTITY){
+		
+		SELECTED_QUANTITY = k;
+
+		$('#addQuantityBox').slideToggle(300);
+
+		$('#toggleAddQuantity').parent().toggle();
+		$('#appSettingsBox_3 .cancelAppSettings').parent().toggle();
+		$('#qty_table').toggle();
+
+		$('#q_paypal').val('');
+		$('#q_stripe').val('');
+		$('#q_price').val('');
+		$('#q_qty').val(k+2);
+
+		if(a_toggleEditQuantity){
+			$('#q_paypal').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].paypal);
+			$('#q_stripe').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].stripe);
+			$('#q_price').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].price);
+
+			$('#updateQuantity').show();
+			$('#cancelEditQuantity').show();
+			$('#addQuantity').hide();
+			$('#cancelAddQuantity').hide();
+		}else{
+			$('#updateQuantity').hide();
+			$('#cancelEditQuantity').hide();
+			$('#addQuantity').show();
+			$('#cancelAddQuantity').show();
+		}
+
+		a_toggleEditQuantity = !a_toggleEditQuantity;
+	
+	}
+
 	function switchOrderBumpOn(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
 		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
@@ -722,12 +811,36 @@
 		editVariantListener();
 	}
 
+	function updateQtyTable(){
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Qty<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<div class=\"prod_cell\"><\/div>\r\n<\/div>";
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity = [];
+		}
+		for(var k=0;k<funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.length;k++){
+			var quantity = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[k];
+			code +=  "<div class=\"prod_row\"  id=\"quantity_"+SELECTED_STEP+"_"+SELECTED_PRODUCT+"_"+k+"\" data-i=\""+SELECTED_STEP+"\" data-j=\""+SELECTED_PRODUCT+"'\" data-k=\""+k+"'\">\t\r\n<div class=\"prod_cell\">"+(k+2)+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.price+" USD<\/div>\r\n<div class=\"prod_cell qtybuttons\"><button class='fbutton editQuantity'><i class='fas fa-pencil-alt'></i></button><button class='fbutton deleteQuantity delete_btn'><i class='far fa-trash-alt'></i></button><\/div>\r\n<\/div>";
+			
+		}
+		$("#qty_table").html(code);
+		//EFFECTS
+		deleteQuantityListener();
+		editQuantityListener();
+	}
+
 	$('#toggleAddVariant, #cancelAddVariant').click(function(){
 		toggleAddVariant();
 	});
 
 	$('#cancelEditVariant').click(function(){
 		toggleEditVariant();
+	});
+
+	$('#toggleAddQuantity, #cancelAddQuantity').click(function(){
+		toggleAddQuantity();
+	});
+
+	$('#cancelEditQuantity').click(function(){
+		toggleEditQuantity();
 	});
 
 	$('.editButton').click(function(){
@@ -778,6 +891,7 @@
 	var SELECTED_PRODUCT = 0;
 	var SELECTED_APP = 2;
 	var SELECTED_VARIANT = 0;
+	var SELECTED_QUANTITY = 0;
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
 	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
@@ -814,7 +928,7 @@
 	}
 
 	function selectStep(){
-		
+		console.log('Bepis');
 		if(funnelSteps[SELECTED_STEP].products.length == 0){
 			$('#toggleEditProduct').css('visibility','hidden');
 			$('#toggleApps').css('visibility','hidden');
@@ -851,7 +965,15 @@
 		});
 		$('.prod_row').removeClass('active');
 		$('#product_'+SELECTED_STEP+'_'+SELECTED_PRODUCT).addClass('active');
-		updateApps();
+		if(funnelSteps[SELECTED_STEP].products.length > 0){
+			updateApps();
+		}
+		if(!p_toggleAppSettings){
+			toggleAppSettings(SELECTED_APP);
+		}
+		if(!p_toggleApps){
+			toggleApps();
+		}
 		
 	}
 
@@ -992,6 +1114,50 @@
 			var K = parseInt($(this).parent().parent().data('k'));
 			
 			toggleEditVariant(K);
+		});
+	}
+
+	$('#addQuantity').click(function(){
+		var quantity = {};
+		quantity.stripe = $('#q_stripe').val();
+		quantity.paypal = $('#q_paypal').val();
+		quantity.price = $('#q_price').val();
+
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.push(quantity);
+		saveFunnel();
+		updateQtyTable();
+		toggleAddQuantity();
+	});
+
+	$('#updateQuantity').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].stripe = $('#q_stripe').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].paypal = $('#q_paypal').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].price = $('#q_price').val();
+
+		saveFunnel();
+		updateQtyTable();
+		toggleEditQuantity(SELECTED_QUANTITY);
+	});
+
+	function deleteQuantityListener(){
+		$('.deleteQuantity').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			console.log(K);
+			funnelSteps[I].products[J].quantity.splice(K,1);
+			saveFunnel();
+			updateQtyTable();
+		});
+	}
+
+	function editQuantityListener(){
+		$('.editQuantity').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			
+			toggleEditQuantity(K);
 		});
 	}
 	
