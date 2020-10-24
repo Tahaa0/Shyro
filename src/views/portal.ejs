@@ -90,19 +90,38 @@
 								</div>
 							</div>
 						</div>
+						<div id="funnelAppsBox" class="box_2 box_3" style="display:none">
+							<div class="app_item" id='fapp_item_1'>
+								<div class="app_icon blue">
+									<i class="fab fa-paypal"></i>
+								</div>
+								<div class="app_details">
+									<div class="app_title">Paypal</div>
+									<div class="app_caption">Integrate both Paypal & Stripe</div>
+								</div>
+								<div class="switchbox">
+									<label class="switch">
+									  <input type="checkbox" id='app_paypal'>
+									  <span class="slider round"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='updateStep' style="display: none;">Update</span>
 						<span class='black_button' id='toggleAdd'>+ Add Step</span>
 						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
 						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
-						<div id="myfunnels" class="row">
+						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
+						<div id="myfunnels" class="row dbox">
 							<div class="col-md-4">
-								<div class="dbox" id='myf'>
+								<div id='myf'>
 									
 								</div>
 							</div>
 							<div class="col-md-8" id='products'>
-								<div class="dbox">
+								<div class="">
 									<h2>Products</h2>
 									<div id="addProductBox" class='box_2' style="display: none;">
 										<div class="row">
@@ -257,7 +276,7 @@
 											</div>
 											
 											<div class="f_buttons">
-												<button id='addQuantity'>Add Variant</button>
+												<button id='addQuantity'>Add Quantity</button>
 												<button id='updateQuantity' style="display:none">Update</button>
 												<button id="cancelAddQuantity">Cancel</button>
 												<button id="cancelEditQuantity"  style="display:none">Cancel</button>
@@ -314,8 +333,8 @@
 						</div>
 
 					</div>
-					<div class="dbox" id='genbox'>
-						<div class="row">
+					<div class="" id='genbox'>
+						<div class="row dbox">
 							<div class="col-md-6">
 								<div class="field_label">Head Script :</div>
 								<div class="field_input"><input type="text" name='script_head' id="scripthead" disabled=""></div>
@@ -333,111 +352,8 @@
 			
 		</div>
 	</div>
-	<!--<div id="innerCont">
-		<h1 style="text-align: center;">Steps</h1>
-		<hr>	
-		<div class="row" style="min-height: 200px;">
-			<div class="col-md-8">
-				<div id="buttonbar" class="buttonbar">
-					<button onclick='addstep()'>+ Add Step</button>
-				</div>
-				<div id="stepBox" style="display: none;">
-					<input type="text" placeholder="Step Title" id='stepTitle'>
-					<input type="text" placeholder="Step URL" id='stepURL'>
-					<select name="steptype" id="stepType">
-						<option value="form">Order Form</option>
-						<option value="upsell">Upsell / Downsell / Cross-sell</option>
-					</select>
-					<button id='addStep' class='purplebutton'>+ Add Step</button>
-					<button id='updateStep' class='purplebutton' style="display: none;">Update Step</button>
-				</div>
-				<div id="inside">
-				
-				
-			</div>
-			</div>
-			
-			<div class="col-md-4">
-				<div id="buttonbar2" class="buttonbar">
-					<button onclick='addproductX()'>+ Add Product</button>
-					<button class='infobutton' id='infobutton'>Selected : None</button>
-				</div>
-				<div id="createBox" style="display: none;">
-					<input type="text" id='prodIndex' value=0 disabled style='display:none'>
-					<input type="text" id='prodTitle' placeholder="Product Name"  style="width: 97%;">
-					<input type="text" id='prodStripe' placeholder="Product ID (Stripe)">
-					<input type="text" id='prodPaypal' placeholder="Product ID (Paypal)">	
-					<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='orderBump' name="orderBump"><label for="orderBump">Order Bump</label></div>
-					<div style="width: 200px; margin:0 auto; padding: 14px;"><input type="checkbox" id='highlight' name="highlight"><label for="highlight">Highlight</label></div>
-					<input type="text" id='prodPrice' placeholder="Price" style='display: none'>
-					<button class='purplebutton' id='createProduct'>+ Add Product</button>
-					<button id='updateProduct' class='purplebutton' style="display: none;">Update Product</button>
-				</div>
-				<div id="bumpBox" style="display: none;">
-					<h3>HTML Code :</h3>
-					<textarea id='bumpCode'></textarea>
-					<button id='updateBump' class='purplebutton'>Update Order Bump</button>
-				</div>
-				<div id="varBox" style="display: none;">
-					<h3>Add Variant</h3>
-					<input type="text" id='varTitle' placeholder="Product Name"  style="width: 97%;">
-					<input type="text" id='varOptions' placeholder="Variant Options"  style="width: 97%;">
-					<button id='addVariant' class='purplebutton'>Save</button>
-				</div>
-				<div id="insideProd">
-				
-				
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row" id='genrow' style="display: none;">
-			<div class="col-md-2">
-				<button id='save'>Save</button>
-				<button id='generateScript'>Save & Generate Script</button>
-			</div>
-			
-			<div class="col">
-				
-				<h3>Head Tracking Code</h3>
-				<textarea name="" id="script" disabled></textarea>
-				
-			</div>
-			<div class="col">
-				<h3>Body Tracking Code</h3>
-				<textarea name="" id="scriptbody" disabled></textarea>
-			</div>
-		</div>
-	</div>
-</div>-->
-<!--		
+	
 
-	<div id="main">
-		<div id="reglog">
-			<input type="text" placeholder="Step Title" id='stepTitle' class="inp90">
-			<input type="text" placeholder="Step URL" id='stepURL' class="inp90">
-			<select name="steptype" id="stepType" class='inp90'>
-				<option value="form">Order Form</option>
-				<option value="upsell">Upsell / Downsell / Cross-sell</option>
-			</select>
-			<button id='addStep'>+ Add Step</button>
-			
-			
-		</div>
-		<div id="inside">
-			
-		</div>
-		<button id='generateScript'>Generate Script</button>
-		<h3>Head Tracking Code</h3>
-		<textarea name="" id="script" disabled>
-				
-		</textarea>
-		<h3>Body Tracking Code</h3>
-		<textarea name="" id="scriptbody" disabled>
-				
-		</textarea>
-	</div>
--->
 <div id="realOverlay"></div>
 <div id="realOverlay2"></div>
 
@@ -501,12 +417,28 @@
 	var a_toggleAddQuantity = true;
 	var a_toggleEditQuantity = true;
 
+	var f_toggleFunnelApps = true;
+
+	function toggleFunnelApps(){
+		$('#funnelAppsBox').slideToggle(300);
+
+		$('#cancelFunnelApps').toggle();
+		$('#toggleAdd').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+
+		f_toggleFunnelApps = !f_toggleFunnelApps;
+	}
+
 	function toggleAddStep(){
 		$("#addStepBox").slideToggle(300);
 
 		$('#addStep').toggle();
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+
 
 		$('#step_title').val('');
 		$('#step_url').val('');
@@ -525,6 +457,7 @@
 		$('#updateStep').toggle();
 		$('#toggleAdd').toggle();
 		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
 
 		$('#step_title').val('');
 		$('#step_url').val('');
@@ -826,6 +759,10 @@
 		deleteQuantityListener();
 		editQuantityListener();
 	}
+
+	$('#toggleFunnelApps, #cancelFunnelApps').click(function(){
+		toggleFunnelApps();
+	});
 
 	$('#toggleAddVariant, #cancelAddVariant').click(function(){
 		toggleAddVariant();
