@@ -145,10 +145,12 @@ window.onload = function(){
       });
 
       $('input[name=xxprod]').each(function(index){
+        var PARENT = $(this).parent();
         var label = $("<label></label>");
         label.addClass('radlab');
         label.html($(this));
-        label.append('<span class="checkmark"></span>')
+        label.append('<span class="checkmark"></span>');
+        PARENT.append(label);
       });
 
       $('input[name=xxprod]').click(function () {
@@ -296,79 +298,3 @@ window.onload = function(){
     }
   }
 }
-
-/*
-      $(function () {
-        var CREATE_PAYMENT_URL  = 'https://imadbitgold.clickfunnels.com/pages/hk7l8wi2p1q4jcxl/payment_gateways/paypal/payment/create/';
-        var EXECUTE_PAYMENT_URL = 'https://imadbitgold.clickfunnels.com/pages/hk7l8wi2p1q4jcxl/payment_gateways/paypal/payment/execute/';
-
-        $("a[href*='#yes-link'], .elIMG[data-imagelink*='#yes-link']").each(function(index, link){
-          $link = $(link);
-          $parent = $link.parent();
-          $link.hide();
-          parent_id = 'pp_button_' + index;
-          $parent.attr("id",parent_id);
-          paypal.Button.render({
-            env: 'production',
-            client: {
-              parent_id: parent_id,
-              production: 'test',
-              sandbox: 'test'
-            },
-            commit: true, // Show a 'Pay Now' button
-            style: {
-              size:  'responsive',
-              shape: 'rect',
-              color: 'blue',
-              layout: 'vertical'
-            },
-            funding: {
-              allowed: [ paypal.FUNDING.CREDIT ],
-              disallowed: [ paypal.FUNDING.CARD ]
-            },
-            payment: function(resolve, reject) {
-              parent_id = this.props.client.parent_id;
-              yes_link_selector = '#' + parent_id + ' ' + "a[href*='#yes-link']";
-              // Set a variable that will prevent the normal on-submit handler
-              // from submitting the form. (But allow it to do validations.) After
-              // we've obtained a token from PayPal we'll submit the form directly.
-              window.isPayPalOrderForm = true;
-              // Trigger a click on the now-hidden buyButton so that validations and other
-              // on-submit type actions are fired
-              $(yes_link_selector).trigger("click", function(){
-                if(window.cfARIsValid){
-                  $('#cf_contact_email').val($('input[name="email"]').val());
-                  return $.post(CREATE_PAYMENT_URL, $('#cfAR').serialize()).then(function(data) {
-                    resolve(data.id);
-                  });
-                }else{
-                  // TODO : Should we somehow handle this?
-                  // We have to `reject` in order to make PayPal do the right thing
-                  // but this error surfaces in console. Maybe that's OK?
-                  reject('The order form has not validated. Please correct any errors.');
-                }
-              });
-            },
-
-            onAuthorize: function(data) {
-              return paypal.request.post(EXECUTE_PAYMENT_URL, {
-                paymentID: data.paymentID,
-                payerID:   data.payerID
-              }).then(function() {
-                // The payment is complete!
-                var $form = $('#cfAR');
-                $form.append($('<input type="hidden" name="purchase[payment_gateway_token]" />').val(data.paymentID));
-                //$form.append($('<a href="#submit-form"></a>'));
-                //$("a[href='#submit-form']").trigger('click');
-                $form.submit();
-              });
-            },
-
-            onCancel: function (data, actions) {
-                $('.otoloading').hide();
-            }
-
-          }, '#' + parent_id);
-        });
-      });
-*/
