@@ -249,7 +249,7 @@ window.onload = function(){
         checkProd(calculateID());
       });
 
-      if(!paypalAPP){
+      if(paypalAPP){
         parDOM.prepend(ppBody);
         parDOM.prepend(ppTab);
         parDOM.prepend(ccBody);
