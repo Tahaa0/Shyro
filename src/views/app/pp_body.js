@@ -66,13 +66,15 @@ if(VALID){
         }
       }
       //QUANTITY
-      if(STEP.products[i].quantityApp){
+      if(STEP.products[i].quantity){
         if(STEP.products[i].quantity.length > 0){
           for(var j=0;j<STEP.products[i].quantity.length;j++){
               $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
               $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
-              var HTML = "<span class='xxqm' data-prod="+i+" data-var="+j+">-</span><span class='xxquantity' id='xxq"+i+"_"+j+"' data-prod="+i+" data-var="+j+">1</span><span class='xxqp' data-prod="+i+" data-var="+j+">+</span>";
-              $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
+          }
+          if(STEP.products[i].quantityApp){
+            var HTML = "<span class='xxqm' data-prod="+i+">-</span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+">+</span>";
+            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
           }
         }
       }
