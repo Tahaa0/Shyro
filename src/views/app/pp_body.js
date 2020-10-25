@@ -49,7 +49,7 @@ if(VALID){
       }
       $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
       //VARIANTS
-      if(STEP.products[i].variants){
+      if(STEP.products[i].variantsApp){
         if(STEP.products[i].variants.length > 0){
           for(var j=0;j<STEP.products[i].variants.length;j++){
             var HTML = $('#cfAR').html();
@@ -66,7 +66,7 @@ if(VALID){
         }
       }
       //QUANTITY
-      if(STEP.products[i].quantity){
+      if(STEP.products[i].quantityApp){
         if(STEP.products[i].quantity.length > 0){
           for(var j=0;j<STEP.products[i].quantity.length;j++){
               $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
