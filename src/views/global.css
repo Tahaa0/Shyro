@@ -1424,6 +1424,8 @@ input:checked + .slider:before {
 	cursor: pointer;
 }
 
+
+
 body{
 	background-color: white !important;
 }
