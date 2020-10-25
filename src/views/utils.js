@@ -73,12 +73,12 @@ function createFunnel(title,cb){
 	});
 }
 
-function updateFunnel(id,title,steps,cb){
+function updateFunnel(id,title,steps,apps,cb){
 	$.ajax({
 	  url: "/api/funnel/"+id,
 	  type: "PUT",
 	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
-	  data: {'title':title,'steps':steps},
+	  data: {'title':title,'steps':steps,'apps':apps},
 	  error: function(err) {
 	    cb(err,{});
 	  },

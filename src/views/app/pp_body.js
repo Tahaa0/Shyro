@@ -34,16 +34,19 @@
 if(VALID){
 
   console.log(STEP);
-  if(STEP.type == 'form'){
+  if(STEP.type == 'form'){  //ORDER FORM
 
 
     //change name and remove paypal products from checkout (form)
     for(var i=0;i<STEP.products.length;i++){
+      
       var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent();
+      PARENT_.remove();
+
+      
       if(STEP.products[i].bump){
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
       }
-      PARENT_.remove();
       $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
       //VARIANTS
       if(STEP.products[i].variants){

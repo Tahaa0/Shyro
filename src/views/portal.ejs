@@ -382,7 +382,19 @@
 		'downsell': 'Downsell'
 	}
 
+	const FUNNEL_ID = "<%= id %>";
 
+	var funnelSteps = [];
+	var funnelTitle = "Funnel";
+	var funnelApps = {
+		paypal: false
+	};
+
+	var SELECTED_STEP = 0;
+	var SELECTED_PRODUCT = 0;
+	var SELECTED_APP = 2;
+	var SELECTED_VARIANT = 0;
+	var SELECTED_QUANTITY = 0;
 
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
@@ -427,6 +439,13 @@
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+
+		if(f_toggleFunnelApps){
+			$('#app_paypal').prop("checked", funnelApps.paypal);
+			$('html, body').animate({
+		        scrollTop: $(".welcome_box").offset().top
+		    }, 500);
+		}
 
 		f_toggleFunnelApps = !f_toggleFunnelApps;
 	}
@@ -546,6 +565,8 @@
 		$('#app_bump').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump);
 		$('#app_quantity').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp);
 		$('#app_variants').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp);
+
+
 
 		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump){
 			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
@@ -819,16 +840,7 @@
 		}
 	});
 
-	const FUNNEL_ID = "<%= id %>";
-
-	var funnelSteps = [];
-	var funnelTitle = "Funnel";
-
-	var SELECTED_STEP = 0;
-	var SELECTED_PRODUCT = 0;
-	var SELECTED_APP = 2;
-	var SELECTED_VARIANT = 0;
-	var SELECTED_QUANTITY = 0;
+	
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
 	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
@@ -1001,6 +1013,11 @@
 
 	$('#app_variants').change(function(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp = $(this).is(':checked');
+		saveFunnel();
+	});
+
+	$('#app_paypal').change(function(){
+		funnelApps.paypal = $(this).is(':checked');
 		saveFunnel();
 	});
 	
@@ -1287,6 +1304,7 @@
 			if(!err) {
 				funnelSteps = data.funnel_.steps;
 				funnelTitle = data.funnel_.title;
+				funnelApps = data.funnel_.apps;
 				$('#funnel_title').html(funnelTitle);
 				updateFunnelSteps();
 			}else{
@@ -1296,7 +1314,7 @@
 	}
 
 	function saveFunnel(){
-		updateFunnel(FUNNEL_ID,funnelTitle,JSON.stringify(funnelSteps),function(err,data){
+		updateFunnel(FUNNEL_ID,funnelTitle,JSON.stringify(funnelSteps),JSON.stringify(funnelApps),function(err,data){
 			if(!err) {
 				//
 			}else{

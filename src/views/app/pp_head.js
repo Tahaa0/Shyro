@@ -249,11 +249,13 @@ window.onload = function(){
         checkProd(calculateID());
       });
 
-      parDOM.prepend(ppBody);
-      parDOM.prepend(ppTab);
-      parDOM.prepend(ccBody);
-      parDOM.prepend(ccTab);
-      ccBody.prepend(ccForm);
+      if(!paypalAPP){
+        parDOM.prepend(ppBody);
+        parDOM.prepend(ppTab);
+        parDOM.prepend(ccBody);
+        parDOM.prepend(ccTab);
+        ccBody.prepend(ccForm);
+      }
       
       //---------------------------
       $('#cfAR').on('submit',function(e){

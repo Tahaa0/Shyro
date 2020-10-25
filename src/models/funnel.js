@@ -10,6 +10,10 @@ const funnelSchema = new mongoose.Schema({
         required: 'Title is empty.',
         max: 144
     },
+    apps : {
+        type: Map,
+        of: Boolean
+    },
     steps : Array
 }, {timestamps: true});
 
