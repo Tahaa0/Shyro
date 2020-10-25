@@ -144,14 +144,7 @@ window.onload = function(){
         checkProd(calculateID());
       });
 
-      $('input[name=xxprod]').each(function(index){
-        var PARENT = $(this).parent();
-        var label = $("<label></label>");
-        label.addClass('radlab');
-        label.html($(this));
-        label.append('<span class="checkmark"></span>');
-        PARENT.append(label);
-      });
+      
 
       $('input[name=xxprod]').click(function () {
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
@@ -181,6 +174,16 @@ window.onload = function(){
           $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html(code);
         }
       }
+
+      $('input[name=xxprod]').each(function(index){
+        var PARENT = $(this).parent();
+        var label = $("<label></label>");
+        label.addClass('radlab');
+        label.html($(this));
+        label.append('<span class="checkmark"></span>');
+        PARENT.prepend(label);
+      });
+      
       checkProd(calculateID());
 
       var NOTICE_ON = true;
