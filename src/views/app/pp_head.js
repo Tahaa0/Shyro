@@ -61,7 +61,7 @@ window.onload = function(){
     }
 
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
-    var _price= $('input[name=xxprod]:checked').parent().find('.elOrderProductOptinPrice').html();
+    var _price= $('input[name=xxprod]:checked').parent().parent().find('.elOrderProductOptinPrice').html();
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     if($('input[name=xxprod]:checked').data('quantity') > 1){
       _name += " (x"+$('input[name=xxprod]:checked').data('quantity')+")";
@@ -183,7 +183,7 @@ window.onload = function(){
         label.append('<span class="checkmark"></span>');
         PARENT.prepend(label);
       });
-      
+
       checkProd(calculateID());
 
       var NOTICE_ON = true;
