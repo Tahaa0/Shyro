@@ -48,6 +48,20 @@ if(VALID){
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
       }
       $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
+      
+      //QUANTITY
+      if(STEP.products[i].quantity){
+        if(STEP.products[i].quantity.length > 0){
+          for(var j=0;j<STEP.products[i].quantity.length;j++){
+              $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
+              $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
+          }
+          if(STEP.products[i].quantityApp){
+            var HTML = "<div class='qtybox'><span class='xxqm' data-prod="+i+"><i class='fas fa-minus'></i></span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+"><i class='fas fa-plus'></i></span></div>";
+            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
+          }
+        }
+      }
       //VARIANTS
       if(STEP.products[i].variantsApp){
         if(STEP.products[i].variants.length > 0){
@@ -66,19 +80,7 @@ if(VALID){
           }
         }
       }
-      //QUANTITY
-      if(STEP.products[i].quantity){
-        if(STEP.products[i].quantity.length > 0){
-          for(var j=0;j<STEP.products[i].quantity.length;j++){
-              $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
-              $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
-          }
-          if(STEP.products[i].quantityApp){
-            var HTML = "<div class='qtybox'><span class='xxqm' data-prod="+i+"><i class='fas fa-minus'></i></span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+"><i class='fas fa-plus'></i></span></div>";
-            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
-          }
-        }
-      }
+      
     }
 
 
