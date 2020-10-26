@@ -149,8 +149,9 @@ window.onload = function(){
       
 
       $('input[name=xxprod]').click(function () {
+        console.log('m');
         $('.varibox').slideUp(300);
-        $(this).find('.varibox').slideDown(300);
+        $(this).parent().parent().find('.varibox').slideDown(300);
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
         if($('input[name=xxprod]:checked').data('quantity')){
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
