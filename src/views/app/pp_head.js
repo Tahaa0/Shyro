@@ -149,7 +149,6 @@ window.onload = function(){
       
 
       $('input[name=xxprod]').click(function () {
-        console.log('m');
         $('.varibox').slideUp(300);
         $(this).parent().parent().find('.varibox').slideDown(300);
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
@@ -162,6 +161,7 @@ window.onload = function(){
       });
       
       $('input[name=xxprod]:first').attr('checked','checked');
+      $('input[name=xxprod]:first').parent().parent().find('.varibox').show();
 
       CHOSEN_ID = $('input[name=xxprod]:first').val();
       //HIGHLIGHT
