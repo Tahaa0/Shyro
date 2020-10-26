@@ -190,9 +190,9 @@ window.onload = function(){
       setInterval(function(){
         NOTICE_ON = !NOTICE_ON;
         if(NOTICE_ON){
-          $('.noticeon').css('visibility':'visible');
+          $('.noticeon').css('visibility','visible');
         }else{
-          $('.noticeon').css('visibility':'hidden');
+          $('.noticeon').css('visibility','hidden');
         }
       },500);
 
