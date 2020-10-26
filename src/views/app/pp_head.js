@@ -1,5 +1,7 @@
 window.onload = function(){
 
+  $('.varibox').hide();
+
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
   var QUANTITY = 1;
   var BUMPS = [];
@@ -93,7 +95,7 @@ window.onload = function(){
       var radioStyle = "\/* The container *\/\r\n.radlab {\r\n  position: relative;\r\n  padding-left: 35px;\r\n  margin-bottom: 12px;\r\n  cursor: pointer;\r\n  font-size: 12px;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n\r\n\/* Hide the browser\'s default radio button *\/\r\n.radlab input {\r\n  position: absolute;\r\n  opacity: 0;\r\n  cursor: pointer;\r\n}\r\n\r\n\/* Create a custom radio button *\/\r\n.checkmark {\r\n  position: absolute;\r\n  top: -2px;\r\n  left: 0;\r\n  height: 18px;\r\n  width: 18px;\r\n  background-color: #eee;\r\n  border-radius: 50%;\r\n}\r\n\r\n\/* On mouse-over, add a grey background color *\/\r\n.radlab:hover input ~ .checkmark {\r\n  background-color: #ccc;\r\n}\r\n\r\n\/* When the radio button is checked, add a blue background *\/\r\n.radlab input:checked ~ .checkmark {\r\n  background-color: #2196F3;\r\n}\r\n\r\n\/* Create the indicator (the dot\/circle - hidden when not checked) *\/\r\n.checkmark:after {\r\n  content: \"\";\r\n  position: absolute;\r\n  display: none;\r\n}\r\n\r\n\/* Show the indicator (dot\/circle) when checked *\/\r\n.radlab input:checked ~ .checkmark:after {\r\n  display: block;\r\n}\r\n\r\n\/* Style the indicator (dot\/circle) *\/\r\n.radlab .checkmark:after {\r\n \ttop: 5px;\r\n\tleft: 5px;\r\n\twidth: 8px;\r\n\theight: 8px;\r\n\tborder-radius: 50%;\r\n\tbackground: white;\r\n}";
       var highlightStyle = ".highlighted{\r\n  background-color:#FEFF04;\r\n  border-radius:5px;\r\n  width: 105% !important;\r\n  padding:17px;\r\n  margin-left: -15px;\r\n  border: 1px solid #A0A0A0;\r\n  box-shadow: 0 1px 1px #A0A0A0;\r\n  font-weight:bold;\r\n}\r\n.highlighted .radlab{\r\n\tdisplay: inline-block;\r\n\tvertical-align: top;\r\n\tmargin-top: 17px;\r\n}";
       var bumpStyle = ".bump1{\r\n\tborder: 3px solid #BE386D;\r\n\tborder-radius: 5px;\r\n\twidth: auto;\r\n\tcolor: black;\r\n\tpadding: 8px;\r\n       font-family:\'Montserrat\';\r\n       font-size:16px;\r\n}\r\n.bump1 label{\r\n\tbackground-color: black;\r\n\tcolor: white;\r\n\twidth: 100%;\r\n\tdisplay: inline-block;\t\r\n\ttext-align: center;\r\n\tpadding: 5px 0;\r\n}\r\n.bump1 .x1{\r\n\tfont-weight: bold;\t\r\n\ttext-decoration: underline;\r\n}\r\n.bump1 h4{\r\n\tmargin: 0;\r\n\ttext-align: center;\t\r\n\tfont-size: 18px;\r\n\tpadding: 0 10px 10px 10px;\r\n\tfont-weight:700;\r\n}";
-      var varStyle = ".xxvar{\r\n\tdisplay: inline-block;\r\n\tborder: 2px solid #E0E0E0;\r\n\tpadding: 10px;\r\n\tborder-radius: 4px;\r\n\tmargin-left: 3px;\r\n\tmargin-right: 3px;\r\n\tcursor: pointer;\r\n}\r\n.varActive{\r\n\tbackground-color: #2196F3;\r\n\tcolor: white;\r\n\tfont-weight: 900;\r\n\tborder: 2px solid #2196F3;\r\n}\r\n.varibox{\r\n\tmargin-top: 7px;\r\n\tpadding-left: 35px;\r\n}\r\n.varilabel{\r\n\tmin-width: 85px;\r\n\tdisplay: inline-block;\r\n}";
+      var varStyle = ".xxvar{\r\n\tdisplay: inline-block;\r\n\tborder: 2px solid #E0E0E0;\r\n\tpadding: 10px;\r\n\tborder-radius: 4px;\r\n\tmargin-left: 3px;\r\n\tmargin-right: 3px;\r\n\tcursor: pointer;\r\n\tbackground-color: white;\r\n}\r\n.varActive{\r\n\tbackground-color: #2196F3;\r\n\tcolor: white;\r\n\tfont-weight: 900;\r\n\tborder: 2px solid #2196F3;\r\n}\r\n.varibox{\r\n\tmargin-top: 7px;\r\n\tpadding-left: 35px;\r\n}\r\n.varilabel{\r\n\tmin-width: 85px;\r\n\tdisplay: inline-block;\r\n}";
       var qStyle = ".xxqm,.xxqp{\r\n\tdisplay: inline-block;\r\n\tpadding: 10px;\r\n\tfont-weight: 900;\r\n\tcolor: #2196F3;\r\n\tcursor: pointer;\r\n}\r\n.xxquantity{\r\n\tpadding: 4px 20px;\r\n\tbackground-color: #EEEEEE;\r\n\tfont-weight: 500;\r\n\tborder-radius: 12px;\r\n}\r\n.xxqm{\r\n\tmargin-left: 20px;\r\n}\r\n.qtybox{\r\n\tdisplay: inline-block;\r\n}";
       var productChoiceStyle = ".elProductOptionsBox .elOrderProductOptinProductName {\r\n    padding: 12px;\r\n    border: 1px solid #E4E4E4;\r\n    border-radius: 4px;\r\n    margin-bottom: 0px;\r\n}";
       styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle+bumpStyle+varStyle+qStyle+productChoiceStyle;
@@ -147,6 +149,8 @@ window.onload = function(){
       
 
       $('input[name=xxprod]').click(function () {
+        $('.varibox').slideUp(300);
+        $(this).find('.varibox').slideDown(300);
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
         if($('input[name=xxprod]:checked').data('quantity')){
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
