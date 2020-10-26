@@ -48,23 +48,7 @@ if(VALID){
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
       }
       $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
-      //VARIANTS
-      if(STEP.products[i].variantsApp){
-        if(STEP.products[i].variants.length > 0){
-          for(var j=0;j<STEP.products[i].variants.length;j++){
-            var HTML = $('#cfAR').html();
-            var _name = STEP.products[i].title + '_' + STEP.products[i].variants[j].title + '_' + getTimeNow();
-            HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
-            $('#cfAR').html(HTML);
-
-            var HTML2 = "";
-            for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
-              HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
-            }
-            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
-          }
-        }
-      }
+      
       //QUANTITY
       if(STEP.products[i].quantity){
         if(STEP.products[i].quantity.length > 0){
@@ -79,7 +63,24 @@ if(VALID){
         }
       }
     }
+    //VARIANTS
+      if(STEP.products[i].variantsApp){
+        if(STEP.products[i].variants.length > 0){
+          for(var j=0;j<STEP.products[i].variants.length;j++){
+            var HTML = $('#cfAR').html();
+            var _name = STEP.products[i].title + '_' + STEP.products[i].variants[j].title + '_' + getTimeNow();
+            HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
+            $('#cfAR').html(HTML);
 
+            var HTML2 = "<div class='varibox'>";
+            for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
+              HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
+            }
+            HTML2 += "</div>";
+            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
+          }
+        }
+      }
 
     //change button and credit card form
     var cForm = $('.elCreditCard');
