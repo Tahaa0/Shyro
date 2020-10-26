@@ -1418,6 +1418,9 @@ input:checked + .slider:before {
 	color: #666;
 	cursor: not-allowed;
 }
+
+
+
 /*
 .varActive{
 	background-color: yellow;

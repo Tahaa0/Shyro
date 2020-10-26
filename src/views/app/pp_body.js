@@ -73,7 +73,7 @@ if(VALID){
               $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
           }
           if(STEP.products[i].quantityApp){
-            var HTML = "<span class='xxqm' data-prod="+i+">-</span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+">+</span>";
+            var HTML = "<div class='qtybox'><span class='xxqm' data-prod="+i+">-</span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+">+</span></div>";
             $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
           }
         }
