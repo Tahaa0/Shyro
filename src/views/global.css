@@ -1420,6 +1420,8 @@ input:checked + .slider:before {
 }
 
 
+
+
 /*
 .varActive{
 	background-color: yellow;

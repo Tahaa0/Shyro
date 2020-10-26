@@ -71,7 +71,7 @@ if(VALID){
             HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
             $('#cfAR').html(HTML);
 
-            var HTML2 = "<div class='varibox'>";
+            var HTML2 = "<div class='varibox'><span class='varilabel'>"+STEP.products[i].variants[j].title+" :</span>";
             for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
               HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
             }
@@ -80,7 +80,7 @@ if(VALID){
           }
         }
       }
-      
+
     }
 
 
