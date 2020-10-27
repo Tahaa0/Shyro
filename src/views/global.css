@@ -1019,6 +1019,9 @@ hr{
 }
 .s_details{
 	flex-grow:1;
+	max-width: 160px;
+	overflow: hidden;
+
 }
 .step_item.purple .s_icon{
 	background-color: #CFC8FF;
@@ -1048,7 +1051,7 @@ hr{
 }
 
 .s_icon{
-	
+	min-width: 88px;
 	width: 88px;
 	height: 70px;
 	background-color: #FFEBF6;
@@ -1419,9 +1422,111 @@ input:checked + .slider:before {
 	cursor: not-allowed;
 }
 
+.f_buttons.smallerbuttons>button{
+	border-radius: 4px;
+	font-size: 12px;
+	padding: 4px 12px;
+}
+.prev{
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 8px;
+}
+#funnelAppsBox{
+	max-width: none;
+	width: auto;
+}
+.tag_{
+	font-size: 12px;
+	background-color: #EEEEEE;
+	padding: 4px 10px;
+	border-radius: 4px;
+	color: #9C9C9C;
+	margin-left: 4px;
+	float: right;
+}
 
-
-
+#sidebar_user{
+	position: relative;
+	z-index: 2;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 0 20px;
+	margin: 0 20px;
+	height: 62px;
+	border-radius: 12px;
+	color: #11142D;
+	cursor: pointer;
+	-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+}
+#sidebar_user:hover,#sidebar_user.active{
+	background: #3F8CFF;
+color: #ffffff;
+}
+#sidebar_user:hover .user_membership,#sidebar_user.active .user_membership{
+	color:white;
+}
+.user_icon{
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	font-size: 0;
+}
+.user_icon img{
+	width: 100%;
+	min-height: 100%;
+	border-radius: 50%;
+}
+.user_details{
+	-webkit-box-flex: 0;
+-ms-flex: 0 0 calc(100% - 64px);
+flex: 0 0 calc(100% - 64px);
+width: calc(100% - 64px);
+padding: 0 5px 0 16px;
+}
+.user_fullname{
+	overflow: hidden;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+white-space: nowrap;
+font-size: 14px;
+line-height: 1.42857;
+font-weight: 600;
+}
+.user_membership{
+	font-size: 13px;
+font-weight: 600;
+line-height: 1.38462;
+overflow: hidden;
+-o-text-overflow: ellipsis;
+text-overflow: ellipsis;
+white-space: nowrap;
+color: #808191;
+-webkit-transition: 	400ms all;
+	-o-transition: 	400ms all;
+	transition: 	400ms all;
+}
+.user_arrow{
+	-ms-flex-negative: 0;
+flex-shrink: 0;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+justify-content: center;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+width: 24px;
+height: 24px;
+}
 /*
 .varActive{
 	background-color: yellow;

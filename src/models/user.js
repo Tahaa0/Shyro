@@ -62,7 +62,14 @@ const UserSchema = new mongoose.Schema({
     resetPasswordExpires: {
         type: Date,
         required: false
+    },
+
+    membershipLevel : {
+        type: Number,
+        required: true,
+        default: 0
     }
+
 }, {timestamps: true});
 
 
