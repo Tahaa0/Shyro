@@ -11,7 +11,7 @@ const upload = multer().single('profileImage');
 
 //INDEX
 router.get('/', User.index);
-
+router.get('/profile', User.getProfile);
 //STORE
 router.post('/', [
     check('email').isEmail().withMessage('Enter a valid email address'),
@@ -24,8 +24,8 @@ router.post('/', [
 router.get('/:id',  User.show);
 
 //UPDATE
-router.put('/:id', upload, User.update);
-
+//router.put('/:id', upload, User.update);
+router.put('/profile', User.updateProfile);
 //DELETE
 router.delete('/:id', User.destroy);
 

@@ -29,6 +29,40 @@ $('#sidebar_user').click(function(){
 
 });
 
+//MY ACCOUNT
+
+function updateProfile(username,firstName,lastName,cb){
+	$.ajax({
+	  url: "/api/user/profile",
+	  type: "PUT",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'username':username,'firstName':firstName,'lastName':lastName},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+function getProfile(cb){
+	$.ajax({
+	  url: "/api/user/profile",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+//
+
 function getUser(id,cb){
 	$.ajax({
 	  url: "/api/user/"+id,

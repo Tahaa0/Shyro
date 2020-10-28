@@ -121,7 +121,7 @@
 						<div class="dbox">
 							<div class='form_item' id='formProfile'>
 								<h2>Profile Information</h2>
-								<form id="accform">
+									<h4 class='green' id='profileStatus'></h4>
 									<div class="field">
 										<div class="field_label">Username</div>
 										<div class="field_input"><input type="text" name='username' id="a_username" ></div>
@@ -137,14 +137,14 @@
 										</div>
 									</div>
 									<br>
-									<button class='black_button central' type="submit" id="a_submit">Change Info</button>
-								</form>
+									<button class='black_button central' id="a_submit">Change Info</button>
+								
 							</div>
 							<div class='form_item' id='formPassword' style="display: none">
 								<h2>Change Password</h2>
-								<form id="accform">
+								
 									<div class="field">
-										<div class="field_label">Old Password</div>
+										<div class="field_label">Current Password</div>
 											<div class="field_input"><input type="password"  name='old_password' id="old_pwd"></div>
 									</div>
 									<div class="row">
@@ -159,12 +159,12 @@
 										
 									</div>
 									<br>
-									<button class='black_button central' type="submit" id="a_submit">Change Password</button>
-								</form>
+									<button class='black_button central' id="a_submit">Change Password</button>
+								
 							</div>
 							<div class='form_item' id='formEmail' style="display: none">
 								<h2>Change Email Address</h2>
-								<form id="accform">
+								
 									<div class="row">
 										<div class="col-md-6">
 											<div class="field_label">Your Current Email</div>
@@ -178,15 +178,15 @@
 										
 										
 									</div>
-									<div class="field">
+									<div class="field" style="margin-top: 15px;	">
 										<div class="field_label">Reason Behind Changement</div>
 										<div class="field_input"><input type="text"  name='old_password' id="old_pwd"></div>
 										</div>
 									<br>
 									
 									<br>
-									<button class='black_button central' type="submit" id="a_submit">Submit</button>
-								</form>
+									<button class='black_button central' id="a_submit">Submit</button>
+								
 							</div>
 							<div class='form_item' id='formDelete' style="display: none; padding-top: 80px;">
 								<h2 style="text-align: center;	color: #E04A3A;">Delete Your Account</h2>
@@ -246,6 +246,8 @@
 		alert(data.message);
 	});
 
+	refreshProfile();
+
 	$('.app_item').click(function(){
 		$('.app_item').removeClass('active');
 		$(this).addClass('active');
@@ -254,7 +256,29 @@
 		$('#'+$(this).data('ff_id')).fadeIn(350);
 	});
 
-	
+	//FORM SUBS
+
+	$('#a_submit').click(function(){
+		updateProfile($('#a_username').val(),$('#a_fn').val(),$('#a_ln').val(),function(err,data){
+			if(!err) {
+				$('#profileStatus').html('<i class="far fa-check-circle"></i> Your profile was successfully updated.')
+			}else{
+				alert(err);
+			}
+		});
+	});
+
+	function refreshProfile(){
+		getProfile(function(err,data){
+			if(!err) {
+				$('#a_username').val(data.user_.username);
+				$('#a_fn').val(data.user_.firstName);
+				$('#a_ln').val(data.user_.lastName);
+			}else{
+				alert(err);
+			}
+		});
+	}
 </script>
 </body>
 </html>

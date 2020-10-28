@@ -95,6 +95,43 @@ exports.update = async function (req, res) {
     }
 };
 
+exports.updateProfile = async function (req, res) {
+    try {
+
+        const username = req.body.username;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+
+        const id = req.session['user_id']
+
+        const user = await User.findByIdAndUpdate(id, {$set: {username:username,firstName:firstName,lastName:lastName}}, {new: true});
+
+        return res.status(200).json({ message: 'Profile has been updated'});
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
+
+exports.getProfile = async function (req, res) {
+    try {
+
+        const id = req.session['user_id']
+
+        const user = await User.findById(id);
+
+        var user_ = {
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
+        }
+
+        return res.status(200).json({ user_});
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};
 // @route DESTROY api/user/{id}
 // @desc Delete User
 // @access Public
