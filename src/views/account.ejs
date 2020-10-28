@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-	<meta charset="UTF-8">
 <head>
 	<meta charset="UTF-8">
 	<title>CF APP</title>
@@ -26,13 +25,13 @@
 			</div>
 			<div id="sidebar_menu">
 				<h4>Admin tools</h4>
-				<div class="item active_item"  href='/dashboard'>
+				<div class="item"  href='/dashboard'>
 					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
 				</div>
 				<div class="item " href='/funnels'>
 					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
 				</div>
-				<div class="item"  href='/apps'>
+				<div class="item "  href='/apps'>
 					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
 				</div>
 				<div class="item"  href='/documentation'>
@@ -48,7 +47,7 @@
 			
 			</div>
 			<div id="sidebar_userdrop">
-				<div class="userdrop_link" id='profile'>
+				<div class="userdrop_link"  id='profile'>
 					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
 					<div class="userdrop_text">Profile</div>
 				</div>
@@ -67,7 +66,6 @@
 				</div>
 				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
 			</div>
-			<button class='black_button orange'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button>
 		</div>
 	</div>
 	<div id="page_wrapper">
@@ -75,12 +73,9 @@
 			<div class="col-md-8 center_page">
 				<div class="inside">
 					<div class="welcome_box">
-						<h4>Hi Taha Boudouma,</h4>
-						<h1>Welcome back !</h1>
+						<h1>My Account</h1>
 					</div>
-					<div class="announce">
-
-					</div>
+					
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -95,7 +90,36 @@
 			</div>
 		</div>
 	</div>
-	
+	<!--<div id="innerCont">
+		<h1 style="text-align: center;">Steps</h1>
+		<hr>	
+		<div class="row" style="min-height: 200px;">
+			<div class="col-md-8">
+				<div id="buttonbar" class="buttonbar">
+					<button onclick='addfunnel()'>+ Add Funnel</button>
+				</div>
+				<div id="stepBox" style="display: none;">
+					<input type="text" placeholder="Funnel Title" id='funnelTitle'>
+					<button id='addFunnel' class='purplebutton'>+ Add Funnel</button>
+					<button id='cancelFunnel'>Cancel</button>
+				</div>
+				<div id="inside">
+				
+				
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div id="buttonbar2" class="buttonbar">
+					
+				</div>
+				<div id="insideProd">
+				
+				
+				</div>
+			</div>
+		</div>
+	</div>-->
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>

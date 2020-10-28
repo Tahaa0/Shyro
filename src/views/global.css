@@ -31,6 +31,14 @@ h1{
 	display: block;	
 	margin: 0 auto;	
 }
+.black_button.orange{
+	background-color: #FF754C;
+	display: block;
+	margin:0 auto;
+	width: 210px;
+	margin-bottom: 30px;
+	padding: 10px;
+}
 #logform,#regform{
 	padding-bottom: 30px;	
 	border-bottom: 1px solid #E4E4E4;
@@ -1473,7 +1481,7 @@ input:checked + .slider:before {
 	-webkit-transition: 	400ms all;
 	-o-transition: 	400ms all;
 	transition: 	400ms all;
-	margin-bottom: 40px;
+	margin-bottom: 12px;
 }
 #sidebar_user:hover,#sidebar_user.active{
 	background: #3F8CFF;

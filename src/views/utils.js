@@ -2,6 +2,10 @@ $('.item').click(function(){
 	window.location = $(this).attr('href');
 });
 
+$('#profile').click(function(){
+	window.location = '/account';
+})
+
 $('#logout').click(function(){
 	logout(function(err,data){
 		if(!err) {

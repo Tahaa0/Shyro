@@ -63,6 +63,14 @@ module.exports = app => {
         }
     });
 
+    app.get('/account', (req,res)=>{
+        if(req.session['token']){
+            res.render('account.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
     app.get('/funnel/:id', (req,res)=>{
         if(req.session['token']){
             res.render('portal.ejs',{id:req.params.id});
