@@ -679,7 +679,7 @@ hr{
 #sidebar{
 	position: fixed;
 	height: 100vh;
-	width: 300px;
+	width: 280px;
 	border-right: 1px solid #E4E4E4;
 }
 #page_wrapper{

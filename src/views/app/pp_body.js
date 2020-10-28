@@ -83,7 +83,7 @@ if(VALID){
 
     }
 
-
+    $('.elOrderProductOptions.elProductOptionsBox input[name="purchase[product_id]"]').parent().parent().remove();
     //change button and credit card form
     var cForm = $('.elCreditCard');
         var bButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
