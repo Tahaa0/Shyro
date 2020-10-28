@@ -960,10 +960,12 @@
 	function updateFunnelSteps(){
 
 		if(funnelSteps.length == 0){
+			$('#toggleAddProduct').css('visibility','hidden');
 			$('#toggleSplitTest').css('visibility','hidden');
 			$('#toggleEdit').css('visibility','hidden');
 			$('#deleteStep').css('visibility','hidden');
 		}else{
+			$('#toggleAddProduct').css('visibility','visible');
 			$('#toggleSplitTest').css('visibility','visible');
 			$('#toggleEdit').css('visibility','visible');
 			$('#deleteStep').css('visibility','visible');
