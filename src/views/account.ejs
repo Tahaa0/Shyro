@@ -72,26 +72,129 @@
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-12 center_page">
 				<div class="inside">
 					<div class="welcome_box">
+						<h4>Edit Account Information</h4>
 						<h1>My Account</h1>
 					</div>
-					
+					<div id="myapps" class="row">
+					<div class="dbox col-md-4 myaccountbox" id="applist">
+						<div class="app_item active" style="margin-top: 0;" data-ff_id='formProfile'>
+							<div class="app_icon gray">
+								<i class="fas fa-address-card"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Profile</div>
+								<div class="app_caption">Change your profile information</div>
+							</div>
+						</div>
+						<div class="app_item" data-ff_id='formPassword'>
+							<div class="app_icon gray">
+								<i class="fas fa-key"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Password</div>
+								<div class="app_caption">Change your password</div>
+							</div>
+						</div>
+						<div class="app_item" data-ff_id='formEmail'>
+							<div class="app_icon gray">
+								<i class="fas fa-at"></i>
+							</div>
+							<div class="app_details">
+								<div class="app_title">Email</div>
+								<div class="app_caption">Change your Email Address</div>
+							</div>
+						</div>
+						<div class="app_item" data-ff_id='formDelete'>
+							<div class="app_icon red">
+								<i class="fas fa-user-slash"></i>
+							</div>
+							<div class="app_details red">
+								<div class="app_title">Delete Account</div>
+								<div class="app_caption">Delete My Account</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8" id='app_desc'>
+						<div class="dbox">
+							<div class='form_item' id='formProfile'>
+								<h2>Profile Information</h2>
+								<form id="accform">
+									<div class="field">
+										<div class="field_label">Username</div>
+										<div class="field_input"><input type="text" name='username' id="a_username" ></div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="field_label">First Name</div>
+											<div class="field_input"><input type="text" name='firstName' id="a_fn"></div>
+										</div>
+										<div class="col-md-6">
+											<div class="field_label">Last Name</div>
+											<div class="field_input"><input type="text" name='lastName' id="a_ln"></div>
+										</div>
+									</div>
+									<br>
+									<button class='black_button central' type="submit" id="a_submit">Change Info</button>
+								</form>
+							</div>
+							<div class='form_item' id='formPassword' style="display: none">
+								<h2>Change Password</h2>
+								<form id="accform">
+									<div class="field">
+										<div class="field_label">Old Password</div>
+											<div class="field_input"><input type="password"  name='old_password' id="old_pwd"></div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="field_label">New Password</div>
+											<div class="field_input"><input type="password"  name='password' id="new_pwd"></div>
+										</div>
+										<div class="col-md-6">
+											<div class="field_label">Confirm New Password</div>
+											<div class="field_input"><input type="password"  name='password_confirm' id="new_pwd_confirm"></div>
+										</div>
+										
+									</div>
+									<br>
+									<button class='black_button central' type="submit" id="a_submit">Change Password</button>
+								</form>
+							</div>
+							<div class='form_item' id='formEmail' style="display: none">
+								<h2>Change Email Address</h2>
+								<form id="accform">
+									<div class="field">
+										<div class="field_label">Your Current Email</div>
+											<div class="field_input"><input type="password"  name='old_password' id="old_pwd"></div>
+										</div>
+									<br>
+									<div class="field">
+										<div class="field_label">Your New Email</div>
+											<div class="field_input"><input type="password"  name='old_password' id="old_pwd"></div>
+										</div>
+									<br>
+									<button class='black_button central' type="submit" id="a_submit">Submit</button>
+								</form>
+							</div>
+							<div class='form_item' id='formDelete' style="display: none; padding-top: 80px;">
+								<h2 style="text-align: center;	color: #E04A3A;">Delete Your Account</h2>
+								<h4>Are you sure you want to permanently delete your account ?</h4>
+								<form id="accform">
+									<button class='black_button red' type="submit" id="a_submit">Delete My Account</button>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
+	
 	<!--<div id="innerCont">
 		<h1 style="text-align: center;">Steps</h1>
 		<hr>	
@@ -133,7 +236,14 @@
 		alert(data.message);
 	});
 
-	
+	$('.app_item').click(function(){
+		$('.app_item').removeClass('active');
+		$(this).addClass('active');
+
+		$('.form_item').hide();
+		$('#'+$(this).data('ff_id')).fadeIn(350);
+	});
+
 	
 </script>
 </body>
