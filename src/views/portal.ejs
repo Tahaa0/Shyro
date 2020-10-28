@@ -60,6 +60,9 @@
 						<h1 id='funnel_title'>Kinobody Funnel</h1>
 					</div>
 					<div class="funnels">
+						<div id="addSplitBox" style="display: none;">
+							<input type="text" class='standard_input' id="split_url" placeholder="Split Test URL">
+						</div>
 						<div id="addStepBox" style="display: none;">
 							<input type="text" class='standard_input' id="step_title" placeholder="Step Name">
 							<input type="text" class='standard_input' id="step_url" placeholder="Step URL">
@@ -134,9 +137,12 @@
 						</div>
 						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
+						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
 						<span class='black_button' id='updateStep' style="display: none;">Update</span>
 						<span class='black_button' id='toggleAdd'>+ Add Step</span>
+						<span class='black_button' id='toggleSplitTest'>+ Add Split Test</span>
 						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+
 						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
 						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
 						<div id="myfunnels" class="row dbox">
@@ -452,6 +458,7 @@
 
 	var toggleAdd = true;
 	var toggleEdit = true;
+	var toggleSplit = true;
 
 	var p_toggleAdd = true;
 	var p_toggleEdit = true;
@@ -493,7 +500,7 @@
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
-
+		$('#toggleSplitTest').toggle();
 
 		$('#step_title').val('');
 		$('#step_url').val('');
@@ -506,6 +513,25 @@
 
 	}
 
+	function toggleSplitTest(){
+		$("#addSplitBox").slideToggle(300);
+
+		$('#addSplit').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleAdd').toggle();
+
+		$('#split_url').val('');
+
+		if(toggleSplit){
+			$('#toggleSplitTest').html('Cancel');
+		}else{
+			$('#toggleSplitTest').html('+ Add Split Test');
+		}
+		toggleSplit = !toggleSplit;
+	}
+
 	function toggleEditStep(){
 		$("#addStepBox").slideToggle(300);
 
@@ -513,6 +539,7 @@
 		$('#toggleAdd').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+		$('#toggleSplitTest').toggle();
 
 		$('#step_title').val('');
 		$('#step_url').val('');
@@ -867,6 +894,10 @@
 		toggleAddStep();
 	});
 
+	$('#toggleSplitTest').click(function(){
+		toggleSplitTest();
+	});
+
 	$('#toggleEdit').click(function(){
 		toggleEditStep();
 	});
@@ -966,6 +997,9 @@
 			if(!p_toggleApps){
 				toggleApps();
 			}
+			if(!p_toggleAdd){
+				toggleAddProduct();
+			}
 			checkHideProduct();
 		});
 		$('.prod_row').removeClass('active');
@@ -978,6 +1012,9 @@
 		}
 		if(!p_toggleApps){
 			toggleApps();
+		}
+		if(!p_toggleAdd){
+			toggleAddProduct();
 		}
 		checkHideProduct();
 		
@@ -1010,6 +1047,15 @@
 		updateFunnelSteps();
 	});
 
+	$('#addSplit').click(function(){
+		funnelSteps.splice(SELECTED_STEP,0,JSON.parse(JSON.stringify(funnelSteps[SELECTED_STEP])));
+		funnelSteps[SELECTED_STEP].title += ' - A';
+		funnelSteps[SELECTED_STEP+1].title += ' - B';
+		funnelSteps[SELECTED_STEP+1].url = $('#split_url').val();
+		saveFunnel();
+		updateFunnelSteps();
+		toggleSplitTest();
+	});
 
 	$('#addProduct').click(function(){
 		var product = {};

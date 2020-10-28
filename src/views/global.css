@@ -1532,6 +1532,10 @@ height: 24px;
 	color: #CCC;
 	font-style: italic;
 }
+
+#split_url{
+	margin-bottom: 15px;
+}
 /*
 .varActive{
 	background-color: yellow;
