@@ -956,9 +956,11 @@
 	function updateFunnelSteps(){
 
 		if(funnelSteps.length == 0){
+			$('#toggleSplitTest').css('visibility','hidden');
 			$('#toggleEdit').css('visibility','hidden');
 			$('#deleteStep').css('visibility','hidden');
 		}else{
+			$('#toggleSplitTest').css('visibility','visible');
 			$('#toggleEdit').css('visibility','visible');
 			$('#deleteStep').css('visibility','visible');
 		}
