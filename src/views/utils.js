@@ -1,3 +1,30 @@
+$('.item').click(function(){
+	window.location = $(this).attr('href');
+});
+
+$('#logout').click(function(){
+	logout(function(err,data){
+		if(!err) {
+			localStorage.removeItem("token");
+			window.location = '/';
+		}else{
+			alert(err);
+		}
+	});
+})
+
+$('#sidebar_user').click(function(){
+	$(this).toggleClass('active');
+	if($(this).hasClass('active')){
+		$(this).find('.user_arrow').html('<i class="fas fa-chevron-up"></i>');
+		$('#sidebar_userdrop').slideDown(300);
+	}else{
+		$(this).find('.user_arrow').html('<i class="fas fa-chevron-down"></i>');
+		$('#sidebar_userdrop').slideUp(300);
+	}
+
+});
+
 function getUser(id,cb){
 	$.ajax({
 	  url: "/api/user/"+id,

@@ -21,32 +21,53 @@
 <body>
 <div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
-	<div id="sidebar">
-		<div id="sidebar_logo">
-			<h1>LOGO</h1>
-		</div>
-		<div id="sidebar_menu">
-			<h4>Admin tools</h4>
-			<div class="item"  href='/dashboard'>
-				<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+	<div class="sidebar_container">
+		<div id="sidebar">
+			<div id="sidebar_logo">
+				<h1>LOGO</h1>
 			</div>
-			<div class="item active_item" href='/funnels'>
-				<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+			<div id="sidebar_menu">
+				<h4>Admin tools</h4>
+				<div class="item"  href='/dashboard'>
+					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+				</div>
+				<div class="item active_item" href='/funnels'>
+					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+				</div>
+				<div class="item "  href='/apps'>
+					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item"  href='/documentation'>
+					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+				</div>
+				<div class="item"  href='/subscriptions'>
+					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+				</div>
+				<div class="item"  href='/support'>
+					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+				</div>
+				
+			
 			</div>
-			<div class="item"  href='/apps'>
-				<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+			<div id="sidebar_userdrop">
+				<div class="userdrop_link">
+					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_text">Profile</div>
+				</div>
+				<div class="userdrop_link" id='logout'>
+					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_text">Logout</div>
+				</div>
 			</div>
-			<div class="item"  href='/documentation'>
-				<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
-			</div>
-			<div class="item"  href='/subscriptions'>
-				<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
-			</div>
-			<div class="item"  href='/support'>
-				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
-			</div>
-			<div class="item" id='logout'  href='/'>
-				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			<div id="sidebar_user">	
+				<div class="user_icon">
+					<img src="/views/gfx/avatar.png" alt="">
+				</div>
+				<div class="user_details">
+					<div class="user_fullname">Taha Boudouma</div>
+					<div class="user_membership">Free Trial</div>
+				</div>
+				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
 			</div>
 		</div>
 	</div>
@@ -1253,170 +1274,7 @@
 			$(self).removeAttr('disabled');
 		},1000);
 	});
-	/*
-	function addproductX(){
-		addproduct(SELECTED_STEP);
-	}
-
-	function addproduct(index){
-		$('#createProduct').show();
-		$('#updateProduct').hide();
-		$('#createBox').slideDown(400);
-	}
-
-	function editstep(index){
-		SELECTED_STEP = index;
-		selectStep();
-		$('#addStep').hide();
-		$('#updateStep').show();
-		$('#stepBox').slideDown(400);
-		$('#stepTitle').val(funnelSteps[index].title);
-		$('#stepURL').val(funnelSteps[index].url);
-		$('#stepType').val(funnelSteps[index].type);
-	}
-
-	function editproduct(i,j){
-		SELECTED_STEP = i;
-		SELECTED_PRODUCT = j;
-		$('#createProduct').hide();
-		$('#updateProduct').show();
-		$('#createBox').slideDown(400);
-		$('#prodTitle').val(funnelSteps[i].products[j].title);
-		$('#prodStripe').val(funnelSteps[i].products[j].stripe);
-		$('#prodPaypal').val(funnelSteps[i].products[j].paypal);
-		$('#prodPrice').val(funnelSteps[i].products[j].price);
-		$("#orderBump").prop("checked", funnelSteps[i].products[j].bump);
-		$("#highlight").prop("checked", funnelSteps[i].products[j].highlight);
-		if(funnelSteps[i].products[j].bump){
-			$('#prodPrice').show();
-		}
-	}
-
-	function editbump(i,j){
-		SELECTED_STEP = i;
-		SELECTED_PRODUCT = j;
-		$('#bumpBox').slideDown(400);
-		$("#bumpCode").val(funnelSteps[i].products[j].bumpCode);
-	}
-
-	function editvar(i,j){
-		SELECTED_STEP = i;
-		SELECTED_PRODUCT = j;
-		$('#varBox').slideDown(400);
-	}
-
-	function addstep(){
-		$('#addStep').show();
-		$('#updateStep').hide();
-		$('#stepBox').slideDown(400);
-
-	}
-
-
-
-	function deletestep(index){
-		funnelSteps.splice(index,1);
-		updateFunnelSteps();
-	}
-
-	function deleteproduct(i,j){
-		funnelSteps[i].products.splice(j,1);
-		updateFunnelSteps();
-	}
-
-	$('#orderBump').click(function (){
-        if($(this).is(':checked')){
-          $('#prodPrice').show();
-        }else{
-        	$('#prodPrice').hide();
-        }
-    });
-
-	/*$('#createProduct').click(function(){
-		var product = {};
-		product.title = $('#prodTitle').val();
-		product.stripe = $('#prodStripe').val();
-		product.paypal = $('#prodPaypal').val();
-		product.price = $('#prodPrice').val();
-		product.variants = [];
-		if($('#orderBump').is(':checked')){
-			product.bump = true;
-		}else{
-			product.bump = false;
-		}
-		if($('#highlight').is(':checked')){
-			product.highlight = true;
-		}else{
-			product.highlight = false;
-		}
-		var index = parseInt(SELECTED_STEP);
-		funnelSteps[index].products.push(product);
-		$('#prodTitle').val('');
-		$('#prodStripe').val('');
-		$('#prodPaypal').val('');
-		$('#prodPrice').val('');
-		$("#orderBump").prop("checked", false);
-		$("#highlight").prop("checked", false);
-		$('#prodPrice').hide();
-		updateFunnelSteps();
-		$('#createBox').slideUp(400);
-	});	
-
-	$('#updateProduct').click(function(){
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title = $('#prodTitle').val();
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe = $('#prodStripe').val();
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal = $('#prodPaypal').val();
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price = $('#prodPrice').val();
-		if($('#orderBump').is(':checked')){
-			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
-		}else{
-			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
-		}
-		if($('#highlight').is(':checked')){
-			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = true;
-		}else{
-			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = false;
-		}
-		var index = parseInt(SELECTED_STEP);
-		$('#prodTitle').val('');
-		$('#prodStripe').val('');
-		$('#prodPaypal').val('');
-		$('#prodPrice').val('');
-		$("#orderBump").prop("checked", false);
-		$("#highlight").prop("checked", false);
-		$('#prodPrice').hide();
-		updateFunnelSteps();
-		$('#createBox').slideUp(400);
-	});
-
-	$('#updateBump').click(function(){
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#bumpCode').val();
-		$('#bumpCode').val('');
-		updateFunnelSteps();
-		$('#bumpBox').slideUp(400);
-	});
-
-	$('#addVariant').click(function(){
-		var variant = {};
-		variant.title = $('#varTitle').val();
-		variant.options = $('#varOptions').val().split(',');
-		$('#varTitle').val('');
-		$('#varOptions').val('');
-		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.push(variant);
-		updateFunnelSteps();
-		$('#varBox').slideUp(400);
-	});*/
-
-	$('#logout').click(function(){
-		logout(function(err,data){
-			if(!err) {
-				localStorage.removeItem("token");
-				window.location = '/';
-			}else{
-				alert(err);
-			}
-		});
-	})
+	
 
 
 	$('#save').click(function(){

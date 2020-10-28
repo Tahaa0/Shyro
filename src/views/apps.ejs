@@ -18,32 +18,53 @@
 	<!--<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>-->
 <div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
-	<div id="sidebar">
-		<div id="sidebar_logo">
-			<h1>LOGO</h1>
-		</div>
-		<div id="sidebar_menu">
-			<h4>Admin tools</h4>
-			<div class="item "  href='/dashboard'>
-				<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+	<div class="sidebar_container">
+		<div id="sidebar">
+			<div id="sidebar_logo">
+				<h1>LOGO</h1>
 			</div>
-			<div class="item " href='/funnels'>
-				<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+			<div id="sidebar_menu">
+				<h4>Admin tools</h4>
+				<div class="item"  href='/dashboard'>
+					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+				</div>
+				<div class="item " href='/funnels'>
+					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+				</div>
+				<div class="item active_item"  href='/apps'>
+					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item"  href='/documentation'>
+					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+				</div>
+				<div class="item"  href='/subscriptions'>
+					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+				</div>
+				<div class="item"  href='/support'>
+					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+				</div>
+				
+			
 			</div>
-			<div class="item active_item"  href='/apps'>
-				<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+			<div id="sidebar_userdrop">
+				<div class="userdrop_link">
+					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_text">Profile</div>
+				</div>
+				<div class="userdrop_link" id='logout'>
+					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_text">Logout</div>
+				</div>
 			</div>
-			<div class="item"  href='/documentation'>
-				<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
-			</div>
-			<div class="item"  href='/subscriptions'>
-				<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
-			</div>
-			<div class="item"  href='/support'>
-				<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
-			</div>
-			<div class="item" id='logout'  href='/'>
-				<span class="icon"><i class="fas fa-power-off"></i></span><span class="text">Logout</span>
+			<div id="sidebar_user">	
+				<div class="user_icon">
+					<img src="/views/gfx/avatar.png" alt="">
+				</div>
+				<div class="user_details">
+					<div class="user_fullname">Taha Boudouma</div>
+					<div class="user_membership">Free Trial</div>
+				</div>
+				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
 			</div>
 		</div>
 	</div>
@@ -149,94 +170,12 @@
 		alert(data.message);
 	});
 
-	$('.item').click(function(){
-		window.location = $(this).attr('href');
-	});
 
 	$('.app_item').click(function(){
 			$('.app_item').removeClass('active');
 			$(this).addClass('active');
 		});
 
-	$('#logout').click(function(){
-		logout(function(err,data){
-			if(!err) {
-				localStorage.removeItem("token");
-				window.location = '/';
-			}else{
-				alert(err);
-			}
-		});
-	})
-	/*
-	var FUNNELS = [];
-	funnelRefresh();
-
-	function updateFunnels(){
-		var code = '';
-		for(var i =0;i<FUNNELS.length;i++){
-			var funnel = FUNNELS[i];
-			code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>"+funnel.title+"</span><button class='minibutton' onclick='deletefunnel("+i+")'>Delete</button><button class='minibutton' onclick='editfunnel("+i+")'>Edit</button></div>";
-		}
-		$("#inside").html(code);
-	}
-
-	function addfunnel(){
-		$('#stepBox').slideDown(400);
-	}
-
-	function editfunnel(index){
-		window.location = '/funnel/'+FUNNELS[index]._id;
-	}
-
-	function deletefunnel(index){
-		deleteFunnel(FUNNELS[index]._id,function(err,data){
-			if(!err) {
-				funnelRefresh();
-			}else{
-				console.log(err);
-			}
-		});
-	}
-
-	$('#addFunnel').click(function(){
-		createFunnel($('#funnelTitle').val(),function(err,data){
-			if(!err) {
-				funnelRefresh();
-			}else{
-				console.log(err);
-			}
-		});
-		$('#funnelTitle').val('');
-		$('#stepBox').slideUp(400);
-	});
-
-	$('#cancelFunnel').click(function(){
-		$('#funnelTitle').val('');
-		$('#stepBox').slideUp(400);
-	});
-
-	$('#logout').click(function(){
-		logout(function(err,data){
-			if(!err) {
-				localStorage.removeItem("token");
-				window.location = '/';
-			}else{
-				alert(err);
-			}
-		});
-	})
-	
-	function funnelRefresh(){
-		indexFunnels(function(err,data){
-			if(!err) {
-				FUNNELS = data.funnels;
-				updateFunnels();
-			}else{
-				console.log(err);
-			}
-		});
-	}*/
 	
 </script>
 </body>
