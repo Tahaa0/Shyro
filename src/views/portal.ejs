@@ -868,10 +868,12 @@
 	}
 
 	function checkHideProduct(){
-		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
-			$('#hideProduct').html('Enable');
-		}else{
-			$('#hideProduct').html('Disable');
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT]){
+			if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+				$('#hideProduct').html('Enable');
+			}else{
+				$('#hideProduct').html('Disable');
+			}
 		}
 	}
 
