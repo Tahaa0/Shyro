@@ -4,6 +4,7 @@ html,body{
 	padding: 0;
 	font-family: 'Inter';
 	color: #808191;
+	overflow-x: hidden;
 }
 body{
 	background-color: #F1F3F5;
@@ -36,7 +37,8 @@ h1{
 	display: block;
 	margin:0 auto;
 	width: 210px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+	margin-top: 20px;
 	padding: 10px;
 }
 #logform,#regform{
@@ -1326,7 +1328,7 @@ hr{
 	color: black;
 }
 
-#toggleEdit,#deleteStep,#toggleEditProduct,#deleteProduct,#toggleApps{
+#toggleEdit,#deleteStep,#toggleEditProduct,#deleteProduct,#toggleApps,#hideProduct,#toggleSplitTest{
 	visibility: hidden;
 }
 /* /////////// SWITCH W3SCHOOLS CODE /////////////// */
@@ -1482,6 +1484,9 @@ input:checked + .slider:before {
 	-o-transition: 	400ms all;
 	transition: 	400ms all;
 	margin-bottom: 12px;
+	background-color: #ffffff;
+	-webkit-box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.04);
+box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.04);
 }
 #sidebar_user:hover,#sidebar_user.active{
 	background: #3F8CFF;

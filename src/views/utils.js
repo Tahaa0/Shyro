@@ -20,9 +20,11 @@ $('#logout').click(function(){
 $('#sidebar_user').click(function(){
 	$(this).toggleClass('active');
 	if($(this).hasClass('active')){
+		$('.premcont').slideUp(300);
 		$(this).find('.user_arrow').html('<i class="fas fa-chevron-up"></i>');
 		$('#sidebar_userdrop').slideDown(300);
 	}else{
+		$('.premcont').slideDown(300);
 		$(this).find('.user_arrow').html('<i class="fas fa-chevron-down"></i>');
 		$('#sidebar_userdrop').slideUp(300);
 	}

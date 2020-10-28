@@ -49,6 +49,8 @@
 				
 			
 			</div>
+			<div class="premcont">
+			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
 			<div id="sidebar_userdrop">
 				<div class="userdrop_link" id='profile'>
 					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
@@ -381,7 +383,7 @@
 										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
 										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
 										<button id='toggleApps'>Apps</button>
-										<button id='hideProduct'>Hide</button>
+										<button id='hideProduct'>Disable</button>
 										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
 									</div>
 									<div class="prod_table" id='prod_table'>
@@ -867,9 +869,9 @@
 
 	function checkHideProduct(){
 		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
-			$('#hideProduct').html('Unhide');
+			$('#hideProduct').html('Enable');
 		}else{
-			$('#hideProduct').html('Hide');
+			$('#hideProduct').html('Disable');
 		}
 	}
 
