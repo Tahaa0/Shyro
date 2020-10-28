@@ -43,42 +43,48 @@ if(VALID){
       var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent();
       PARENT_.remove();
 
-      
-      if(STEP.products[i].bump){
+      if(STEP.products[i].hidden){
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
-      }
-      $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
-      
-      //QUANTITY
-      if(STEP.products[i].quantity){
-        if(STEP.products[i].quantity.length > 0){
-          for(var j=0;j<STEP.products[i].quantity.length;j++){
-              $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
-              $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
-          }
-          if(STEP.products[i].quantityApp){
-            var HTML = "<div class='qtybox'><span class='xxqm' data-prod="+i+"><i class='fas fa-minus'></i></span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+"><i class='fas fa-plus'></i></span></div>";
-            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
-          }
-        }
-      }
-      //VARIANTS
-      if(STEP.products[i].variantsApp){
-        if(STEP.products[i].variants.length > 0){
-          for(var j=0;j<STEP.products[i].variants.length;j++){
-            var HTML = $('#cfAR').html();
-            var _name = STEP.products[i].title + '_' + STEP.products[i].variants[j].title + '_' + getTimeNow();
-            HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
-            $('#cfAR').html(HTML);
+        $('#pid-'+STEP.products[i].paypal+'-0').parent().parent().remove();
+      }else{
 
-            var HTML2 = "<div class='varibox'><span class='varilabel'>"+STEP.products[i].variants[j].title+" :</span>";
-            for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
-              HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
+        if(STEP.products[i].bump){
+          $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
+        }
+        $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod');
+        
+        //QUANTITY
+        if(STEP.products[i].quantity){
+          if(STEP.products[i].quantity.length > 0){
+            for(var j=0;j<STEP.products[i].quantity.length;j++){
+                $('#pid-'+STEP.products[i].quantity[j].stripe+'-0').parent().parent().remove();
+                $('#pid-'+STEP.products[i].quantity[j].paypal+'-0').parent().parent().remove();
             }
-            HTML2 += "</div>";
-            $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
+            if(STEP.products[i].quantityApp){
+              var HTML = "<div class='qtybox'><span class='xxqm' data-prod="+i+"><i class='fas fa-minus'></i></span><span class='xxquantity' id='xxq"+i+"' data-prod="+i+">1</span><span class='xxqp' data-prod="+i+"><i class='fas fa-plus'></i></span></div>";
+              $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML);
+            }
           }
         }
+        //VARIANTS
+        if(STEP.products[i].variantsApp){
+          if(STEP.products[i].variants.length > 0){
+            for(var j=0;j<STEP.products[i].variants.length;j++){
+              var HTML = $('#cfAR').html();
+              var _name = STEP.products[i].title + '_' + STEP.products[i].variants[j].title + '_' + getTimeNow();
+              HTML += '<input type="hidden" id="xxvar'+i+'_'+j+'" name="'+_name+'" value="">';
+              $('#cfAR').html(HTML);
+
+              var HTML2 = "<div class='varibox'><span class='varilabel'>"+STEP.products[i].variants[j].title+" :</span>";
+              for(var k=0;k<STEP.products[i].variants[j].options.length;k++){
+                HTML2 += "<span class='xxvar' data-prod="+i+" data-var="+j+" >"+STEP.products[i].variants[j].options[k]+"</span>";
+              }
+              HTML2 += "</div>";
+              $('#pid-'+STEP.products[i].stripe+'-0').parent().append(HTML2);
+            }
+          }
+        }
+
       }
 
     }

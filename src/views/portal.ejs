@@ -354,6 +354,7 @@
 										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
 										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
 										<button id='toggleApps'>Apps</button>
+										<button id='hideProduct'>Hide</button>
 										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
 									</div>
 									<div class="prod_table" id='prod_table'>
@@ -441,7 +442,11 @@
 	}
 
 	function productHTML(p,i,j){
-		var HTML = "<div class=\"prod_row\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
+		var str_hidden = "";
+		if(p.hidden){
+			str_hidden = "hidden";
+		}
+		var HTML = "<div class=\"prod_row "+str_hidden+"\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
 		return HTML;
 	}
 
@@ -812,6 +817,24 @@
 		editQuantityListener();
 	}
 
+	function checkHideProduct(){
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+			$('#hideProduct').html('Unhide');
+		}else{
+			$('#hideProduct').html('Hide');
+		}
+	}
+
+	function toggleHideProduct(){
+
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden = false;
+		}else{
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden = true;
+		}
+
+	}
+
 	$('#toggleFunnelApps, #cancelFunnelApps').click(function(){
 		toggleFunnelApps();
 	});
@@ -913,10 +936,12 @@
 			$('#toggleEditProduct').css('visibility','hidden');
 			$('#toggleApps').css('visibility','hidden');
 			$('#deleteProduct').css('visibility','hidden');
+			$('#hideProduct').css('visibility','hidden');
 		}else{
 			$('#toggleEditProduct').css('visibility','visible');
 			$('#toggleApps').css('visibility','visible');
 			$('#deleteProduct').css('visibility','visible');
+			$('#hideProduct').css('visibility','visible');
 		}
 
 		$('.step_item').removeClass('active');
@@ -941,7 +966,7 @@
 			if(!p_toggleApps){
 				toggleApps();
 			}
-
+			checkHideProduct();
 		});
 		$('.prod_row').removeClass('active');
 		$('#product_'+SELECTED_STEP+'_'+SELECTED_PRODUCT).addClass('active');
@@ -954,6 +979,7 @@
 		if(!p_toggleApps){
 			toggleApps();
 		}
+		checkHideProduct();
 		
 	}
 
@@ -1015,6 +1041,11 @@
 		updateFunnelSteps();
 	});
 
+	$('#hideProduct').click(function(){
+		toggleHideProduct();
+		saveFunnel();
+		updateFunnelSteps();
+	});
 	//APPS
 	$('.editable .switch input[type=checkbox]').change(function(){
 		if($(this).is(':checked')){

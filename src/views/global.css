@@ -1527,6 +1527,11 @@ align-items: center;
 width: 24px;
 height: 24px;
 }
+
+.prod_row.hidden .prod_cell{
+	color: #CCC;
+	font-style: italic;
+}
 /*
 .varActive{
 	background-color: yellow;
