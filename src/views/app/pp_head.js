@@ -306,8 +306,8 @@ window.onload = function(){
     }
 
     if(currencyAPP){
-      $.getJSON('http://ipinfo.io/?token=87ed38221c7ade', function(data){
-        console.log(data.country);
+      $.get('https://ipinfo.io/?token=87ed38221c7ade', function(data){
+        console.log(data);
       });
     }
   }
