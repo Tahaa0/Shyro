@@ -11,8 +11,7 @@ const funnelSchema = new mongoose.Schema({
         max: 144
     },
     apps : {
-        type: Map,
-        of: Boolean
+        type: Map
     },
     steps : Array
 }, {timestamps: true});

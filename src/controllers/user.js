@@ -120,10 +120,28 @@ exports.getProfile = async function (req, res) {
 
         const user = await User.findById(id);
 
+        var membershipTitle = "";
+
+        switch(user.membershipLevel){
+            case 0:
+                membershipTitle = "Free Trial";
+                break;
+            case 1:
+                membershipTitle = "Member";
+                break;
+            case 2:
+                membershipTitle = "Premium Member";
+                break;
+            default:
+                break;
+        }
+
         var user_ = {
             username: user.username,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            membershipLevel: user.membershipLevel,
+            membershipTitle: membershipTitle
         }
 
         return res.status(200).json({ user_});

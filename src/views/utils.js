@@ -17,6 +17,17 @@ $('#logout').click(function(){
 	});
 })
 
+getProfile(function(err,data){
+	if(!err) {
+		$('#sidebar_user .user_fullname').html(data.user_.username);
+		$('#sidebar_user .user_membership').html(data.user_.membershipTitle);
+		$('.full_name').html(data.user_.firstName+" "+data.user_.lastName);
+	}else{
+		alert(err);
+	}
+});
+
+
 $('#sidebar_user').click(function(){
 	$(this).toggleClass('active');
 	if($(this).hasClass('active')){

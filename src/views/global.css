@@ -1448,7 +1448,7 @@ input:checked + .slider:before {
 	color: #BACA63;
 	margin-bottom: 10px;
 }
-#scriptbody,#scripthead{
+#scriptbody,#scripthead,#cc_code{
 	font-size: 13px;
 	background-color: #1D1E22;
 	color: #BACA63;
@@ -1494,6 +1494,9 @@ input:checked + .slider:before {
 	max-width: none;
 	width: auto;
 }
+.appsettingsbox{
+	background-color: white;
+}
 .tag_{
 	font-size: 12px;
 	background-color: #EEEEEE;
@@ -1528,6 +1531,7 @@ input:checked + .slider:before {
 box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.04);
 position: absolute;
 bottom: 10px;
+width: 230px;
 }
 #sidebar_user:hover,#sidebar_user.active{
 	background: #3F8CFF;

@@ -66,7 +66,7 @@
 					<img src="/views/gfx/avatar.png" alt="">
 				</div>
 				<div class="user_details">
-					<div class="user_fullname">Taha Boudouma</div>
+					<div class="user_fullname">User</div>
 					<div class="user_membership">Free Trial</div>
 				</div>
 				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
@@ -145,19 +145,50 @@
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="app_item" id='fapp_item_2'>
+									<div class="app_item editable" id='fapp_item_2'>
 										<div class="app_icon yellow">
 											<i class="fas fa-euro-sign"></i>
 										</div>
 										<div class="app_details">
-											<div class="app_title">Currency Converter <span class='tag_'>Coming Soon</span> </div>
+											<div class="app_title">Currency Converter</div>
 											<div class="app_caption">Support Worldwide Currencies</div>
+										</div>
+										<div class="editbox">
+											<button id='editCurrency' class="f_editButton fbutton" data-index='2'><i class="fas fa-pencil-alt"></i></button>
+										</div>
+										<div class="switchbox">
+											<label class="switch">
+											  <input type="checkbox" id='app_currency'>
+											  <span class="slider round"></span>
+											</label>
 										</div>
 									</div>
 								</div>
 							</div>
 							
 						</div>
+						<div id="fappSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+							<div class="field">
+								<div class="field_label">Source Currency :</div>
+								<div class="field_input"><input type="text" id='source_currency' value="USD"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">Price :</div>
+									<div class="field_input"><input type="text" id="cc_price" value='14.99'></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Code :</div>
+									<div class="field_input"><input type="text" id="cc_code" readonly="true" value="%price_14.99%"></div>
+								</div>
+								
+							</div>
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id='updateCurrency'>Update</button>
+								<button class="cancelFunnelAppSettings">Cancel</button>
+							</div>
+						</div>
+						<div></div>
 						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
@@ -448,12 +479,15 @@
 	var funnelSteps = [];
 	var funnelTitle = "Funnel";
 	var funnelApps = {
-		paypal: false
+		paypal: false,
+		currencyConverter: false,
+		funnelCurrency: 'USD'
 	};
 
 	var SELECTED_STEP = 0;
 	var SELECTED_PRODUCT = 0;
 	var SELECTED_APP = 2;
+	var SELECTED_FUNNEL_APP = 2;
 	var SELECTED_VARIANT = 0;
 	var SELECTED_QUANTITY = 0;
 
@@ -463,6 +497,13 @@
 
 	$('.link_button').click(function(){
 		window.location = $(this).attr('href');
+	});
+
+	$('#cc_price').keyup(function(){
+		var code = "%price_";
+		code += parseFloat($('#cc_price').val());
+		code +="%";
+		$('#cc_code').val(code);
 	});
 
 	function stepHTML(s,i){
@@ -496,9 +537,10 @@
 	var a_toggleEditQuantity = true;
 
 	var f_toggleFunnelApps = true;
+	var f_toggleAppSettings = true;
 
 	function toggleFunnelApps(){
-		$('#funnelAppsBox').slideToggle(300);
+		
 
 		$('#cancelFunnelApps').toggle();
 		$('#toggleAdd').toggle();
@@ -507,14 +549,71 @@
 		$('#toggleFunnelApps').toggle();
 		$('#toggleSplitTest').toggle();
 
+		if(!f_toggleAppSettings){
+			toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
+			$('#funnelAppsBox').slideToggle(300);
+		}else{
+			$('#funnelAppsBox').slideToggle(300);
+		}
+
 		if(f_toggleFunnelApps){
 			$('#app_paypal').prop("checked", funnelApps.paypal);
+			$('#app_currency').prop("checked", funnelApps.currencyConverter);
+
+			if(funnelApps.currencyConverter){
+				$('#app_currency').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+			}else{
+				$('#app_currency').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+			}
+
 			$('html, body').animate({
 		        scrollTop: $(".welcome_box").offset().top
 		    }, 500);
 		}
 
 		f_toggleFunnelApps = !f_toggleFunnelApps;
+	}
+
+	function toggleFunnelAppSettings(n){
+		SELECTED_FUNNEL_APP = n;
+		if(f_toggleAppSettings){
+			switch(n){
+				case 2: //Currency Converter
+					$('#source_currency').val(funnelApps.funnelCurrency);
+					break;
+				default:
+					break;
+			}
+
+			$('#funnelAppsBox .row').removeClass('row').addClass('__row');
+			$('#funnelAppsBox .col-md-6').removeClass('col-md-6').addClass('__col-md-6');
+
+			$('#fapp_item_1').css('margin-top','0');
+			$('#fapp_item_2').css('margin-top','10px');
+			$('#fapp_item_3').css('margin-top','10px');
+			$('#funnelAppsBox').css('display','inline-block');
+			
+			$('#funnelAppsBox .app_details, #funnelAppsBox .editbox, #funnelAppsBox .switchbox, #funnelAppsBox .f_buttons').fadeOut(100);
+			$('#funnelAppsBox').animate({'width':'90px','padding':'10px'},350);
+			$('#fappSettingsBox_'+n).show().animate({'width':'500px'},350);
+			$("#fapp_item_"+n).addClass('active');
+		}else{
+			$('#funnelAppsBox .__row').removeClass('__row').addClass('row');
+			$('#funnelAppsBox .__col-md-6').removeClass('__col-md-6').addClass('col-md-6');
+
+			$('#fapp_item_1').css('margin-top','');
+			$('#fapp_item_2').css('margin-top','');
+			$('#fapp_item_3').css('margin-top','');
+			$('#funnelAppsBox').css('display','');
+
+
+			$('#funnelAppsBox .app_details, #funnelAppsBox .editbox, #funnelAppsBox .switchbox, #funnelAppsBox .f_buttons').delay(250).fadeIn(100);
+			$('#funnelAppsBox').animate({'width':'100%','padding':'20px'},350)
+			$('#fappSettingsBox_'+n).animate({'width':'0px'},350).hide();
+			$('#funnelAppsBox .app_item').removeClass('active');
+		}
+		f_toggleAppSettings = !f_toggleAppSettings;
+	
 	}
 
 	function toggleAddStep(){
@@ -679,6 +778,7 @@
 		$('#toggleEditProduct').toggle();
 		$('#toggleApps').toggle();
 		$('#deleteProduct').toggle();
+		$('#hideProduct').toggle();
 
 		if(p_toggleApps){
 			updateApps();
@@ -912,8 +1012,16 @@
 		toggleAppSettings(parseInt($(this).data('index')));
 	});
 
+	$('.f_editButton').click(function(){
+		toggleFunnelAppSettings(parseInt($(this).data('index')));
+	});
+
 	$('.cancelAppSettings').click(function(){
 		toggleAppSettings(SELECTED_APP);
+	});
+
+	$('.cancelFunnelAppSettings').click(function(){
+		toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
 	});
 
 	$('#toggleAdd').click(function(){
@@ -945,12 +1053,17 @@
 		$(this).addClass('active');
 	});
 
-	$('.app_icon').click(function(){
+	$('#appsBox .app_icon').click(function(){
 		if(!p_toggleAppSettings){
 			toggleAppSettings(SELECTED_APP);
 		}
 	});
 
+	$('#funnelAppsBox .app_icon').click(function(){
+		if(!f_toggleAppSettings){
+			toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
+		}
+	});
 	
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
@@ -1158,7 +1271,19 @@
 		funnelApps.paypal = $(this).is(':checked');
 		saveFunnel();
 	});
-	
+
+	$('#app_currency').change(function(){
+		funnelApps.currencyConverter = $(this).is(':checked');
+		saveFunnel();
+	});
+
+	//FAPP SETTINGS
+
+	$('#updateCurrency').click(function(){
+		funnelApps.funnelCurrency = $('#source_currency').val();
+		saveFunnel();
+	});
+
 	//APP SETTINGS
 
 	$('#orderBumpSave').click(function(){
@@ -1271,7 +1396,7 @@
 		});
 	}
 	
-	$('#scripthead, #scriptbody').click(function(){
+	$('#scripthead, #scriptbody, #cc_code').click(function(){
 		$(this).select();
 		document.execCommand('copy');
 		var VAL = $(this).val();
