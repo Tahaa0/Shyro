@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CF APP</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
+	<link rel="stylesheet" href="/views/global.css">
+</head>
+<body>
+<div id="bgoverlay"></div>
+<div class="container-fluid" id='maincont'>
+	<div class="sidebar_container">
+		<div id="sidebar">
+			<div id="sidebar_logo">
+				<h1>LOGO</h1>
+			</div>
+			<div id="sidebar_menu">
+				<h4>Admin tools</h4>
+				<div class="item"  href='/dashboard'>
+					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+				</div>
+				<div class="item active_item" href='/funnels'>
+					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+				</div>
+				<div class="item "  href='/apps'>
+					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item"  href='/documentation'>
+					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+				</div>
+				<div class="item"  href='/subscriptions'>
+					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+				</div>
+				<div class="item"  href='/support'>
+					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+				</div>
+				
+			
+			</div>
+			<div class="premcont">
+			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
+			<div id="sidebar_userdrop">
+				<div class="userdrop_link" id='profile'>
+					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_text">Profile</div>
+				</div>
+				<div class="userdrop_link" id='logout'>
+					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_text">Logout</div>
+				</div>
+			</div>
+			<div id="sidebar_user">	
+				<div class="user_icon">
+					<img src="/views/gfx/avatar.png" alt="">
+				</div>
+				<div class="user_details">
+					<div class="user_fullname">User</div>
+					<div class="user_membership">Free Trial</div>
+				</div>
+				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
+			</div>
+		</div>
+	</div>
+	<div id="page_wrapper">
+		<div class="upgradeOverlay" style="display:none;">
+			<h2 style="text-align: center;	color: #FF754C;">Feature Unavailable</h2>
+			<h4>Please upgrade your account to access this feature</h4>
+			<div class="inlineButtons">
+				<button class='black_button oranges' id="upgradeAcc">Upgrade My Account</button>
+				<button class='black_button white' id="noThanks">No Thanks</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 center_page">
+				<div class="inside">
+					<div class="welcome_box">
+						<button class='back_button link_button' href='/funnels/'><i class="fas fa-reply"></i></button>
+						<h4>Funnel Steps</h4>
+						<h1 id='funnel_title'>Kinobody Funnel</h1>
+					</div>
+					<div class="funnels">
+						<div id="addSplitBox" style="display: none;">
+							<input type="text" class='standard_input' id="split_url" placeholder="Split Test URL">
+						</div>
+						<div id="addStepBox" style="display: none;">
+							<input type="text" class='standard_input' id="step_title" placeholder="Step Name">
+							<input type="text" class='standard_input' id="step_url" placeholder="Step URL">
+							<div class="select_type" id='step_type'>
+								<div class="select_tab active" data-type='form'>
+									<div class="select_icon">
+										<i class="fas fa-shopping-cart"></i>
+									</div>
+									<div class="select_text">
+										Order Form
+									</div>
+								</div>
+								<div class="select_tab" data-type='upsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-up"></i>
+									</div>
+									<div class="select_text">
+										Upsell
+									</div>
+								</div>
+								<div class="select_tab" data-type='downsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-down"></i>
+									</div>
+									<div class="select_text">
+										Downsell
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="funnelAppsBox" class="box_2 box_3" style="display:none">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="app_item premium" id='fapp_item_1'>
+										<div class="app_icon blue">
+											<i class="fab fa-paypal"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Paypal</div>
+											<div class="app_caption">Integrate both Paypal & Stripe</div>
+										</div>
+										<div class="premiumbox">
+											<i class="fas fa-crown"></i>
+										</div>
+										<div class="switchbox">
+											<label class="switch">
+											  <input type="checkbox" id='app_paypal'>
+											  <span class="slider round"></span>
+											</label>
+										</div>
+									</div>
+									<div class="app_item" id='fapp_item_3'>
+										<div class="app_icon pink">
+											<i class="fas fa-shopping-cart"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Abandoned Checkout <span class='tag_'>Coming Soon</span> </div>
+											<div class="app_caption">Recover customers who left the checkout page</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="app_item premium" id='fapp_item_2'>
+										<div class="app_icon yellow">
+											<i class="fas fa-euro-sign"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Currency Converter</div>
+											<div class="app_caption">Support Worldwide Currencies</div>
+										</div>
+										<div class="premiumbox">
+											<i class="fas fa-crown"></i>
+										</div>
+										<div class="switchbox">
+											<label class="switch">
+											  <input type="checkbox" id='app_currency'>
+											  <span class="slider round"></span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div></div>
+						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
+						<span class='black_button' id='addStep' style="display: none;">Submit</span>
+						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
+						<span class='black_button' id='updateStep' style="display: none;">Update</span>
+						<span class='black_button' id='toggleAdd'>+ Add Step</span>
+						<span class='black_button' id='toggleSplitTest'>+ Add Split Test</span>
+						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+
+						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
+						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
+						<div id="myfunnels" class="row dbox">
+							<div class="col-md-4">
+								<div id='myf'>
+									
+								</div>
+							</div>
+							<div class="col-md-8" id='products'>
+								<div class="">
+									<h2>Products</h2>
+									<div id="addProductBox" class='box_2' style="display: none;">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Product Name</div>
+												<div class="field_input"><input type="text" name='p_title' id="p_title" ></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">Price</div>
+												<div class="field_input"><input type="text" name='p_price' id="p_price" ></div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Stripe ID</div>
+												<div class="field_input"><input type="text" name='p_stripe' id="p_stripe"></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">PayPal ID</div>
+												<div class="field_input"><input type="text" name='p_paypal' id="p_paypal"></div>
+											</div>
+											
+										</div>
+										<div class="f_buttons" id='p_addbuttons' style="display: none;">	
+											<button id='addProduct'>Submit</button>
+											<button id='cancelAddProduct'>Cancel</button>
+										</div>
+										<div class="f_buttons" id='p_editbuttons' style="display: none;">	
+											<button id='updateProduct'>Update</button>
+											<button id='cancelEditProduct'>Cancel</button>
+										</div>
+									</div>
+									<div id="appsBox" class="box_2" style="display: none;">
+										<div class="app_item" id='app_item_1'>
+											<div class="app_icon yellow">
+												<i class="fas fa-highlighter"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Highlight</div>
+												<div class="app_caption">Highlight this Product</div>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_highlight'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+										</div>
+										<div class="app_item editable" id='app_item_2'>
+											<div class="app_icon blue">
+												<i class="fas fa-cart-plus"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Order Bump</div>
+												<div class="app_caption">Make this product an Order Bump</div>
+											</div>
+											<div class="editbox">
+												<button id='editOrderBump' class="editButton fbutton" data-index='2'><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_bump'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item premium" id='app_item_3'>
+											<div class="app_icon pink">
+												<i class="fas fa-plus-square"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Quantity</div>
+												<div class="app_caption">Add the possibility to choose a quantity</div>
+											</div>
+											<div class="premiumbox">
+												<i class="fas fa-crown"></i>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_quantity'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item premium" id='app_item_4'>
+											<div class="app_icon yellow">
+												<i class="fas fa-tshirt"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Variants</div>
+												<div class="app_caption">Add variations to this product (Size, Color etc..) </div>
+											</div>
+											<div class="premiumbox">
+												<i class="fas fa-crown"></i>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_variants'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+										
+										<div class="f_buttons">
+											<button id="cancelApps">Done</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="field">
+
+											<div class="field_label" style="margin-bottom: 6px">Order Bump Embed Code :</div>
+											<div class="f_buttons smallerbuttons" style="margin-top: 0;">
+												<button id='orderBump_design1'>Design 1</button>
+												<button id='orderBump_design2'>Design 2</button>
+											</div>
+											<div class="field_input"><textarea id='orderBumpCode'></textarea></div>
+											<div class="field_label" >Preview :</div>
+											<img src="" id='orderBump_img' alt="" class="prev">
+
+										</div>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id="orderBumpSave">Update</button>
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+
+									<div class="f_buttons">	
+										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
+										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
+										<button id='toggleApps'>Apps</button>
+										<button id='hideProduct'>Disable</button>
+										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
+									</div>
+									<div class="prod_table" id='prod_table'>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="" id='genbox'>
+						<div class="row dbox">
+							<div class="col-md-6">
+								<div class="field_label">Head Script :</div>
+								<div class="field_input"><input type="text" name='script_head' id="scripthead" readonly=true></div>
+							</div>
+							<div class="col-md-6">
+								<div class="field_label">Body Script :</div>
+								<div class="field_input"><input type="text" name='script_body' id="scriptbody" readonly=true></div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	
+
+<div id="realOverlay"></div>
+<div id="realOverlay2"></div>
+
+
+	
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/views/utils.js"></script>
+<script>
+	var socket = io();
+	socket.on('err',function(data){
+		console.log(data);
+		alert(data.message);
+	});
+
+	$('#noThanks').click(function(){
+		$('.upgradeOverlay').fadeOut(400);
+	});
+
+	function popPremium(){
+		$('.upgradeOverlay').fadeIn(400);
+	}
+
+	$('input[type=checkbox]').prop('checked',false);
+
+	const COLORS = ['','purple','cyan','yellow'];
+	const ICONS = {
+		'form': 'fas fa-shopping-cart',
+		'upsell': 'fas fa-arrow-up',
+		'downsell': 'fas fa-arrow-down'
+	}
+	const TYPE_TEXT = {
+		'form': 'Order Form',
+		'upsell': 'Upsell',
+		'downsell': 'Downsell'
+	}
+
+	const FUNNEL_ID = "<%= id %>";
+
+	var funnelSteps = [];
+	var funnelTitle = "Funnel";
+	var funnelApps = {
+		paypal: false,
+		currencyConverter: false,
+		funnelCurrency: 'USD'
+	};
+
+	var SELECTED_STEP = 0;
+	var SELECTED_PRODUCT = 0;
+	var SELECTED_APP = 2;
+	var SELECTED_FUNNEL_APP = 2;
+	var SELECTED_VARIANT = 0;
+	var SELECTED_QUANTITY = 0;
+
+	$('.item').click(function(){
+		window.location = $(this).attr('href');
+	});
+
+	$('.link_button').click(function(){
+		window.location = $(this).attr('href');
+	});
+
+	$('#cc_price').keyup(function(){
+		var code = "%price_";
+		code += parseFloat($('#cc_price').val());
+		code +="%";
+		$('#cc_code').val(code);
+	});
+
+	function stepHTML(s,i){
+		var HTML = '<div class=\"step_item '+COLORS[i%4]+'\" id=\"step_'+i+'\" data-index=\"'+i+'\">\r\n<div class=\"s_icon\">\r\n<div class=\"s_iconcap\">'+TYPE_TEXT[s.type]+'<\/div><i class=\"'+ICONS[s.type]+'\"><\/i><\/div>\r\n<div class=\"s_details\">\r\n<div class=\"s_title\">'+s.title+'<div class=\"icc\"><i class=\"fas fa-chevron-right\"><\/i><\/div><\/div>\r\n<div class=\"s_caption\">Type : '+TYPE_TEXT[s.type]+'<br>Url : '+s.url+'<\/div>\r\n<\/div>\r\n<\/div>';
+		return HTML;
+	}
+
+	function productHTML(p,i,j){
+		var str_hidden = "";
+		if(p.hidden){
+			str_hidden = "hidden";
+		}
+		var HTML = "<div class=\"prod_row "+str_hidden+"\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
+		return HTML;
+	}
+
+	var toggleAdd = true;
+	var toggleEdit = true;
+	var toggleSplit = true;
+
+	var p_toggleAdd = true;
+	var p_toggleEdit = true;
+
+	var p_toggleApps = true;
+	var p_toggleAppSettings = true;
+
+	var a_toggleAddVariant = true;
+	var a_toggleEditVariant = true;
+
+	var a_toggleAddQuantity = true;
+	var a_toggleEditQuantity = true;
+
+	var f_toggleFunnelApps = true;
+	var f_toggleAppSettings = true;
+
+	function toggleFunnelApps(){
+		
+
+		$('#cancelFunnelApps').toggle();
+		$('#toggleAdd').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleSplitTest').toggle();
+
+		if(!f_toggleAppSettings){
+			toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
+			$('#funnelAppsBox').slideToggle(300);
+		}else{
+			$('#funnelAppsBox').slideToggle(300);
+		}
+
+		if(f_toggleFunnelApps){
+
+			//PREMIUM ONLY
+			//$('#app_paypal').prop("checked", funnelApps.paypal);
+			//$('#app_currency').prop("checked", funnelApps.currencyConverter);
+
+			/*if(funnelApps.currencyConverter){
+				$('#app_currency').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+			}else{
+				$('#app_currency').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+			}*/
+
+			$('html, body').animate({
+		        scrollTop: $(".welcome_box").offset().top
+		    }, 500);
+		}
+
+		f_toggleFunnelApps = !f_toggleFunnelApps;
+	}
+
+	function toggleFunnelAppSettings(n){
+		SELECTED_FUNNEL_APP = n;
+		if(f_toggleAppSettings){
+			switch(n){
+				case 2: //Currency Converter
+					$('#source_currency').val(funnelApps.funnelCurrency);
+					break;
+				default:
+					break;
+			}
+
+			$('#funnelAppsBox .row').removeClass('row').addClass('__row');
+			$('#funnelAppsBox .col-md-6').removeClass('col-md-6').addClass('__col-md-6');
+
+			$('#fapp_item_1').css('margin-top','0');
+			$('#fapp_item_2').css('margin-top','10px');
+			$('#fapp_item_3').css('margin-top','10px');
+			$('#funnelAppsBox').css('display','inline-block');
+			
+			$('#funnelAppsBox .app_details, #funnelAppsBox .editbox, #funnelAppsBox .switchbox, #funnelAppsBox .f_buttons').fadeOut(100);
+			$('#funnelAppsBox').animate({'width':'90px','padding':'10px'},350);
+			$('#fappSettingsBox_'+n).show().animate({'width':'500px'},350);
+			$("#fapp_item_"+n).addClass('active');
+		}else{
+			$('#funnelAppsBox .__row').removeClass('__row').addClass('row');
+			$('#funnelAppsBox .__col-md-6').removeClass('__col-md-6').addClass('col-md-6');
+
+			$('#fapp_item_1').css('margin-top','');
+			$('#fapp_item_2').css('margin-top','');
+			$('#fapp_item_3').css('margin-top','');
+			$('#funnelAppsBox').css('display','');
+
+
+			$('#funnelAppsBox .app_details, #funnelAppsBox .editbox, #funnelAppsBox .switchbox, #funnelAppsBox .f_buttons').delay(250).fadeIn(100);
+			$('#funnelAppsBox').animate({'width':'100%','padding':'20px'},350)
+			$('#fappSettingsBox_'+n).animate({'width':'0px'},350).hide();
+			$('#funnelAppsBox .app_item').removeClass('active');
+		}
+		f_toggleAppSettings = !f_toggleAppSettings;
+	
+	}
+
+	function toggleAddStep(){
+		$("#addStepBox").slideToggle(300);
+
+		$('#addStep').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleSplitTest').toggle();
+
+		$('#step_title').val('');
+		$('#step_url').val('');
+		if(toggleAdd){
+			$('#toggleAdd').html('Cancel');
+		}else{
+			$('#toggleAdd').html('+ Add Step');
+		}
+		toggleAdd = !toggleAdd;
+
+	}
+
+	function toggleSplitTest(){
+		$("#addSplitBox").slideToggle(300);
+
+		$('#addSplit').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleAdd').toggle();
+
+		$('#split_url').val('');
+
+		if(toggleSplit){
+			$('#toggleSplitTest').html('Cancel');
+		}else{
+			$('#toggleSplitTest').html('+ Add Split Test');
+		}
+		toggleSplit = !toggleSplit;
+	}
+
+	function toggleEditStep(){
+		$("#addStepBox").slideToggle(300);
+
+		$('#updateStep').toggle();
+		$('#toggleAdd').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleSplitTest').toggle();
+
+		$('#step_title').val('');
+		$('#step_url').val('');
+		if(toggleEdit){
+			$('#toggleEdit').html('Cancel');
+			$('#step_title').val(funnelSteps[SELECTED_STEP].title);
+			$('#step_url').val(funnelSteps[SELECTED_STEP].url);
+
+			$('.select_tab').removeClass('active');
+			$('.select_tab[data-type='+funnelSteps[SELECTED_STEP].type+']').addClass('active');
+		}else{
+			$('#toggleEdit').html('<i style=\'font-size: 14px; margin-right: \t2px;\' class=\"fas fa-pencil-alt\"><\/i> Edit Step');
+		}
+		toggleEdit = !toggleEdit;
+	}
+
+	function toggleAddProduct(){
+		$("#addProductBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
+		$('#deleteProduct').toggle();
+
+		$('#p_addbuttons').toggle();
+
+		$('#p_title').val('');
+		$('#p_price').val('');
+		$('#p_stripe').val('');
+		$('#p_paypal').val('');
+
+		if(p_toggleAdd){
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleAdd = !p_toggleAdd;
+	}
+
+	function toggleEditProduct(){
+		$("#addProductBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
+		$('#deleteProduct').toggle();
+
+		$('#p_editbuttons').toggle();
+
+		$('#p_title').val('');
+		$('#p_price').val('');
+		$('#p_stripe').val('');
+		$('#p_paypal').val('');
+
+		if(p_toggleEdit){
+			$('#p_title').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title);
+			$('#p_price').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price);
+			$('#p_stripe').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe);
+			$('#p_paypal').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal);
+
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleEdit = !p_toggleEdit;
+	}
+
+	function updateApps(){
+
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp = false;
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp = false;
+		}
+
+		$('#app_highlight').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight);
+		$('#app_bump').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump);
+		//$('#app_quantity').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp);
+		//$('#app_variants').prop("checked", funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp);
+
+
+
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump){
+			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_bump').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+		/*if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantityApp){
+			$('#app_quantity').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_quantity').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variantsApp){
+			$('#app_variants').parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$('#app_variants').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}*/
+	}
+
+	function toggleApps(){
+		$("#appsBox").slideToggle(300);
+
+		$("#toggleAddProduct").toggle();
+		$('#toggleEditProduct').toggle();
+		$('#toggleApps').toggle();
+		$('#deleteProduct').toggle();
+		$('#hideProduct').toggle();
+
+		if(p_toggleApps){
+			updateApps();
+
+			$('html, body').animate({
+		        scrollTop: $("#products").offset().top
+		    }, 500);
+		}
+
+		p_toggleApps = !p_toggleApps;
+	}
+
+	function toggleAppSettings(n){
+		SELECTED_APP = n;
+		if(p_toggleAppSettings){
+			switch(n){
+				case 2:
+					$('#orderBumpCode').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode);
+					break;
+				case 3:
+					updateQtyTable();
+					break;
+				case 4:
+					updateVarTable();
+					break;
+				default:
+					break;
+			}
+
+			$('#appsBox .app_details, #appsBox .editbox, #appsBox .switchbox, #appsBox .f_buttons').fadeOut(100);
+			$('#appsBox').animate({'width':'90px','padding':'10px'},350);
+			$('#appSettingsBox_'+n).show().animate({'width':'500px'},350);
+			$("#app_item_"+n).addClass('active');
+		}else{
+			$('#appsBox .app_details, #appsBox .editbox, #appsBox .switchbox, #appsBox .f_buttons').delay(250).fadeIn(100);
+			$('#appsBox').animate({'width':'500px','padding':'20px'},350)
+			$('#appSettingsBox_'+n).animate({'width':'0px'},350).hide();
+			$('#appsBox .app_item').removeClass('active');
+		}
+		p_toggleAppSettings = !p_toggleAppSettings;
+	
+	}
+
+	function toggleAddVariant(){
+		
+		$('#addVariantBox').slideToggle(300);
+
+		$('#toggleAddVariant').parent().toggle();
+		$('#appSettingsBox_4 .cancelAppSettings').parent().toggle();
+		$('#var_table').toggle();
+
+		$('#v_title').val('');
+		$('#v_options').val('');
+
+		a_toggleAddVariant = !a_toggleAddVariant;
+	
+	}
+
+	function toggleEditVariant(k=SELECTED_VARIANT){
+		
+		SELECTED_VARIANT = k;
+
+		$('#addVariantBox').slideToggle(300);
+
+		$('#toggleAddVariant').parent().toggle();
+		$('#appSettingsBox_4 .cancelAppSettings').parent().toggle();
+		$('#var_table').toggle();
+
+		$('#v_title').val('');
+		$('#v_options').val('');
+
+		if(a_toggleEditVariant){
+			$('#v_title').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].title);
+			$('#v_options').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].options);
+
+			$('#updateVariant').show();
+			$('#cancelEditVariant').show();
+			$('#addVariant').hide();
+			$('#cancelAddVariant').hide();
+		}else{
+			$('#updateVariant').hide();
+			$('#cancelEditVariant').hide();
+			$('#addVariant').show();
+			$('#cancelAddVariant').show();
+		}
+
+		a_toggleEditVariant = !a_toggleEditVariant;
+	
+	}
+
+	function toggleAddQuantity(){
+		
+		$('#addQuantityBox').slideToggle(300);
+
+		$('#toggleAddQuantity').parent().toggle();
+		$('#appSettingsBox_3 .cancelAppSettings').parent().toggle();
+		$('#qty_table').toggle();
+
+		$('#q_paypal').val('');
+		$('#q_stripe').val('');
+		$('#q_price').val('');
+		$('#q_qty').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.length+2);
+
+		a_toggleAddQuantity = !a_toggleAddQuantity;
+	
+	}
+
+	function toggleEditQuantity(k=SELECTED_QUANTITY){
+		
+		SELECTED_QUANTITY = k;
+
+		$('#addQuantityBox').slideToggle(300);
+
+		$('#toggleAddQuantity').parent().toggle();
+		$('#appSettingsBox_3 .cancelAppSettings').parent().toggle();
+		$('#qty_table').toggle();
+
+		$('#q_paypal').val('');
+		$('#q_stripe').val('');
+		$('#q_price').val('');
+		$('#q_qty').val(k+2);
+
+		if(a_toggleEditQuantity){
+			$('#q_paypal').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].paypal);
+			$('#q_stripe').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].stripe);
+			$('#q_price').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].price);
+
+			$('#updateQuantity').show();
+			$('#cancelEditQuantity').show();
+			$('#addQuantity').hide();
+			$('#cancelAddQuantity').hide();
+		}else{
+			$('#updateQuantity').hide();
+			$('#cancelEditQuantity').hide();
+			$('#addQuantity').show();
+			$('#cancelAddQuantity').show();
+		}
+
+		a_toggleEditQuantity = !a_toggleEditQuantity;
+	
+	}
+
+	function switchOrderBumpOn(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = true;
+		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
+		if(!product.bumpCode){
+			var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
+			product.bumpCode = orderBumpCode;
+		}
+		saveFunnel();
+	}
+
+	function switchOrderBumpOff(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
+		saveFunnel();
+	}
+
+	function updateVarTable(){
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Options<\/div>\r\n<div class=\"prod_cell\"><\/div>\r\n<\/div>";
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants = [];
+		}
+		for(var k=0;k<funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.length;k++){
+			var variant = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[k];
+			code +=  "<div class=\"prod_row\"  id=\"variant_"+SELECTED_STEP+"_"+SELECTED_PRODUCT+"_"+k+"\" data-i=\""+SELECTED_STEP+"\" data-j=\""+SELECTED_PRODUCT+"'\" data-k=\""+k+"'\">\t\r\n<div class=\"prod_cell\">"+variant.title+"<\/div>\r\n<div class=\"prod_cell\">"+variant.options+"<\/div>\r\n<div class=\"prod_cell varbuttons\"><button class='fbutton editVariant'><i class='fas fa-pencil-alt'></i></button><button class='fbutton deleteVariant delete_btn'><i class='far fa-trash-alt'></i></button><\/div>\r\n<\/div>";
+			
+		}
+		$("#var_table").html(code);
+		//EFFECTS
+		deleteVariantListener();
+		editVariantListener();
+	}
+
+	function updateQtyTable(){
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Qty<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<div class=\"prod_cell\"><\/div>\r\n<\/div>";
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity == undefined){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity = [];
+		}
+		for(var k=0;k<funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.length;k++){
+			var quantity = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[k];
+			code +=  "<div class=\"prod_row\"  id=\"quantity_"+SELECTED_STEP+"_"+SELECTED_PRODUCT+"_"+k+"\" data-i=\""+SELECTED_STEP+"\" data-j=\""+SELECTED_PRODUCT+"'\" data-k=\""+k+"'\">\t\r\n<div class=\"prod_cell\">"+(k+2)+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+quantity.price+" USD<\/div>\r\n<div class=\"prod_cell qtybuttons\"><button class='fbutton editQuantity'><i class='fas fa-pencil-alt'></i></button><button class='fbutton deleteQuantity delete_btn'><i class='far fa-trash-alt'></i></button><\/div>\r\n<\/div>";
+			
+		}
+		$("#qty_table").html(code);
+		//EFFECTS
+		deleteQuantityListener();
+		editQuantityListener();
+	}
+
+	function checkHideProduct(){
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT]){
+			if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+				$('#hideProduct').html('Enable');
+			}else{
+				$('#hideProduct').html('Disable');
+			}
+		}
+	}
+
+	function toggleHideProduct(){
+
+		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden = false;
+		}else{
+			funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden = true;
+		}
+
+	}
+
+	$('#toggleFunnelApps, #cancelFunnelApps').click(function(){
+		toggleFunnelApps();
+	});
+
+	$('#toggleAddVariant, #cancelAddVariant').click(function(){
+		toggleAddVariant();
+	});
+
+	$('#cancelEditVariant').click(function(){
+		toggleEditVariant();
+	});
+
+	$('#toggleAddQuantity, #cancelAddQuantity').click(function(){
+		toggleAddQuantity();
+	});
+
+	$('#cancelEditQuantity').click(function(){
+		toggleEditQuantity();
+	});
+
+	$('.editButton').click(function(){
+		toggleAppSettings(parseInt($(this).data('index')));
+	});
+
+	$('.f_editButton').click(function(){
+		toggleFunnelAppSettings(parseInt($(this).data('index')));
+	});
+
+	$('.cancelAppSettings').click(function(){
+		toggleAppSettings(SELECTED_APP);
+	});
+
+	$('.cancelFunnelAppSettings').click(function(){
+		toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
+	});
+
+	$('#toggleAdd').click(function(){
+		toggleAddStep();
+	});
+
+	$('#toggleSplitTest').click(function(){
+		toggleSplitTest();
+	});
+
+	$('#toggleEdit').click(function(){
+		toggleEditStep();
+	});
+
+	$('#toggleAddProduct, #cancelAddProduct').click(function(){
+		toggleAddProduct();
+	});
+
+	$('#toggleEditProduct, #cancelEditProduct').click(function(){
+		toggleEditProduct();
+	});
+
+	$('#toggleApps, #cancelApps').click(function(){
+		toggleApps();
+	});
+
+	$('.select_tab').click(function(){
+		$('.select_tab').removeClass('active');
+		$(this).addClass('active');
+	});
+
+	$('#appsBox .app_icon').click(function(){
+		if(!p_toggleAppSettings){
+			toggleAppSettings(SELECTED_APP);
+		}
+	});
+
+	$('#funnelAppsBox .app_icon').click(function(){
+		if(!f_toggleAppSettings){
+			toggleFunnelAppSettings(SELECTED_FUNNEL_APP);
+		}
+	});
+	
+
+	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
+	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
+	refreshFunnel();
+
+
+	function updateFunnelSteps(){
+
+		if(funnelSteps.length == 0){
+			$('#toggleAddProduct').css('visibility','hidden');
+			$('#toggleSplitTest').css('visibility','hidden');
+			$('#toggleEdit').css('visibility','hidden');
+			$('#deleteStep').css('visibility','hidden');
+		}else{
+			$('#toggleAddProduct').css('visibility','visible');
+			$('#toggleSplitTest').css('visibility','visible');
+			$('#toggleEdit').css('visibility','visible');
+			$('#deleteStep').css('visibility','visible');
+		}
+		
+		var code = "";
+		for(var i =0;i<funnelSteps.length;i++){
+			var step = funnelSteps[i];
+			code += stepHTML(step,i);
+		}
+		console.log(funnelSteps);
+		$("#myf").html(code);
+		//EFFECTS
+		$('.step_item').click(function(){
+			$('.step_item').removeClass('active');
+			$(this).addClass('active');
+			SELECTED_STEP = parseInt($(this).data('index'));
+			selectStep();
+		});
+		// /EFFECTS
+		selectStep();
+		
+	}
+
+	function selectStep(){
+		console.log('Bepis');
+		if(funnelSteps[SELECTED_STEP].products.length == 0){
+			$('#toggleEditProduct').css('visibility','hidden');
+			$('#toggleApps').css('visibility','hidden');
+			$('#deleteProduct').css('visibility','hidden');
+			$('#hideProduct').css('visibility','hidden');
+		}else{
+			$('#toggleEditProduct').css('visibility','visible');
+			$('#toggleApps').css('visibility','visible');
+			$('#deleteProduct').css('visibility','visible');
+			$('#hideProduct').css('visibility','visible');
+		}
+
+		$('.step_item').removeClass('active');
+		$('#step_'+SELECTED_STEP).addClass('active');
+		
+		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<\/div>";
+		for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
+			var product = funnelSteps[SELECTED_STEP].products[j];
+			code += productHTML(product,SELECTED_STEP,j);
+			
+		}
+		$("#prod_table").html(code);
+		//Effects
+		$('.prod_row').click(function(){
+			$('.prod_row').removeClass('active');
+			$(this).addClass('active');
+			SELECTED_PRODUCT = parseInt($(this).data('j'));
+			updateApps();
+			if(!p_toggleAppSettings){
+				toggleAppSettings(SELECTED_APP);
+			}
+			if(!p_toggleApps){
+				toggleApps();
+			}
+			if(!p_toggleAdd){
+				toggleAddProduct();
+			}
+			checkHideProduct();
+		});
+		$('.prod_row').removeClass('active');
+		$('#product_'+SELECTED_STEP+'_'+SELECTED_PRODUCT).addClass('active');
+		if(funnelSteps[SELECTED_STEP].products.length > 0){
+			updateApps();
+		}
+		if(!p_toggleAppSettings){
+			toggleAppSettings(SELECTED_APP);
+		}
+		if(!p_toggleApps){
+			toggleApps();
+		}
+		if(!p_toggleAdd){
+			toggleAddProduct();
+		}
+		checkHideProduct();
+		
+	}
+
+	$('#addStep').click(function(){
+		var step = {};
+		step.title = $('#step_title').val();
+		step.url = $('#step_url').val();
+		step.type = $('.select_tab.active').data('type');
+		step.products = [];
+		funnelSteps.push(step);
+		saveFunnel();
+		updateFunnelSteps();
+		toggleAddStep();
+	});
+
+	$('#updateStep').click(function(){
+		funnelSteps[SELECTED_STEP].title = $('#step_title').val();
+		funnelSteps[SELECTED_STEP].url = $('#step_url').val();
+		funnelSteps[SELECTED_STEP].type = $('.select_tab.active').data('type');
+		saveFunnel();
+		updateFunnelSteps();
+		toggleEditStep();
+	});
+
+	$('#deleteStep').click(function(){
+		funnelSteps.splice(SELECTED_STEP,1);
+		saveFunnel();
+		updateFunnelSteps();
+	});
+
+	$('#addSplit').click(function(){
+		funnelSteps.splice(SELECTED_STEP,0,JSON.parse(JSON.stringify(funnelSteps[SELECTED_STEP])));
+		funnelSteps[SELECTED_STEP].title += ' - A';
+		funnelSteps[SELECTED_STEP+1].title += ' - B';
+		funnelSteps[SELECTED_STEP+1].url = $('#split_url').val();
+		saveFunnel();
+		updateFunnelSteps();
+		toggleSplitTest();
+	});
+
+	$('#addProduct').click(function(){
+		var product = {};
+		product.title = $('#p_title').val();
+		product.stripe = $('#p_stripe').val();
+		product.paypal = $('#p_paypal').val();
+		product.price = $('#p_price').val();
+
+		var index = parseInt(SELECTED_STEP);
+		funnelSteps[index].products.push(product);
+		saveFunnel();
+		updateFunnelSteps();
+		toggleAddProduct();
+	});
+
+	$('#updateProduct').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].title = $('#p_title').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].stripe = $('#p_stripe').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].paypal = $('#p_paypal').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].price = $('#p_price').val();
+		saveFunnel();
+		updateFunnelSteps();
+		toggleEditProduct();
+	});
+
+	$('#deleteProduct').click(function(){
+		funnelSteps[SELECTED_STEP].products.splice(SELECTED_PRODUCT,1);
+		saveFunnel();
+		updateFunnelSteps();
+	});
+
+	$('#hideProduct').click(function(){
+		toggleHideProduct();
+		saveFunnel();
+		updateFunnelSteps();
+	});
+	//APPS
+	$('.editable .switch input[type=checkbox]').change(function(){
+		if($(this).is(':checked')){
+			$(this).parent().parent().parent().find('.editbox').css({'visibility':'visible'});
+		}else{
+			$(this).parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
+		}
+	});
+
+	$('#app_highlight').change(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].highlight = $(this).is(':checked');
+		saveFunnel();
+	});
+
+	$('#app_bump').change(function(){
+		if($(this).is(':checked')){
+			switchOrderBumpOn();
+		}else{
+			switchOrderBumpOff();
+		}
+	});
+
+	$('#app_quantity, #app_variants, #app_paypal, #app_currency').change(function(){
+		var self = this;
+		setTimeout(function(){
+			$(self).prop("checked", false);
+		},300);
+		popPremium();
+	});
+
+	//FAPP SETTINGS
+
+	$('#updateCurrency').click(function(){
+		funnelApps.funnelCurrency = $('#source_currency').val();
+		saveFunnel();
+	});
+
+	//APP SETTINGS
+
+	$('#orderBumpSave').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#orderBumpCode').val();
+		saveFunnel();
+		toggleAppSettings(SELECTED_APP);
+	});
+
+	$('#orderBump_design1').click(function(){
+
+		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
+		var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
+
+		$('#orderBumpCode').val(orderBumpCode);
+		$('#orderBump_img').attr('src','/views/gfx/orderbump_design1.png');
+	});
+
+	$('#orderBump_design2').click(function(){
+
+		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
+		var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
+
+		$('#orderBumpCode').val(orderBumpCode);
+		$('#orderBump_img').attr('src','/views/gfx/orderbump_design2.png');
+	});
+
+	$('#addVariant').click(function(){
+		var variant = {};
+		variant.title = $('#v_title').val();
+		variant.options = $('#v_options').val().trim().split(',');
+
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants.push(variant);
+		saveFunnel();
+		updateVarTable();
+		toggleAddVariant();
+	});
+
+	$('#updateVariant').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].title = $('#v_title').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].variants[SELECTED_VARIANT].options = $('#v_options').val().trim().split(',');
+
+		saveFunnel();
+		updateVarTable();
+		toggleEditVariant(SELECTED_VARIANT);
+	});
+
+	function deleteVariantListener(){
+		$('.deleteVariant').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			console.log(K);
+			funnelSteps[I].products[J].variants.splice(K,1);
+			saveFunnel();
+			updateVarTable();
+		});
+	}
+
+	function editVariantListener(){
+		$('.editVariant').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			
+			toggleEditVariant(K);
+		});
+	}
+
+	$('#addQuantity').click(function(){
+		var quantity = {};
+		quantity.stripe = $('#q_stripe').val();
+		quantity.paypal = $('#q_paypal').val();
+		quantity.price = $('#q_price').val();
+
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity.push(quantity);
+		saveFunnel();
+		updateQtyTable();
+		toggleAddQuantity();
+	});
+
+	$('#updateQuantity').click(function(){
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].stripe = $('#q_stripe').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].paypal = $('#q_paypal').val();
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].quantity[SELECTED_QUANTITY].price = $('#q_price').val();
+
+		saveFunnel();
+		updateQtyTable();
+		toggleEditQuantity(SELECTED_QUANTITY);
+	});
+
+	function deleteQuantityListener(){
+		$('.deleteQuantity').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			console.log(K);
+			funnelSteps[I].products[J].quantity.splice(K,1);
+			saveFunnel();
+			updateQtyTable();
+		});
+	}
+
+	function editQuantityListener(){
+		$('.editQuantity').click(function(){
+			var I = parseInt($(this).parent().parent().data('i'));
+			var J = parseInt($(this).parent().parent().data('j'));
+			var K = parseInt($(this).parent().parent().data('k'));
+			
+			toggleEditQuantity(K);
+		});
+	}
+	
+	$('#scripthead, #scriptbody, #cc_code').click(function(){
+		$(this).select();
+		document.execCommand('copy');
+		var VAL = $(this).val();
+		$(this).val('Copied !');
+		$(this).attr('disabled','');
+		var self = this;
+		setTimeout(function(){
+			$(self).val(VAL);
+			$(self).removeAttr('disabled');
+		},1000);
+	});
+	
+
+
+	$('#save').click(function(){
+		saveFunnel();
+	});
+
+	$('#generateScript').click(function(){
+		saveFunnel();
+		$('#script').val('');
+		var stepURLs = [];
+		var steps = funnelSteps;
+		for(var i=0;i<funnelSteps.length;i++){
+			var pathParts = funnelSteps[i].url.split('/');
+			stepURLs.push(pathParts[pathParts.length-1].trim());
+		}
+		var code = '<script>\r\nvar isPAYPAL = false;\r\nvar STEP_URLS = '+JSON.stringify(stepURLs)+';\r\nvar STEPS = '+JSON.stringify(steps)+';\r\n<\/script>\r\n<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_head.js\"><\/script>\r\n';
+			$('#script').val(code);
+			//$('#scriptbody').val('<script src=\"http:\/\/cfapp20.herokuapp.com\/views\/app\/pp_body.js\"><\/script>');
+	});
+
+	function refreshFunnel(){
+		getFunnel(FUNNEL_ID,function(err,data){
+			if(!err) {
+				funnelSteps = data.funnel_.steps;
+				funnelTitle = data.funnel_.title;
+				funnelApps = data.funnel_.apps;
+				$('#funnel_title').html(funnelTitle);
+				updateFunnelSteps();
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+	function saveFunnel(){
+		updateFunnel(FUNNEL_ID,funnelTitle,JSON.stringify(funnelSteps),JSON.stringify(funnelApps),function(err,data){
+			if(!err) {
+				//
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+</script>
+</body>
+</html>

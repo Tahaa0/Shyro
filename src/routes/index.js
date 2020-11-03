@@ -3,6 +3,8 @@ const user = require('./user');
 const funnel = require('./funnel');
 const funnelscript = require('./funnelscript');
 
+const FunnelController = require('../controllers/funnel');
+
 
 const authenticate = require('../middlewares/authenticate');
 
@@ -71,13 +73,15 @@ module.exports = app => {
         }
     });
 
-    app.get('/funnel/:id', (req,res)=>{
+    /*app.get('/funnel/:id', (req,res)=>{
         if(req.session['token']){
             res.render('portal.ejs',{id:req.params.id});
         }else{
             res.redirect('/');
         }
-    });
+    });*/
+
+    app.get('/funnel/:id', FunnelController.portal);
 
     app.get('/recover', (req,res)=>{
     	res.render('askreset.ejs');

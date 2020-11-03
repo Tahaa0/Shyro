@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CF APP</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+			  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
+	<link rel="stylesheet" href="/views/global.css">
+</head>
+<body>
+<div id="bgoverlay"></div>
+<div class="container-fluid" id='maincont'>
+	<div class="sidebar_container">
+		<div id="sidebar">
+			<div id="sidebar_logo">
+				<h1>LOGO</h1>
+			</div>
+			<div id="sidebar_menu">
+				<h4>Admin tools</h4>
+				<div class="item"  href='/dashboard'>
+					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+				</div>
+				<div class="item active_item" href='/funnels'>
+					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+				</div>
+				<div class="item "  href='/apps'>
+					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item"  href='/documentation'>
+					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+				</div>
+				<div class="item"  href='/subscriptions'>
+					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+				</div>
+				<div class="item"  href='/support'>
+					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+				</div>
+				
+			
+			</div>
+			<div class="premcont">
+			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
+			<div id="sidebar_userdrop">
+				<div class="userdrop_link" id='profile'>
+					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_text">Profile</div>
+				</div>
+				<div class="userdrop_link" id='logout'>
+					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_text">Logout</div>
+				</div>
+			</div>
+			<div id="sidebar_user">	
+				<div class="user_icon">
+					<img src="/views/gfx/avatar.png" alt="">
+				</div>
+				<div class="user_details">
+					<div class="user_fullname">User</div>
+					<div class="user_membership">Free Trial</div>
+				</div>
+				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
+			</div>
+		</div>
+	</div>
+	<div id="page_wrapper">
+		<div class="upgradeOverlay">
+			<h2 style="text-align: center;	color: #FF754C;">Feature Unavailable</h2>
+			<h4>Please upgrade your account to access this feature</h4>
+				<button class='black_button oranges' type="submit" id="a_submit">Upgrade My Account</button>
+
+		</div>
+		<div class="row">
+			<div class="col-md-12 center_page">
+				<div class="inside">
+					<div class="welcome_box">
+						<button class='back_button link_button' href='/funnels/'><i class="fas fa-reply"></i></button>
+						<h4>Funnel Steps</h4>
+						<h1 id='funnel_title'>Funnel</h1>
+					</div>
+					<div class="funnels">
+						<div id="addSplitBox" style="display: none;">
+							<input type="text" class='standard_input' id="split_url" placeholder="Split Test URL">
+						</div>
+						<div id="addStepBox" style="display: none;">
+							<input type="text" class='standard_input' id="step_title" placeholder="Step Name">
+							<input type="text" class='standard_input' id="step_url" placeholder="Step URL">
+							<div class="select_type" id='step_type'>
+								<div class="select_tab active" data-type='form'>
+									<div class="select_icon">
+										<i class="fas fa-shopping-cart"></i>
+									</div>
+									<div class="select_text">
+										Order Form
+									</div>
+								</div>
+								<div class="select_tab" data-type='upsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-up"></i>
+									</div>
+									<div class="select_text">
+										Upsell
+									</div>
+								</div>
+								<div class="select_tab" data-type='downsell'>
+									<div class="select_icon">
+										<i class="fas fa-arrow-down"></i>
+									</div>
+									<div class="select_text">
+										Downsell
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="funnelAppsBox" class="box_2 box_3" style="display:none">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="app_item" id='fapp_item_1'>
+										<div class="app_icon blue">
+											<i class="fab fa-paypal"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Paypal</div>
+											<div class="app_caption">Integrate both Paypal & Stripe</div>
+										</div>
+										<div class="switchbox">
+											<label class="switch">
+											  <input type="checkbox" id='app_paypal'>
+											  <span class="slider round"></span>
+											</label>
+										</div>
+									</div>
+									<div class="app_item" id='fapp_item_3'>
+										<div class="app_icon pink">
+											<i class="fas fa-shopping-cart"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Abandoned Checkout <span class='tag_'>Coming Soon</span> </div>
+											<div class="app_caption">Recover customers who left the checkout page</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="app_item editable" id='fapp_item_2'>
+										<div class="app_icon yellow">
+											<i class="fas fa-euro-sign"></i>
+										</div>
+										<div class="app_details">
+											<div class="app_title">Currency Converter</div>
+											<div class="app_caption">Support Worldwide Currencies</div>
+										</div>
+										<div class="editbox">
+											<button id='editCurrency' class="f_editButton fbutton" data-index='2'><i class="fas fa-pencil-alt"></i></button>
+										</div>
+										<div class="switchbox">
+											<label class="switch">
+											  <input type="checkbox" id='app_currency'>
+											  <span class="slider round"></span>
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div id="fappSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+							<div class="field">
+								<div class="field_label">Source Currency :</div>
+								<div class="field_input"><input type="text" id='source_currency' value="USD"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">Price :</div>
+									<div class="field_input"><input type="text" id="cc_price" value='14.99'></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Code :</div>
+									<div class="field_input"><input type="text" id="cc_code" readonly="true" value="%price_14.99%"></div>
+								</div>
+								
+							</div>
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id='updateCurrency'>Update</button>
+								<button class="cancelFunnelAppSettings">Cancel</button>
+							</div>
+						</div>
+						<div></div>
+						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
+						<span class='black_button' id='addStep' style="display: none;">Submit</span>
+						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
+						<span class='black_button' id='updateStep' style="display: none;">Update</span>
+						<span class='black_button' id='toggleAdd'>+ Add Step</span>
+						<span class='black_button' id='toggleSplitTest'>+ Add Split Test</span>
+						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+
+						<span class='black_button' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
+						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
+						<div id="myfunnels" class="row dbox">
+							<div class="col-md-4">
+								<div id='myf'>
+									
+								</div>
+							</div>
+							<div class="col-md-8" id='products'>
+								<div class="">
+									<h2>Products</h2>
+									<div id="addProductBox" class='box_2' style="display: none;">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Product Name</div>
+												<div class="field_input"><input type="text" name='p_title' id="p_title" ></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">Price</div>
+												<div class="field_input"><input type="text" name='p_price' id="p_price" ></div>
+											</div>
+											
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="field_label">Stripe ID</div>
+												<div class="field_input"><input type="text" name='p_stripe' id="p_stripe"></div>
+											</div>
+											<div class="col-md-6">
+												<div class="field_label">PayPal ID</div>
+												<div class="field_input"><input type="text" name='p_paypal' id="p_paypal"></div>
+											</div>
+											
+										</div>
+										<div class="f_buttons" id='p_addbuttons' style="display: none;">	
+											<button id='addProduct'>Submit</button>
+											<button id='cancelAddProduct'>Cancel</button>
+										</div>
+										<div class="f_buttons" id='p_editbuttons' style="display: none;">	
+											<button id='updateProduct'>Update</button>
+											<button id='cancelEditProduct'>Cancel</button>
+										</div>
+									</div>
+									<div id="appsBox" class="box_2" style="display: none;">
+										<div class="app_item" id='app_item_1'>
+											<div class="app_icon yellow">
+												<i class="fas fa-highlighter"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Highlight</div>
+												<div class="app_caption">Highlight this Product</div>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_highlight'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+										</div>
+										<div class="app_item editable" id='app_item_2'>
+											<div class="app_icon blue">
+												<i class="fas fa-cart-plus"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Order Bump</div>
+												<div class="app_caption">Make this product an Order Bump</div>
+											</div>
+											<div class="editbox">
+												<button id='editOrderBump' class="editButton fbutton" data-index='2'><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_bump'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item editable" id='app_item_3'>
+											<div class="app_icon pink">
+												<i class="fas fa-plus-square"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Quantity</div>
+												<div class="app_caption">Add the possibility to choose a quantity</div>
+											</div>
+											<div class="editbox">
+												<button id='editQuantity' class="editButton fbutton" data-index='3'><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_quantity'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+
+										<div class="app_item editable" id='app_item_4'>
+											<div class="app_icon yellow">
+												<i class="fas fa-tshirt"></i>
+											</div>
+											<div class="app_details">
+												<div class="app_title">Variants</div>
+												<div class="app_caption">Add variations to this product (Size, Color etc..) </div>
+											</div>
+											<div class="editbox">
+												<button id='editVariants' class="editButton fbutton" data-index='4'><i class="fas fa-pencil-alt"></i></button>
+											</div>
+											<div class="switchbox">
+												<label class="switch">
+												  <input type="checkbox" id='app_variants'>
+												  <span class="slider round"></span>
+												</label>
+											</div>
+											
+										</div>
+										
+										<div class="f_buttons">
+											<button id="cancelApps">Done</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="field">
+
+											<div class="field_label" style="margin-bottom: 6px">Order Bump Embed Code :</div>
+											<div class="f_buttons smallerbuttons" style="margin-top: 0;">
+												<button id='orderBump_design1'>Design 1</button>
+												<button id='orderBump_design2'>Design 2</button>
+											</div>
+											<div class="field_input"><textarea id='orderBumpCode'></textarea></div>
+											<div class="field_label" >Preview :</div>
+											<img src="" id='orderBump_img' alt="" class="prev">
+
+										</div>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id="orderBumpSave">Update</button>
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_3" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id='toggleAddQuantity'>+ Add Quantity</button>
+										</div>
+										<div id="addQuantityBox" style="display: none;">
+											<div class="row">
+												<div class="col-md-3">
+													<div class="field_label">Quantity :</div>
+													<div class="field_input"><input type="text" name='q_qty' id="q_qty" disabled=""></div>
+												</div>
+												<div class="col-md-9">
+													<div class="field_label">Price :</div>
+													<div class="field_input"><input type="text" name='q_price' id="q_price" ></div>
+												</div>
+												
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="field_label">Stripe ID :</div>
+													<div class="field_input"><input type="text" name='q_stripe'id="q_stripe" ></div>
+												</div>
+												<div class="col-md-6">
+													<div class="field_label">Paypal ID :</div>
+													<div class="field_input"><input type="text" name='q_paypal' id="q_paypal" ></div>
+												</div>
+												
+											</div>
+											
+											<div class="f_buttons">
+												<button id='addQuantity'>Add Quantity</button>
+												<button id='updateQuantity' style="display:none">Update</button>
+												<button id="cancelAddQuantity">Cancel</button>
+												<button id="cancelEditQuantity"  style="display:none">Cancel</button>
+											</div>
+										</div>
+										<div class="prod_table" id='qty_table'>
+										
+										</div>
+										<div class="f_buttons" style="margin-top: 20px;">
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+									<div id="appSettingsBox_4" class="box_2 appsettingsbox" style='width:0px;display: none;'>
+										<div class="f_buttons" style="margin-top: 0;">
+											<button id='toggleAddVariant'>+ Add Variant</button>
+										</div>
+										<div id="addVariantBox" style="display: none;">
+											<div class="row">
+												<div class="col-md-6">
+													<div class="field_label">Name :</div>
+													<div class="field_input"><input type="text" name='v_title' placeholder="Size" id="v_title" ></div>
+												</div>
+												<div class="col-md-6">
+													<div class="field_label">Options :</div>
+													<div class="field_input"><input type="text" name='v_options' placeholder="S, M, L, XL" id="v_options" ></div>
+												</div>
+											</div>
+											<div class="f_buttons">
+												<button id='addVariant'>Add Variant</button>
+												<button id='updateVariant' style="display:none">Update</button>
+												<button id="cancelAddVariant">Cancel</button>
+												<button id="cancelEditVariant"  style="display:none">Cancel</button>
+											</div>
+										</div>
+										<div class="prod_table" id='var_table'>
+										
+										</div>
+										<div class="f_buttons" style="margin-top: 20px;">
+											<button class="cancelAppSettings">Cancel</button>
+										</div>
+									</div>
+
+									<div class="f_buttons">	
+										<button id='toggleAddProduct'><i class="fas fa-plus"></i></button>
+										<button id='toggleEditProduct'><i class="far fa-edit"></i></button>
+										<button id='toggleApps'>Apps</button>
+										<button id='hideProduct'>Disable</button>
+										<button id='deleteProduct' class="delete_btn"><i class="far fa-trash-alt"></i></button>
+									</div>
+									<div class="prod_table" id='prod_table'>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="" id='genbox'>
+						<div class="row dbox">
+							<div class="col-md-6">
+								<div class="field_label">Head Script :</div>
+								<div class="field_input"><input type="text" name='script_head' id="scripthead" readonly=true></div>
+							</div>
+							<div class="col-md-6">
+								<div class="field_label">Body Script :</div>
+								<div class="field_input"><input type="text" name='script_body' id="scriptbody" readonly=true></div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+	
+
+<div id="realOverlay"></div>
+<div id="realOverlay2"></div>
+
+
+	
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/views/utils.js"></script>
+<script>
+	var socket = io();
+	socket.on('err',function(data){
+		console.log(data);
+		alert(data.message);
+	});
+
+	const COLORS = ['','purple','cyan','yellow'];
+	const ICONS = {
+		'form': 'fas fa-shopping-cart',
+		'upsell': 'fas fa-arrow-up',
+		'downsell': 'fas fa-arrow-down'
+	}
+	const TYPE_TEXT = {
+		'form': 'Order Form',
+		'upsell': 'Upsell',
+		'downsell': 'Downsell'
+	}
+
+	const FUNNEL_ID = "<%= id %>";
+
+	var funnelSteps = [];
+	var funnelTitle = "Funnel";
+	var funnelApps = {
+		paypal: false,
+		currencyConverter: false,
+		funnelCurrency: 'USD'
+	};
+
+	var SELECTED_STEP = 0;
+	var SELECTED_PRODUCT = 0;
+	var SELECTED_APP = 2;
+	var SELECTED_FUNNEL_APP = 2;
+	var SELECTED_VARIANT = 0;
+	var SELECTED_QUANTITY = 0;
+
+	
+	function refreshFunnel(){
+		getFunnel(FUNNEL_ID,function(err,data){
+			if(!err) {
+				funnelSteps = data.funnel_.steps;
+				funnelTitle = data.funnel_.title;
+				funnelApps = data.funnel_.apps;
+				$('#funnel_title').html(funnelTitle);
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+	function saveFunnel(){
+		updateFunnel(FUNNEL_ID,funnelTitle,JSON.stringify(funnelSteps),JSON.stringify(funnelApps),function(err,data){
+			if(!err) {
+				//
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+</script>
+</body>
+</html>

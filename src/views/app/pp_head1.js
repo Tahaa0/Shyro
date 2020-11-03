@@ -1,15 +1,12 @@
 window.onload = function(){
 
-  //Hide variant box
   $('.varibox').hide();
-
 
 	var CHOSEN_ID = $('#cfAR input[name="purchase[product_id]"]:first').val();
   var QUANTITY = 1;
   var BUMPS = [];
   
   var HOST = "http://cfapp20.herokuapp.com";
-  //GET FORM INTO DATA MODE TO SEND AFTER CUSTOMIZATION
   var $form = $('#cfAR');
   var FORM = $("<form></form>");
   FORM.attr('target',$form.attr('target'));
@@ -17,7 +14,6 @@ window.onload = function(){
   FORM.attr('action',$form.attr('action'));
   FORM.html(serializeToForm($form.serializeArray()));
 
-  //Gets the right product ID by indentifying which payment method is chosen
   function calculateID() {
     for(var i=0;i<STEP.products.length;i++){
       if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
@@ -46,7 +42,7 @@ window.onload = function(){
     return html;
   }
 
-  //After a product is chosen
+  
   function checkProd(id){
     $('#cfAR input[name="purchase[product_id]"],#cfAR input[name="purchase[product_ids][]"]').removeAttr('checked');
     $('#pid-'+id+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
@@ -110,7 +106,7 @@ window.onload = function(){
       //ADD FORM / BUTTON
       checkProd(calculateID());
 
-      //MOVE THE BUY BUTTON Outside (necessary step)
+
 
       window.buyButton = $("a[href='#submit-form'], a[href='#submit-form-2step-order']");
       var $parentDiv = window.buyButton.parent();
@@ -118,9 +114,7 @@ window.onload = function(){
       var anc = $parentDiv.parent();
       anc.append(window.buyButton);
       $parentDiv.hide();
-      
-      //ADD Payment method choice form
-
+    
       var ccForm = $('.elCreditCardForm');
       var parDOM = ccForm.parent();
       console.log(parDOM);
@@ -153,7 +147,7 @@ window.onload = function(){
       });
 
       
-      //UPON CLICKING A PRODUCT slide varibox and select quantity
+
       $('input[name=xxprod]').click(function () {
         $('.varibox').slideUp(300);
         $(this).parent().parent().find('.varibox').slideDown(300);
@@ -185,7 +179,7 @@ window.onload = function(){
           $('label[for="pid-'+STEP.products[i].stripe+'-0"]').html(code);
         }
       }
-      //CUSTOM CHECKBOX DESIGN
+
       $('input[name=xxprod]').each(function(index){
         var PARENT = $(this).parent();
         var label = $("<label></label>");
@@ -196,7 +190,7 @@ window.onload = function(){
       });
 
       checkProd(calculateID());
-      //RED NOTICE 
+
       var NOTICE_ON = true;
       setInterval(function(){
         NOTICE_ON = !NOTICE_ON;
@@ -206,7 +200,7 @@ window.onload = function(){
           $('.noticeon').css('visibility','hidden');
         }
       },500);
-      //BUMP FUNCTIONALITY
+
       $('input[name=xxbump]').click(function (){
         BUMPS = [];
         $('input[name=xxbump]').each(function(index){
@@ -271,7 +265,6 @@ window.onload = function(){
         checkProd(calculateID());
       });
 
-      //Actually Appending the PAYMENT METHOD CHOICE FORM
       if(paypalAPP){
         parDOM.prepend(ppBody);
         parDOM.prepend(ppTab);
@@ -280,7 +273,7 @@ window.onload = function(){
         ccBody.prepend(ccForm);
       }
       
-      //FORM SUBMIT
+      //---------------------------
       $('#cfAR').on('submit',function(e){
         e.preventDefault();
         FORM.html(serializeToForm($form.serializeArray()));

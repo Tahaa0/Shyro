@@ -1679,6 +1679,57 @@ box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.04);
 	margin-bottom: 20px;	
 	border-bottom: 	1px solid #E4E4E4;
 }
+
+.upgradeOverlay{
+	position: fixed;
+	width: 84%;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.75);
+	z-index: 99;
+	margin-left: -32px;
+}
+.upgradeOverlay h2{
+	text-align: center;
+	font-size: 18px;
+	font-family: 'Poppins';
+	font-weight: 500;
+	margin-top: 280px;
+}
+.upgradeOverlay h4{
+	text-align: center;
+	color: #B2B3BD;
+font-family: 'Inter', sans-serif;
+font-size: 14px;
+text-align: center;
+margin-top: 20px;
+}
+.upgradeOverlay .black_button{
+	background-color: #FF754C;
+display: block;
+margin: 0 auto;
+    margin-top: 0px;
+width: 300px;
+margin-top: 30px;
+}
+
+.premiumbox{
+	color:#FF754C;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+.inlineButtons .black_button{
+	display: inline-block;
+	margin-left: 8px;
+	margin-right: 8px;
+	width: 230px;
+}
+.inlineButtons{
+	text-align: center;
+}
+.black_button.white{
+	background-color: white;
+	color:black;
+}
 /*
 .varActive{
 	background-color: yellow;
