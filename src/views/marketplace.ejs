@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="UTF-8">
+<head>
+	<meta charset="UTF-8">
+	<title>CF APP</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
+	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
+	<link rel="stylesheet" href="/views/global.css">
+	<link rel="stylesheet" href="/views/marketplace.css">
+</head>
+<body>
+	<!--<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>-->
+<div id="bgoverlay"></div>
+<div class="container-fluid" id='maincont'>
+	<div id="menu_drop_icon">
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="sidebar_container">
+		<div id="sidebar">
+			<div id="sidebar_logo">
+				<h1>LOGO</h1>
+			</div>
+			<div id="sidebar_menu">
+				<h4>Admin tools</h4>
+				<div class="item active_item"  href='/dashboard'>
+					<span class="icon"><i class="fas fa-columns"></i></span><span class="text">Overview</span>
+				</div>
+				<div class="item " href='/funnels'>
+					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
+				</div>
+				<div class="item"  href='/apps'>
+					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item"  href='/documentation'>
+					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
+				</div>
+				<div class="item"  href='/subscriptions'>
+					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
+				</div>
+				<div class="item"  href='/support'>
+					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
+				</div>
+				
+			
+			</div>
+			<div class="premcont">
+			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
+			<div id="sidebar_userdrop">
+				<div class="userdrop_link" id='profile'>
+					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_text">Profile</div>
+				</div>
+				<div class="userdrop_link" id='logout'>
+					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_text">Logout</div>
+				</div>
+			</div>
+			<div id="sidebar_user">	
+				<div class="user_icon">
+					<img src="/views/gfx/avatar.png" alt="">
+				</div>
+				<div class="user_details">
+					<div class="user_fullname">User</div>
+					<div class="user_membership">Free Trial</div>
+				</div>
+				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
+			</div>
+
+		</div>
+	</div>
+	<div id="page_wrapper">
+		<div class="menuOverlay">
+		</div>
+		<div class="container containerBB">
+			<div class="welcome_box">
+				<h4>Buy Templates</h4>
+				<h1>Marketplace</h1>
+			</div>
+			<div class="filterbar f_buttons">
+				<button class="active">All</button>
+				<button>Digital</button>
+				<button>Course</button>
+				<button>Freelance</button>
+			</div>
+			<div class="row mp_row">
+
+				<div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+				<div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <!--row end-->
+        	</div>
+        	<div class="row mp_row">
+
+				<div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+				<div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <div class="col-md-3">
+					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
+					<div class="mp_details">
+						<div class="mp_title">Basic Template</div>
+						<div class="mp_price">29$</div>
+					</div>
+					<div class="mp_details2">
+						By <span class="username">FTeam</span>
+					</div>
+	            </div>
+	            <!--row end-->
+        	</div>
+		</div>
+	</div>
+	
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="/views/utils.js"></script>
+<script>
+	var socket = io();
+	socket.on('err',function(data){
+		console.log(data);
+		alert(data.message);
+	});
+
+	$("#menu_drop_icon").click(function(){
+		$('.sidebar_container').animate({'width':'268px'},400);
+		$('.menuOverlay').fadeIn(400);
+	});
+
+	$(".menuOverlay").click(function(){
+		$('.sidebar_container').animate({'width':'0'},400);
+		$('.menuOverlay').fadeOut(400);
+	});
+	
+	
+</script>
+</body>
+</html>

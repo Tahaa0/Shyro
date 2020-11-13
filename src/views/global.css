@@ -72,7 +72,7 @@ h1{
 	margin-top: 30px;	
 	font-size: 30px;
 }
-.field_input>input{
+.field_input>input,.field_input>select{
 	height: 56px;
 	padding: 0 23px !important;
 	border-radius: 8px !important;
@@ -1729,6 +1729,72 @@ margin-top: 30px;
 .black_button.white{
 	background-color: white;
 	color:black;
+}
+
+#ticket_type{
+	width: 550px;
+	margin-top: 25px;
+	margin-bottom: 20px;	
+}
+#ticket_type>.select_tab{
+	flex:0 0 33.3333%;
+}
+
+#ticketDetails{
+	
+}
+#ticketDetails h2{
+	font-size: 24px;
+	font-weight: 500;
+	color: #000;
+	font-family: 'Poppins';
+	margin-left: 9px;
+	margin-top: 30px;
+	border-bottom: 1px solid #E4E4E4;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+}
+#ticketDetails h3{
+	font-family: 'Inter';
+	font-weight: 400;
+	font-size: 14px;
+	text-align: center;
+	color: #444;
+	margin-bottom: 0;
+}
+#ttrow{
+	background-color: #F7F7F7;
+	border-radius: 12px;
+	margin-top: 12px;
+}
+#ticketDetails p{
+	margin-left: 15px;
+	font-weight: 300;
+}
+.ticket_table .prod_row:hover{
+	background-color: #E7FAFF;
+}
+#replybox,#replies{
+	margin-top: 20px;	
+}
+#replies h4{
+	font-size: 13px;
+	color: #5F75EE;
+	font-family: 'Inter';
+	font-weight: 600;
+}
+#replies p{
+	
+	font-size: 14px;
+	margin-bottom: 0;
+}
+#replies .sep{
+	border-bottom: 1px solid #E4E4E4;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+#replies{
+	padding-bottom: 32px;
 }
 /*
 .varActive{

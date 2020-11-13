@@ -73,22 +73,149 @@
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-11 center_page">
 				<div class="inside">
 					<div class="welcome_box">
-						<h4>Funnel Editor</h4>
-						<h1>My Funnels</h1>
+						<h4>Contact Us</h4>
+						<h1>Support Center</h1>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
+					<div class="funnels">
+						<div></div>
+						<div id="addTicketBox" class="box_2 appsettingsbox" style="width: 100%; max-width:none; display: none;">
+							<div class="field">
+								<div class="field_label">Title :</div>
+								<div class="field_input"><input type="text" id="t_title"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">Priority :</div>
+									<div class="field_input"><select id="t_priority">
+										<option value="Low">Low</option>
+										<option value="Medium">Medium</option>
+										<option value="High">High</option>
+										<option value="Urgent">Urgent</option>
+									</select></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Department :</div>
+									<div class="field_input"><select id="t_department">
+										<option value="App">App</option>
+										<option value="Billing">Billing</option>
+									</select></div>
+								</div>
+								
+							</div>
+							<div class="field">
+								<div class="field_label">Message :</div>
+								<div class="field_input"><textarea id="t_message"></textarea></div>
+							</div>
+							
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id="addTicket">Submit</button>
+								<button class="cancelFunnelAppSettings" id='cancelAdd'>Cancel</button>
+							</div>
+						</div>
+						<div></div>
+						<span class='black_button' id='toggleAdd'>+ New Ticket</span>
+						<span class='black_button' id='addTicket' style="display: none;">Submit</span>
+						<div id="myfunnels" class="dbox">	
+							<div id='products'>
+								<div class="">
+									<h2 style="margin-left: 15px;">My Tickets</h2>	
+									<div class="select_type " id='ticket_type'>
+										<div class="select_tab active" data-type='all'>
+											<div class="select_icon">
+												<i class="fas fa-mail-bulk"></i>
+											</div>
+											<div class="select_text">
+												All Tickets
+											</div>
+										</div>
+										<div class="select_tab " data-type='open'>
+											<div class="select_icon">
+												<i class="far fa-envelope-open"></i>
+											</div>
+											<div class="select_text">
+												Open Tickets
+											</div>
+										</div>
+										<div class="select_tab" data-type='closed'>
+											<div class="select_icon">
+												<i class="far fa-envelope"></i>
+											</div>
+											<div class="select_text">
+												Closed Tickets
+											</div>
+										</div>
+									</div>
+									<div class="prod_table ticket_table" id='prod_table'>
+										<div class="prod_headrow">
+											<div class="prod_cell">ID</div>
+											<div class="prod_cell">Subject</div>
+											<div class="prod_cell">Status</div>
+											<div class="prod_cell">Priority</div>
+											<div class="prod_cell">Department</div>
+											<div class="prod_cell"></div>
+										</div><div class="prod_row active" id="product_0_0" data-i="0" data-j="0'">	
+											<div class="prod_cell">100152</div>
+											<div class="prod_cell">Funnel Problem</div>
+											<div class="prod_cell">Open</div>
+											<div class="prod_cell">Medium</div>
+											<div class="prod_cell">App</div>
+											<div class="prod_cell"></div>
+										</div><div class="prod_row" id="product_0_1" data-i="0" data-j="1'">	
+											<div class="prod_cell">100452</div>
+											<div class="prod_cell">apps not working
+											</div>
+											<div class="prod_cell">Open</div>
+											<div class="prod_cell">Low</div>
+											<div class="prod_cell">App</div>
+											<div class="prod_cell"></div>
+										</div><div class="prod_row" id="product_0_2" data-i="0" data-j="2'">	
+											<div class="prod_cell">125001</div>
+											<div class="prod_cell">Cancel Subscription</div>
+											<div class="prod_cell">Open</div>
+											<div class="prod_cell">High</div>
+											<div class="prod_cell">Billing</div>
+											<div class="prod_cell"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="ticketDetails" style="display:none">
+								<div class="f_buttons">
+									<button style='display: inline-block;' id='backToTickets'><i class="fas fa-reply"></i>  <span style="margin-left: 3px"></span>Back to My Tickets</button>
+									<button class='delete_btn' id='closeTicket'><i class="fas fa-times"></i><span style="margin-left: 3px"></span> Close Ticket</button>
+								</div>
+								
+								<div class="row" id='ttrow'>
+									<div class="col-md-4">
+										<h3 id='d_status'>Status : <span style="color:green">Open</span></h3>
+									</div>
+									<div class="col-md-4">
+										<h3 id='d_priority'>Priority : <span style="color:#6C5DD3">Medium</span></h3>
+									</div>
+									<div class="col-md-4">
+										<h3 id='d_department'>Department : Billing</h3>
+									</div>
+									
+								</div>
+								<h2 id="d_title">Subject Title</h2>
+								<p id='d_message'>Message..</p>
+								
+							</div>
+						</div>
+						<div id="replies" class="dbox" style="display: none">
+							
+						</div>
+						<div id="replybox" class="dbox" style="display: none">	
+							<div class="field">
+								<div class="field_label">Reply :</div>
+								<div class="field_input"><textarea id="d_reply"></textarea></div>
+							</div>
+							<button class="black_button" id='d_submit'>Submit</button>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -134,6 +261,164 @@
 		console.log(data);
 		alert(data.message);
 	});
+
+	var FILTER = 'all';
+	var TICKETS = [];
+	var CHOSEN_TICKET_INDEX = 0;
+
+	function ticketHTML(t,i){
+		var str_hidden = "Closed";
+		if(t.open){
+			str_hidden = "Open";
+		}
+		var HTML = "<div class=\"prod_row\"  id=\"ticket_"+t._id+"\" data-i='"+i+"'>\t\r\n<div class=\"prod_cell\">"+t.title+"<\/div>\r\n<div class=\"prod_cell\">"+str_hidden+"<\/div>\r\n<div class=\"prod_cell\">"+t.priority+"<\/div>\r\n<div class=\"prod_cell\">"+t.department+"<\/div>\r\n<\/div>";
+		return HTML;
+	}
+
+	function showTicket(t){
+		$('#d_title').html(t.title);
+		$('#d_priority').html('Priority : <span style="color:#6C5DD3">'+t.priority+'</span>');
+		$('#d_department').html('Department : '+t.department);
+		$('#d_reply').val('');
+		if(t.open){
+			$('#d_status').html('Status : <span style="color:green">Open</span>');
+			$('#closeTicket').show();
+		}else{
+			$('#d_status').html('Status : <span style="color:#E04A3A">Closed</span>');
+			$('#closeTicket').hide();
+		}
+		if(t.replies.length>0){
+			$('#replies').show();
+			var code = "";
+			for(var i=0;i<t.replies.length;i++){
+				if(i>0){
+					code+="<div class='sep'></div>";
+				}
+				code += "<h4>"+t.replies[i].full_name+"</h4>";
+				code += "<p>"+t.replies[i].message+"</p>";
+			}
+			$('#replies').html(code);
+		}else{
+			console.log('0 REPLIES');
+			$('#replies').hide();
+		}
+		$('#d_message').html(t.message);
+	}
+
+	function ticketRefresh(cb=function(){}){
+		indexTickets(function(err,data){
+			if(!err) {
+				TICKETS = data.tickets;
+				var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Title<\/div>\r\n<div class=\"prod_cell\">Status<\/div>\r\n<div class=\"prod_cell\">Priority<\/div>\r\n<div class=\"prod_cell\">Department<\/div>\r\n<\/div>";
+				for(var i=0;i<data.tickets.length;i++){
+					switch(FILTER){
+						case 'all':
+							code += ticketHTML(data.tickets[i],i);
+							break;
+						case 'open':
+							if(data.tickets[i].open) code += ticketHTML(data.tickets[i],i);
+							break;
+						case 'closed':
+							if(!data.tickets[i].open) code += ticketHTML(data.tickets[i],i);
+							break;
+						default:
+							code += ticketHTML(data.tickets[i],i);
+							break;
+					}
+				}
+				console.log(code);
+				$("#prod_table").html(code);
+				$('.prod_row').click(function(){
+					CHOSEN_TICKET_INDEX = parseInt($(this).data('i'));
+					
+					$('#products').slideUp(300);
+					$('#ticketDetails').slideDown(300);
+					$('#replybox').slideDown(300);
+					$('#replies').slideDown(300);
+					showTicket(TICKETS[CHOSEN_TICKET_INDEX]);
+				});
+				cb();
+			}else{
+				console.log(err);
+			}
+		});
+	}
+
+	ticketRefresh();
+
+	var toggleAdd = true;
+
+	function toggleAddTicket(){
+		$("#addTicketBox").slideToggle(300);
+		$('#toggleAdd').toggle();
+		$('#t_title, #t_message').val('');
+		$('#t_department').val('App');
+		$('#t_priority').val('Medium');
+		if(toggleAdd){
+			
+		}else{
+			
+		}
+		toggleAdd = !toggleAdd;
+
+	}
+
+	$('#addTicket').click(function(){
+		createTicket($('#t_title').val(),$('#t_priority').val(),$('#t_department').val(),$('#t_message').val(),function(err,data){
+			if(!err) {
+				ticketRefresh();
+			}else{
+				console.log(err);
+			}
+			toggleAddTicket();
+		});
+	});
+
+	$('#toggleAdd, #cancelAdd').click(function(){
+		toggleAddTicket();
+	});
+
+
+	$('#backToTickets').click(function(){
+		$('#products').slideDown(300);
+		$('#ticketDetails').slideUp(300);
+		$('#replybox').slideUp(300);
+		$('#replies').slideUp(300);
+		ticketRefresh();
+	});
+
+	$('#closeTicket').click(function(){
+		closeTicket(TICKETS[CHOSEN_TICKET_INDEX]._id,function(err,data){
+			if(!err) {
+				ticketRefresh(function(){
+					showTicket(TICKETS[CHOSEN_TICKET_INDEX]);
+				});
+			}else{
+				console.log(err);
+			}
+		});
+	});
+
+	$('#d_submit').click(function(){
+		replyTicket(TICKETS[CHOSEN_TICKET_INDEX]._id,$('#d_reply').val(),function(err,data){
+			if(!err) {
+				ticketRefresh(function(){
+					showTicket(TICKETS[CHOSEN_TICKET_INDEX]);
+				});
+			}else{
+				console.log(err);
+			}
+		});
+	});
+
+	$('.select_tab').click(function(){
+		$('.select_tab').removeClass('active');
+		$(this).addClass('active');
+		FILTER = $(this).data('type');
+		ticketRefresh();
+	});
+
+	
 
 </script>
 </body>

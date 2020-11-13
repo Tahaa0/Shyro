@@ -40,6 +40,69 @@ $('#sidebar_user').click(function(){
 
 });
 
+//TICKET
+
+function replyTicket(id,message,cb){
+	$.ajax({
+	  url: "/api/ticket/reply",
+	  type: "PUT",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {id:id,message:message},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+function closeTicket(id,cb){
+	$.ajax({
+	  url: "/api/ticket/close",
+	  type: "PUT",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {id:id},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+function indexTickets(cb){
+	$.ajax({
+	  url: "/api/ticket",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+
+function createTicket(title,priority,department,message,cb){
+	$.ajax({
+	  url: "/api/ticket/",
+	  type: "POST",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'title':title,'priority':priority,'department':department,'message':message},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
 //MY ACCOUNT
 
 function updateProfile(username,firstName,lastName,cb){

@@ -1,7 +1,9 @@
 const auth = require('./auth');
 const user = require('./user');
 const funnel = require('./funnel');
+const ticket = require('./ticket');
 const funnelscript = require('./funnelscript');
+const paypal = require('./paypal');
 
 const FunnelController = require('../controllers/funnel');
 
@@ -73,6 +75,18 @@ module.exports = app => {
         }
     });
 
+    app.get('/marketplace', (req,res)=>{
+        if(req.session['token']){
+            res.render('marketplace.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+    app.get('/paypaltest', (req,res)=>{
+        res.render('paypaltest.ejs');
+    });
+
     /*app.get('/funnel/:id', (req,res)=>{
         if(req.session['token']){
             res.render('portal.ejs',{id:req.params.id});
@@ -90,6 +104,8 @@ module.exports = app => {
     app.use('/api/auth', auth);
     app.use('/api/user', authenticate, user);
     app.use('/api/funnel', authenticate, funnel);
+    app.use('/api/ticket', authenticate, ticket);
     app.use('/api/funnelscript', funnelscript);
+    app.use('/api/paypal/', paypal);
 
 };

@@ -1,0 +1,102 @@
+html,body{
+	background-color: #fff;
+}
+.welcome_box{
+	margin-top: 25px;
+}
+#page_wrapper{
+	padding-left:0;
+	padding-top: 40px;
+}
+.sidebar_container{
+	background-color: white;
+	z-index: 100;
+	width: 0;
+}
+.containerBB{
+	max-width: 1298px;
+	padding-bottom: 100px;
+}
+.filterbar{
+	margin-top: 35px;
+}
+.filterbar>button{
+	border: 2px solid #FF754C;
+	padding: 6px 16px;
+	background-color: transparent;
+	border-radius: 12px;
+}
+.filterbar>button:hover,.filterbar>button.active{
+	background-color: #6C5DD3;
+	border: 2px solid #6C5DD3;
+	color: #FFF;
+}
+.mp_row{
+	margin-top: 30px;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border-radius: .3125rem;
+}
+
+.mp_img{
+	width: 100%;
+	display: block;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.mp_title{
+	font-size: 16px;
+font-weight: 600;
+color: #000;
+font-family: 'Inter';
+display: inline-block;
+padding: 4px 0;
+}
+.mp_price{
+	font-size: 14px;
+background-color: #EEEEEE;
+padding: 4px 10px;
+border-radius: 4px;
+color: #7C7C7C;
+margin-left: 4px;
+float: right;
+font-weight: 500;
+}
+.mp_details{
+	margin-top: 10px;
+}
+.mp_details2{
+	font-size: 12px;
+font-weight: 500;
+color: #808191;
+}
+#menu_drop_icon{
+	position: fixed;
+	top: 20px;
+	left: 30px;
+	cursor: pointer;
+	font-size: 24px;
+	color:#222;
+	-webkit-transition: all .25s;
+	-o-transition: all .25s;
+	transition: all .25s;
+}
+#menu_drop_icon:hover{
+	transform: rotate(180deg);
+}
+.menuOverlay{
+	display: none;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.75);
+	z-index: 99;
+	margin-top: -40px;
+	cursor: pointer;
+}

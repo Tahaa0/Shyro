@@ -686,6 +686,7 @@
 		$('#toggleEditProduct').toggle();
 		$('#toggleApps').toggle();
 		$('#deleteProduct').toggle();
+		$('#hideProduct').toggle();
 
 		$('#p_addbuttons').toggle();
 
@@ -1211,7 +1212,10 @@
 		funnelSteps[index].products.push(product);
 		saveFunnel();
 		updateFunnelSteps();
-		toggleAddProduct();
+		if(!p_toggleAdd){
+			toggleAddProduct();
+		}
+		
 	});
 
 	$('#updateProduct').click(function(){
