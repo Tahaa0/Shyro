@@ -10,16 +10,10 @@ const funnelSchema = new mongoose.Schema({
         required: 'Title is empty.',
         max: 144
     },
-    price : {
-        type: Number,
-        required: true
+    apps : {
+        type: Map
     },
-    tags : Array,
-    guarantee : {
-        type: Number,
-        default: 0
-    },
-    screenshots: Array
+    steps : Array
 }, {timestamps: true});
 
 module.exports = mongoose.model('Funnels', funnelSchema);

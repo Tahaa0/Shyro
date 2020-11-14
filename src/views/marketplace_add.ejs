@@ -34,18 +34,19 @@
 				<div class="item "  href='/apps'>
 					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
 				</div>
-				<div class="item"  href='/marketplace'>
+				<div class="item active_item"  href='/marketplace'>
 					<span class="icon"><i class="fas fa-store"></i></span><span class="text">Marketplace</span>
 				</div>
 				<div class="item"  href='/documentation'>
 					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
 				</div>
-				<div class="item active_item"  href='/subscriptions'>
+				<div class="item"  href='/subscriptions'>
 					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
 				</div>
 				<div class="item"  href='/support'>
 					<span class="icon"><i class="far fa-question-circle"></i></span><span class="text">Support</span>
 				</div>
+				
 				
 			
 			</div>
@@ -71,61 +72,58 @@
 				</div>
 				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
 			</div>
+			
 		</div>
 	</div>
 	<div id="page_wrapper">
 		<div class="row">
-			<div class="col-md-8 center_page">
+			<div class="col-md-11 center_page">
 				<div class="inside">
 					<div class="welcome_box">
-						<h4>Funnel Editor</h4>
-						<h1>My Funnels</h1>
+						<h4>Start Selling</h4>
+						<h1>Marketplace</h1>
 					</div>
-					
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="rightbar">
-					<div class="navbar">
-						
-					</div>
-					<div class="logs">
-						<h2>Update Logs</h2>
+					<div class="funnels">
+						<div></div>
+						<div id="addTicketBox" class="box_2 appsettingsbox" style="width: 100%; max-width:none;">
+							<div class="field">
+								<div class="field_label">Title :</div>
+								<div class="field_input"><input type="text" id="mp_title"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">Price :</div>
+									<div class="field_input"><input type="text" id="mp_price" placeholder="14.99"></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Guarantee :</div>
+									<div class="field_input"><select id="mp_guarantee">
+										<option value=0>No Guarantee</option>
+										<option value=3>3 Days</option>
+										<option value=7>7 Days</option>
+										<option value=15>15 Days</option>
+										<option value=30>30 Days</option>
+									</select></div>
+								</div>
+								
+							</div>
+							<div class="field">
+								<div class="field_label">ClickFunnels Template Link :</div>
+								<div class="field_input"><input type="text" id="mp_link"></div>
+							</div>
+							
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id="mp_submit"><i class="fas fa-long-arrow-alt-right"></i>  Next</button>
+								<button class="cancelFunnelAppSettings" id='goback'>Cancel</button>
+							</div>
+						</div>
+						<div></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!--<div id="innerCont">
-		<h1 style="text-align: center;">Steps</h1>
-		<hr>	
-		<div class="row" style="min-height: 200px;">
-			<div class="col-md-8">
-				<div id="buttonbar" class="buttonbar">
-					<button onclick='addfunnel()'>+ Add Funnel</button>
-				</div>
-				<div id="stepBox" style="display: none;">
-					<input type="text" placeholder="Funnel Title" id='funnelTitle'>
-					<button id='addFunnel' class='purplebutton'>+ Add Funnel</button>
-					<button id='cancelFunnel'>Cancel</button>
-				</div>
-				<div id="inside">
-				
-				
-				</div>
-			</div>
-			
-			<div class="col-md-4">
-				<div id="buttonbar2" class="buttonbar">
-					
-				</div>
-				<div id="insideProd">
-				
-				
-				</div>
-			</div>
-		</div>
-	</div>-->
+	
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
@@ -137,8 +135,10 @@
 		alert(data.message);
 	});
 
-	
-	
+	$('#goback').click(function(){
+		window.location = "/marketplace";
+	});
+
 </script>
 </body>
 </html>

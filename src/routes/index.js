@@ -79,6 +79,14 @@ module.exports = app => {
         if(req.session['token']){
             res.render('marketplace.ejs');
         }else{
+            res.render('marketplace0.ejs');
+        }
+    });
+
+    app.get('/marketplace/add', (req,res)=>{
+        if(req.session['token']){
+            res.render('marketplace_add.ejs');
+        }else{
             res.redirect('/');
         }
     });
