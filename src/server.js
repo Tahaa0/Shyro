@@ -19,7 +19,7 @@ var session = require("express-session")({
     saveUninitialized: true
 });
 
-
+var sslRedirect = require('heroku-ssl-redirect');
 
 // Setting up port
 const connUri = process.env.MONGO_LOCAL_CONN_URL;
@@ -31,6 +31,7 @@ let PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(session);
+app.use(sslRedirect());
 
 app.use(cors());
 

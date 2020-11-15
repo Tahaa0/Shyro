@@ -1796,17 +1796,7 @@ margin-top: 30px;
 #replies{
 	padding-bottom: 32px;
 }
-/*
-.varActive{
-	background-color: yellow;
-	cursor: pointer;
-}
 
-
-
-body{
-	background-color: white !important;
-}
 .bump2{
 	width: 600px;
 	margin: 0 auto;
@@ -1815,6 +1805,7 @@ body{
 	border-radius: 5px;
 	background-color: white;
 	color:black;
+	font-family: 'Poppins';
 }
 .bump2 img{
 	display: inline-block;

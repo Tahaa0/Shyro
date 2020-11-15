@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+	<meta charset="UTF-8">
 <head>
 	<meta charset="UTF-8">
 	<title>CF APP</title>
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -13,11 +15,15 @@
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
 	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
 	<link rel="stylesheet" href="/views/global.css">
+	<link rel="stylesheet" href="/views/marketplace.css">
 </head>
 <body>
 	<!--<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>-->
 <div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
+	<div id="menu_drop_icon">
+		<i class="fas fa-bars"></i>
+	</div>
 	<div class="sidebar_container">
 		<div id="sidebar">
 			<div id="sidebar_logo">
@@ -31,13 +37,16 @@
 				<div class="item " href='/funnels'>
 					<span class="icon"><i class="fas fa-filter"></i></span><span class="text">My Funnels</span>
 				</div>
-				<div class="item "  href='/apps'>
+				<div class="item"  href='/apps'>
 					<span class="icon"><i class="fas fa-star-half-alt"></i></span><span class="text">Apps</span>
+				</div>
+				<div class="item active_item"  href='/marketplace'>
+					<span class="icon"><i class="fas fa-store"></i></span><span class="text">Marketplace</span>
 				</div>
 				<div class="item"  href='/documentation'>
 					<span class="icon"><i class="fas fa-book"></i></span><span class="text">Documentation</span>
 				</div>
-				<div class="item active_item"  href='/subscriptions'>
+				<div class="item"  href='/subscriptions'>
 					<span class="icon"><i class="fas fa-money-check-alt"></i></span><span class="text">My Subscriptions</span>
 				</div>
 				<div class="item"  href='/support'>
@@ -68,66 +77,37 @@
 				</div>
 				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
 			</div>
+
 		</div>
 	</div>
 	<div id="page_wrapper">
-		<div class="row">
-			<div class="col-md-8 center_page">
-				<div class="inside">
-					<div class="welcome_box">
-						<h1>Paypal TEST</h1>
-					</div>
-					<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
-					<div id="paypal-button"></div>
-
-					<div class="bump2">
-						<img src="https://s3.amazonaws.com/cdn.fanduel.com/images/2019/Homepage/Home/phones-sm.png" alt="">	
-						<div class="desc_">
-							<div class="smt">Special One Time Offer :</div>
-							<div class="smt2"><strong>My Awesome Box Set</strong> - Just 97$ + Shipping</div>
-							<p>Get the entire My Awesome Box Series for just one payment of 97$ + Shipping (14.95$ or 29.95$ Intl.) - The box set comes in a box and is a set.</p>
-						</div>
-						<div class="action">
-							<button>+ ADD</button>
-						</div>
-					</div>
-				</div>
+		<div class="menuOverlay">
+		</div>
+		<div class="container containerBB">
+			<div class="welcome_box">
+				<h4>Buy Templates</h4>
+				<h1>Marketplace</h1>
 			</div>
-			
+			<div class="filterbar f_buttons">
+				<button class="active">All</button>
+				<button>Digital</button>
+				<button>Course</button>
+				<button>Freelance</button>
+				<button class="black_button" id="listItem">Start Selling</button>
+			</div>
+			<div class="row">
+				<div class="col-md-9">
+					
+				</div>
+				<div class="col-md-3">
+					
+				</div>
+        	</div>
 		</div>
 	</div>
 	
 </div>
 
-
-<script>
-  paypal.Button.render({
-    env: 'sandbox', // Or 'production'
-    // Set up the payment:
-    // 1. Add a payment callback
-    payment: function(data, actions) {
-      // 2. Make a request to your server
-      return actions.request.post('/api/paypal/create-payment/')
-        .then(function(res) {
-          // 3. Return res.id from the response
-          return res.id;
-        });
-    },
-    // Execute the payment:
-    // 1. Add an onAuthorize callback
-    onAuthorize: function(data, actions) {
-      // 2. Make a request to your server
-      return actions.request.post('/api/paypal/execute-payment/', {
-        paymentID: data.paymentID,
-        payerID:   data.payerID
-      })
-        .then(function(res) {
-          // 3. Show the buyer a confirmation message.
-        });
-    }
-  }, '#paypal-button');
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script src="/views/utils.js"></script>
 <script>
@@ -137,8 +117,19 @@
 		alert(data.message);
 	});
 
+	$("#menu_drop_icon").click(function(){
+		$('.sidebar_container').animate({'width':'268px'},400);
+		$('.menuOverlay').fadeIn(400);
+	});
+
+	$(".menuOverlay").click(function(){
+		$('.sidebar_container').animate({'width':'0'},400);
+		$('.menuOverlay').fadeOut(400);
+	});
 	
-	
+	$('#listItem').click(function(){
+		window.location ='/marketplace/add';
+	});
 </script>
 </body>
 </html>

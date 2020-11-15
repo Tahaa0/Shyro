@@ -91,6 +91,15 @@ module.exports = app => {
         }
     });
 
+    app.get('/marketplace/product', (req,res)=>{
+        if(req.session['token']){
+            res.render('mp_product.ejs');
+        }else{
+            res.redirect('/');
+        }
+    });
+
+
     app.get('/paypaltest', (req,res)=>{
         res.render('paypaltest.ejs');
     });
