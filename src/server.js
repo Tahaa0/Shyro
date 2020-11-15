@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+var sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -19,7 +19,7 @@ var session = require("express-session")({
     saveUninitialized: true
 });
 
-var sslRedirect = require('heroku-ssl-redirect');
+
 
 // Setting up port
 const connUri = process.env.MONGO_LOCAL_CONN_URL;
@@ -28,10 +28,12 @@ let PORT = process.env.PORT || 3000;
 
 //=== 1 - CREATE APP
 // Creating express app and configuring middleware needed for authentication
+console.log(sslRedirect);
 const app = express();
+app.use(sslRedirect.default());
 
 app.use(session);
-app.use(sslRedirect());
+
 
 app.use(cors());
 
