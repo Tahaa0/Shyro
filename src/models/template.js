@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const funnelSchema = new mongoose.Schema({
+const templateSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
@@ -10,10 +10,16 @@ const funnelSchema = new mongoose.Schema({
         required: 'Title is empty.',
         max: 144
     },
-    apps : {
-        type: Map
+    price : {
+        type: Number,
+        required: true
     },
-    steps : Array
+    tags : Array,
+    guarantee : {
+        type: Number,
+        default: 0
+    },
+    screenshots: Array
 }, {timestamps: true});
 
-module.exports = mongoose.model('Funnels', funnelSchema);
+module.exports = mongoose.model('Templates', templateSchema);

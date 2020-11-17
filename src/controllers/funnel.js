@@ -75,6 +75,7 @@ exports.headScript = async function (req, res) {
         
         var stepURLs = [];
         var steps = funnel_.steps;
+        
         for(var i=0;i<funnel_.steps.length;i++){
             var pathParts = funnel_.steps[i].url.split('/');
             stepURLs.push(pathParts[pathParts.length-1].trim());
