@@ -97,10 +97,10 @@ exports.bodyScript = async function (req, res) {
 
         if (!funnel_) return res.status(401).json({message: 'Funnel does not exist'});
 
-        var userId = funnel_.userId;
+        /*var userId = funnel_.userId;
         var user = await User.findById(id);
         var membershipLevel = user.membershipLevel;
-
+        */
         var fileContent;
 
         /*switch(membershipLevel){
