@@ -207,10 +207,19 @@ window.onload = function(){
         }
       },500);
       //BUMP FUNCTIONALITY
-      $('input[name=xxbump]').click(function (){
+      $('[name=xxbump]').click(function (){
         BUMPS = [];
-        $('input[name=xxbump]').each(function(index){
-          if($(this).is(':checked')){
+        if($(this).hasClass('bumpButton')){
+          if($(this).attr('checked')){
+            $(this).html('+ ADD');
+            $(this).removeAttr('checked');
+          }else{
+            $(this).html('ADDED');
+            $(this).attr('checked','checked');
+          }
+        }
+        $('[name=xxbump]').each(function(index){
+          if($(this).is(':checked') || $(this).attr('checked')){
             BUMPS.push($(this).val());
           }
         });
