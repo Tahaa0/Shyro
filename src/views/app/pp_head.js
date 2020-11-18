@@ -218,7 +218,7 @@ window.onload = function(){
             $(this).removeAttr('checked');
             $(this).removeClass('bumpChecked');
           }else{
-            $(this).html('<i class="fas fa-plus-circle"></i> ADDED');
+            $(this).html('<i class="fas fa-check-circle"></i> ADDED');
             $(this).attr('checked','checked');
             $(this).addClass('bumpChecked');
           }
