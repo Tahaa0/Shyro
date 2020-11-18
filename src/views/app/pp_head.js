@@ -9,7 +9,8 @@ window.onload = function(){
   var BUMPS = [];
   
   var RATE = "1";
-  var CUR = "$";
+  var CUR = "USD";
+  var SYM = "$";
 
   var HOST = "https://www.shyro.io";
   //GET FORM INTO DATA MODE TO SEND AFTER CUSTOMIZATION
@@ -83,7 +84,11 @@ window.onload = function(){
     FORM.html(serializeToForm($form.serializeArray()));
 
     $('.xxprice').each(function(index){
-      $(this).html(CUR+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+      if(CUR == SYM){
+        $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+      }else{
+        $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+      }
     });
   }
 
@@ -339,8 +344,13 @@ window.onload = function(){
         $.getJSON(HOST+'/api/funnelscript/getrate?country=MA&currency=USD',function(data){
           RATE = data.rate;
           CUR = data.currency;
+          SYM = data.symbol;
           $('.xxprice').each(function(index){
-            $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+            if(CUR == SYM){
+              $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+            }else{
+              $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+            }
           });
         });
       });
