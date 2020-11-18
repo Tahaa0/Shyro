@@ -330,7 +330,8 @@ window.onload = function(){
     if(currencyAPP){
       $.get('https://ipinfo.io/?token=87ed38221c7ade', function(data){
         $.getJSON(HOST+'/api/funnelscript/getrate?country=MA&currency=USD',function(data){
-          console.log(data);
+          var RATE = data.rate;
+          $('.xxprice').html("CUR "+(parseInt($(this).data('price'))*RATE));
         });
       });
     }
