@@ -56,7 +56,7 @@ window.onload = function(){
         if(STEP.products[i].paypal == BUMPS[j] || STEP.products[i].stripe == BUMPS[j]){
           var b_name = STEP.products[i].title;
           var b_price = STEP.products[i].price;
-          hb += "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+b_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">$"+b_price+"<\/td><\/tr>";
+          hb += "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+b_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\"><span class='xxprice' data-value="+b_price+">$"+b_price+"</span><\/td><\/tr>";
             if(isPAYPAL){
                 $('#pid-'+STEP.products[i].paypal+'-1[name="purchase[product_ids][]"]').attr('checked','checked');
             }else{
@@ -71,7 +71,7 @@ window.onload = function(){
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     if($('input[name=xxprod]:checked').data('quantity') > 1){
       _name += " (x"+$('input[name=xxprod]:checked').data('quantity')+")";
-      _price = "$"+$('input[name=xxprod]:checked').data('price');
+      _price = "<span class='xxprice' data-value="+$('input[name=xxprod]:checked').data('price')+">$"+$('input[name=xxprod]:checked').data('price')+"</span>";
     }
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
     
