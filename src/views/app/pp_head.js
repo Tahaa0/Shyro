@@ -85,7 +85,7 @@ window.onload = function(){
 
     $('.xxprice').each(function(index){
       if(CUR == SYM){
-        $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+        $(this).html((parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
       }else{
         $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
       }
@@ -347,7 +347,7 @@ window.onload = function(){
           SYM = data.symbol;
           $('.xxprice').each(function(index){
             if(CUR == SYM){
-              $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+              $(this).html((parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
             }else{
               $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
             }
