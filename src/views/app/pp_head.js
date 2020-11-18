@@ -332,7 +332,7 @@ window.onload = function(){
         $.getJSON(HOST+'/api/funnelscript/getrate?country=MA&currency=USD',function(data){
           var RATE = data.rate;
           $('.xxprice').each(function(index){
-            $(this).html("CUR "+(parseFloat($(this).data('price'))*RATE));
+            $(this).html("CUR "+(parseFloat($(this).data('value'))*RATE));
           });
         });
       });
