@@ -142,7 +142,8 @@ exports.getRate = async function(req,res){
         await request(URL, { json: true }, (err, resp, body) => {
             if (err) { return res.status(500).json({message: error.message}) }
             code = body.quotes[currency+currency2];
-            return res.status(200).type('.txt').send(code);
+            //return res.status(200).type('.txt').send(code);
+            res.status(200).json({body: body});
         });
 
     } catch (error) {
