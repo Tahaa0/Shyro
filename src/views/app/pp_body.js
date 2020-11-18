@@ -56,7 +56,9 @@ if(VALID){ //IF THIS IS A STEP
           $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
         }
         $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod'); //ADD ATTRIBUTE XXPROD TO the product (stripe)
-        $('#pid-'+STEP.products[i].stripe+'-0').data('price',STEP.products[i].price);  //SET DATA PRICE
+        $('#pid-'+STEP.products[i].stripe+'-0').data('price',STEP.products[i].price);
+        var inHTML = $('#pid-'+STEP.products[i].stripe+'-0').parent().find('.elOrderProductOptinPrice').html();
+        $('#pid-'+STEP.products[i].stripe+'-0').parent().find('.elOrderProductOptinPrice').html("<span class='xxprice' data-value="+STEP.products[i].price+">"+inHTML+"</span>");
         //QUANTITY
         if(STEP.products[i].quantity){
           if(STEP.products[i].quantity.length > 0){
