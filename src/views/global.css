@@ -1855,6 +1855,7 @@ margin-top: 30px;
 .bump2 button{
 	display: inline-block;
 	width: auto;
+	margin: 5px auto;
 	margin-top: 32px;
 	border-radius: 3px;
 	border: 1px solid #E0E0E0;
@@ -1863,4 +1864,6 @@ margin-top: 30px;
 	font-weight: bold;
 	width: 80%;
 	font-size: 15px;
+	padding: 10px;
+
 }
