@@ -8,6 +8,15 @@ window.onload = function(){
   var QUANTITY = 1;
   var BUMPS = [];
   
+  function roundUp50(n){
+    var N = parseFloat(n).toFixed(2);
+    if((N - parseInt(N))>0.5){
+      return parseInt(N) + 1;
+    }else{
+      return parseInt(N) + 0.5;
+    }
+  }
+
   var RATE = "1";
   var CUR = "USD";
   var SYM = "$";
@@ -85,9 +94,9 @@ window.onload = function(){
 
     $('.xxprice').each(function(index){
       if(CUR == SYM){
-        $(this).html((parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+        $(this).html(roundUp50((parseFloat($(this).data('value'))*RATE).toFixed(2))+" "+CUR);
       }else{
-        $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+        $(this).html(SYM+""+roundUp50((parseFloat($(this).data('value'))*RATE).toFixed(2)));
       }
     });
   }
@@ -347,9 +356,9 @@ window.onload = function(){
           SYM = data.symbol;
           $('.xxprice').each(function(index){
             if(CUR == SYM){
-              $(this).html((parseFloat($(this).data('value'))*RATE).toFixed(2)+" "+CUR);
+              $(this).html(roundUp50((parseFloat($(this).data('value'))*RATE).toFixed(2))+" "+CUR);
             }else{
-              $(this).html(SYM+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+              $(this).html(SYM+""+roundUp50((parseFloat($(this).data('value'))*RATE).toFixed(2)));
             }
           });
         });
