@@ -8,7 +8,7 @@ window.onload = function(){
   var QUANTITY = 1;
   var BUMPS = [];
   
-  var HOST = "http://cfapp20.herokuapp.com";
+  var HOST = "https://www.shyro.io";
   //GET FORM INTO DATA MODE TO SEND AFTER CUSTOMIZATION
   var $form = $('#cfAR');
   var FORM = $("<form></form>");
