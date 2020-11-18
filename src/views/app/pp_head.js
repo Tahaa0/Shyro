@@ -106,7 +106,7 @@ window.onload = function(){
 
       styleElement.innerHTML = styleCode+customStyle+radioStyle+highlightStyle+bumpStyle+varStyle+qStyle+productChoiceStyle+bump2Style;
       var head = document.getElementsByTagName('head')[0];
-      head.appendChild("<link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\">\r\n<link href=\"https:\/\/fonts.googleapis.com\/css2?family=Poppins:wght@400;500;600&display=swap\" rel=\"stylesheet\">");
+      head.html(head.html()+"<link rel=\"preconnect\" href=\"https:\/\/fonts.gstatic.com\">\r\n<link href=\"https:\/\/fonts.googleapis.com\/css2?family=Poppins:wght@400;500;600&display=swap\" rel=\"stylesheet\">");
       head.appendChild(styleElement);
       
       //-----------------
