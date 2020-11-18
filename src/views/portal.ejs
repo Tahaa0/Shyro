@@ -1311,7 +1311,7 @@
 	$('#orderBump_design2').click(function(){
 
 		var product = funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT];
-		var orderBumpCode = '<div class=\"bump2\">\r\n<img src=\"https:\/\/s3.amazonaws.com\/cdn.fanduel.com\/images\/2019\/Homepage\/Home\/phones-sm.png\" alt=\"\">\t\r\n<div class=\"desc_\">\r\n<div class=\"smt\">Special One Time Offer :<\/div>\r\n<div class=\"smt2\"><strong>'+product.title+'<\/strong> - Just '+product.price+'$ + Shipping<\/div>\r\n<p>Get the entire My Awesome Box Series for just one payment of '+product.price+'$ + Shipping (14.95$ or 29.95$ Intl.) - The box set comes in a box and is a set.<\/p>\r\n<\/div>\r\n<div class=\"action\">\r\n<button class="bumpButton"  name=\"xxbump\" value=\"'+product.stripe+'\">+ ADD<\/button>\r\n<\/div>\r\n<\/div>';
+		var orderBumpCode = '<div class=\"bump2\">\r\n<img src=\"https:\/\/s3.amazonaws.com\/cdn.fanduel.com\/images\/2019\/Homepage\/Home\/phones-sm.png\" alt=\"\">\t\r\n<div class=\"desc_\">\r\n<div class=\"smt\">Special One Time Offer :<\/div>\r\n<div class=\"smt2\"><strong>'+product.title+'<\/strong> - Just '+product.price+'$ + Shipping<\/div>\r\n<p>Get the entire My Awesome Box Series for just one payment of '+product.price+'$ + Shipping (14.95$ or 29.95$ Intl.) - The box set comes in a box and is a set.<\/p>\r\n<\/div>\r\n<div class=\"action\">\r\n<button class="bumpButton"  name=\"xxbump\" value=\"'+product.stripe+'\"><i class="fas fa-plus-circle"></i> ADD<\/button>\r\n<\/div>\r\n<\/div>';
 
 		$('#orderBumpCode').val(orderBumpCode);
 		$('#orderBump_img').attr('src','/views/gfx/orderbump_design2.png');

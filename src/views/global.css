@@ -1878,6 +1878,6 @@ margin-top: 30px;
 	color: #348A36;
 }
 .bumpChecked{
-	background-color: #6DCC70;
-	color: #FFF;
+	background-color: #6DCC70 !important;
+	color: #FFF !important;
 }
