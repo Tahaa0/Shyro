@@ -56,7 +56,7 @@ if(VALID){ //IF THIS IS A STEP
           $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
         }
         $('#pid-'+STEP.products[i].stripe+'-0').attr('name','xxprod'); //ADD ATTRIBUTE XXPROD TO the product (stripe)
-        
+        $('#pid-'+STEP.products[i].stripe+'-0').data('price',STEP.products[i].price);  //SET DATA PRICE
         //QUANTITY
         if(STEP.products[i].quantity){
           if(STEP.products[i].quantity.length > 0){

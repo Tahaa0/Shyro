@@ -67,7 +67,8 @@ window.onload = function(){
     }
 
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
-    var _price= $('input[name=xxprod]:checked').parent().parent().find('.elOrderProductOptinPrice').html();
+    var _prc = $('input[name=xxprod]:checked').data('price');
+    var _price= "<span class='xxprice' data-value="+_prc+">$"+_prc+"</span>";
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     if($('input[name=xxprod]:checked').data('quantity') > 1){
       _name += " (x"+$('input[name=xxprod]:checked').data('quantity')+")";
