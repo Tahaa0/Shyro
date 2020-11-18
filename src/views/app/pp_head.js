@@ -340,7 +340,7 @@ window.onload = function(){
           RATE = data.rate;
           CUR = data.currency;
           $('.xxprice').each(function(index){
-            $(this).html(CUR+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+            $(this).html(CUR+" "+(parseFloat($(this).data('value'))*RATE).toFixed(2));
           });
         });
       });
