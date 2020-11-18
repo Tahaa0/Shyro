@@ -8,6 +8,9 @@ window.onload = function(){
   var QUANTITY = 1;
   var BUMPS = [];
   
+  var RATE = "1";
+  var CUR = "$";
+
   var HOST = "https://www.shyro.io";
   //GET FORM INTO DATA MODE TO SEND AFTER CUSTOMIZATION
   var $form = $('#cfAR');
@@ -78,6 +81,10 @@ window.onload = function(){
     
     $('.elOrderProductOptions tbody').html(hh+ht+hb);
     FORM.html(serializeToForm($form.serializeArray()));
+
+    $('.xxprice').each(function(index){
+      $(this).html(CUR+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
+    });
   }
 
   
@@ -330,9 +337,10 @@ window.onload = function(){
     if(currencyAPP){
       $.get('https://ipinfo.io/?token=87ed38221c7ade', function(data){
         $.getJSON(HOST+'/api/funnelscript/getrate?country=MA&currency=USD',function(data){
-          var RATE = data.rate;
+          RATE = data.rate;
+          CUR = data.currency;
           $('.xxprice').each(function(index){
-            $(this).html("CUR "+(parseFloat($(this).data('value'))*RATE));
+            $(this).html(CUR+""+(parseFloat($(this).data('value'))*RATE).toFixed(2));
           });
         });
       });
