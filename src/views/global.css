@@ -1796,9 +1796,8 @@ margin-top: 30px;
 }
 
 .bump2{
-	width: 100%;
+	width: 600px;
 	margin: 0 auto;
-	margin-top: 50px;
 	border: 3px solid #EEEEEE;
 	border-radius: 5px;
 	background-color: white;
@@ -1894,4 +1893,8 @@ margin-top: 30px;
 	background-color: #6C5DD3;
 	border: 2px solid #6C5DD3;
 	color: #FFF;
+}
+
+#ob_preview{
+	overflow-x: scroll;
 }
