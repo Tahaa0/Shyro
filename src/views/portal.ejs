@@ -326,8 +326,9 @@
 									<div id="appSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
 										<div class="field">
 											<div class="f_buttons smallerbuttons" style="margin-top: 0; margin-bottom: 10px;">
-												<button id='orderBump_design1'>Design 1</button>
+												<button id='orderBump_design1' class="active">Design 1</button>
 												<button id='orderBump_design2'>Design 2</button>
+												<input type="text" id='ob_design' hidden="hidden">
 											</div>
 											<div id='orderBump_design1_details'>
 												<div class="field">
@@ -1316,7 +1317,16 @@
 	//APP SETTINGS
 
 	$('#orderBumpSave').click(function(){
+		var bDATA = {
+			title: $('#ob_title').val(),
+			subtitle: $('#ob_subtitle').val(),
+			description: $('#ob_description').val(),
+			image: $('#ob_asset_url').val(),
+			design: parseInt($('#ob_design').val())
+		}
+		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpData = bDATA;
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = $('#orderBumpCode').val();
+
 		saveFunnel();
 		toggleAppSettings(SELECTED_APP);
 	});
