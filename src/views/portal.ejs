@@ -330,9 +330,7 @@
 												<button id='orderBump_design2' class="obdes">Design 2</button>
 												<input type="text" id='ob_design' hidden="hidden">
 											</div>
-											<div id='ob_preview'>
-												
-											</div>
+											
 											<div id='orderBump_design1_details'>
 												<div class="field">
 													<div class="field_label">Asset Url :</div>
@@ -356,6 +354,10 @@
 											<div class="field">
 												<div class="field_label">Embed Code :</div>
 												<div class="field_input"><input type="text" id='ob_code'></div>
+											</div>
+											<div class="field_label">Preview :</div>
+											<div id='ob_preview'>
+												
 											</div>
 										</div>
 										<div class="f_buttons" style="margin-top: 0;">
@@ -990,13 +992,11 @@
 
 		$('.obdes').removeClass('active');
 		$('#orderBump_design'+d).addClass('active');
+
+		previewOrderBump();
 	}
 
 	$('#ob_asset_url, #ob_title, #ob_subtitle, #ob_description,#ob_design').change(function(){
-		previewOrderBump();
-	});
-
-	$('#orderBump_design1, #orderBump_design2').click(function(){
 		previewOrderBump();
 	});
 
