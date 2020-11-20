@@ -1452,14 +1452,11 @@ input:checked + .slider:before {
 	color: #BACA63;
 	margin-bottom: 10px;
 }
-#scriptbody,#scripthead,#cc_code{
+#scriptbody,#scripthead,#cc_code,#ob_code{
 	font-size: 13px;
 	background-color: #1D1E22;
 	color: #BACA63;
 	cursor: pointer;
-}
-#appSettingsBox_2 .field{
-	margin-bottom: 0;
 }
 
 #var_table .prod_cell, #qty_table .prod_cell{

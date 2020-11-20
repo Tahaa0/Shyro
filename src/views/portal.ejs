@@ -325,9 +325,7 @@
 									</div>
 									<div id="appSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
 										<div class="field">
-
-											<div class="field_label" style="margin-bottom: 6px">Order Bump Embed Code :</div>
-											<div class="f_buttons smallerbuttons" style="margin-top: 0;">
+											<div class="f_buttons smallerbuttons" style="margin-top: 0; margin-bottom: 10px;">
 												<button id='orderBump_design1'>Design 1</button>
 												<button id='orderBump_design2'>Design 2</button>
 											</div>
@@ -353,7 +351,7 @@
 											</div>
 											<div class="field">
 												<div class="field_label">Embed Code :</div>
-												<div class="field_input"><input type="text" id='ob1_code'></div>
+												<div class="field_input"><input type="text" id='ob_code'></div>
 											</div>
 										</div>
 										<div class="f_buttons" style="margin-top: 0;">
@@ -1427,7 +1425,7 @@
 		});
 	}
 	
-	$('#scripthead, #scriptbody, #cc_code').click(function(){
+	$('#scripthead, #scriptbody, #cc_code, #ob_code').click(function(){
 		$(this).select();
 		document.execCommand('copy');
 		var VAL = $(this).val();
