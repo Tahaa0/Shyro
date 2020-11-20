@@ -238,11 +238,13 @@ window.onload = function(){
       $('.yybump').each(function(index){
         console.log($(this).data('value'));
         for(var i=0;i<STEP.products.length;i++){
+          console.log(STEP.products[i].stripe, $(this).data('value'));
           if(STEP.products[i].stripe == $(this).data('value')){
+            console.log('AAAAH');
             $(this).html(STEP.products[i].bumpCode);
           }
         }
-        
+
         $('[name=xxbump]').click(function (){
           BUMPS = [];
           if($(this).hasClass('bumpButton')){
