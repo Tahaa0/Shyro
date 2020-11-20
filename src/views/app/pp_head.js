@@ -234,26 +234,38 @@ window.onload = function(){
         }
       },500);
       //BUMP FUNCTIONALITY
-      $('[name=xxbump]').click(function (){
-        BUMPS = [];
-        if($(this).hasClass('bumpButton')){
-          if($(this).attr('checked')){
-            $(this).html('<i class="fas fa-plus-circle"></i> ADD');
-            $(this).removeAttr('checked');
-            $(this).removeClass('bumpChecked');
-          }else{
-            $(this).html('<i class="fas fa-check-circle"></i> ADDED');
-            $(this).attr('checked','checked');
-            $(this).addClass('bumpChecked');
+      //yybump
+      $('.yybump').each(function(index){
+        console.log($(this).data('value'));
+        for(var i=0;i<STEP.products.length;i++){
+          if(STEP.products[i].stripe == $(this).data('value')){
+            $(this).html(STEP.products[i].bumpCode);
           }
         }
-        $('[name=xxbump]').each(function(index){
-          if($(this).is(':checked') || $(this).attr('checked')){
-            BUMPS.push($(this).val());
+        
+        $('[name=xxbump]').click(function (){
+          BUMPS = [];
+          if($(this).hasClass('bumpButton')){
+            if($(this).attr('checked')){
+              $(this).html('<i class="fas fa-plus-circle"></i> ADD');
+              $(this).removeAttr('checked');
+              $(this).removeClass('bumpChecked');
+            }else{
+              $(this).html('<i class="fas fa-check-circle"></i> ADDED');
+              $(this).attr('checked','checked');
+              $(this).addClass('bumpChecked');
+            }
           }
+          $('[name=xxbump]').each(function(index){
+            if($(this).is(':checked') || $(this).attr('checked')){
+              BUMPS.push($(this).val());
+            }
+          });
+          checkProd(calculateID());
         });
-        checkProd(calculateID());
       });
+
+
       //VARIANTS
       $('.xxvar').click(function(){
         $('.xxvar').removeClass('varActive');
