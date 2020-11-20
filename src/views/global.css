@@ -1878,3 +1878,20 @@ margin-top: 30px;
 	background-color: #6DCC70 !important;
 	color: #FFF !important;
 }
+
+
+.filterbar{
+	margin-top: 35px;
+	vertical-align: top;
+}
+.filterbar>button{
+	border: 2px solid #FF754C;
+	padding: 6px 16px;
+	background-color: transparent;
+	border-radius: 12px;
+}
+.filterbar>button:hover,.filterbar>button.active{
+	background-color: #6C5DD3;
+	border: 2px solid #6C5DD3;
+	color: #FFF;
+}
