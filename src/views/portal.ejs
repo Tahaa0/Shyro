@@ -334,25 +334,27 @@
 											<div id='orderBump_design1_details'>
 												<div class="field">
 													<div class="field_label">Asset Url :</div>
-													<div class="field_input"><input type="text" id='ob1_asset_url'></div>
+													<div class="field_input"><input type="text" id='ob_asset_url'></div>
 												</div>
-												<div class="field">
-													<div class="field_label">Heading :</div>
-													<div class="field_input"><input type="text" id='ob1_title'></div>
-												</div>
-												<div class="field">
-													<div class="field_label">Subheading :</div>
-													<div class="field_input"><input type="text" id='ob1_subtitle'></div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="field_label">Heading :</div>
+														<div class="field_input"><input type="text" id='ob_title'></div>
+													</div>
+													<div class="col-md-6">
+														<div class="field_label">Subheading :</div>
+														<div class="field_input"><input type="text" id='ob_subtitle'></div>
+													</div>
 												</div>
 												<div class="field">
 													<div class="field_label">Description :</div>
-													<div class="field_input"><textarea id='ob1_description'></textarea></div>
+													<div class="field_input"><textarea id='ob_description'></textarea></div>
 												</div>
 											</div>
-											<div class="field_input"><textarea id='orderBumpCode'></textarea></div>
-											<div class="field_label" >Preview :</div>
-											<img src="" id='orderBump_img' alt="" class="prev">
-
+											<div class="field">
+												<div class="field_label">Embed Code :</div>
+												<div class="field_input"><input type="text" id='ob1_code'></div>
+											</div>
 										</div>
 										<div class="f_buttons" style="margin-top: 0;">
 											<button id="orderBumpSave">Update</button>
@@ -818,7 +820,7 @@
 		if(p_toggleAppSettings){
 			switch(n){
 				case 2:
-					$('#orderBumpCode').val(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode);
+					updateOrderBump();
 					break;
 				case 3:
 					updateQtyTable();
@@ -956,6 +958,10 @@
 	function switchOrderBumpOff(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
 		saveFunnel();
+	}
+
+	function updateOrderBump(){
+		//FILL IN DATA
 	}
 
 	function updateVarTable(){
