@@ -527,9 +527,9 @@
 	});
 
 	$('#cc_price').keyup(function(){
-		var code = "%price_";
+		var code = "<span class='xxprice' data-value='";
 		code += parseFloat($('#cc_price').val());
-		code +="%";
+		code +="'></span>";
 		$('#cc_code').val(code);
 	});
 
@@ -996,7 +996,7 @@
 		previewOrderBump();
 	}
 
-	$('#ob_asset_url, #ob_title, #ob_subtitle, #ob_description,#ob_design').change(function(){
+	$('#ob_asset_url, #ob_title, #ob_subtitle, #ob_description,#ob_design').keyup(function(){
 		previewOrderBump();
 	});
 
