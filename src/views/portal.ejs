@@ -990,6 +990,8 @@
 			$('#ob_asset_url').val("https://s3.amazonaws.com/cdn.fanduel.com/images/2019/Homepage/Home/phones-sm.png");
 			chooseOrderBumpDesign(1);
 		}
+
+		previewOrderBump();
 		
 	}
 
@@ -998,6 +1000,38 @@
 
 		$('.obdes').removeClass('active');
 		$('#orderBump_design'+d).addClass('active');
+	}
+
+	$('#ob_asset_url, #ob_title, #ob_subtitle, #ob_description,#ob_design').change(function(){
+		previewOrderBump();
+	});
+
+	function previewOrderBump(){
+		var code = '';
+		var bDATA = {
+			title: $('#ob_title').val(),
+			subtitle: $('#ob_subtitle').val(),
+			description: $('#ob_description').val(),
+			image: $('#ob_asset_url').val(),
+			design: parseInt($('#ob_design').val())
+		}
+		
+
+		if(bDATA.design == 1){
+
+			code += '<div class=\"bump1\">\r\n\t\t<label for=\"bump-\"><input type=\"checkbox\" id=\"bump-\" name=\"xxbump\" value=\"'+product.stripe+'\">'+bDATA.title+'<\/label>\r\n\t\t<p>'+bDATA.description+'<\/p>\r\n\t\t<h4>'+bDATA.subtitle+'<\/h4>\r\n\t<\/div>';
+
+		}else if(bDATA.design == 2){
+
+			code += '<div class=\"bump2\">';
+			if(bDATA.image.length>1){
+				code += "\r\n<img src=\""+bDATA.image+"\" alt=\"\">";
+			}
+			code += '\t\r\n<div class=\"desc_\">\r\n<div class=\"smt\">'+bDATA.title+'<\/div>\r\n<div class=\"smt2\">'+bDATA.subtitle+'<\/div>\r\n<p>'+bDATA.description+'<\/p>\r\n<\/div>\r\n<div class=\"action\">\r\n<button class="bumpButton"  name=\"xxbump\" value=\"\"><i class="fas fa-plus-circle"></i> ADD<\/button>\r\n<\/div>\r\n<\/div>';
+
+		}
+
+		$('#ob_preview').html(code);
 	}
 
 	function updateVarTable(){
