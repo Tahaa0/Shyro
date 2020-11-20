@@ -330,6 +330,19 @@
 												<button id='orderBump_design2' class="obdes">Design 2</button>
 												<input type="text" id='ob_design' hidden="hidden">
 											</div>
+											<div id='ob_preview'>
+												<div class="bump2">
+												<img src="https://s3.amazonaws.com/cdn.fanduel.com/images/2019/Homepage/Home/phones-sm.png" alt="">	
+												<div class="desc_">
+												<div class="smt">Special One Time Offer :</div>
+												<div class="smt2"><strong>pro bump</strong> - Just 1$ + Shipping</div>
+												<p>Get the entire My Awesome Box Series for just one payment of 1$ + Shipping (14.95$ or 29.95$ Intl.) - The box set comes in a box and is a set.</p>
+												</div>
+												<div class="action">
+												<button class="bumpButton" name="xxbump" value="3064648"><i class="fas fa-plus-circle"></i> ADD</button>
+												</div>
+												</div>
+											</div>
 											<div id='orderBump_design1_details'>
 												<div class="field">
 													<div class="field_label">Asset Url :</div>
@@ -1364,7 +1377,7 @@
 				orderBumpCode += "\r\n<img src=\""+bDATA.image+"\" alt=\"\">";
 			}
 			orderBumpCode += '\t\r\n<div class=\"desc_\">\r\n<div class=\"smt\">'+bDATA.title+'<\/div>\r\n<div class=\"smt2\">'+bDATA.subtitle+'<\/div>\r\n<p>'+bDATA.description+'<\/p>\r\n<\/div>\r\n<div class=\"action\">\r\n<button class="bumpButton"  name=\"xxbump\" value=\"'+product.stripe+'\"><i class="fas fa-plus-circle"></i> ADD<\/button>\r\n<\/div>\r\n<\/div>';
-			
+
 		}
 
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bumpCode = orderBumpCode;
