@@ -12,8 +12,10 @@ window.onload = function(){
     var N = parseFloat(n).toFixed(2);
     if((N - parseInt(N))>0.5){
       return parseInt(N) + 1;
-    }else{
+    }else if((N - parseInt(N))>0){
       return parseInt(N) + 0.5;
+    }else{
+      return parseInt(N);
     }
   }
 

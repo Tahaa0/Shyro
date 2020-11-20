@@ -96,6 +96,15 @@ if(VALID){ //IF THIS IS A STEP
       }
 
     }
+    //yybump
+    $('.yybump').each(function(index){
+      console.log($(this).data('value'));
+      for(var i=0;i<STEP.products.length;i++){
+        if(STEP.products[i].stripe == $(this).data('value')){
+          $(this).html(STEP.products[i].bumpCode);
+        }
+      }
+    });
 
     $('.elOrderProductOptions.elProductOptionsBox input[name="purchase[product_id]"]').parent().parent().remove();
     //change button and credit card form
