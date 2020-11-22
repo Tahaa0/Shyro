@@ -48,6 +48,24 @@
 <!-- inject css end -->
 <link href="css/theme-color/color-6.css" rel="stylesheet" type="text/css" />
 
+<style type="text/css">
+  #main-menu .nav-item>.nav-link{
+    color: white;
+  }
+  #main-menu .nav-item>.nav-link.active{
+    color: #481EA7;
+  }
+  .fixed-header #main-menu .nav-item>.nav-link{
+    color: #1c1d3e;
+  }
+  .fixed-header #main-menu .nav-item>.nav-link.active{
+    color: #481EA7;
+  }
+  #pricing{
+    margin-bottom:  50px;
+  }
+</style>
+
 </head>
 
 <body>
@@ -76,15 +94,16 @@
 
 <!--header start-->
 
-<header id="site-header" class="header header-1">
-  <div class="container-fluid">
-    <div id="header-wrap" class="box-shadow">
+<header id="site-header" class="header header-2">
+  <div class="container">
+    <div id="header-wrap" class="" style="background-color: transparent;">
       <div class="row">
         <div class="col-lg-12">
           <!-- Navbar -->
           <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand logo" href="index.html">
-              <img id="logo-img" class="img-center" src="/views/gfx/logo.png" alt="">
+              <img id="logo-img" class="img-center" src="/views/gfx/logo-white.png" alt="">
+              <img id="logo-img" class="img-center sticky-logo" src="/views/gfx/logo.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"> <span></span>
               <span></span>
@@ -92,8 +111,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <!-- Left nav -->
-              <ul id="main-menu" class="nav navbar-nav ml-auto mr-auto">
-                <li class="nav-item"> <a class="nav-link active" href="#home">Home</a> 
+              <ul id="main-menu" class="nav navbar-nav ml-auto mr-auto" data-smartmenus-id="16060438405453936">
+              <li class="nav-item"> <a class="nav-link active" href="#home">Home</a> 
                 </li>
                 <li class="nav-item"> <a class="nav-link" href="#about">About</a> 
                 </li>
@@ -107,38 +126,34 @@
                 </li>
                 <li class="nav-item"> <a class="nav-link" href="#faq">FAQ</a> 
                 </li>
-                
+              </ul>
             </div>
-            <a class="btn btn-theme btn-sm" href="/login" data-text="Login"> <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
+            <a class="btn btn-white btn-sm" href="login.html" data-text="Login"> <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
           </a>
           </nav>
         </div>
       </div>
     </div>
   </div>
-</header>
-
+<div></div></header>
 <!--header end-->
 
 
 <!--hero section start-->
 
-<section id="home" class="fullscreen-banner banner p-0" data-bg-img="images/pattern/01.png" style="height: 407px; background-image: url(&quot;images/pattern/01.png&quot;);">
-  <div class="hero-bg">
-    <img class="img-fluid" src="images/bg/04.png" alt="">
-  </div>
+<section id="home" class="fullscreen-banner banner p-0 grediant-bg" style="height: 407px; margin-bottom: 80px;">
   <div class="align-center p-0" style="padding-top: 90px;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-7 col-md-12 img-side">
-          <img class="img-center" src="images/mackbook/01.png" alt="">
+          <img class="img-center" src="/views/gfx/laptop-dashboard.png" alt="">
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-lg-5 col-md-12 md-mt-5 ml-auto">
-          <h1 class="mb-4 font-weight-normal wow fadeInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp;">A Complete <span class="font-weight-bold text-uppercase">Software</span> Based Website</h1>
+        <div class="col-lg-5 col-md-12 md-mt-5 ml-auto" style="color: white !important;">
+          <h1 class="mb-4 font-weight-normal wow fadeInUp" data-wow-duration="1.5s" style="visibility: visible; animation-duration: 1.5s; animation-name: fadeInUp; color: white ;">A Complete <span class="font-weight-bold text-uppercase">Software</span> Based Website</h1>
           <p class="lead mb-4 wow fadeInUp" data-wow-duration="2s" data-wow-delay="0.3s" style="visibility: visible; animation-duration: 2s; animation-delay: 0.3s; animation-name: fadeInUp;">Softino is an all-new stylish Software For device that can show you things.</p>
           <a class="btn btn-theme wow fadeInUp" data-wow-duration="3s" data-wow-delay="0.5s" href="#" data-text="Start A Today" style="visibility: visible; animation-duration: 3s; animation-delay: 0.5s; animation-name: fadeInUp;"> <span>S</span><span>t</span><span>a</span><span>r</span><span>t</span>
             <span> </span><span>A</span>  <span> </span><span>T</span><span>o</span><span>d</span><span>a</span><span>y</span>
@@ -190,89 +205,102 @@
 
 <!--about start-->
 
-<section id="service" class="pos-r bg-effect-2 bg-effect-3 py-15" data-bg-color="#fbfbfb" style="background-color: rgb(251, 251, 251);">
+<section id='service' class="pos-r o-hidden">
+  <div class="bg-animation">
+    <img class="zoom-fade" src="images/pattern/03.png" alt="">
+  </div>
   <div class="container">
-    <div class="row text-center">
-      <div class="col-lg-8 col-md-12 ml-auto mr-auto">
-        <div class="section-title">
-          <div class="title-effect title-effect-2">
-            <div class="ellipse"></div> <i class="la la-cubes"></i>
-          </div>
-          <h2 class="title">Our Exciting feature And Service</h2>
-          <p>Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi</p>
-        </div>
-      </div>
-    </div>
     <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-software"></i>
-          </div>
-          <div class="featured-title">
-            <h5>Design</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 sm-mt-5">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-scroll"></i>
-          </div>
-          <div class="featured-title">
-            <h5>Drag And Drop</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 md-mt-5">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-resolution"></i>
-          </div>
-          <div class="featured-title">
-            <h5>High Resolution</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mt-5">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-objective"></i>
-          </div>
-          <div class="featured-title">
-            <h5>App integration</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mt-5">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-market"></i>
-          </div>
-          <div class="featured-title">
-            <h5>Marketing</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 mt-5">
-        <div class="featured-item style-6">
-          <div class="featured-icon"> <i class="flaticon-customer-service"></i>
-          </div>
-          <div class="featured-title">
-            <h5>Helping Support</h5>
-          </div>
-          <div class="featured-desc">
-            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
+      <div class="col-sm-12">
+        <div class="tab style-2">
+          <!-- Nav tabs -->
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-item nav-link" id="nav-tab1" data-toggle="tab" href="#tab1-1" role="tab" aria-selected="false"> <i class="flaticon-data"></i> 
+                <h5>Marketing</h5>
+              </a> <a class="nav-item nav-link" id="nav-tab2" data-toggle="tab" href="#tab1-2" role="tab" aria-selected="false"><i class="flaticon-research"></i> <h5>Planning</h5></a>
+              <a class="nav-item nav-link" id="nav-tab3" data-toggle="tab" href="#tab1-3" role="tab" aria-selected="false"><i class="flaticon-analytics"></i> <h5>Anlysis</h5></a>
+              <a class="nav-item nav-link active" id="nav-tab4" data-toggle="tab" href="#tab1-4" role="tab" aria-selected="true"><i class="flaticon-objective"></i> <h5>Stratergy</h5></a>
+            </div>
+          </nav>
+          <!-- Tab panes -->
+          <div class="tab-content" id="nav-tabContent">
+            <div role="tabpanel" class="tab-pane fade" id="tab1-1">
+              <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                  <img class="img-fluid" src="images/svg/04.svg" alt="">
+                </div>
+                <div class="col-lg-6 col-md-12 md-mt-5">
+                  <h4 class="mb-4">Powerful &amp; Awesome Marketing</h4>
+                  <p class="mb-4">Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
+                    <li>Design must be functional</li>
+                    <li>Futionality must into</li>
+                    <li>Aenean pellentes vitae</li>
+                    <li>Mattis effic iturut magna</li>
+                    <li>Lusce enim nulla mollis</li>
+                    <li>Phasellus eget felis</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="tab1-2">
+              <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                  <img class="img-fluid" src="images/svg/05.svg" alt="">
+                </div>
+                <div class="col-lg-6 col-md-12 md-mt-5">
+                  <h4 class="mb-4">Powerful &amp; Awesome Marketing</h4>
+                  <p class="mb-4">Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
+                    <li>Design must be functional</li>
+                    <li>Futionality must into</li>
+                    <li>Aenean pellentes vitae</li>
+                    <li>Mattis effic iturut magna</li>
+                    <li>Lusce enim nulla mollis</li>
+                    <li>Phasellus eget felis</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="tab1-3">
+              <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                  <img class="img-fluid" src="images/svg/06.svg" alt="">
+                </div>
+                <div class="col-lg-6 col-md-12 md-mt-5">
+                  <h4 class="mb-4">Powerful &amp; Awesome Marketing</h4>
+                  <p class="mb-4">Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
+                    <li>Design must be functional</li>
+                    <li>Futionality must into</li>
+                    <li>Aenean pellentes vitae</li>
+                    <li>Mattis effic iturut magna</li>
+                    <li>Lusce enim nulla mollis</li>
+                    <li>Phasellus eget felis</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade active show" id="tab1-4">
+              <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                  <img class="img-fluid" src="images/svg/07.svg" alt="">
+                </div>
+                <div class="col-lg-6 col-md-12 md-mt-5">
+                  <h4 class="mb-4">Powerful &amp; Awesome Marketing</h4>
+                  <p class="mb-4">Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
+                    <li>Design must be functional</li>
+                    <li>Futionality must into</li>
+                    <li>Aenean pellentes vitae</li>
+                    <li>Mattis effic iturut magna</li>
+                    <li>Lusce enim nulla mollis</li>
+                    <li>Phasellus eget felis</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -285,68 +313,59 @@
 
 <!--feature start-->
 
-<section id="feature" class="service pos-r bg-effect o-hidden">
+<section id="feature" class="pos-r o-hidden text-center">
+  <div class="bg-animation">
+    <img class="zoom-fade" src="images/pattern/03.png" alt="">
+  </div>
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 col-md-12 order-lg-12 image-column right">
-        <div class="blink-img">
-          <img class="img-fluid blinkblink" src="images/pattern/04.png" alt="">
+    <div class="row">
+      <div class="col-lg-8 col-md-12 ml-auto mr-auto">
+        <div class="section-title">
+          <div class="title-effect title-effect-2">
+            <div class="ellipse"></div> <i class="la la-cubes"></i>
+          </div>
+          <h2 class="title">Our Exciting feature And Service</h2>
+          <p>Softino Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi</p>
         </div>
-        <img class="img-fluid z-index-1 w-100" src="images/svg/01.svg" alt="">
       </div>
-      <div class="col-lg-6 col-md-12 md-mt-5 order-lg-1">
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <div class="featured-item style-3">
-              <div class="featured-icon">
-                <i class="la la-diamond"></i>
-              </div>
-              <div class="featured-title">
-                <h5>Design</h5>
-              </div>
-              <div class="featured-desc">
-                <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="featured-item style-4">
+          <div class="featured-icon">
+            <img class="img-center" src="images/feature/06.png" alt="">
           </div>
-          <div class="col-lg-6 col-md-6 mt-4">
-            <div class="featured-item style-3">
-              <div class="featured-icon">
-                <i class="la la-credit-card"></i>
-              </div>
-              <div class="featured-title">
-                <h5>Drag And Drop</h5>
-              </div>
-              <div class="featured-desc">
-                <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
+          <div class="featured-title">
+            <h5>Design</h5>
           </div>
-          <div class="col-lg-6 col-md-6 sm-mt-3">
-            <div class="featured-item style-3">
-              <div class="featured-icon">
-                <i class="la la-desktop"></i>
-              </div>
-              <div class="featured-title">
-                <h5>High Resolution</h5>
-              </div>
-              <div class="featured-desc">
-                <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
+          <div class="featured-desc">
+            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
           </div>
-          <div class="col-lg-6 col-md-6 mt-4">
-            <div class="featured-item style-3">
-              <div class="featured-icon">
-                <i class="la la-headphones"></i>
-              </div>
-              <div class="featured-title">
-                <h5>Helping Support</h5>
-              </div>
-              <div class="featured-desc">
-                <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
-              </div>
-            </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 sm-mt-5">
+        <div class="featured-item style-4">
+          <div class="featured-icon">
+            <img class="img-center" src="images/feature/07.png" alt="">
+          </div>
+          <div class="featured-title">
+            <h5>Drag And Drop</h5>
+          </div>
+          <div class="featured-desc">
+            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 md-mt-5">
+        <div class="featured-item style-4">
+          <div class="featured-icon">
+            <img class="img-center" src="images/feature/08.png" alt="">
+          </div>
+          <div class="featured-title">
+            <h5>High Resolution</h5>
+          </div>
+          <div class="featured-desc">
+            <p>Top quality Software services, labore et dolore magna ali qua Lorem ipsum dolor sit amet.</p>
           </div>
         </div>
       </div>
