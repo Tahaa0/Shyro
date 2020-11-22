@@ -722,6 +722,11 @@ hr{
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
+#sidebar_logo img{
+	width: 60%;
+	display: block;
+	margin: 0 auto;
+}
 #sidebar_menu{
 	padding: 20px;
 	padding-right: 40px;

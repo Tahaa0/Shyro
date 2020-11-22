@@ -131,7 +131,7 @@ if(logform){
 		}
 		$.post('/api/auth/login',data,function(data,status,xhr){
 			localStorage.setItem("token",data.token);
-			window.location = '/';
+			window.location = '/dashboard';
 		}).fail(function(data,status,xhr){
 			alert(status+' : '+data.responseText);
 		});

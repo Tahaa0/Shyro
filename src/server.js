@@ -28,7 +28,7 @@ let PORT = process.env.PORT || 3000;
 
 //=== 1 - CREATE APP
 // Creating express app and configuring middleware needed for authentication
-console.log(sslRedirect);
+
 const app = express();
 app.use(sslRedirect.default());
 
@@ -54,6 +54,11 @@ app.set('view engine', 'jade');
 //app.use(/public',express.static(__dirname + '/public'));'
 app.set('views', path.join(__dirname, 'views'));
 app.use('/views', express.static(__dirname + '/views'));
+app.use('/images', express.static(__dirname + '/views/landing/images'));
+app.use('/css', express.static(__dirname + '/views/landing/css'));
+app.use('/fonts', express.static(__dirname + '/views/landing/fonts'));
+app.use('/js', express.static(__dirname + '/views/landing/js'));
+app.use('/php', express.static(__dirname + '/views/landing/php'));
 //=== 2 - SET UP DATABASE
 //Configure mongoose's promise to global promise
 mongoose.promise = global.Promise;

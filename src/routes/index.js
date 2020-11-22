@@ -12,18 +12,22 @@ const authenticate = require('../middlewares/authenticate');
 
 module.exports = app => {
     app.get('/', (req, res) => {
-    	if(req.session['token']){
-    		res.redirect('/dashboard');
-    	}else{
-    		res.render('index.ejs')
-    	}
+    	res.render('landing/index.ejs')
+    });
+
+    app.get('/login', (req, res) => {
+        if(req.session['token']){
+            res.redirect('/dashboard');
+        }else{
+            res.render('index.ejs')
+        }
     });
 
     app.get('/dashboard', (req,res)=>{
         if(req.session['token']){
             res.render('dashboard.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -31,7 +35,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('funnels.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -39,7 +43,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('apps.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -47,7 +51,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('documentation.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -55,7 +59,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('subscriptions.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -63,7 +67,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('support.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -71,7 +75,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('account.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -87,7 +91,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('marketplace_add.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
@@ -95,7 +99,7 @@ module.exports = app => {
         if(req.session['token']){
             res.render('mp_product.ejs');
         }else{
-            res.redirect('/');
+            res.redirect('/login');
         }
     });
 
