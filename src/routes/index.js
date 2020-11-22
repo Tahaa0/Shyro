@@ -15,6 +15,14 @@ module.exports = app => {
     	res.render('landing/index.ejs')
     });
 
+    app.get('/index.html', (req, res) => {
+        res.redirect('/')
+    });
+
+    app.get('/index', (req, res) => {
+        res.redirect('/')
+    });
+
     app.get('/login', (req, res) => {
         if(req.session['token']){
             res.redirect('/dashboard');
