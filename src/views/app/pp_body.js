@@ -38,15 +38,19 @@
       var c = STEP.products[i].stripe;
       STEP.products[i].stripe = STEP.products[i].paypal;
       STEP.products[i].paypal = c;
-      for(var j=0;j<STEP.products[i].quantity.length;j++){
-        var x = STEP.products[i].quantity[j].stripe;
-        STEP.products[i].quantity[j].stripe = STEP.products[i].quantity[j].paypal;
-        STEP.products[i].quantity[j].paypal = x;
+      
+      if(STEP.products[i].quantity){
+        for(var j=0;j<STEP.products[i].quantity.length;j++){
+          var x = STEP.products[i].quantity[j].stripe;
+          STEP.products[i].quantity[j].stripe = STEP.products[i].quantity[j].paypal;
+          STEP.products[i].quantity[j].paypal = x;
+        }
       }
+      
     }
   }
 
-  
+
 if(VALID){ //IF THIS IS A STEP
 
   console.log(STEP);
