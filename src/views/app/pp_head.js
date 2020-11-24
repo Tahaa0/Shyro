@@ -241,11 +241,8 @@ window.onload = function(){
       //BUMP FUNCTIONALITY
       //yybump
       $('.yybump').each(function(index){
-        console.log($(this).data('value'));
         for(var i=0;i<STEP.products.length;i++){
-          console.log(STEP.products[i].stripe, $(this).data('value'));
-          if(STEP.products[i].stripe == $(this).data('value')){
-            console.log('AAAAH');
+          if(STEP.products[i].stripe == $(this).data('value') || STEP.products[i].paypal == $(this).data('value')){
             $(this).html(STEP.products[i].bumpCode);
           }
         }
