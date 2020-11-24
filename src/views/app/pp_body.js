@@ -43,8 +43,10 @@ if(VALID){ //IF THIS IS A STEP
     for(var i=0;i<STEP.products.length;i++){
       
       //REMOVE  paypal products
+      
       var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent();
       PARENT_.remove();
+      
 
 
       if(STEP.products[i].hidden){ //REMOVE HIDDEN PRODUCTS
