@@ -179,7 +179,10 @@ window.onload = function(){
         checkProd(calculateID());
       });
 
-      
+      if(!paypalAPP && paymentMethod == "paypal"){
+        window.buyButton.hide();
+        $parentDiv.show();
+      }
       //UPON CLICKING A PRODUCT slide varibox and select quantity
       $('input[name=xxprod]').click(function () {
         $('.varibox').slideUp(300);
