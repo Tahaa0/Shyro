@@ -1,15 +1,3 @@
-if(!paypalAPP && paymentMethod == 'paypal'){
-  for(var i=0;i<STEP.products.length;i++){
-    var c = STEP.products[i].stripe;
-    STEP.products[i].stripe = STEP.products[i].paypal;
-    STEP.products[i].paypal = c;
-    for(var j=0;j<STEP.products[i].quantity.length;j++){
-      var x = STEP.products[i].quantity[j].stripe;
-      STEP.products[i].quantity[j].stripe = STEP.products[i].quantity[j].paypal;
-      STEP.products[i].quantity[j].paypal = x;
-    }
-  }
-}
 
 window.onload = function(){
 
