@@ -181,7 +181,7 @@ window.onload = function(){
 
       if(!paypalAPP && paymentMethod == "paypal"){
         window.buyButton.hide();
-        ccForm.hide();
+        parDOM.hide();
         $parentDiv.show();
       }
       //UPON CLICKING A PRODUCT slide varibox and select quantity
