@@ -740,15 +740,16 @@ hr{
 	padding-bottom: 10px;
 }
 #sidebar_menu .item{
-	padding: 13px 18px;
+	padding: 9px 18px;
 	border-radius: 12px;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 500;
 	cursor: pointer;
 	-webkit-transition: 	400ms all;
 	-o-transition: 	400ms all;
 	transition: 	400ms all;
 	font-family: 'Poppins';
+	text-align: left;	
 }
 #sidebar_menu .item:hover{
 	color: #6C5DD3;
@@ -771,9 +772,20 @@ hr{
 }
 #sidebar_menu .item .icon{
 	margin-right: 16px;
-	font-size: 17px;
+	font-size: 22px;
+	font-weight: 100;
+	margin-top: -5px;
 	color: #BBBCBD;
+	display: inline-block;
+	padding-top: 4px;
+	font-family: 'Flaticon' !important;
 }
+#sidebar_menu .item .text{
+display: inline-block;
+padding-top: 6px;
+vertical-align: top;
+}
+
 #maincont{
 	padding: 0;
 }
