@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 28/11/2020 13:24
+  	Creation date: 28/11/2020 14:32
   	*/
 
 @font-face {
@@ -25,7 +25,9 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
   font-family: Flaticon;
+        
 font-style: normal;
+
 }
 
 .flaticon-credit-card:before { content: "\f100"; }
@@ -65,3 +67,8 @@ font-style: normal;
 .flaticon-lock:before { content: "\f122"; }
 .flaticon-profile:before { content: "\f123"; }
 .flaticon-search:before { content: "\f124"; }
+.flaticon-ticket:before { content: "\f125"; }
+.flaticon-info-square:before { content: "\f126"; }
+.flaticon-arrow-up:before { content: "\f127"; }
+.flaticon-arrow-down-2:before { content: "\f128"; }
+.flaticon-arrow-up-2:before { content: "\f129"; }
