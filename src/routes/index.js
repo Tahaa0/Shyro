@@ -24,12 +24,15 @@ module.exports = app => {
     });
 
     app.get('/login', (req, res) => {
+        res.redirect('/')
+    });
+    /*app.get('/login', (req, res) => {
         if(req.session['token']){
             res.redirect('/dashboard');
         }else{
             res.render('index.ejs')
         }
-    });
+    });*/
 
     app.get('/dashboard', (req,res)=>{
         if(req.session['token']){
