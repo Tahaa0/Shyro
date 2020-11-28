@@ -57,11 +57,11 @@
 			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
 			<div id="sidebar_userdrop">
 				<div class="userdrop_link" id='profile'>
-					<div class="userdrop_icon"><i class="fas fa-user"></i></div>
+					<div class="userdrop_icon"><i class="flaticon-profile bigflat"></i></div>
 					<div class="userdrop_text">Profile</div>
 				</div>
 				<div class="userdrop_link" id='logout'>
-					<div class="userdrop_icon"><i class="fas fa-power-off"></i></div>
+					<div class="userdrop_icon"><i class="flaticon-logout bigflat"></i></div>
 					<div class="userdrop_text">Logout</div>
 				</div>
 			</div>
@@ -197,11 +197,11 @@
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
 						<span class='black_button' id='updateStep' style="display: none;">Update</span>
-						<span class='black_button' id='toggleAdd'>+ Add Step</span>
-						<span class='black_button' id='toggleSplitTest'>+ Add Split Test</span>
-						<span class='black_button' id='toggleEdit'><i style='font-size: 14px; margin-right: 	2px;' class="fas fa-pencil-alt"></i> Edit Step</span>
+						<span class='black_button' id='toggleAdd'><i class="flaticon-plus"></i> <span>Add Step</span></span>
+						<span class='black_button' id='toggleSplitTest'><i class="flaticon-plus"></i> <span>Add Split Test</span></span>
+						<span class='black_button' id='toggleEdit'><i class="flaticon-edit-square"></i> <span>Edit Step</span></span>
 
-						<span class='black_button delete_btn' id='deleteStep'><i style='font-size: 14px; margin-right: 	2px;' class="far fa-trash-alt"></i> Delete Step</span>
+						<span class='black_button delete_btn' id='deleteStep'><i class="flaticon-delete"></i> <span>Delete Step</span></span>
 						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
 						<div id="myfunnels" class="row dbox">
 							<div class="col-md-4">
@@ -658,7 +658,7 @@
 		if(toggleAdd){
 			$('#toggleAdd').html('Cancel');
 		}else{
-			$('#toggleAdd').html('+ Add Step');
+			$('#toggleAdd').html('<i class="flaticon-plus"></i> Add Step');
 		}
 		toggleAdd = !toggleAdd;
 
@@ -678,7 +678,7 @@
 		if(toggleSplit){
 			$('#toggleSplitTest').html('Cancel');
 		}else{
-			$('#toggleSplitTest').html('+ Add Split Test');
+			$('#toggleSplitTest').html('<i class="flaticon-plus"></i> Add Split Test');
 		}
 		toggleSplit = !toggleSplit;
 	}
@@ -702,7 +702,7 @@
 			$('.select_tab').removeClass('active');
 			$('.select_tab[data-type='+funnelSteps[SELECTED_STEP].type+']').addClass('active');
 		}else{
-			$('#toggleEdit').html('<i style=\'font-size: 14px; margin-right: \t2px;\' class=\"fas fa-pencil-alt\"><\/i> Edit Step');
+			$('#toggleEdit').html('<i class="flaticon-edit"></i> Edit Step');
 		}
 		toggleEdit = !toggleEdit;
 	}

@@ -1658,12 +1658,13 @@ align-items: center;
 height: 56px;
 border-radius: 12px;
 font-size: 14px;
-font-weight: 600;
+font-weight: 500;
 color: #808191;
 -webkit-transition: all .25s;
 -o-transition: all .25s;
 transition: all .25s;
 cursor: pointer;
+font-family: 'Poppins';
 }
 .userdrop_link:hover{
 	background: #ffffff;
@@ -1955,7 +1956,7 @@ margin-top: 30px;
  	color: #FFF;
  	padding-left: 8px;
  	padding-right: 8px;
- 	border-radius: 5px;
+ 	border-radius: 8px;
  }
  .__open{
  	display: inline-block;
@@ -1963,5 +1964,30 @@ margin-top: 30px;
  	color: #FFF;
  	padding-left: 8px;
  	padding-right: 8px;
- 	border-radius: 5px;
+ 	border-radius: 8px;
  }
+.black_button span{
+	display: inline-block;
+	vertical-align: middle;
+	padding-top: 0px;
+}
+.black_button [class^="flaticon-"]:before,.black_button [class*=" flaticon-"]:before,
+.black_button [class^="flaticon-"]:after,.black_button [class*=" flaticon-"]:after {   
+  font-weight: normal;
+  font-size: 21px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.fbutton [class^="flaticon-"]:before,.fbutton [class*=" flaticon-"]:before,
+.fbutton [class^="flaticon-"]:after,.fbutton [class*=" flaticon-"]:after {   
+  font-weight: normal;
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bigflat{
+	font-size: 20px;
+}
