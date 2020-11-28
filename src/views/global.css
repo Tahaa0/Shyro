@@ -1947,4 +1947,21 @@ margin-top: 30px;
 	padding: 0 10px 10px 10px;
 	font-weight:700;
 }
-      
+ 
+ /*TICKET*/
+ .__closed{
+ 	display: inline-block;
+ 	background-color: #E04A3A;
+ 	color: #FFF;
+ 	padding-left: 8px;
+ 	padding-right: 8px;
+ 	border-radius: 5px;
+ }
+ .__open{
+ 	display: inline-block;
+ 	background-color: #7FBA7A;
+ 	color: #FFF;
+ 	padding-left: 8px;
+ 	padding-right: 8px;
+ 	border-radius: 5px;
+ }

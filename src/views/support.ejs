@@ -94,17 +94,18 @@
 								<div class="col-md-6">
 									<div class="field_label">Priority :</div>
 									<div class="field_input"><select id="t_priority">
-										<option value="Low">Low</option>
-										<option value="Medium">Medium</option>
-										<option value="High">High</option>
-										<option value="Urgent">Urgent</option>
+										<option value="Low">Low (Getting Started)</option>
+										<option value="High">High (I Need Help Fast)</option>
+										<option value="Urgent">Urgent (Live Funnel Getting Traffic)</option>
 									</select></div>
 								</div>
 								<div class="col-md-6">
 									<div class="field_label">Department :</div>
 									<div class="field_input"><select id="t_department">
-										<option value="App">App</option>
-										<option value="Billing">Billing</option>
+										<option value="Sales">Sales</option>
+										<option value="Billing" >Billing</option>
+										<option value="Technical">Technical</option>
+										<option value="Marketplace">Marketplace</option>
 									</select></div>
 								</div>
 								
@@ -271,9 +272,9 @@
 	var CHOSEN_TICKET_INDEX = 0;
 
 	function ticketHTML(t,i){
-		var str_hidden = "Closed";
+		var str_hidden = "<span class='__closed'>Closed</span>";
 		if(t.open){
-			str_hidden = "Open";
+			str_hidden = "<span class='__open'>Open</span>";
 		}
 		var HTML = "<div class=\"prod_row\"  id=\"ticket_"+t._id+"\" data-i='"+i+"'>\t\r\n<div class=\"prod_cell\">"+t.title+"<\/div>\r\n<div class=\"prod_cell\">"+str_hidden+"<\/div>\r\n<div class=\"prod_cell\">"+t.priority+"<\/div>\r\n<div class=\"prod_cell\">"+t.department+"<\/div>\r\n<\/div>";
 		return HTML;
@@ -356,8 +357,8 @@
 		$("#addTicketBox").slideToggle(300);
 		$('#toggleAdd').toggle();
 		$('#t_title, #t_message').val('');
-		$('#t_department').val('App');
-		$('#t_priority').val('Medium');
+		$('#t_department').val('Sales');
+		$('#t_priority').val('Low');
 		if(toggleAdd){
 			
 		}else{
