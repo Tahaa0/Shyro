@@ -107,6 +107,35 @@ margin-left: -3px;
   .tab.style-2 .nav-tabs .nav-link{
     flex: 0 0 23%;
   }
+  .expand_div{
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,1));
+    height: 100px;
+    widows: 100%;
+    margin-top: -100px;
+    position: relative;
+    z-index: 99;
+    text-align: center;
+    vertical-align: bottom;
+    padding-top: 40px;
+    color: #6C63FF;
+    font-size: 30px;
+  }
+  .expand_div span{
+    display: inline-block;
+    -webkit-transition: all 0.25s ease-in-out 0s;
+-moz-transition: all 0.25s ease-in-out 0s;
+-ms-transition: all 0.25s ease-in-out 0s;
+-o-transition: all 0.25s ease-in-out 0s;
+transition: all 0.25s ease-in-out 0s;
+cursor: pointer;
+  }
+  .expand_div span:hover{
+    padding-top: 10px;
+    
+  }
+  .expandable{
+    display: none;  
+  }
 </style>
 
 </head>
@@ -425,11 +454,14 @@ Works Perfectly fine with all Funnel steps, order form, OTOs and Order bumps.
 <br>
 The beautiful part is that everything is done inside your Clickfunnels’® account so you don’t need to provide Shyro any of your Payment Details and it doesn’t need access to it.
 </p>
+<div class="expand_div"> <span><i class="fas fa-chevron-down"></i></span></div>
+<div class="expandable">  
                   <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                     <li>Supports order forms, OTOs and Order bumps.</li>
                     <li>The best locking solution on the market yet.</li>
                     <li>Integrates directly with Clickfunnels’®, so it doesn’t need access to your details.</li>
                   </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -444,12 +476,14 @@ The beautiful part is that everything is done inside your Clickfunnels’® acco
 <br>
 It Supports up to 168 currencies collected from various commercial sources & banks every 1 second for more accuracy. And the best part is that it does change the prices on your landing pages’ texts as well not just the order forms 😎.
 </p>
+<div class="expand_div"> <span><i class="fas fa-chevron-down"></i></span></div>
+<div class="expandable">  
                   <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                     <li>Change Currency automatically based on Geo location.</li>
                     <li>Supports 168 Currencies worldwide.</li>
                     <li>Exchange rates pulled once every 1 sec for the best accuracy.</li>
                     <li>Changes the text prices on landing pages.</li>
-                  </ul>
+                  </ul></div>
                 </div>
               </div>
             </div>
@@ -466,11 +500,13 @@ It is done in a super-cool way to give you absolute freedom with adding and remo
 <br>
 Since we don’t access your data, the Variant your customers chooses will get automatically added to their profile on Clickfunnels® for a simple way for you and your VAs.
 </p>
+<div class="expand_div"> <span><i class="fas fa-chevron-down"></i></span></div>
+<div class="expandable">  
                   <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
                     <li>Add variants to any product.</li>
                     <li>Edit and remove variants without touching the product itself.</li>
                     <li>Variants gets added to the User profile (in Clickfunnels®) for ease of use for you and your VAs..</li>
-                  </ul>
+                  </ul></div>
                 </div>
               </div>
             </div>
@@ -486,7 +522,10 @@ Since we don’t access your data, the Variant your customers chooses will get a
 We’ve created a special marketplace to give you Access to High-Converting funnels, landing pages, and more. For the price of a meal or two.
 <br><br>
 The best part is it is an open Marketplace for all designers to list their templates in to create a competition between all of the amazing designers and funnel hackers out there, so you know you get the best designs for the best prices. 
-<br>
+</p>
+<div class="expand_div"> <span><i class="fas fa-chevron-down"></i></span></div>
+<div class="expandable">
+  <p>
 We are and always will carefully review new entries from our community one by one to make sure they meet high-quality design and functionality standards. From whole Funnels to Single Page Templates in all niches.
 </p>
                   <ul class="custom-li list-unstyled list-icon-2 d-inline-block">
@@ -495,6 +534,8 @@ We are and always will carefully review new entries from our community one by on
                     <li>Variety of templates to choose from</li>
                     <li>Money-Back guarantee and real reviews and feedback not controlled or censored by the sellers</li>
                   </ul>
+</div>
+
                 </div>
               </div>
             </div>
@@ -1026,7 +1067,17 @@ Shyro charges a 30% on each sale, and payouts are every 15 Days.
 <script src="js/theme-script.js"></script>
 
 <!-- inject js end -->
-
+<script>
+    $('.nav-item.nav-link').click(function(){
+        $('.nav-item.nav-link').removeClass('active');
+        $('.expand_div').show();
+        $('.expandable').hide();
+    });
+    $('.expand_div span').click(function(){
+        $(this).parent().hide();
+        $(this).parent().next().slideDown(400);
+    });
+</script>
 </body>
 
 </html>
