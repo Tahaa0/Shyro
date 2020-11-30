@@ -84,7 +84,7 @@
 					<div class="welcome_box">
 						<button class='back_button link_button' href='/funnels/'><i class="fas fa-reply"></i></button>
 						<h4>Funnel Steps</h4>
-						<h1 id='funnel_title'>Kinobody Funnel</h1>
+						<h1 id='funnel_title'>Funnel</h1>
 					</div>
 					<div class="funnels">
 						<div id="addSplitBox" style="display: none;">
@@ -171,6 +171,35 @@
 							</div>
 							
 						</div>
+						<div id="funnelSettingsBox" class="box_2 box_3" style="display:none">
+							<div class="row">
+								<div class="col-md-5">
+									<div class="app_title" style="margin-left: 4px;">Payment Method :</div>
+									<div class="select_type" id='payment_method'>
+										<div class="select_tab active" data-type='stripe'>
+											<div class="select_icon">
+												<i class="fab fa-stripe-s"></i>
+											</div>
+											<div class="select_text">
+												Stripe
+											</div>
+										</div>
+										<div class="select_tab active" data-type='paypal'>
+											<div class="select_icon">
+												<i class="fab fa-paypal"></i>
+											</div>
+											<div class="select_text">
+												Paypal
+											</div>
+										</div>
+									</div>
+									<div class="field_label" style="text-align: center; margin-top: 4px;	margin-bottom: 0;	">This field is irrelevant if Shyro Pay is Active.</div>
+								</div>
+								<div class="col-md-6">
+									
+								</div>
+							</div>
+						</div>
 						<div id="fappSettingsBox_2" class="box_2 appsettingsbox" style='width:0px;display: none;'>
 							<div class="field">
 								<div class="field_label">Source Currency :</div>
@@ -194,15 +223,19 @@
 						</div>
 						<div></div>
 						<span class='black_button' id='cancelFunnelApps' style="display: none;">Done</span>
+						<span class='black_button' id='cancelFunnelSettings' style="display: none;">Cancel</span>
+						<span class='black_button' id='saveFunnelSettings' style="display: none;">Save</span>
 						<span class='black_button' id='addStep' style="display: none;">Submit</span>
 						<span class='black_button' id='addSplit' style="display: none;">Submit</span>
 						<span class='black_button' id='updateStep' style="display: none;">Update</span>
 						<span class='black_button' id='toggleAdd'><i class="flaticon-plus"></i> <span>Add Step</span></span>
-						<span class='black_button' id='toggleSplitTest'><i class="flaticon-plus"></i> <span>Add Split Test</span></span>
+						<span class='black_button' id='toggleSplitTest'><i class="flaticon-plus"></i> <span>Split Test</span></span>
 						<span class='black_button' id='toggleEdit'><i class="flaticon-edit-square"></i> <span>Edit Step</span></span>
 
 						<span class='black_button delete_btn' id='deleteStep'><i class="flaticon-delete"></i> <span>Delete Step</span></span>
-						<span class='black_button' id='toggleFunnelApps' style="float: right;">Funnel Apps</span>
+						<span class='black_button' id='toggleFunnelSettings' style="float: right;"><i class="flaticon-setting"></i> <span>Settings</span></span>
+						<span class='black_button' id='toggleFunnelApps' style="float: right; margin-right: 5px;	"><i class="flaticon-category"></i> <span>Apps</span></span>
+						
 						<div id="myfunnels" class="row dbox">
 							<div class="col-md-4">
 								<div id='myf'>
@@ -509,7 +542,8 @@
 	var funnelApps = {
 		paypal: false,
 		currencyConverter: false,
-		funnelCurrency: 'USD'
+		funnelCurrency: 'USD',
+		paymentMethod: 'stripe'
 	};
 
 	var SELECTED_STEP = 0;
@@ -565,6 +599,7 @@
 	var a_toggleEditQuantity = true;
 
 	var f_toggleFunnelApps = true;
+	var f_toggleFunnelSettings = true;
 	var f_toggleAppSettings = true;
 
 	function toggleFunnelApps(){
@@ -575,6 +610,7 @@
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+		$('#toggleFunnelSettings').toggle();
 		$('#toggleSplitTest').toggle();
 
 		if(!f_toggleAppSettings){
@@ -593,6 +629,31 @@
 			}else{
 				$('#app_currency').parent().parent().parent().find('.editbox').css({'visibility':'hidden'});
 			}
+
+			$('html, body').animate({
+		        scrollTop: $(".welcome_box").offset().top
+		    }, 500);
+		}
+
+		f_toggleFunnelApps = !f_toggleFunnelApps;
+	}
+
+	function toggleFunnelSettings(){
+		
+		$('#cancelFunnelSettings').toggle();
+		$('#saveFunnelSettings').toggle();
+		$('#toggleAdd').toggle();
+		$('#toggleEdit').toggle();
+		$('#deleteStep').toggle();
+		$('#toggleFunnelApps').toggle();
+		$('#toggleFunnelSettings').toggle();
+		$('#toggleSplitTest').toggle();
+
+		$('#funnelSettingsBox').slideToggle(300);
+
+		if(f_toggleFunnelSettings){
+			$('#payment_method .select_tab').removeClass('active');
+			$('#payment_method .select_tab[data-type='+funnelApps.paymentMethod+']').addClass('active');
 
 			$('html, body').animate({
 		        scrollTop: $(".welcome_box").offset().top
@@ -651,6 +712,7 @@
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+		$('#toggleFunnelSettings').toggle();
 		$('#toggleSplitTest').toggle();
 
 		$('#step_title').val('');
@@ -658,7 +720,7 @@
 		if(toggleAdd){
 			$('#toggleAdd').html('Cancel');
 		}else{
-			$('#toggleAdd').html('<i class="flaticon-plus"></i> Add Step');
+			$('#toggleAdd').html('<i class="flaticon-plus"></i> <span>Add Step</span>');
 		}
 		toggleAdd = !toggleAdd;
 
@@ -671,6 +733,7 @@
 		$('#toggleEdit').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+		$('#toggleFunnelSettings').toggle();
 		$('#toggleAdd').toggle();
 
 		$('#split_url').val('');
@@ -678,7 +741,7 @@
 		if(toggleSplit){
 			$('#toggleSplitTest').html('Cancel');
 		}else{
-			$('#toggleSplitTest').html('<i class="flaticon-plus"></i> Add Split Test');
+			$('#toggleSplitTest').html('<i class="flaticon-plus"></i> <span>Add Split Test</span>');
 		}
 		toggleSplit = !toggleSplit;
 	}
@@ -690,6 +753,7 @@
 		$('#toggleAdd').toggle();
 		$('#deleteStep').toggle();
 		$('#toggleFunnelApps').toggle();
+		$('#toggleFunnelSettings').toggle();
 		$('#toggleSplitTest').toggle();
 
 		$('#step_title').val('');
@@ -699,10 +763,10 @@
 			$('#step_title').val(funnelSteps[SELECTED_STEP].title);
 			$('#step_url').val(funnelSteps[SELECTED_STEP].url);
 
-			$('.select_tab').removeClass('active');
-			$('.select_tab[data-type='+funnelSteps[SELECTED_STEP].type+']').addClass('active');
+			$('#step_type .select_tab').removeClass('active');
+			$('#step_type .select_tab[data-type='+funnelSteps[SELECTED_STEP].type+']').addClass('active');
 		}else{
-			$('#toggleEdit').html('<i class="flaticon-edit"></i> Edit Step');
+			$('#toggleEdit').html('<i class="flaticon-edit-square"></i> <span>Edit Step</span>');
 		}
 		toggleEdit = !toggleEdit;
 	}
@@ -1081,6 +1145,10 @@
 
 	}
 
+	$('#toggleFunnelSettings, #cancelFunnelSettings').click(function(){
+		toggleFunnelSettings();
+	});
+
 	$('#toggleFunnelApps, #cancelFunnelApps').click(function(){
 		toggleFunnelApps();
 	});
@@ -1142,7 +1210,7 @@
 	});
 
 	$('.select_tab').click(function(){
-		$('.select_tab').removeClass('active');
+		$(this).parent().find('.select_tab').removeClass('active');
 		$(this).addClass('active');
 	});
 
@@ -1255,12 +1323,18 @@
 		checkHideProduct();
 		
 	}
+	//F SETTINGS
+	$('#saveFunnelSettings').click(function(){
+		funnelApps.paymentMethod = $('#payment_method .select_tab.active').data('type');
+		saveFunnel();
+		toggleFunnelSettings();
+	});
 
 	$('#addStep').click(function(){
 		var step = {};
 		step.title = $('#step_title').val();
 		step.url = $('#step_url').val();
-		step.type = $('.select_tab.active').data('type');
+		step.type = $('#step_type .select_tab.active').data('type');
 		step.products = [];
 		funnelSteps.push(step);
 		saveFunnel();
@@ -1271,7 +1345,7 @@
 	$('#updateStep').click(function(){
 		funnelSteps[SELECTED_STEP].title = $('#step_title').val();
 		funnelSteps[SELECTED_STEP].url = $('#step_url').val();
-		funnelSteps[SELECTED_STEP].type = $('.select_tab.active').data('type');
+		funnelSteps[SELECTED_STEP].type = $('#step_type .select_tab.active').data('type');
 		saveFunnel();
 		updateFunnelSteps();
 		toggleEditStep();

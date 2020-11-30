@@ -1512,6 +1512,10 @@ input:checked + .slider:before {
 	max-width: none;
 	width: auto;
 }
+#funnelSettingsBox{
+	max-width: none;
+	width: 100%;
+}
 .appsettingsbox{
 	background-color: white;
 }
@@ -1990,4 +1994,11 @@ margin-top: 30px;
 
 .bigflat{
 	font-size: 20px;
+}
+
+#payment_method{
+	width: 100%;	
+}
+#payment_method .select_tab{
+	flex: 0 0 50%
 }
