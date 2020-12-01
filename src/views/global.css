@@ -2002,3 +2002,12 @@ margin-top: 30px;
 #payment_method .select_tab{
 	flex: 0 0 50%
 }
+
+input.disabled{
+	background-color: #E7E7E7;
+	border:2px solid #E7E7E7;
+	cursor: not-allowed;
+}
+.premcont{
+	display: none;
+}

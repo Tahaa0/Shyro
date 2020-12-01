@@ -139,6 +139,28 @@
 		alert(data.message);
 	});
 
+	function durationText(date){
+		var now = new Date();
+		var milliseconds = now-date;
+		console.log(milliseconds);
+		if(milliseconds < 60*1000){ //less than 1 minute
+			return "Just updated."
+		}
+		var minutes = parseInt(milliseconds/(60*1000));
+		if(milliseconds < 60*60*1000){ //less than 1 hour
+			return "Updated "+minutes+" minutes ago."
+		}
+		var hours = parseInt(minutes/60);
+		var s_hours = "s";
+		if(hours == 1) s_hours = "";
+
+		if(milliseconds < 24*60*60*1000){ //less than 1 day
+			return "Updated "+hours+" hour"+s_hours+" ago."
+		}
+
+		return "Last updated "+date.toLocaleDateString()+".";
+	}
+
 	function funnelHTML(title,steps,updated_text,color,isActive,i){
 		var activeText = 'Active';
 		if(!isActive){
@@ -183,7 +205,8 @@
 			var funnel = FUNNELS[i];
 			/*code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>"+funnel.title+"</span><button class='minibutton' onclick='deletefunnel("+i+")'>Delete</button><button class='minibutton' onclick='editfunnel("+i+")'>Edit</button></div>";
 			code += "<div class=\"funnel_item\"><div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div><div class=\"f_details\"><div class=\"f_title\">"+funnel.title+"<\/div><div class=\"f_caption\">Active<\/div><div class=\"f_buttons\" style='display:none;'><button onclick='editfunnel("+i+")' class=\'close_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'close_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div><\/div><div class=\"f_details\"><div class=\"f_caption2\">3 Steps<\/div><\/div><div class=\"f_details2\"><div class=\"f_caption2\">Updated 12h ago<\/div><\/div><\/div>";*/
-			code += funnelHTML(funnel.title,funnel.steps.length,'Updated 1min ago',COLORS[i%3],true,i);
+			var lastUpdated = new Date(funnel.updatedAt);
+			code += funnelHTML(funnel.title,funnel.steps.length,durationText(lastUpdated),COLORS[i%3],true,i);
 		}
 		$("#myfunnels").html(code);
 		//EFFECTS

@@ -582,6 +582,29 @@
 		return HTML;
 	}
 
+	function refreshProductIDFields(){
+
+		$('#q_stripe, #p_stripe, #q_paypal, #p_paypal').removeAttr('disabled');
+		$('#q_stripe, #p_stripe, #q_paypal, #p_paypal').removeClass('disabled');
+
+		if(!funnelApps.paypal){
+			if(funnelApps.paymentMethod == 'paypal'){
+				$('#q_stripe, #p_stripe').attr('disabled','disabled');
+				$('#q_stripe, #p_stripe').addClass('disabled');
+			}else if(funnelApps.paymentMethod == 'stripe'){
+				$('#q_paypal, #p_paypal').attr('disabled','disabled');
+				$('#q_paypal, #p_paypal').addClass('disabled');
+			}
+		}
+	}
+
+	$('#q_stripe, #p_stripe, #q_paypal, #p_paypal').keyup(function(){
+		var str_url = $(this).val();
+		if(str_url.includes('/products/')){
+			$(this).val(str_url.split('/products/')[1].split('/')[0]);
+		}
+	});
+
 	var toggleAdd = true;
 	var toggleEdit = true;
 	var toggleSplit = true;
@@ -803,6 +826,7 @@
 		$('#toggleEditProduct').toggle();
 		$('#toggleApps').toggle();
 		$('#deleteProduct').toggle();
+		$('#hideProduct').toggle();
 
 		$('#p_editbuttons').toggle();
 
@@ -1326,6 +1350,7 @@
 	//F SETTINGS
 	$('#saveFunnelSettings').click(function(){
 		funnelApps.paymentMethod = $('#payment_method .select_tab.active').data('type');
+		refreshProductIDFields();
 		saveFunnel();
 		toggleFunnelSettings();
 	});
@@ -1439,6 +1464,7 @@
 
 	$('#app_paypal').change(function(){
 		funnelApps.paypal = $(this).is(':checked');
+		refreshProductIDFields();
 		saveFunnel();
 	});
 
