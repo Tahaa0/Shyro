@@ -343,6 +343,7 @@ window.onload = function(){
         parDOM.prepend(ccBody);
         parDOM.prepend(ccTab);
         ccBody.prepend(ccForm);
+        ccBody.append('<div style="clear: both;"></div>');
       }
       
       //FORM SUBMIT
