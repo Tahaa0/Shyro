@@ -140,14 +140,14 @@ window.onload = function(){
 		
     if(STEP.type =='form'){
 
-      var results = highlight(/%price_\d+\.?\d*%/gi, 'body', '*');
+      //var results = highlight(/%price_\d+\.?\d*%/gi, 'body', '*');
 
-      $.each(results, function() {
+      /*$.each(results, function() {
           $(this).html($(this).html().replace(/%price_\d+\.?\d*%/gi,function(x){
             var prc = x.split('_')[1].split('%')[0];
             return "<span class='xxprice' data-value="+prc+"></span>";
           }));
-      });
+      });*/
 
       /*$('body').html($('body').html().replace(/%price_\d+\.?\d*%/gi,function(x){
         var prc = x.split('_')[1].split('%')[0];
