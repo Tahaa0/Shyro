@@ -9,14 +9,10 @@ window.onload = function(){
   var QUANTITY = 1;
   var BUMPS = [];
   
-  function escRegExp(str) {
-    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-  }
-
   // Return matched elements based on regex contents
   function highlight(regex, element, child) {
       // Create a regex based on the match string
-      var regex = new RegExp(escRegExp(regex), 'gim');
+      var regex = regex;
       // Generate results based on regex matches within match_parent
       var results = [];
       // Check for element
@@ -152,7 +148,7 @@ window.onload = function(){
             return "<span class='xxprice' data-value="+prc+"></span>";
           }));
       });
-      
+
       /*$('body').html($('body').html().replace(/%price_\d+\.?\d*%/gi,function(x){
         var prc = x.split('_')[1].split('%')[0];
         return "<span class='xxprice' data-value="+prc+"></span>";
