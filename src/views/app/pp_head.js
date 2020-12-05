@@ -10,25 +10,7 @@ window.onload = function(){
   var BUMPS = [];
   
   // Return matched elements based on regex contents
-  function highlight(regex, element, child) {
-      // Create a regex based on the match string
-      var regex = regex;
-      // Generate results based on regex matches within match_parent
-      var results = [];
-      // Check for element
-      if($(element).length) {
-          // Match regex on parent element
-          var match = $(element).text().match(regex);
-          if(match != null) {
-              // Push our matches onto results
-              $(element).find(child).each(function(index, value) {
-                  // Push child onto to results array if it contains our regex
-                  if($(this).text().match(regex)) results.push($(this));
-              });
-          }
-      }
-      return results;
-  }
+  
 
 
   function roundUp50(n){
@@ -140,14 +122,7 @@ window.onload = function(){
 		
     if(STEP.type =='form'){
 
-      //var results = highlight(/%price_\d+\.?\d*%/gi, 'body', '*');
-
-      /*$.each(results, function() {
-          $(this).html($(this).html().replace(/%price_\d+\.?\d*%/gi,function(x){
-            var prc = x.split('_')[1].split('%')[0];
-            return "<span class='xxprice' data-value="+prc+"></span>";
-          }));
-      });*/
+      
 
       /*$('body').html($('body').html().replace(/%price_\d+\.?\d*%/gi,function(x){
         var prc = x.split('_')[1].split('%')[0];
