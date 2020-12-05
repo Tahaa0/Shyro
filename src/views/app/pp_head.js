@@ -9,6 +9,32 @@ window.onload = function(){
   var QUANTITY = 1;
   var BUMPS = [];
   
+  function escRegExp(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+  }
+
+  // Return matched elements based on regex contents
+  function highlight(regex, element, child) {
+      // Create a regex based on the match string
+      var regex = new RegExp(escRegExp(regex), 'gim');
+      // Generate results based on regex matches within match_parent
+      var results = [];
+      // Check for element
+      if($(element).length) {
+          // Match regex on parent element
+          var match = $(element).text().match(regex);
+          if(match != null) {
+              // Push our matches onto results
+              $(element).find(child).each(function(index, value) {
+                  // Push child onto to results array if it contains our regex
+                  if($(this).text().match(regex)) results.push($(this));
+              });
+          }
+      }
+      return results;
+  }
+
+
   function roundUp50(n){
     var N = parseFloat(n).toFixed(2);
     if((N - parseInt(N))>0.5){
@@ -117,20 +143,16 @@ window.onload = function(){
 	if(VALID){
 		
     if(STEP.type =='form'){
-      function ReplaceChildText(node, findText, replaceText) {
-          if (node.nodeType == 3) {
-              node.innerHTML = node.innerHTML.replace(findText, replaceText);
-          } else {
-              for (var child in node.childNodes) {
-                  ReplaceChildText(child, findText, replaceText);
-              }
-          }
-      }
 
-      ReplaceChildText(document.getElementsByTagName('body')[0], /%price_\d+\.?\d*%/gi, function(x){
-        var prc = x.split('_')[1].split('%')[0];
-        return "<span class='xxprice' data-value="+prc+"></span>";
+      var results = highlight(/%price_\d+\.?\d*%/gi, 'body', '*');
+
+      $.each(results, function() {
+          $(this).html($(this).html().replace(/%price_\d+\.?\d*%/gi,function(x){
+            var prc = x.split('_')[1].split('%')[0];
+            return "<span class='xxprice' data-value="+prc+"></span>";
+          }));
       });
+      
       /*$('body').html($('body').html().replace(/%price_\d+\.?\d*%/gi,function(x){
         var prc = x.split('_')[1].split('%')[0];
         return "<span class='xxprice' data-value="+prc+"></span>";
