@@ -65,7 +65,12 @@ if(VALID){ //IF THIS IS A STEP
       var PARENT_ = $('#pid-'+STEP.products[i].paypal+'-0').parent().parent();
       PARENT_.remove();
       
+      //change %price%
 
+      $('body').innerHTML.replace(/%price_\d+\.?\d*%/gi,function(x){
+        var prc = x.split('_')[1].split('%')[0];
+        return "<span class='xxprice' data-value="+prc+"></span>";
+      });
 
       if(STEP.products[i].hidden){ //REMOVE HIDDEN PRODUCTS
         $('#pid-'+STEP.products[i].stripe+'-0').parent().parent().remove();
