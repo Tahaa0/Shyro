@@ -76,7 +76,7 @@
 		</div>
 	</div>
 	<div id="page_wrapper">
-		<div class="upgradeOverlay">
+		<div class="upgradeOverlay" style="display: none;">
 			<h2 style="text-align: center;	color: #FF754C;">Feature Unavailable</h2>
 			<h4>This feature is under development. Please come back later.</h4>
 
@@ -90,7 +90,7 @@
 					</div>
 					<div class="funnels">
 						<div></div>
-						<div id="addTicketBox" class="box_2 appsettingsbox" style="width: 100%; max-width:none;">
+						<div id="addProductMp_1" class="box_2 appsettingsbox" style="width: 100%; max-width:none;">
 							<div class="field">
 								<div class="field_label">Title :</div>
 								<div class="field_input"><input type="text" id="mp_title"></div>
@@ -118,11 +118,56 @@
 							</div>
 							
 							<div class="f_buttons" style="margin-top: 0;">
-								<button class="cancelFunnelAppSettings" id="mp_submit"><i class="fas fa-long-arrow-alt-right"></i>  Next</button>
+								<button class="cancelFunnelAppSettings" id="mp_next_1"><i class="fas fa-long-arrow-alt-right"></i>  Next</button>
 								<button class="cancelFunnelAppSettings" id='goback'>Cancel</button>
 							</div>
 						</div>
+						<!------------------------------------------------------------------------------------>
+						<div id="addProductMp_2" class="box_2 appsettingsbox" style="display:none; width: 100%; max-width:none;">
+							<div class="field">
+								<div class="field_label">Description :</div>
+								<div class="field_input"><textarea id='mp_description'></textarea></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6 multiput">
+									<div class="field_label">Features :</div>
+									<div class="field_input"><input type="text" id="mp_feature_1" placeholder="Feature #1"></div>
+									<div class="field_input"><input type="text" id="mp_feature_2" placeholder="Feature #2"></div>
+									<div class="field_input"><input type="text" id="mp_feature_3" placeholder="Feature #3"></div>
+									<div class="field_input"><input type="text" id="mp_feature_4" placeholder="Feature #4"></div>
+								</div>
+								<div class="col-md-6 multiput">
+									<div class="field_label">Frequently Asked Questions :</div>
+									<div class="field_input"><input type="text" id="mp_q_1" placeholder="Question #1"></div>
+									<div class="field_input"><input type="text" id="mp_a_1" placeholder="Answer #1"></div>
+									<div class="field_input"><input type="text" id="mp_q_2" placeholder="Question #2"></div>
+									<div class="field_input"><input type="text" id="mp_a_2" placeholder="Answer #2"></div>
+								</div>	
+							</div>
+							
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id="mp_next_2"><i class="fas fa-long-arrow-alt-right"></i>  Next</button>
+								<button class="cancelFunnelAppSettings" id='goback_2'>Back</button>
+							</div>
+						</div>
+
+						<div id="addProductMp_3" class="box_2 appsettingsbox" style="display:none; width: 100%; max-width:none;">
+							<div class="field">
+								<div class="field_label">Main Image :</div>
+								<div class="field_input"><input type="text" id='mp_main_img' placeholder="Image URL"></div>
+							</div>
+							<div class="field">
+								<div class="field_label">Bottom Images :</div>
+								<div class="field_input"><textarea id='mp_images' placeholder="Image URLs one each line"></textarea></div>
+							</div>
+							
+							<div class="f_buttons" style="margin-top: 0;">
+								<button class="cancelFunnelAppSettings" id="mp_publish">Publish</button>
+								<button class="cancelFunnelAppSettings" id='goback_3'>Back</button>
+							</div>
+						</div>
 						<div></div>
+
 					</div>
 				</div>
 			</div>
@@ -142,6 +187,23 @@
 
 	$('#goback').click(function(){
 		window.location = "/marketplace";
+	});
+	$('#goback_2').click(function(){
+		$('#addProductMp_2').hide();
+		$('#addProductMp_1').slideDown(400);
+	});
+	$('#goback_3').click(function(){
+		$('#addProductMp_3').hide();
+		$('#addProductMp_2').slideDown(400);
+	});
+
+	$('#mp_next_1').click(function(){
+		$('#addProductMp_1').hide();
+		$('#addProductMp_2').slideDown(400);
+	});
+	$('#mp_next_2').click(function(){
+		$('#addProductMp_2').hide();
+		$('#addProductMp_3').slideDown(400);
 	});
 
 </script>
