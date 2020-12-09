@@ -201,9 +201,29 @@
 		$('#addProductMp_1').hide();
 		$('#addProductMp_2').slideDown(400);
 	});
+
 	$('#mp_next_2').click(function(){
 		$('#addProductMp_2').hide();
 		$('#addProductMp_3').slideDown(400);
+	});
+
+	$('#mp_publish').click(function(){
+		var title = $('#mp_title').val();
+		var price = $('#mp_price').val();
+		var guarantee = $('#mp_guarantee').val();
+		var template_link = $('#mp_link').val();
+		var description = $('#mp_description').val();
+		var features = [$('#mp_feature_1').val(),$('#mp_feature_2').val(),$('#mp_feature_3').val(),$('#mp_feature_4').val()];
+		var faq = [$('#mp_q_1').val(),$('#mp_a_1').val(),$('#mp_q_2').val(),$('#mp_a_2').val()];
+		var main_img = $('#mp_main_img').val();
+		var bottom_imgs = $('#mp_images').val();
+		createTemplate(title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,function(err,data){
+			if(!err) {
+				$('#addProductMp_3').hide();
+			}else{
+				console.log(err);
+			}
+		});
 	});
 
 </script>

@@ -14,12 +14,19 @@ const templateSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    tags : Array,
     guarantee : {
         type: Number,
         default: 0
     },
-    screenshots: Array
+    template_link: {
+        type: String,
+        required: true
+    },
+    description: String,
+    features: Array,
+    faq: Array,
+    main_img: String,
+    bottom_imgs: String
 }, {timestamps: true});
 
 module.exports = mongoose.model('Templates', templateSchema);

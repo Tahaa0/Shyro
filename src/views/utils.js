@@ -39,7 +39,36 @@ $('#sidebar_user').click(function(){
 	}
 
 });
+//MARKETPLACE
+function createTemplate(title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,cb){
+	$.ajax({
+	  url: "/api/template/",
+	  type: "POST",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'title':title,price:price,guarantee:guarantee,template_link:template_link,description:description,features:features,faq:faq:main_img:main_img:bottom_imgs:bottom_imgs},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
 
+function indexTickets(cb){
+	$.ajax({
+	  url: "/api/template",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
 //TICKET
 
 function replyTicket(id,message,cb){

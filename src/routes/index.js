@@ -1,6 +1,7 @@
 const auth = require('./auth');
 const user = require('./user');
 const funnel = require('./funnel');
+const template = require('./template');
 const ticket = require('./ticket');
 const funnelscript = require('./funnelscript');
 const paypal = require('./paypal');
@@ -136,5 +137,8 @@ module.exports = app => {
     app.use('/api/ticket', authenticate, ticket);
     app.use('/api/funnelscript', funnelscript);
     app.use('/api/paypal/', paypal);
+
+    //marketplace
+    app.use('/api/template', authenticate, template);
 
 };
