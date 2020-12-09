@@ -12,6 +12,7 @@ router.get('/', Template.index);
 router.post('/', [
     check('title').not().isEmpty().withMessage('Title is empty.'),
 ],Template.create);
-
+//SHOW
+router.get('/:id',  Template.show);
 
 module.exports = router;

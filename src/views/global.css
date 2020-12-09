@@ -2024,3 +2024,13 @@ input.disabled{
 .multiput input{
 	margin-bottom: 8px;
 }
+
+a{
+	color: inherit;
+text-decoration: none;
+background-color: transparent;
+}
+a:hover{
+	text-decoration: none;
+	color: inherit;
+}

@@ -96,93 +96,8 @@
 				<button>Freelance</button>
 				<button class="black_button" id="listItem">Start Selling</button>
 			</div>
-			<div class="row mp_row">
-
-				<div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-				<div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <!--row end-->
-        	</div>
-        	<div class="row mp_row">
-
-				<div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-				<div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <div class="col-md-3">
-					<img class="mp_img" src='http://codenpixel.com/demo/marketspot/assets/img/06-sneak-peeks_1571386621320.png'>
-					<div class="mp_details">
-						<div class="mp_title">Basic Template</div>
-						<div class="mp_price">29$</div>
-					</div>
-					<div class="mp_details2">
-						By <span class="username">FTeam</span>
-					</div>
-	            </div>
-	            <!--row end-->
+			<div id="market_listings">
+				
         	</div>
 		</div>
 	</div>
@@ -197,6 +112,40 @@
 		console.log(data);
 		alert(data.message);
 	});
+
+	marketplaceRefresh();
+
+	function mpListingHTML(id,thumbnail_url,title,price,username){
+		var code = '<div class="col-md-3"><div class="mp_img_cont"><a href="/marketplace/product/'+id+'"><img class="" src="'+thumbnail_url+'"></a></div><div class="mp_details"><div class="mp_title"><a href="/marketplace/product/'+id+'">'+title+'</a></div><div class="mp_price">'+price+'$</div></div><div class="mp_details2">By <span class="username">'+username+'</span></div></div>';
+		return code;
+	}
+	
+	function updateTemplates(){
+		var html = "";
+		var rows = parseInt(TEMPLATES.length/3);
+		for(var i=0;i<TEMPLATES.length;i++){
+			if(i == 0){
+				html += "<div class='row mp_row'>";
+			}else if(i % 3 == 0){
+				html += "</div><div class='row mp_row'>";
+			}
+
+			html += mpListingHTML(TEMPLATES[i]._id,TEMPLATES[i].main_img,TEMPLATES[i].title,TEMPLATES[i].price,TEMPLATES[i].username);
+		}
+		html += "</div>";
+		$('#market_listings').html(html);
+	}
+
+	function marketplaceRefresh(){
+		indexTemplates(function(err,data){
+			if(!err) {
+				TEMPLATES = data.templates;
+				updateTemplates();
+			}else{
+				console.log(err);
+			}
+		});
+	}
 
 	$("#menu_drop_icon").click(function(){
 		$('.sidebar_container').animate({'width':'268px'},400);

@@ -45,7 +45,7 @@ function createTemplate(title,price,guarantee,template_link,description,features
 	  url: "/api/template/",
 	  type: "POST",
 	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
-	  data: {'title':title,price:price,guarantee:guarantee,template_link:template_link,description:description,features:features,faq:faq:main_img:main_img:bottom_imgs:bottom_imgs},
+	  data: {'title':title,price:price,guarantee:guarantee,template_link:template_link,description:description,'features':features,'faq':faq,main_img:main_img,bottom_imgs:bottom_imgs},
 	  error: function(err) {
 	    cb(err,{});
 	  },
@@ -55,9 +55,24 @@ function createTemplate(title,price,guarantee,template_link,description,features
 	});
 }
 
-function indexTickets(cb){
+function indexTemplates(cb){
 	$.ajax({
 	  url: "/api/template",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
+function getTemplate(id,cb){
+	$.ajax({
+	  url: "/api/template/"+id,
 	  type: "GET",
 	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
 	  data: {},

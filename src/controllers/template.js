@@ -11,6 +11,19 @@ exports.index = async function (req, res) {
     res.status(200).json({templates});
 };
 
+exports.show = async function (req, res) {
+    try {
+        const id = req.params.id;
+
+        const template_ = await Templates.findById(id);
+
+        if (!template_) return res.status(401).json({message: 'Template does not exist'});
+        
+        res.status(200).json({template_});
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+};
 
 exports.create = async (req, res) => {
     try {
@@ -31,11 +44,30 @@ exports.create = async (req, res) => {
         }
         var {template_link} = req.body;
         var {description} = req.body;
-        var {features} = req.body;
-        var {faq} = req.body;
+        
+        var features_ = JSON.parse(req.body.features);
+        var features = [];
+        for(var i=0;i<features_.length;i++){
+            if(features_[i].length>0){
+                features.push(features_[i]);
+            }
+        }
+
+        var faq_ = JSON.parse(req.body.faq);
+        var faq = [];
+        for(var i=0;i<faq_.length;i++){
+            if(faq_.length>0){
+                faq.push(faq_[i]);
+            }
+        }
+
         var {main_img} = req.body;
         var {bottom_imgs} = req.body;
-
+        if(bottom_imgs == ""){
+            bottom_imgs = [];
+        }else{
+            bottom_imgs = bottom_imgs.split('\n');
+        }
         
         const id = req.session['user_id'];
 
@@ -43,6 +75,7 @@ exports.create = async (req, res) => {
 
     	var dt = {
     		userId: user_._id,
+            username: user_.username,
     		title:title,
     		price:parseFloat(price),
             guarantee:g,
@@ -51,7 +84,7 @@ exports.create = async (req, res) => {
             features:features,
             faq:faq,
             main_img:main_img,
-            bottom_imgs:bottom_imgs.split('\n');
+            bottom_imgs:bottom_imgs
     	}
     	const template_ = new Templates(dt);
 
@@ -64,6 +97,7 @@ exports.create = async (req, res) => {
         res.status(500).json({success: false, message: error.message})
     }
 };
+
 /*
 exports.update = async function (req, res) {
     try {

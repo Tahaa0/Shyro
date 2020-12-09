@@ -92,20 +92,22 @@
 			<div class="row" style="width: 100%">
 				<div class="col-md-9">
 					<div class="mp_main_image_container">
-						<img class='mp_main_image' src="http://codenpixel.com/demo/marketspot/assets/img/5_1576156789870.png" alt="">
+						<img class='mp_main_image' id='t_main_image' src="http://codenpixel.com/demo/marketspot/assets/img/5_1576156789870.png" alt="">
 					</div>
 					<div class="mpp_desc">
-						<h1 class="mpp_title">
+						<h1 class="mpp_title" id='t_title'>
 							 Front-end UI kit to create a e-commerce websites with html templates and code snippets. 
 						</h1>
+						<div id="t_desc">
 						<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et metus at nibh volutpat lacinia. Donec at nulla ultricies mauris gravida feugiat et at justo. Fusce molestie malesuada sapien, vitae rutrum enim auctor et. Pellentesque iaculis lorem quis laoreet tempus.<br><br> Pellentesque suscipit, purus nec facilisis scelerisque, arcu quam tempor mi, hendrerit porttitor lectus nisi eu sapien. Mauris sagittis lacus in mi imperdiet lobortis.<br><br> Proin vulputate, quam sit amet rhoncus pulvinar, neque libero luctus elit, et imperdiet tellus ex in tellus. Sed tristique pulvinar erat, quis sollicitudin erat ornare vitae. Aenean in bibendum libero. Vestibulum gravida, arcu nec consequat maximus, justo massa cursus ante, non maximus tortor felis vel purus. Pellentesque efficitur quis ipsum et congue. Aliquam eget ipsum ipsum. Phasellus ornare sem metus, in congue lacus ullamcorper ac. Proin id vulputate neque. </p>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4">
 							<div class="mp_feature_box">
 								<h4>Features</h4>
-								<ul>
+								<ul id='t_features'>
 									<li><i class="fas fa-check greenlight"></i> 25 Illustrations</li>
 									<li><i class="fas fa-check greenlight"></i> Bright & Modern Style</li>
 									<li><i class="fas fa-check greenlight"></i> Fully Vector</li>
@@ -116,10 +118,10 @@
 						<div class="col-md-8">
 							<div class="mp_user_faq">
 								<h4>Frequently Asked Questions</h4>
-								<h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</h5>
-								<p>Donec at nulla ultricies mauris gravida feugiat et at justo. Fusce molestie malesuada sapien, vitae rutrum enim auctor et. Pellentesque iaculis lorem quis laoreet tempus.</p>
-								<h5>Pellentesque iaculis lorem quis laoreet tempus ?</h5>
-								<p>Aliquam eget ipsum ipsum. Phasellus ornare sem metus, in congue lacus ullamcorper ac. Proin id vulputate neque.</p>
+								<h5 id='t_q1'>Lorem ipsum dolor sit amet, consectetur adipiscing elit ?</h5>
+								<p id='t_a1'>Donec at nulla ultricies mauris gravida feugiat et at justo. Fusce molestie malesuada sapien, vitae rutrum enim auctor et. Pellentesque iaculis lorem quis laoreet tempus.</p>
+								<h5 id='t_q2'>Pellentesque iaculis lorem quis laoreet tempus ?</h5>
+								<p id='t_a2'>Aliquam eget ipsum ipsum. Phasellus ornare sem metus, in congue lacus ullamcorper ac. Proin id vulputate neque.</p>
 							</div>
 						</div>	
 					</div>
@@ -137,13 +139,13 @@
 						<h4>Shyro ClickFunnels Template</h4>
 
 						<ul>
-							<li><i class="fas fa-dot-circle greenlight"></i> 7 Days Guarantee</li>
+							<li><i class="fas fa-dot-circle greenlight"></i> <span id='t_guarantee'>7 Days Guarantee</span></li>
 							<li><i class="fas fa-dot-circle greenlight"></i> 24/7 Customer Support</li>
 						</ul>
 						<div class="spacer20">	</div>
 						<img style='width: 100%;' src="https://interactivespares.com/wp-content/uploads/2018/07/paypal_logo.png" alt="">
 						<div class="spacer20"></div>
-						<div class="black_button">Purchase <i class="fas fa-long-arrow-alt-right"></i> 49$</div>
+						<div class="black_button">Purchase <i class="fas fa-long-arrow-alt-right"></i> <span id='t_guarantee'>49$</span></div>
 					</div>
 				</div>
         	</div>
@@ -160,6 +162,46 @@
 		console.log(data);
 		alert(data.message);
 	});
+
+	var TEMPLATE_ID = "<%= id %>";
+	var TEMPLATE = {};
+
+	refreshTemplate();
+
+	function updateProductPage(){
+		$('#t_main_image').attr('src',TEMPLATE.main_img);
+		$('#t_title').html(TEMPLATE.title);
+		$('#t_desc').html(TEMPLATE.description.replace(/\n/g, "<br />"));
+		if(TEMPLATE.guarantee>0){
+			$('#t_guarantee').html(TEMPLATE.guarantee+" Days Guarantee");
+		}else{
+			$('#t_guarantee').parent().remove();
+		}
+		
+		$('#t_price').html("$"+TEMPLATE.price);
+
+		var f_html = "";
+		for(var i=0;i<TEMPLATE.features.length;i++){
+			f_html += '<li><i class="fas fa-check greenlight"></i> '+TEMPLATE.features[i]+'</li>';
+		}
+		$('#t_features').html(f_html)
+
+		$('#t_q1').html(TEMPLATE.faq[0]);
+		$('#t_a1').html(TEMPLATE.faq[1]);
+		$('#t_q2').html(TEMPLATE.faq[2]);
+		$('#t_a2').html(TEMPLATE.faq[3]);
+	}
+
+	function refreshTemplate(){
+		getTemplate(TEMPLATE_ID,function(err,data){
+			if(!err) {
+				TEMPLATE = data.template_;
+				updateProductPage();
+			}else{
+				console.log(err);
+			}
+		});
+	}
 
 	$("#menu_drop_icon").click(function(){
 		$('.sidebar_container').animate({'width':'268px'},400);

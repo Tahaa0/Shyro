@@ -5,6 +5,10 @@ const templateSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: 'Title is empty.',
@@ -26,7 +30,7 @@ const templateSchema = new mongoose.Schema({
     features: Array,
     faq: Array,
     main_img: String,
-    bottom_imgs: String
+    bottom_imgs: Array
 }, {timestamps: true});
 
 module.exports = mongoose.model('Templates', templateSchema);

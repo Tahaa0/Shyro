@@ -217,7 +217,7 @@
 		var faq = [$('#mp_q_1').val(),$('#mp_a_1').val(),$('#mp_q_2').val(),$('#mp_a_2').val()];
 		var main_img = $('#mp_main_img').val();
 		var bottom_imgs = $('#mp_images').val();
-		createTemplate(title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,function(err,data){
+		createTemplate(title,price,guarantee,template_link,description,JSON.stringify(features),JSON.stringify(faq),main_img,bottom_imgs,function(err,data){
 			if(!err) {
 				$('#addProductMp_3').hide();
 			}else{

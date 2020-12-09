@@ -104,9 +104,9 @@ module.exports = app => {
         }
     });
 
-    app.get('/marketplace/product', (req,res)=>{
+    app.get('/marketplace/product/:id', (req,res)=>{
         if(req.session['token']){
-            res.render('mp_product.ejs');
+            res.render('mp_product.ejs',{id:req.params.id});
         }else{
             res.redirect('/login');
         }
