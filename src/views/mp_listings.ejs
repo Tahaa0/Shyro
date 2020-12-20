@@ -86,8 +86,8 @@
 		</div>
 		<div class="container containerBB">
 			<div class="welcome_box">
-				<h4>Buy Templates</h4>
-				<h1>Marketplace</h1>
+				<h4>My Listings</h4>
+				<h1>My Templates</h1>
 			</div>
 			<div class="filterbar f_buttons">
 				<button class="active">All</button>
@@ -117,7 +117,7 @@
 	marketplaceRefresh();
 
 	function mpListingHTML(id,thumbnail_url,title,price,username){
-		var code = '<div class="col-md-3"><div class="mp_img_cont"><a href="/marketplace/product/'+id+'"><img class="" src="'+thumbnail_url+'"></a></div><div class="mp_details"><div class="mp_title"><a href="/marketplace/product/'+id+'">'+title+'</a></div><div class="mp_price">'+price+'$</div></div><div class="mp_details2">By <span class="username">'+username+'</span></div></div>';
+		var code = '<div class="col-md-3"><div class="mp_img_cont"><a href="/marketplace/product/edit/'+id+'"><img class="" src="'+thumbnail_url+'"></a></div><div class="mp_details"><div class="mp_title"><a href="/marketplace/product/edit/'+id+'">'+title+'</a></div><div class="mp_price">'+price+'$</div></div><div class="mp_details2">By <span class="username">'+username+'</span></div></div>';
 		return code;
 	}
 	
@@ -138,7 +138,7 @@
 	}
 
 	function marketplaceRefresh(){
-		indexTemplates(function(err,data){
+		indexOwnTemplates(function(err,data){
 			if(!err) {
 				TEMPLATES = data.templates;
 				updateTemplates();

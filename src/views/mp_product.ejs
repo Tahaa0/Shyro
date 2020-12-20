@@ -126,13 +126,14 @@
 						</div>	
 					</div>
 					<div class="spacer20"></div>
-					<div class="mp_main_image_container">
-						<img class='mp_main_image' src="http://codenpixel.com/demo/marketspot/assets/img/6_1576156774871.png" alt="">
+					<div id="bottom_images">
+						<div class="mp_main_image_container"><img class="mp_main_image" src="http://codenpixel.com/demo/marketspot/assets/img/6_1576156774871.png" alt=""></div>
+						<div class="spacer30"></div>
+						<div class="mp_main_image_container">
+							<img class='mp_main_image' src="http://codenpixel.com/demo/marketspot/assets/img/3_1576157483446.jpg" alt="">
+						</div>
 					</div>
-					<div class="spacer30"></div>
-					<div class="mp_main_image_container">
-						<img class='mp_main_image' src="http://codenpixel.com/demo/marketspot/assets/img/3_1576157483446.jpg" alt="">
-					</div>
+					
 				</div>
 				<div class="col-md-3">
 					<div class="mp_buy_box">
@@ -145,7 +146,7 @@
 						<div class="spacer20">	</div>
 						<img style='width: 100%;' src="https://interactivespares.com/wp-content/uploads/2018/07/paypal_logo.png" alt="">
 						<div class="spacer20"></div>
-						<div class="black_button">Purchase <i class="fas fa-long-arrow-alt-right"></i> <span id='t_guarantee'>49$</span></div>
+						<div class="black_button">Purchase <i class="fas fa-long-arrow-alt-right"></i> <span id='t_price'>49$</span></div>
 					</div>
 				</div>
         	</div>
@@ -190,6 +191,15 @@
 		$('#t_a1').html(TEMPLATE.faq[1]);
 		$('#t_q2').html(TEMPLATE.faq[2]);
 		$('#t_a2').html(TEMPLATE.faq[3]);
+
+		var bi_html = "";
+		for(var i=0;i<TEMPLATE.bottom_imgs.length;i++){
+			if(i > 0){
+				bi_html += '<div class="spacer30"></div>';
+			}
+			bi_html += '<div class="mp_main_image_container"><img class="mp_main_image" src="'+TEMPLATE.bottom_imgs[i]+'" alt=""></div>';
+		}
+		$('#bottom_images').html(bi_html);
 	}
 
 	function refreshTemplate(){

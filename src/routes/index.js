@@ -96,6 +96,14 @@ module.exports = app => {
         }
     });
 
+    app.get('/marketplace/my-listings', (req,res)=>{
+        if(req.session['token']){
+            res.render('mp_listings.ejs');
+        }else{
+            res.redirect('/login');
+        }
+    });
+
     app.get('/marketplace/add', (req,res)=>{
         if(req.session['token']){
             res.render('marketplace_add.ejs');
@@ -107,6 +115,14 @@ module.exports = app => {
     app.get('/marketplace/product/:id', (req,res)=>{
         if(req.session['token']){
             res.render('mp_product.ejs',{id:req.params.id});
+        }else{
+            res.redirect('/login');
+        }
+    });
+
+    app.get('/marketplace/product/edit/:id', (req,res)=>{
+        if(req.session['token']){
+            res.render('marketplace_edit.ejs',{id:req.params.id});
         }else{
             res.redirect('/login');
         }

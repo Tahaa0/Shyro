@@ -55,6 +55,36 @@ function createTemplate(title,price,guarantee,template_link,description,features
 	});
 }
 
+function updateTemplate(id,title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,cb){
+	$.ajax({
+	  url: "/api/template/"+id,
+	  type: "PUT",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {'title':title,price:price,guarantee:guarantee,template_link:template_link,description:description,'features':features,'faq':faq,main_img:main_img,bottom_imgs:bottom_imgs},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
+
+function indexOwnTemplates(cb){
+	$.ajax({
+	  url: "/api/template/own",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
 function indexTemplates(cb){
 	$.ajax({
 	  url: "/api/template",
