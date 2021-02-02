@@ -23,59 +23,7 @@
 <div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
 	<div class="sidebar_container">
-		<div id="sidebar">
-			<div id="sidebar_logo">
-				<a href="/dashboard"><img src="/views/gfx/logo.png" alt=""></a>
-			</div>
-			<div id="sidebar_menu">
-				<h4>Admin tools</h4>
-				<div class="item "  href='/dashboard'>
-					<span class="icon"><i class="flaticon-activity"></i></span><span class="text">Overview</span>
-				</div>
-				<div class="item active_item" href='/funnels'>
-					<span class="icon"><i class="flaticon-filter-2"></i></span><span class="text">My Funnels</span>
-				</div>
-				<div class="item"  href='/apps'>
-					<span class="icon"><i class="flaticon-category"></i></span><span class="text">Apps</span>
-				</div>
-				<div class="item"  href='/marketplace'>
-					<span class="icon"><i class="flaticon-buy"></i></span><span class="text">Marketplace</span>
-				</div>
-				<div class="item"  href='/documentation'>
-					<span class="icon"><i class="flaticon-document"></i></span><span class="text">Documentation</span>
-				</div>
-				<div class="item"  href='/subscriptions'>
-					<span class="icon"><i class="flaticon-bookmark"></i></span><span class="text">My Subscriptions</span>
-				</div>
-				<div class="item"  href='/support'>
-					<span class="icon"><i class="flaticon-message"></i></span><span class="text">Support</span>
-				</div>
-				
-			
-			</div>
-			<div class="premcont">
-			<button class='black_button orange' id='gopremium'><i class="fas fa-crown"></i><span style="display: inline-block; width: 7px;"></span>Go Premium</button></div>
-			<div id="sidebar_userdrop">
-				<div class="userdrop_link" id='profile'>
-					<div class="userdrop_icon"><i class="flaticon-profile bigflat"></i></div>
-					<div class="userdrop_text">Profile</div>
-				</div>
-				<div class="userdrop_link" id='logout'>
-					<div class="userdrop_icon"><i class="flaticon-logout bigflat"></i></div>
-					<div class="userdrop_text">Logout</div>
-				</div>
-			</div>
-			<div id="sidebar_user">	
-				<div class="user_icon">
-					<img src="/views/gfx/avatar.png" alt="">
-				</div>
-				<div class="user_details">
-					<div class="user_fullname">User</div>
-					<div class="user_membership">Free Trial</div>
-				</div>
-				<div class="user_arrow"><i class="fas fa-chevron-down"></i></div>
-			</div>
-		</div>
+		<%- include('snippets/sidebar'); %>
 	</div>
 	<div id="page_wrapper">
 		<div class="row">

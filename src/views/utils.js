@@ -17,6 +17,50 @@ $('#logout').click(function(){
 	});
 })
 
+function durationText(date){
+		var now = new Date();
+		var milliseconds = now-date;
+		console.log(milliseconds);
+		if(milliseconds < 60*1000){ //less than 1 minute
+			return "Just updated."
+		}
+		var minutes = parseInt(milliseconds/(60*1000));
+		if(milliseconds < 60*60*1000){ //less than 1 hour
+			return "Updated "+minutes+" minutes ago."
+		}
+		var hours = parseInt(minutes/60);
+		var s_hours = "s";
+		if(hours == 1) s_hours = "";
+
+		if(milliseconds < 24*60*60*1000){ //less than 1 day
+			return "Updated "+hours+" hour"+s_hours+" ago."
+		}
+
+		return "Last updated "+date.toLocaleDateString()+".";
+	}
+
+	function durationTextSupport(date){
+		var now = new Date();
+		var milliseconds = now-date;
+		console.log(milliseconds);
+		if(milliseconds < 60*1000){ //less than 1 minute
+			return "Just created"
+		}
+		var minutes = parseInt(milliseconds/(60*1000));
+		if(milliseconds < 60*60*1000){ //less than 1 hour
+			return +minutes+" minutes ago"
+		}
+		var hours = parseInt(minutes/60);
+		var s_hours = "s";
+		if(hours == 1) s_hours = "";
+
+		if(milliseconds < 24*60*60*1000){ //less than 1 day
+			return hours+" hour"+s_hours+" ago"
+		}
+
+		return date.toLocaleDateString()+"";
+	}
+
 getProfile(function(err,data){
 	if(!err) {
 		$('#sidebar_user .user_fullname').html(data.user_.username);

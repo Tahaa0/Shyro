@@ -34,7 +34,7 @@ module.exports = app => {
 
     app.get('/dashboard', (req,res)=>{
         if(req.session['token']){
-            res.render('dashboard.ejs');
+            res.render('dashboard.ejs',{sidebar_index:0});
         }else{
             res.redirect('/login');
         }
@@ -42,7 +42,7 @@ module.exports = app => {
 
     app.get('/funnels', (req,res)=>{
         if(req.session['token']){
-            res.render('funnels.ejs');
+            res.render('funnels.ejs',{sidebar_index:1});
         }else{
             res.redirect('/login');
         }
@@ -50,7 +50,7 @@ module.exports = app => {
 
     app.get('/apps', (req,res)=>{
         if(req.session['token']){
-            res.render('apps.ejs');
+            res.render('apps.ejs',{sidebar_index:2});
         }else{
             res.redirect('/login');
         }
@@ -58,7 +58,7 @@ module.exports = app => {
 
     app.get('/documentation', (req,res)=>{
         if(req.session['token']){
-            res.render('documentation.ejs');
+            res.render('documentation.ejs',{sidebar_index:4});
         }else{
             res.redirect('/login');
         }
@@ -66,7 +66,7 @@ module.exports = app => {
 
     app.get('/subscriptions', (req,res)=>{
         if(req.session['token']){
-            res.render('subscriptions.ejs');
+            res.render('subscriptions.ejs',{sidebar_index:5});
         }else{
             res.redirect('/login');
         }
@@ -74,7 +74,7 @@ module.exports = app => {
 
     app.get('/support', (req,res)=>{
         if(req.session['token']){
-            res.render('support.ejs');
+            res.render('support.ejs',{sidebar_index:6});
         }else{
             res.redirect('/login');
         }
@@ -90,7 +90,7 @@ module.exports = app => {
 
     app.get('/marketplace', (req,res)=>{
         if(req.session['token']){
-            res.render('marketplace.ejs');
+            res.render('marketplace.ejs',{sidebar_index:3});
         }else{
             res.render('marketplace0.ejs');
         }
@@ -98,7 +98,7 @@ module.exports = app => {
 
     app.get('/marketplace/my-listings', (req,res)=>{
         if(req.session['token']){
-            res.render('mp_listings.ejs');
+            res.render('mp_listings.ejs',{sidebar_index:3});
         }else{
             res.redirect('/login');
         }
@@ -106,7 +106,7 @@ module.exports = app => {
 
     app.get('/marketplace/add', (req,res)=>{
         if(req.session['token']){
-            res.render('marketplace_add.ejs');
+            res.render('marketplace_add.ejs',{sidebar_index:3});
         }else{
             res.redirect('/login');
         }
@@ -114,7 +114,7 @@ module.exports = app => {
 
     app.get('/marketplace/product/:id', (req,res)=>{
         if(req.session['token']){
-            res.render('mp_product.ejs',{id:req.params.id});
+            res.render('mp_product.ejs',{id:req.params.id,sidebar_index:3});
         }else{
             res.redirect('/login');
         }
@@ -122,7 +122,7 @@ module.exports = app => {
 
     app.get('/marketplace/product/edit/:id', (req,res)=>{
         if(req.session['token']){
-            res.render('marketplace_edit.ejs',{id:req.params.id});
+            res.render('marketplace_edit.ejs',{id:req.params.id,sidebar_index:3});
         }else{
             res.redirect('/login');
         }
