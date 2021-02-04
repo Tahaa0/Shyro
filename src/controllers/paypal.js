@@ -1,10 +1,10 @@
 const request = require('request');
 
 var CLIENT =
-  'AVakVQOQBs9z-SvHoHnqyxHkp4uRw3IZ3fvC2dojfTs3hvE3Di1DrHijrvn20A393M_QNLt16jerb2BS';
+  'AfOIqx1YHBVGv2ym7XwrMBPQkdBs1bi-PovagXRUzWRbW4IlcWc9SSm97O0t_HRdDQsBk0ieSkUCL4xn';
 var SECRET =
-  'EEw6ZPdOMgYBk0QbJGQ-WLTZqcbefysjMi7v1nN8BWXrCooad-8CabH6PMLJt3Gnl-lCglRug_5yHYoU';
-var PAYPAL_API = 'https://api-m.sandbox.paypal.com';
+  'EDjxs3JFU6upXNrbtfgR9lsj_VTaeR3ksBWu24Wt14cM5p5NPKT1JloX8fiImsJLxBkL2k-N3KAsC0uS';
+var PAYPAL_API = 'https://api-m.paypal.com';
 
 exports.createPayment = async function(req,res){
     try{
@@ -26,7 +26,7 @@ exports.createPayment = async function(req,res){
                 {
                   amount:
                   {
-                    total: '5.99',
+                    total: '1.99',
                     currency: 'USD'
                   }
                 }],
@@ -75,7 +75,7 @@ exports.executePayment = async function(req,res){
               {
                 amount:
                 {
-                  total: '10.99',
+                  total: '1.99',
                   currency: 'USD'
                 }
               }]

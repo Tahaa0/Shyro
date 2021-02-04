@@ -54,14 +54,15 @@
 
 <script>
   paypal.Button.render({
-    env: 'sandbox', // Or 'production'
+    env: 'production', // Or 'production'
     // Set up the payment:
     // 1. Add a payment callback
     payment: function(data, actions) {
       // 2. Make a request to your server
       return actions.request.post('/api/paypal/create-payment/')
         .then(function(res) {
-          // 3. Return res.id from the response
+        	console.log('SET-UP ###');
+          console.log(res);
           return res.id;
         });
     },
@@ -74,7 +75,8 @@
         payerID:   data.payerID
       })
         .then(function(res) {
-          // 3. Show the buyer a confirmation message.
+        	console.log('AUTHORIZE ###');
+          console.log(res);
         });
     }
   }, '#paypal-button');

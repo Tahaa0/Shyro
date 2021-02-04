@@ -130,7 +130,7 @@ module.exports = app => {
 
 
     app.get('/paypaltest', (req,res)=>{
-        res.render('paypaltest.ejs');
+        res.render('paypaltest.ejs',{sidebar_index:99});
     });
 
     /*app.get('/funnel/:id', (req,res)=>{
