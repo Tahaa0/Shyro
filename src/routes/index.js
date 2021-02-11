@@ -32,13 +32,7 @@ module.exports = app => {
         }
     });
 
-    app.get('/dashboard', (req,res)=>{
-        if(req.session['token']){
-            res.render('dashboard.ejs',{sidebar_index:0});
-        }else{
-            res.redirect('/login');
-        }
-    });
+    app.get('/dashboard', FunnelController.checkMembership);
 
     app.get('/funnels', (req,res)=>{
         if(req.session['token']){

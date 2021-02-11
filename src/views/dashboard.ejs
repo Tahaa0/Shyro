@@ -22,10 +22,70 @@
 	<!--<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>-->
 <div id="bgoverlay"></div>
 <div class="container-fluid" id='maincont'>
+	<% if(popup == 1){ %>
+	<div class="signupOverlay">
+		<div class="signupBox">
+			<h4>Sign Up : Step 2</h4>
+			<h1>Select Plan</h1>
+			<div class="spacer30"></div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="planbox">
+						<h2>STARTER</h2>
+						<h4>Monthly Package</h4>
+						<ul>
+							<li><i class="fas fa-check greenlight"></i> Access to marketplace</li>
+				            <li><i class="fas fa-check greenlight"></i> List in Marketplace</li>
+				            <li><i class="fas fa-check greenlight"></i> Product Highlight</li>
+				            <li><i class="fas fa-check greenlight"></i> Custom Order Bumps</li>
+				            <li><i class="fas fa-check greenlight"></i> Product Split-Test</li>
+				            <li><i class="fas fa-check greenlight"></i> Custom Video Overlay</li>
+				            <li><i class="fas fa-times redlight"></i> Shyro Pay</li>
+				            <li><i class="fas fa-times redlight"></i> Quantity Selector</li>
+				            <li><i class="fas fa-times redlight"></i> Product Variants</li>
+				            <li><i class="fas fa-times redlight"></i> Smart Currency</li>
+				            <li><i class="fas fa-times redlight"></i> Abandoned Checkout (Soon)</li>
+				            <li><i class="fas fa-times redlight"></i> Advanced Facebook Tracking (Soon)</li>
+				            <li><i class="fas fa-check greenlight"></i> 24/7 Customer Support</li>	
+						</ul>
+						<button class="black_button">Start 7 Day Free Trial</button>
+						<h5>Renews at 5.99$/month</h5>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="planbox">
+						<h2>PREMIUM</h2>
+						<h4>Monthly Package</h4>
+						<ul>
+							<li><i class="fas fa-check greenlight"></i> Access to marketplace</li>
+				            <li><i class="fas fa-check greenlight"></i> List in Marketplace</li>
+				            <li><i class="fas fa-check greenlight"></i> Product Highlight</li>
+				            <li><i class="fas fa-check greenlight"></i> Custom Order Bumps</li>
+				            <li><i class="fas fa-check greenlight"></i> Product Split-Test</li>
+				            <li><i class="fas fa-check greenlight"></i> Custom Video Overlay</li>
+				            <li><i class="fas fa-check greenlight"></i> Shyro Pay</li>
+				            <li><i class="fas fa-check greenlight"></i> Quantity Selector</li>
+				            <li><i class="fas fa-check greenlight"></i> Product Variants</li>
+				            <li><i class="fas fa-check greenlight"></i> Smart Currency</li>
+				            <li><i class="fas fa-check greenlight"></i> Abandoned Checkout (Soon)</li>
+				            <li><i class="fas fa-check greenlight"></i> Advanced Facebook Tracking (Soon)</li>
+				            <li><i class="fas fa-check greenlight"></i> 24/7 Customer Support</li>
+						</ul>
+						<button class="black_button">Start 7 Day Free Trial</button>
+						<h5>Renews at 27.99$/month</h5>
+					</div>
+				</div>
+			</div>
+			<button class="black_button orange2">No, I just want the marketplace</button>
+		</div>
+
+	</div>
+	<% } %>
 	<div class="sidebar_container">
 		<%- include('snippets/sidebar'); %>
 	</div>
 	<div id="page_wrapper">
+		
 		<div class="row">
 			<div class="col-md-8 center_page">
 				<div class="inside">

@@ -166,22 +166,44 @@ exports.portal = async function (req, res) {
         //switch
         switch(membershipLevel){
             case 0:
-                return res.render('portal0.ejs',{id:req.params.id});
+                return res.render('portal0.ejs',{id:req.params.id,sidebar_index:1});
                 break;
             case 1:
-                return res.render('portal1.ejs',{id:req.params.id});
+                return res.render('portal1.ejs',{id:req.params.id,sidebar_index:1});
                 break;
             case 2:
-                return res.render('portal.ejs',{id:req.params.id});
+                return res.render('portal.ejs',{id:req.params.id,sidebar_index:1});
                 break;
             default:
-                return res.render('portal0.ejs',{id:req.params.id});
+                return res.render('portal0.ejs',{id:req.params.id,sidebar_index:1});
                 break;
         }
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 };
+
+exports.checkMembership = async function (req,res){
+    try {
+        if(!req.session['token']){
+            return res.redirect('/login');
+        }
+        //get user membership level
+        const id = req.session['user_id']
+        const user = await User.findById(id);
+
+        var membershipLevel = user.membershipLevel;
+
+        if(membershipLevel == -1){
+            return res.render('dashboard.ejs',{sidebar_index:0,popup:1});
+        }else{
+            return res.render('dashboard.ejs',{sidebar_index:0,popup:0});
+        }
+        
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
 /*
 exports.updateFunnel = async (req, res)=>{
 	try {
