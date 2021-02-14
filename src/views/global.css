@@ -40,6 +40,13 @@ h1{
 	width: 300px;
 	margin-top: 30px;
 }
+.black_button.orange3{
+	background-color: #000;
+	display: block;
+	margin:0 auto;
+	width: 300px;
+	margin-top: 30px;
+}
 .black_button.orange{
 	background-color: #FF754C;
 	display: block;
@@ -1741,7 +1748,7 @@ box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.04);
 	border-radius: 30px;
 	background-color: #FFF;
 	box-shadow: 0 0 1px #6C5DD3;
-	min-height: 200px;
+	min-height: 300px;
 	padding: 20px 30px;	
 }
 .planbox h2{
@@ -2140,4 +2147,26 @@ background-color: transparent;
 a:hover{
 	text-decoration: none;
 	color: inherit;
+}
+
+#billing_form{
+	display: block;	
+	margin: 0 auto;	
+	border-radius: 30px;
+	background-color: #FFF;
+	box-shadow: 0 0 1px #6C5DD3;
+	min-height: 200px;
+	padding: 20px 30px;
+	padding-bottom: 50px;	
+}
+#b_plan{
+	text-align: center;
+background-color: #f0f0f0;
+color: #666;
+cursor: not-allowed;
+}
+.std_img{
+	display: block;
+	width: 60%;
+	margin: 0 auto;
 }
