@@ -9,4 +9,10 @@ const router = express.Router();
 router.post('/create-payment', Paypal.createPayment);
 router.post('/execute-payment', Paypal.executePayment);
 
+router.post('/create-payment-starter', Paypal.createPayment);
+router.post('/execute-payment-starter', Paypal.executePayment);
+
+router.post('/create-payment-premium', Paypal.createPayment);
+router.post('/execute-payment-premium', Paypal.executePayment);
+
 module.exports = router;
