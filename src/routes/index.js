@@ -5,6 +5,7 @@ const template = require('./template');
 const ticket = require('./ticket');
 const funnelscript = require('./funnelscript');
 const paypal = require('./paypal');
+const webhook = require('./webhook');
 
 const FunnelController = require('../controllers/funnel');
 
@@ -147,6 +148,7 @@ module.exports = app => {
     app.use('/api/ticket', authenticate, ticket);
     app.use('/api/funnelscript', funnelscript);
     app.use('/api/paypal/', paypal);
+    app.use('/api/webhook/',webhook);
 
     //marketplace
     app.use('/api/template', authenticate, template);
