@@ -5,7 +5,7 @@ const Webhook = require('../controllers/webhook');
 
 const router = express.Router();
 
-//PAYMENT
-router.post('/hook', Webhook.listen);
+//WEBHOOK
+router.post('/hook/:id', Webhook.listen);
 
 module.exports = router;

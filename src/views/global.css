@@ -1483,7 +1483,7 @@ input:checked + .slider:before {
 	color: #BACA63;
 	margin-bottom: 10px;
 }
-#scriptbody,#scripthead,#cc_code,#ob_code{
+#scriptbody,#scripthead,#cc_code,#ob_code,#webhook_link{
 	font-size: 13px;
 	background-color: #1D1E22;
 	color: #BACA63;

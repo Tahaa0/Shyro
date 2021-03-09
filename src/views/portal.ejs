@@ -788,6 +788,12 @@
 							</div>
 							
 						</div>
+                        <div class="row dbox">
+                            <div class="field col-md-12">
+                                <div class="field_label">Webhook Link :</div>
+                                <div class="field_input"><input type="text" name='webhook_link' id="webhook_link" readonly=true></div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 				
@@ -1546,6 +1552,7 @@
 
 	$('#scripthead').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/head_script\/'+FUNNEL_ID+'\"><\/script>');
 	$('#scriptbody').val('<script src=\"http:\/\/'+window.location.host+'\/api\/funnelscript\/body_script\/'+FUNNEL_ID+'\"><\/script>');
+    $('#webhook_link').val('http:\/\/'+window.location.host+'\/api\/webhook\/hook\/'+FUNNEL_ID);
 	refreshFunnel();
 
 
@@ -1916,7 +1923,7 @@
 		});
 	}
 	
-	$('#scripthead, #scriptbody, #cc_code, #ob_code').click(function(){
+	$('#scripthead, #scriptbody, #webhook_link, #cc_code, #ob_code').click(function(){
 		$(this).select();
 		document.execCommand('copy');
 		var VAL = $(this).val();

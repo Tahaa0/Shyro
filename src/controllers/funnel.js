@@ -1,4 +1,5 @@
 const Funnels = require('../models/funnel');
+const Webhooks = require('../models/webhook');
 const User = require('../models/user');
 const tools = require('../utils/tools');
 const cc = require('iso-country-currency');
@@ -32,6 +33,16 @@ exports.create = async (req, res) => {
     	const funnel_ = new Funnels(dt);
 
         await funnel_.save();
+
+        var dtw = {
+            userId: user_._id,
+            funnelId: funnel_._id,
+            content : []
+        }
+
+        const webhook_ = new Webhooks(dtw);
+
+        await webhook_.save();
 
         res.status(200).json(funnel_);
 
