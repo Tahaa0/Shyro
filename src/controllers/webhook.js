@@ -11,9 +11,14 @@ exports.listen = async (req, res) => {
         if (!webhook_) return res.status(401).json({message: 'Webhook does not exist'});
         
         var new_content = webhook_.content;
+        var new_sales = webhook_.sales;
         new_content.push(req.body);
 
-        const webhook = await Webhooks.findByIdAndUpdate(webhook_._id, {$set: {content:new_content}}, {new: true});
+        if(req.body.purchase && req.body.event == "created"){
+            new_sales.push(req.body.purchase);
+        }
+
+        const webhook = await Webhooks.findByIdAndUpdate(webhook_._id, {$set: {content:new_content,sales:new_sales}}, {new: true});
 
         res.status(200).end();
     } catch (error) {

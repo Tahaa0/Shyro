@@ -9,7 +9,8 @@ const webhookSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    content : Array
+    content : Array,
+    sales : Array
 }, {timestamps: true});
 
 
