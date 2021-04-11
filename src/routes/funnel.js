@@ -19,5 +19,7 @@ router.get('/:id',  Funnel.show);
 router.put('/:id', Funnel.update);
 //DELETE
 router.delete('/:id', Funnel.destroy);
+//Get sales
+router.get('/sales/:id', Funnel.getSales);
 
 module.exports = router;
