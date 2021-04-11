@@ -1985,7 +1985,7 @@
                 $('#total_sales').val(data.sales.length);
                 var revenue = 0;
                 for(var i=0;i<data.sales.length;i++){
-                    revenue += data.sales.original_amount_cents;
+                    revenue += data.sales[i].original_amount_cents;
                 }
                 var revenue = revenue/100;
                 $('#total_revenue').val(revenue+" "+data.sales[0].original_amount_currency);
