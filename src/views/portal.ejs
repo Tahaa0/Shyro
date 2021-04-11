@@ -1968,6 +1968,13 @@
 				console.log(err);
 			}
 		});
+        getSales(FUNNEL_ID,function(err,data){
+            if(!err) {
+                console.log(data);
+            }else{
+                console.log(err);
+            }
+        });
 	}
 
 	function saveFunnel(){
