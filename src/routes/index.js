@@ -142,6 +142,10 @@ module.exports = app => {
     	res.render('askreset.ejs');
     });
 
+    app.post('/funnel_webhooks/test', (req,res)=>{
+        res.status(200).end();
+    });
+
     app.use('/api/auth', auth);
     app.use('/api/user', authenticate, user);
     app.use('/api/funnel', authenticate, funnel);
