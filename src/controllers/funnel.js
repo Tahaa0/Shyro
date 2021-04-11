@@ -270,7 +270,7 @@ exports.getSales = async function (req, res) {
         const webhook_ = await Webhooks.findOne({funnelId:id});
 
         if (!webhook_) return res.status(401).json({message: 'Funnel webhook does not exist'});
-        if (req.session['user_id'].toString() !== funnel_.userId.toString()) return res.status(401).json({message: "Sorry, you don't have the permission to upd this data."});
+        if (req.session['user_id'].toString() !== webhook_.userId.toString()) return res.status(401).json({message: "Sorry, you don't have the permission to upd this data."});
 
             res.status(200).json({sales: webhook_.sales});
     } catch (error) {
