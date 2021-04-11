@@ -302,7 +302,7 @@ function indexFunnels(cb){
 
 function getSales(id,cb){
 	$.ajax({
-	  url: "/api/webhook/sales/"+id,
+	  url: "/api/funnel/sales/"+id,
 	  type: "GET",
 	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
 	  data: {},
