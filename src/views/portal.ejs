@@ -795,6 +795,18 @@
                             </div>
                         </div>
 					</div>
+                    <div id="salesbox">
+                        <div class="row dbox">
+                            <div class="col-md-6">
+                                <div class="field_label">Total Sales :</div>
+                                <div class="field_input"><input type="text" name='total_sales' id="total_sales" readonly=true></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="field_label">Total Revenue :</div>
+                                <div class="field_input"><input type="text" name='total_revenue' id="total_revenue" readonly=true></div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 				
 			</div>
@@ -1970,7 +1982,13 @@
 		});
         getSales(FUNNEL_ID,function(err,data){
             if(!err) {
-                console.log(data);
+                $('#total_sales').val(data.sales.length);
+                var revenue = 0;
+                for(var i=0;i<data.sales.length;i++){
+                    revenue += data.sales.original_amount_cents;
+                }
+                var revenue = revenue/100;
+                $('#total_revenue').val(revenue+" "+data.sales[0].original_amount_currency);
             }else{
                 console.log(err);
             }
