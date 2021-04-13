@@ -169,7 +169,7 @@
 						<img src="/views/gfx/paypal.png" class='std_img' alt="">
 						<h4 style="text-align: center; margin-top: 10px;">Total to pay now : $0</h4>
 						<h4 id='renews_text' style="text-align: center; margin-top: 10px; margin-bottom: 25px;"></h4>
-						<button>Start Free Trial</button>
+						<button id='starttrial'>Start Free Trial</button>
 					</div>
 				</div>
 				<button class="black_button orange3" id='back2'>Back to Billing</button>
@@ -242,6 +242,16 @@
 	$('#back2').click(function(){
 		$('#signup_step3').hide();
 		$('#signup_step2').fadeIn(1000);
+	});
+
+	$('#starttrial').click(function(){
+		startFreeTrial(function(err,data){
+            if(!err) {
+                window.location.reload();
+            }else{
+                console.log(err);
+            }
+        });
 	});
 
 </script>

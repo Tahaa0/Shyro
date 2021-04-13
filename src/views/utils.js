@@ -222,6 +222,19 @@ function createTicket(title,priority,department,message,cb){
 }
 
 //MY ACCOUNT
+function startFreeTrial(cb){
+	$.ajax({
+	  url: "/api/user/startfreetrial",
+	  type: "POST",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	  	cb(null,data);
+	  }
+	});
+}
 
 function updateProfile(username,firstName,lastName,cb){
 	$.ajax({
