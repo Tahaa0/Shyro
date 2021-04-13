@@ -29,4 +29,6 @@ router.put('/profile', User.updateProfile);
 //DELETE
 router.delete('/:id', User.destroy);
 
+router.post('/startfreetrial', User.startFreeTrial);
+
 module.exports = router;

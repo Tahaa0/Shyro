@@ -170,3 +170,20 @@ exports.destroy = async function (req, res) {
         res.status(500).json({message: error.message});
     }
 };
+
+exports.startFreeTrial = async function (req, res) {
+    try {
+        const id = req.session['user_id']
+        
+        const user_ = await User.findById(id);
+
+        //Make sure the user is new
+        if (user_.membershipLevel != -1) return res.status(401).json({message: "You no longer have access to Free Trial"});
+
+        const user = await User.findByIdAndUpdate(id, {$set: {membershipLevel:2,currentEarned:0,nextBilling:Date.now() + 30*24*60*60*1000}}, {new: true});
+
+        res.status(200).json({message: 'Free Trial has started'});
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+};

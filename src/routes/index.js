@@ -8,14 +8,13 @@ const paypal = require('./paypal');
 const webhook = require('./webhook');
 
 const FunnelController = require('../controllers/funnel');
+const AffiliateController = require('../controllers/affiliate');
 
 
 const authenticate = require('../middlewares/authenticate');
 
 module.exports = app => {
-    app.get('/', (req, res) => {
-    	res.render('landing/index.ejs')
-    });
+    app.get('/', AffiliateController.getIndex);
 
     app.get('/index.html', (req, res) => {
         res.redirect('/')

@@ -68,6 +68,16 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: -1
+    },
+
+    nextBilling: {
+        type: Date,
+        required: false
+    },
+
+    currentEarned: {
+        type: Number,
+        default: 0
     }
 
 }, {timestamps: true});
