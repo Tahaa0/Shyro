@@ -99,4 +99,8 @@ io.use(sharedsession(session),{
 //Configure socket
 require('./socket/index')(io);
 
-//Configure GameManager
+//cron
+
+const InvoiceController = require('./controllers/invoice');
+
+InvoiceController.verifySubscriptions();

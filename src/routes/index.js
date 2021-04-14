@@ -6,6 +6,7 @@ const ticket = require('./ticket');
 const funnelscript = require('./funnelscript');
 const paypal = require('./paypal');
 const webhook = require('./webhook');
+const invoice = require('./invoice');
 
 const FunnelController = require('../controllers/funnel');
 const AffiliateController = require('../controllers/affiliate');
@@ -148,6 +149,7 @@ module.exports = app => {
     app.use('/api/auth', auth);
     app.use('/api/user', authenticate, user);
     app.use('/api/funnel', authenticate, funnel);
+    app.use('/api/invoice', authenticate, invoice);
     app.use('/api/ticket', authenticate, ticket);
     app.use('/api/funnelscript', funnelscript);
     app.use('/api/paypal/', paypal);

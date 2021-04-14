@@ -14,6 +14,7 @@
 	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
 	<link rel="stylesheet" href="/views/global.css">
 	<link href="/views/gfx/fonts/flaticon.css" rel="stylesheet" type="text/css" />
+	
 </head>
 <body>
 	<!--<div style="height: 100px"><a class='slink' id='logout'><button>Logout</button></a></div>-->
@@ -23,14 +24,34 @@
 		<%- include('snippets/sidebar'); %>
 	</div>
 	<div id="page_wrapper">
+		<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 		<div class="row">
 			<div class="col-md-8 center_page">
 				<div class="inside">
 					<div class="welcome_box">
-						<h4>Funnel Editor</h4>
-						<h1>My Funnels</h1>
+						<h4>Payment and invoices</h4>
+						<h1>My Subscriptions</h1>
 					</div>
-					
+					<div id="mysubscriptions" class="row">
+						<div class="dbox col-md-12" id="">
+							<h2>Current Subscription</h2>
+							<h3 id='membership_level' class='greentext'></h3>
+							<p class='lighttext'>Next billing : <span id='next_billing_date'></span></p>
+							<hr style="border-top: 0; margin-top:40px;">
+							<h2>Unpaid Invoices</h2>
+							<div id='current_invoices'>
+								<p class='lighttext'>There are currently no invoices..</p>
+							</div>
+						</div>
+					</div>
+					<div id="mysubscriptions" class="row">
+						<div class="dbox col-md-12" id="">
+							<h2>Paid Invoices</h2>
+							<div id='past_invoices'>
+								<p class='lighttext'>There are currently no invoices..</p>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
@@ -85,8 +106,79 @@
 		console.log(data);
 		alert(data.message);
 	});
-
 	
+	refreshProfile();
+
+	function invoiceHTML(invoice){
+		var dd = new Date(invoice.createdAt);
+		var code = "<div class='invoice'><h3 class='redtext'>Invoice "+(dd.getMonth()+1)+"/"+dd.getDate()+"/"+dd.getFullYear()+" : "+invoice.value+"$</h3><p class='lighttext'>Shyro Premium Membership</p></div>";
+		return code;
+	}
+
+	function invoiceHTMLpaid(invoice){
+		var dd = new Date(invoice.createdAt);
+		var code = "<div class='invoice'><h3 class='greentext'>Invoice "+(dd.getMonth()+1)+"/"+dd.getDate()+"/"+dd.getFullYear()+" : "+invoice.value+"$</h3><p class='lighttext'>Shyro Premium Membership</p></div>";
+		return code;
+	}
+
+	function refreshProfile(){
+		getProfile(function(err,data){
+			if(!err) {
+				var dd = new Date(data.user_.nextBilling)
+				console.log(dd);
+				$('#next_billing_date').html((dd.getMonth()+1)+"/"+dd.getDate()+"/"+dd.getFullYear());
+				$('#membership_level').html(data.user_.membershipTitle)
+			}else{
+				console.log(err);
+			}
+		});
+		indexOwnInvoices(function(err,dd){
+			if(!err){
+				$('#current_invoices').html('');
+				$('#past_invoices').html('');
+				var total = 0;
+				for(var i =0;i<dd.invoices.length;i++){
+					if(dd.invoices[i].status == 0){
+						total += dd.invoices[i].value;
+						$('#current_invoices').append(invoiceHTML(dd.invoices[i]));
+					}else{
+						$('#past_invoices').append(invoiceHTMLpaid(dd.invoices[i]));
+					}
+					
+				}
+				$('#current_invoices').append("<p class='lighttext' style='color:black;size:15px;margin-top:10px;'>Pay Total : $"+total+"</p><div id='paypal-button'></div>")
+				paypal.Button.render({
+				    env: 'sandbox', // Or 'production'
+				    // Set up the payment:
+				    // 1. Add a payment callback
+				    payment: function(data, actions) {
+				      // 2. Make a request to your server
+				      return actions.request.post('/api/paypal/create-payment/')
+				        .then(function(res) {
+				        	console.log('SET-UP ###');
+				          console.log(res);
+				          return res.id;
+				        });
+				    },
+				    // Execute the payment:
+				    // 1. Add an onAuthorize callback
+				    onAuthorize: function(data, actions) {
+				      // 2. Make a request to your server
+				      return actions.request.post('/api/paypal/execute-payment/', {
+				        paymentID: data.paymentID,
+				        payerID:   data.payerID
+				      })
+				        .then(function(res) {
+				        	console.log('AUTHORIZE ###');
+				          console.log(res);
+				        });
+				    }
+				  }, '#paypal-button');
+			}else{
+				console.log(err);
+			}
+		});
+	}
 	
 </script>
 </body>

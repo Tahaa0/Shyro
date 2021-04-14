@@ -141,7 +141,9 @@ exports.getProfile = async function (req, res) {
             firstName: user.firstName,
             lastName: user.lastName,
             membershipLevel: user.membershipLevel,
-            membershipTitle: membershipTitle
+            membershipTitle: membershipTitle,
+            nextBilling: user.nextBilling,
+            currentEarned: user.currentEarned
         }
 
         return res.status(200).json({ user_});

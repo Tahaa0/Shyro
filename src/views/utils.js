@@ -83,6 +83,23 @@ $('#sidebar_user').click(function(){
 	}
 
 });
+//INVOICE
+
+function indexOwnInvoices(cb){
+	$.ajax({
+	  url: "/api/invoice/",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
 //MARKETPLACE
 function createTemplate(title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,cb){
 	$.ajax({
