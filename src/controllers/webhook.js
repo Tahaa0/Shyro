@@ -17,7 +17,7 @@ exports.listen = async (req, res) => {
 
         if(req.body.purchase && req.body.event == "created"){
             new_sales.push(req.body.purchase);
-            var user_ = await User.findbyId(userId);
+            var user_ = await User.findById(userId);
             var new_currentEarned = user_.currentEarned + req.body.purchase.original_amount_cents/100;
             var user = await User.findByIdAndUpdate(userId,{$set:{currentEarned:new_currentEarned}}, {new:true});
         }
