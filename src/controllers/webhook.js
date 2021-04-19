@@ -17,9 +17,9 @@ exports.listen = async (req, res) => {
 
         if(req.body.purchase && req.body.event == "created"){
             new_sales.push(req.body.purchase);
-            var user_ = await Users.findbyId(userId);
+            var user_ = await User.findbyId(userId);
             var new_currentEarned = user_.currentEarned + req.body.purchase.original_amount_cents/100;
-            var user = await Users.findByIdAndUpdate(userId,{$set:{currentEarned:new_currentEarned}}, {new:true});
+            var user = await User.findByIdAndUpdate(userId,{$set:{currentEarned:new_currentEarned}}, {new:true});
         }
 
         const webhook = await Webhooks.findByIdAndUpdate(webhook_._id, {$set: {content:new_content,sales:new_sales}}, {new: true});
