@@ -101,6 +101,6 @@ require('./socket/index')(io);
 
 //cron
 
-const InvoiceController = require('./controllers/invoice');
+const cronController = require('./controllers/cron');
 
-InvoiceController.verifySubscriptions();
+cronController.cronSetup();

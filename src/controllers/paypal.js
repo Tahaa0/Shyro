@@ -63,6 +63,9 @@ exports.executePayment = async function(req,res){
     try{
         // 3. Call /v1/payments/payment/PAY-XXX/execute to finalize the payment.
         var valueSTR = await InvoicesController.getTotalDue(req.session['user_id']);
+        var paymentID = req.body.paymentID;
+        var payerID = req.body.payerID;
+
         request.post(PAYPAL_API + '/v1/payments/payment/' + paymentID +
           '/execute',
           {

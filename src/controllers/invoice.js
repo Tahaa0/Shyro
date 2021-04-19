@@ -1,7 +1,7 @@
 const Invoices = require('../models/invoice');
 const User = require('../models/user');
 
-exports.verifySubscriptions = function(cb){
+exports.verifySubscriptions = function(){
     User.find({membershipLevel:2, nextBilling: {$lte : Date.now()}}, function (err, users) {
         if(!err){
             var invoices = [];
@@ -24,20 +24,21 @@ exports.clearUser = function(user_id){
             console.log(err);
         } 
     });
+    User.findByIdAndUpdate(user_id,{$set: {currentEarned:0}}, {new: true},function(err,data){});
 }
 
-exports.getTotalDue = function(user_id){
-    Invoices.find({userId:user_id,status:0},function(err,invoices){
-        if(!err){
-            var totalDue = 0;
-            for(var i=0;i<invoices.length;i++){
-                totalDue += invoices[i].value;
-            }
-            return totalDue;
-        }else{
-            console.log(err);
-        } 
-    });
+exports.getTotalDue = async function(user_id){
+    try{
+        var invoices = await Invoices.find({userId:user_id,status:0});
+        var totalDue = 0;
+        for(var i=0;i<invoices.length;i++){
+            totalDue += invoices[i].value;
+        }
+        return totalDue;
+    }catch(error){
+        console.log(error);
+    }
+    
 }
 
 var createInvoice = function(user_id,due){
