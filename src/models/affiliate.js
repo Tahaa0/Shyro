@@ -5,6 +5,11 @@ const affiliateSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    rate: {
+    	type: Number,
+    	required: true,
+    	default: 0.15
+    },
     referrals: Array
 }, {timestamps: true});
 

@@ -78,6 +78,11 @@ const UserSchema = new mongoose.Schema({
     currentEarned: {
         type: Number,
         default: 0
+    },
+
+    referrer: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
     }
 
 }, {timestamps: true});

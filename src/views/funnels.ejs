@@ -23,6 +23,12 @@
 		<%- include('snippets/sidebar'); %>
 	</div>
 	<div id="page_wrapper">
+		<div class="upgradeOverlay" style="display:none">
+			<h2 style="text-align: center;	color: #FF754C;">Confimation</h2>
+			<h4>Do you really want to delete this funnel?</h4>
+				<button class='black_button delete_btn' onclick="confirmDeleteFunnel()">Delete Funnel</button>
+
+		</div>
 		<div class="row">
 			<div class="col-md-11 center_page">
 				<div class="inside">
@@ -118,13 +124,18 @@
 	});
 
 	var FUNNELS = [];
-	
-	$('.funnel_item').click(function(){
-			$('.funnel_item').removeClass('active_funnel');
-			$(".f_buttons").slideUp(200);
-			$(this).addClass('active_funnel');
-			$(this).find(".f_buttons").slideDown(200);
-		});
+	var funnelDeletionPending = 0;
+
+	$('.funnel_item').mouseenter(function(){
+		$('.funnel_item').removeClass('active_funnel');
+		$(".f_buttons").slideUp(200);
+		$(this).addClass('active_funnel');
+		$(this).find(".f_buttons").slideDown(200);
+	});
+	$('.funnel_item').mouseleave(function(){
+		$('.funnel_item').removeClass('active_funnel');
+		$(".f_buttons").slideUp(200);
+	});
 	funnelRefresh();
 
 	function updateFunnels(){
@@ -138,11 +149,15 @@
 		}
 		$("#myfunnels").html(code);
 		//EFFECTS
-		$('.funnel_item').click(function(){
+		$('.funnel_item').mouseenter(function(){
 			$('.funnel_item').removeClass('active_funnel');
 			$(".f_buttons").slideUp(200);
 			$(this).addClass('active_funnel');
 			$(this).find(".f_buttons").slideDown(200);
+		});
+		$('.funnel_item').mouseleave(function(){
+			$('.funnel_item').removeClass('active_funnel');
+			$(".f_buttons").slideUp(200);
 		});
 	}
 
@@ -156,7 +171,12 @@
 	}
 
 	function deletefunnel(index){
-		deleteFunnel(FUNNELS[index]._id,function(err,data){
+		funnelDeletionPending = index;
+		$('.upgradeOverlay').fadeIn();
+	}
+
+	function confirmDeleteFunnel(){
+		deleteFunnel(FUNNELS[funnelDeletionPending]._id,function(err,data){
 			if(!err) {
 				funnelRefresh();
 			}else{
@@ -164,7 +184,10 @@
 			}
 		});
 	}
-
+	$('.upgradeOverlay').click(function(e){
+		console.log('a');
+		$(this).fadeOut();	
+	})
 	$('#addFunnel').click(function(){
 		createFunnel($('#funnel_title').val(),function(err,data){
 			if(!err) {
@@ -188,5 +211,6 @@
 	}
 	
 </script>
+<%- include('snippets/livechat'); %>
 </body>
 </html>

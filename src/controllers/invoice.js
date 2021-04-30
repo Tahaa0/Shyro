@@ -55,17 +55,13 @@ var createInvoice = function(user_id,due){
 }
 
 var calculateInvoice = function(user){
-    if(user.currentEarned < 1000) return 29;
-    if(user.currentEarned < 2500) return 39;
-    if(user.currentEarned < 5000) return 79;
-    if(user.currentEarned < 7500) return 119;
-    if(user.currentEarned < 10000) return 159;
-    if(user.currentEarned < 12500) return 199;
-    if(user.currentEarned < 15000) return 239;
-    if(user.currentEarned < 17500) return 269;
-    if(user.currentEarned < 20000) return 289;
-    if(user.currentEarned < 30000) return 389;
-    return 489;
+    if(user.currentEarned <= 1000) return 14.99;
+    if(user.currentEarned <= 5000) return (14.99 + user.currentEarned*0.011);
+    if(user.currentEarned <= 10000) return (14.99 + user.currentEarned*0.01);
+    if(user.currentEarned <= 15000) return (14.99 + user.currentEarned*0.009);
+    if(user.currentEarned <= 20000) return (14.99 + user.currentEarned*0.008);
+    if(user.currentEarned <= 30000) return (14.99 + user.currentEarned*0.007);
+    return (14.99 + user.currentEarned*0.006);
 }
 
 exports.indexOwn = async function (req, res) {

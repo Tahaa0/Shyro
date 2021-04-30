@@ -6,6 +6,7 @@ const cors = require('cors');
 const passport = require("passport");
 const path = require("path");
 const url = require('url');
+var cookieParser = require('cookie-parser');
 
 var EventEmitter = require('events').EventEmitter;
 var EventController = new EventEmitter();
@@ -74,7 +75,7 @@ connection.on('error', (err) => {
 //=== 3 - INITIALIZE PASSPORT MIDDLEWARE
 app.use(passport.initialize());
 require("./middlewares/jwt")(passport);
-
+app.use(cookieParser());
 
 //=== 4 - CONFIGURE ROUTES
 //Configure Route

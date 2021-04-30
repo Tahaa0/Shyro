@@ -42,6 +42,22 @@
 							<input type="text" class='standard_input' id="step_title" placeholder="Step Name">
 							<input type="text" class='standard_input' id="step_url" placeholder="Step URL">
 							<div class="select_type" id='step_type'>
+                                <div class="select_tab" data-type='sales'>
+                                    <div class="select_icon">
+                                        <i class="fas fa-dollar-sign"></i>
+                                    </div>
+                                    <div class="select_text">
+                                        Sales Page
+                                    </div>
+                                </div>
+                                <div class="select_tab" data-type='launch'>
+                                    <div class="select_icon">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="select_text">
+                                        Product Launch
+                                    </div>  
+                                </div>
 								<div class="select_tab active" data-type='form'>
 									<div class="select_icon">
 										<i class="fas fa-shopping-cart"></i>
@@ -58,14 +74,23 @@
 										Upsell
 									</div>
 								</div>
-								<div class="select_tab" data-type='downsell'>
-									<div class="select_icon">
-										<i class="fas fa-arrow-down"></i>
-									</div>
-									<div class="select_text">
-										Downsell
-									</div>
-								</div>
+                                <div class="select_tab" data-type='downsell'>
+                                    <div class="select_icon">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="select_text">
+                                        Downsell
+                                    </div>
+                                </div>
+                                <div class="select_tab" data-type='confirmation'>
+                                    <div class="select_icon">
+                                        <i class="fas fa-check-square"></i>
+                                    </div>
+                                    <div class="select_text">
+                                        Order Confirmation
+                                    </div>
+                                </div>
+                                
 							</div>
 						</div>
 						<div id="funnelAppsBox" class="box_2 box_3" style="display:none">
@@ -123,10 +148,12 @@
 							<div class="row">
 								
 								
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="app_title" style="margin-left: 4px;">Funnel Title :</div>
 									<div class="field_input" style="margin-top: 12px;"><input type="text" id='funnel_name'></div>
 									<div style="margin-top: 12px;"></div>
+                                </div>
+                                <div class="col-md-4">
 									<div class="field_input">
 										<div class="app_title" style="margin-left: 4px;">Funnel Currency :</div>
 										<select name="" id="funnel_currency" style="margin-top: 12px;">
@@ -299,7 +326,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-md-5">
+								<div class="col-md-4">
 									<div class="app_title" style="margin-left: 4px;">Payment Method :</div>
 									<div class="select_type" id='payment_method'>
 										<div class="select_tab active" data-type='stripe'>
@@ -534,7 +561,7 @@
 							</div>
 							<div class="col-md-8" id='products'>
 								<div class="">
-									<h2>Products</h2>
+									<h2 id='products_section_title'>Products</h2>
 									<div id="addProductBox" class='box_2' style="display: none;">
 										<div class="row">
 											<div class="col-md-6">
@@ -835,12 +862,18 @@
 	const ICONS = {
 		'form': 'fas fa-shopping-cart',
 		'upsell': 'fas fa-arrow-up',
-		'downsell': 'fas fa-arrow-down'
+		'downsell': 'fas fa-arrow-down',
+        'confirmation': 'fas fa-check-square',
+        'launch': 'fas fa-rocket',
+        'sales': 'fas fa-dollar-sign'
 	}
 	const TYPE_TEXT = {
 		'form': 'Order Form',
 		'upsell': 'Upsell',
-		'downsell': 'Downsell'
+		'downsell': 'Downsell',
+        'confirmation': 'Confirmation',
+        'launch': 'Prod. Launch',
+        'sales': 'Sales Page'
 	}
 
 	const FUNNEL_ID = "<%= id %>";
@@ -860,7 +893,7 @@
 	var SELECTED_FUNNEL_APP = 2;
 	var SELECTED_VARIANT = 0;
 	var SELECTED_QUANTITY = 0;
-
+    hideProductsSectionTitle();
 	$('.item').click(function(){
 		window.location = $(this).attr('href');
 	});
@@ -1461,13 +1494,17 @@
 	}
 
 	function checkHideProduct(){
-		if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT]){
-			if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
-				$('#hideProduct').html('Enable');
-			}else{
-				$('#hideProduct').html('Disable');
-			}
-		}
+        if(funnelSteps.length>0){
+            if(funnelSteps[SELECTED_STEP]){
+                if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT]){
+                    if(funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].hidden){
+                        $('#hideProduct').html('Enable');
+                    }else{
+                        $('#hideProduct').html('Disable');
+                    }
+                }
+            }
+        }
 	}
 
 	function toggleHideProduct(){
@@ -1479,6 +1516,15 @@
 		}
 
 	}
+
+    function hideProductsSectionTitle(){
+        console.log(funnelSteps);
+        if(funnelSteps.length==0){
+            $('#products_section_title').hide();
+        }else{
+            $('#products_section_title').show();
+        }
+    }
 
 	$('#toggleFunnelSettings, #cancelFunnelSettings').click(function(){
 		toggleFunnelSettings();
@@ -1602,28 +1648,32 @@
 	}
 
 	function selectStep(){
-		
-		if(funnelSteps[SELECTED_STEP].products.length == 0){
-			$('#toggleEditProduct').css('visibility','hidden');
-			$('#toggleApps').css('visibility','hidden');
-			$('#deleteProduct').css('visibility','hidden');
-			$('#hideProduct').css('visibility','hidden');
-		}else{
-			$('#toggleEditProduct').css('visibility','visible');
-			$('#toggleApps').css('visibility','visible');
-			$('#deleteProduct').css('visibility','visible');
-			$('#hideProduct').css('visibility','visible');
-		}
 
+		if(funnelSteps[SELECTED_STEP]){
+            if(funnelSteps[SELECTED_STEP].products.length == 0){
+            $('#toggleEditProduct').css('visibility','hidden');
+            $('#toggleApps').css('visibility','hidden');
+            $('#deleteProduct').css('visibility','hidden');
+            $('#hideProduct').css('visibility','hidden');
+            }else{
+                $('#toggleEditProduct').css('visibility','visible');
+                $('#toggleApps').css('visibility','visible');
+                $('#deleteProduct').css('visibility','visible');
+                $('#hideProduct').css('visibility','visible');
+            }		
+        }
 		$('.step_item').removeClass('active');
 		$('#step_'+SELECTED_STEP).addClass('active');
 		
 		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<\/div>";
-		for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
-			var product = funnelSteps[SELECTED_STEP].products[j];
-			code += productHTML(product,SELECTED_STEP,j);
-			
-		}
+		if(funnelSteps[SELECTED_STEP]){
+            for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
+                var product = funnelSteps[SELECTED_STEP].products[j];
+                code += productHTML(product,SELECTED_STEP,j);
+                
+            }
+        }
+        
 		$("#prod_table").html(code);
 		//Effects
 		$('.prod_row').click(function(){
@@ -1644,9 +1694,12 @@
 		});
 		$('.prod_row').removeClass('active');
 		$('#product_'+SELECTED_STEP+'_'+SELECTED_PRODUCT).addClass('active');
-		if(funnelSteps[SELECTED_STEP].products.length > 0){
-			updateApps();
-		}
+        if(funnelSteps[SELECTED_STEP]){
+            if(funnelSteps[SELECTED_STEP].products.length > 0){
+                updateApps();
+            }
+        }
+		
 		if(!p_toggleAppSettings){
 			toggleAppSettings(SELECTED_APP);
 		}
@@ -1657,7 +1710,6 @@
 			toggleAddProduct();
 		}
 		checkHideProduct();
-		
 	}
 	//F SETTINGS
 	$('#saveFunnelSettings').click(function(){
@@ -1681,6 +1733,7 @@
 		saveFunnel();
 		updateFunnelSteps();
 		toggleAddStep();
+        hideProductsSectionTitle();
 	});
 
 	$('#updateStep').click(function(){
@@ -1696,6 +1749,7 @@
 		funnelSteps.splice(SELECTED_STEP,1);
 		saveFunnel();
 		updateFunnelSteps();
+        hideProductsSectionTitle();
 	});
 
 	$('#addSplit').click(function(){
@@ -2006,5 +2060,6 @@
 	}
 
 </script>
+<%- include('snippets/livechat'); %>
 </body>
 </html>

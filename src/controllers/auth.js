@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Token = require('../models/token');
 const {sendEmail} = require('../utils/index');
-
+const Affiliates = require('../models/affiliate');
 // @route POST api/auth/register
 // @desc Register user
 // @access Public
@@ -12,11 +12,21 @@ exports.register = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (user) return res.status(401).json({message: 'The email address you have entered is already associated with another account.'});
-
-        const newUser = new User({ ...req.body, role: "basic" });
-
+        //CHECK FOR AFFILIATE
+        var newUser;
+        if(req.cookies.aff){
+            newUser = new User({ ...req.body, role: "basic", referrer:req.cookies.aff});
+        }else{
+            newUser = new User({ ...req.body, role: "basic" });
+        }
+        
+        const affiliate_ = await Affiliates.findOne({userId:req.cookies.aff});
+        var referrals = affiliate_.referrals;
+        referrals.push(newUser._id);
+        const affiliate = await Affiliates.findByIdAndUpdate(affiliate_._id, {$set: {referrals:referrals}}, {new: true});
+        
         const user_ = await newUser.save();
-
+        res.clearCookie('aff');
         await sendVerificationEmail(user_, req, res);
 
     } catch (error) {

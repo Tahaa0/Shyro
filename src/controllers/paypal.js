@@ -2,6 +2,7 @@ const request = require('request');
 const Invoices = require('../models/invoice');
 const User = require('../models/user');
 const InvoicesController = require('./invoice');
+const AffiliateController = require('./affiliate');
 
 var CLIENT =
   'AVakVQOQBs9z-SvHoHnqyxHkp4uRw3IZ3fvC2dojfTs3hvE3Di1DrHijrvn20A393M_QNLt16jerb2BS';
@@ -96,6 +97,7 @@ exports.executePayment = async function(req,res){
               return res.sendStatus(500);
             }
             // 4. Return a success response to the clientsb-x8p6t3079833@personal.example.com
+            AffiliateController.createCommission(req.session['user_id'],valueSTR);
             InvoicesController.clearUser(req.session['user_id']);
             res.status(200).json({message: 'Invoice was successfully paid.'})
           });

@@ -1040,10 +1040,10 @@ vertical-align: top;
 	margin-top: 10px;
 	font-family: 'Inter';
 	font-size: 12px;
-	width: 500px;
+	width: 800px;
 }
 .select_tab{
-	flex: 0 0 33.333%;
+	flex: 0 0 16.6666%;
 	padding: 8px;
 	text-align: center;
 	border-radius: 12px;
@@ -2198,4 +2198,8 @@ cursor: not-allowed;
 .invoice{
 	border-top: 1px solid #EEE;
 	margin-top: 20px;
+}
+
+#funnel_name,#funnel_currency{
+	height: 70px;
 }
