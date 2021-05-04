@@ -5,6 +5,9 @@ const ticketSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
+    username: {
+        type: String
+    },
     title: {
         type: String,
         required: 'Title is empty.',
@@ -26,6 +29,10 @@ const ticketSchema = new mongoose.Schema({
     },
     message:{
         type: String
+    },
+    read:{
+        type:Boolean,
+        default:true
     }
 }, {timestamps: true});
 

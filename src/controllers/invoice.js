@@ -65,6 +65,15 @@ var calculateInvoice = function(user){
 }
 
 exports.indexOwn = async function (req, res) {
-    const invoices = await Invoices.find({userId:req.session['user_id']});
+    const invoices = await Invoices.find({userId:req.session['user_id']});  
     res.status(200).json({invoices});
+};
+
+exports.notification = async function (req, res) {
+    const invoices = await Invoices.find({userId:req.session['user_id'],status:0});
+    if(invoices.length>0){
+        res.status(200).json({notify:true});
+    }else{
+        res.status(200).json({notify:false});
+    }
 };

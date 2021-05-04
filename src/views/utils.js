@@ -100,6 +100,21 @@ function indexOwnInvoices(cb){
 	});
 }
 
+function notificationInvoices(cb){
+	$.ajax({
+	  url: "/api/invoice/notification",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
 //MARKETPLACE
 function createTemplate(title,price,guarantee,template_link,description,features,faq,main_img,bottom_imgs,cb){
 	$.ajax({
@@ -176,6 +191,21 @@ function getTemplate(id,cb){
 	});
 }
 //TICKET
+
+function notificationTickets(cb){
+	$.ajax({
+	  url: "/api/ticket/notification",
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
 
 function replyTicket(id,message,cb){
 	$.ajax({
@@ -541,3 +571,30 @@ function getMap(id,cb){
 	});
 }
 */
+
+
+
+
+
+
+//RUNTIME
+
+notificationInvoices(function(err,dd){
+	if(!err) {
+		if(dd.notify){
+			$('#subscriptions_item>.text').addClass('notify');
+		}
+	}else{
+		console.log(err);
+	}
+});
+
+notificationTickets(function(err,dd){
+	if(!err) {
+		if(dd.notify){
+			$('#support_item>.text').addClass('notify');
+		}
+	}else{
+		console.log(err);
+	}
+});

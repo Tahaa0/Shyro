@@ -15,6 +15,8 @@ router.post('/', [
 
 router.put('/close', Ticket.close);
 router.put('/reply', Ticket.reply);
+
+router.get('/notification',Ticket.notification);
 /*
 //SHOW
 router.get('/:id',  Funnel.show);

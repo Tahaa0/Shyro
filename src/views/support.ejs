@@ -154,6 +154,7 @@
 										<h3 id='d_date'>Date : Just created.</h3>
 									</div>
 								</div>
+								<h4 id='d_username'>Username</h4>
 								<h2 id="d_title">Subject Title</h2>
 								<p id='d_message'>Message..</p>
 								
@@ -231,6 +232,7 @@
 
 	function showTicket(t){
 		$('#d_title').html(t.title);
+		$('#d_username').html(t.username);
 		$('#d_priority').html('Priority : <span style="color:#6C5DD3">'+t.priority+'</span>');
 		$('#d_department').html('Department : '+t.department);
 		$('#d_date').html('Date : '+durationTextSupport(new Date(t.createdAt)));

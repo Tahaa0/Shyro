@@ -7,5 +7,6 @@ const router = express.Router();
 
 //INDEX
 router.get('/', Invoice.indexOwn);
+router.get('/notification',Invoice.notification);
 
 module.exports = router;

@@ -1884,7 +1884,7 @@ margin-top: 30px;
 	color: #000;
 	font-family: 'Poppins';
 	margin-left: 9px;
-	margin-top: 30px;
+	margin-top: 10px;
 	border-bottom: 1px solid #E4E4E4;
 	padding-bottom: 30px;
 	margin-bottom: 30px;
@@ -1917,6 +1917,14 @@ margin-top: 30px;
 	color: #5F75EE;
 	font-family: 'Inter';
 	font-weight: 600;
+}
+#d_username{
+	font-size: 13px;
+	color: #5F75EE;
+	font-family: 'Inter';
+	font-weight: 600;
+	margin-left: 9px;
+	margin-top: 20px;
 }
 #replies p{
 	
@@ -2202,4 +2210,14 @@ cursor: not-allowed;
 
 #funnel_name,#funnel_currency{
 	height: 70px;
+}
+
+.notify::after{
+	content:"";
+	display: inline-block;
+	width: 5.5px;
+	height: 5px;
+	background-color: #FF754C;
+	vertical-align: top;
+	border-radius: 100%;
 }
