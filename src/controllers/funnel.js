@@ -277,3 +277,25 @@ exports.getSales = async function (req, res) {
         res.status(500).json({message: error.message})
     }
 };
+
+exports.getAnalytics = async function (req, res) {
+    try {
+        const id = req.params.id;
+
+        const webhook_ = await Webhooks.findOne({funnelId:id});
+
+        if (!webhook_) return res.status(401).json({message: 'Funnel webhook does not exist'});
+        if (req.session['user_id'].toString() !== webhook_.userId.toString()) return res.status(401).json({message: "Sorry, you don't have the permission to upd this data."});
+
+        var orders = webhook_.sales.length;
+        var revenue = 0;
+        for(var i=0;i<webhook_.sales.length;i++){
+            revenue += webhook_.sales[i].original_amount_cents;
+        }
+        var revenue = revenue/100;
+        
+        res.status(200).json({orders:orders,revenue:revenue});
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+};

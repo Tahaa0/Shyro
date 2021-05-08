@@ -101,7 +101,7 @@
 											<i class="fab fa-paypal"></i>
 										</div>
 										<div class="app_details">
-											<div class="app_title">Paypal</div>
+											<div class="app_title">Shyro Pay</div>
 											<div class="app_caption">Integrate both Paypal & Stripe</div>
 										</div>
 										<div class="switchbox">
@@ -755,7 +755,7 @@
 										
 										</div>
 										<div class="f_buttons" style="margin-top: 20px;">
-											<button class="cancelAppSettings">Cancel</button>
+											<button class="cancelAppSettings">Done</button>
 										</div>
 									</div>
 									<div id="appSettingsBox_4" class="box_2 appsettingsbox" style='width:0px;display: none;'>
@@ -784,7 +784,7 @@
 										
 										</div>
 										<div class="f_buttons" style="margin-top: 20px;">
-											<button class="cancelAppSettings">Cancel</button>
+											<button class="cancelAppSettings">Done</button>
 										</div>
 									</div>
 
@@ -916,10 +916,14 @@
 
 	function productHTML(p,i,j){
 		var str_hidden = "";
+        var str_bump = "";
 		if(p.hidden){
 			str_hidden = "hidden";
 		}
-		var HTML = "<div class=\"prod_row "+str_hidden+"\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
+        if(p.bump){
+            str_bump = "(Order Bump)";
+        }
+		var HTML = "<div class=\"prod_row "+str_hidden+"\"  id=\"product_"+i+"_"+j+"\" data-i=\""+i+"\" data-j=\""+j+"'\">\t\r\n<div class=\"prod_cell\">"+p.title+"<span style='color:#AAA; font-weight:100; margin-left:5px;'>"+str_bump+"</span><\/div>\r\n<div class=\"prod_cell\">"+p.stripe+"<\/div>\r\n<div class=\"prod_cell\">"+p.paypal+"<\/div>\r\n<div class=\"prod_cell\">"+p.price+" USD<\/div>\r\n<\/div>";
 		return HTML;
 	}
 
@@ -1389,12 +1393,15 @@
 			var orderBumpCode = '<div class=\"bump1\">\r\n\t\t<label for=\"bump-'+product.stripe+'\"><input type=\"checkbox\" id=\"bump-'+product.stripe+'\" name=\"xxbump\" value=\"'+product.stripe+'\"> Add this cool thing<\/label>\r\n\t\t<p><span class=\'x1\'>ONE TIME OFFER ('+product.price+'$) :<\/span> Get full access to '+product.title+' for a special one-time only price of <strong>$'+product.price+'<\/strong> Lorem ipsum dolor sit amet<\/p>\r\n\t\t<h4>Click YES to add this to your order now for just '+product.price+'$<\/h4>\r\n\t<\/div>';
 			product.bumpCode = orderBumpCode;
 		}
+
 		saveFunnel();
+        updateFunnelSteps();
 	}
 
 	function switchOrderBumpOff(){
 		funnelSteps[SELECTED_STEP].products[SELECTED_PRODUCT].bump = false;
 		saveFunnel();
+        updateFunnelSteps();
 	}
 
 	function updateOrderBump(){

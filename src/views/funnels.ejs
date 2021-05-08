@@ -30,7 +30,7 @@
 
 		</div>
 		<div class="row">
-			<div class="col-md-11 center_page">
+			<div class="col-md-12 center_page">
 				<div class="inside">
 					<div class="welcome_box">
 						<h4>Funnel Editor</h4>
@@ -77,6 +77,43 @@
 				</div>
 				<div id="insideProd">
 				
+<div class="funnel_item "+color+"">
+	<div class="f_icon"><img src="/views/gfx/funnel.png" alt=""></div>
+	<div class="flex">
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+			<div class="f_buttons" style='display:none;'>
+				<button onclick='editfunnel("+i+")' class='edit_btn'><i class="far fa-edit"></i></button>
+				<button onclick='deletefunnel("+i+")' class='delete_btn'><i class="far fa-trash-alt"></i></button>
+			</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+		<div class="f_details">
+			<div class="f_title">"+title+"</div>
+			<div class="f_caption">"+activeText+"</div>
+		</div>
+	</div>
+</div>
 				
 				</div>
 			</div>
@@ -95,12 +132,13 @@
 
 	
 
-	function funnelHTML(title,steps,updated_text,color,isActive,i){
+	function funnelHTML(id,title,steps,updated_text,color,isActive,i){
 		var activeText = 'Active';
 		if(!isActive){
 			activeText = 'Inactive';
 		}
-		var HTML = "<div class=\"funnel_item "+color+"\">\r\n<div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div>\r\n<div class=\"flex\">\r\n<div class=\"f_details\">\r\n<div class=\"f_title\">"+title+"<\/div>\r\n<div class=\"f_caption\">"+activeText+"<\/div>\r\n<div class=\"f_buttons\" style='display:none;'><button onclick='editfunnel("+i+")' class=\'edit_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'delete_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div>\r\n<\/div>\r\n<div class=\"f_details textcenter\">\r\n<div class=\"f_caption2\">"+steps+" Steps<\/div>\r\n<\/div>\r\n<div class=\"f_details2\">\r\n<div class=\"f_caption2\">"+updated_text+"<\/div>\r\n<\/div>\r\n<\/div>\r\n<\/div>";
+		//var HTML = "<div class=\"funnel_item "+color+"\">\r\n<div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div>\r\n<div class=\"flex\">\r\n<div class=\"f_details\">\r\n<div class=\"f_title\">"+title+"<\/div>\r\n<div class=\"f_caption\">"+activeText+"<\/div>\r\n<div class=\"f_buttons\" style='display:none;'><button onclick='editfunnel("+i+")' class=\'edit_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'delete_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div>\r\n<\/div>\r\n<div class=\"f_details textcenter\">\r\n<div class=\"f_caption2\">"+steps+" Steps<\/div>\r\n<\/div>\r\n<div class=\"f_details2\">\r\n<div class=\"f_caption2\">"+updated_text+"<\/div>\r\n<\/div>\r\n<\/div>\r\n<\/div>";
+		var HTML = "<div class=\"funnel_item "+color+"\">\r\n\t<div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div>\r\n\t<div class=\"flex\">\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_title\">"+title+"<\/div>\r\n\t\t\t<div class=\"f_caption\">"+activeText+"<\/div>\r\n\t\t\t<div class=\"f_buttons\" style=\'display:none;\'>\r\n\t\t\t\t<button onclick=\'editfunnel("+i+")\' class=\'edit_btn\'><i class=\"far fa-edit\"><\/i><\/button>\r\n\t\t\t\t<button onclick=\'deletefunnel("+i+")\' class=\'delete_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button>\r\n\t\t\t<\/div>\r\n\t\t<\/div>\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_caption\">Revenue<\/div>\r\n\t\t\t<div class=\"f_title\" id=\"revenue_"+id+"\">$"+0+"<\/div>\r\n\t\t<\/div>\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_caption\">Orders<\/div>\r\n\t\t\t<div class=\"f_title\" id=\"orders_"+id+"\">"+0+"<\/div>\r\n\t\t<\/div>\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_caption\">Conv. Rate<\/div>\r\n\t\t\t<div class=\"f_title\">"+0+"%<\/div>\r\n\t\t<\/div>\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_caption\">Optins<\/div>\r\n\t\t\t<div class=\"f_title\">"+0+"<\/div>\r\n\t\t<\/div>\r\n\t\t<div class=\"f_details\">\r\n\t\t\t<div class=\"f_caption\">Optins Rate<\/div>\r\n\t\t\t<div class=\"f_title\">"+0+"%<\/div>\r\n\t\t<\/div>\r\n\t<\/div>\r\n<\/div>"
 		return HTML;
 	}
 
@@ -145,7 +183,16 @@
 			/*code += "<div class='sttl' data-index="+i+" id='sttl_"+i+"'><span style='padding-left:4px;'>"+funnel.title+"</span><button class='minibutton' onclick='deletefunnel("+i+")'>Delete</button><button class='minibutton' onclick='editfunnel("+i+")'>Edit</button></div>";
 			code += "<div class=\"funnel_item\"><div class=\"f_icon\"><img src=\"\/views\/gfx\/funnel.png\" alt=\"\"><\/div><div class=\"f_details\"><div class=\"f_title\">"+funnel.title+"<\/div><div class=\"f_caption\">Active<\/div><div class=\"f_buttons\" style='display:none;'><button onclick='editfunnel("+i+")' class=\'close_btn\'><i class=\"far fa-edit\"><\/i><\/button><button onclick='deletefunnel("+i+")' class=\'close_btn\'><i class=\"far fa-trash-alt\"><\/i><\/button><\/div><\/div><div class=\"f_details\"><div class=\"f_caption2\">3 Steps<\/div><\/div><div class=\"f_details2\"><div class=\"f_caption2\">Updated 12h ago<\/div><\/div><\/div>";*/
 			var lastUpdated = new Date(funnel.updatedAt);
-			code += funnelHTML(funnel.title,funnel.steps.length,durationText(lastUpdated),COLORS[i%3],true,i);
+			code += funnelHTML(funnel._id,funnel.title,funnel.steps.length,durationText(lastUpdated),COLORS[i%3],true,i);
+			getAnalytics(funnel._id,function(err,data){
+	            if(!err) {
+	                $('#orders_'+funnel._id).html(data.orders);
+	                $('#revenue_'+funnel._id).html("$"+data.revenue);
+	            }else{
+	                console.log(err);
+	            }
+	        });
+			
 		}
 		$("#myfunnels").html(code);
 		//EFFECTS
@@ -208,6 +255,7 @@
 				console.log(err);
 			}
 		});
+
 	}
 	
 </script>

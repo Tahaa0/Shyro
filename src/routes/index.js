@@ -77,7 +77,7 @@ module.exports = app => {
 
     app.get('/account', (req,res)=>{
         if(req.session['token']){
-            res.render('account.ejs');
+            res.render('account.ejs',{sidebar_index:0});
         }else{
             res.redirect('/login');
         }

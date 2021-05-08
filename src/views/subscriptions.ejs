@@ -147,7 +147,8 @@
 					
 				}
 				$('#current_invoices').append("<p class='lighttext' style='color:black;size:15px;margin-top:10px;'>Pay Total : $"+total+"</p><div id='paypal-button'></div>")
-				paypal.Button.render({
+				if(total > 0){
+					paypal.Button.render({
 				    env: 'sandbox', // Or 'production'
 				    // Set up the payment:
 				    // 1. Add a payment callback
@@ -174,6 +175,10 @@
 				        });
 				    }
 				  }, '#paypal-button');
+				}else{
+					$('#paypal-button').hide();
+				}
+				
 			}else{
 				console.log(err);
 			}

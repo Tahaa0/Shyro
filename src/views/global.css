@@ -900,6 +900,7 @@ vertical-align: top;
 	-o-transition: 	400ms all;
 	transition: 	400ms all;
 	margin-top: 22px;
+	border: 1px solid #E5E5E5;
 }
 .funnel_item:first-child{
 	margin-top: 0;	
@@ -1223,7 +1224,7 @@ vertical-align: top;
 #myapps{
 	margin-top: 50px;
 }
-#applist h2, #app_desc h2, #mysubscriptions h2{
+#applist h2, #app_desc h2, #mysubscriptions h2,h2{
 	font-size: 18px;
 	font-family: 'Poppins';
 	font-weight: 500;
@@ -2220,4 +2221,63 @@ cursor: not-allowed;
 	background-color: #FF754C;
 	vertical-align: top;
 	border-radius: 100%;
+}
+
+.an_flex{
+	display: flex;	border-radius: 16px; border: 1px solid #E4E4E4;
+}
+.an_details{
+	width: 25%; flex: 0 0 25%; padding: 24px;	
+}
+.an_details:not(:last-child){
+	border-right: 1px solid #E4E4E4;
+}
+.an_head{
+	display: flex;	
+}
+.an_icon{
+	width: 18px;
+	height: 18px;
+	border-radius: 6px;
+	font-size: 9px;
+	padding-top: 2px;
+	padding-left: 0px;		
+	text-align: center;
+	background-color: #6C5DD3;
+	color: #FFF;
+}
+.an_text{
+	display: block;	
+	font-size: 12px;
+	line-height: 1.3333;
+	color:#000;
+	font-weight: 500;
+	margin-left: 8px;
+	margin-top: 0.5px;
+}
+.an_counter{
+	font-size: 40px;
+	line-height: 1.5;
+	font-weight: 600;
+	font-family: 'Poppins';
+	color:#000;
+	margin-top: 5px;	
+}
+.an_indicator{
+	height: 2px;
+	background-color: #E4E4E4;
+}
+.an_progress{
+	position: relative;
+	height: 2px;
+	background-color: #6C5DD3;
+}
+.an_icon.blue,.an_progress.blue{
+	background-color: #3F8CFF;
+}
+.an_icon.pink,.an_progress.pink{
+	background-color: #FFA2C0;
+}
+.an_icon.yellow,.an_progress.yellow{
+	background-color: #FF754C;
 }

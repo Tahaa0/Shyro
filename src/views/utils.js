@@ -375,6 +375,21 @@ function getSales(id,cb){
 	});
 }
 
+function getAnalytics(id,cb){
+	$.ajax({
+	  url: "/api/funnel/analytics/"+id,
+	  type: "GET",
+	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+	  data: {},
+	  error: function(err) {
+	    cb(err,{});
+	  },
+	  success: function(data,status,xhr) {
+	    cb(null,data);
+	  }
+	});
+}
+
 function getFunnel(id,cb){
 	$.ajax({
 	  url: "/api/funnel/"+id,

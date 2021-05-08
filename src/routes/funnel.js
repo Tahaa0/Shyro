@@ -21,5 +21,6 @@ router.put('/:id', Funnel.update);
 router.delete('/:id', Funnel.destroy);
 //Get sales
 router.get('/sales/:id', Funnel.getSales);
+router.get('/analytics/:id', Funnel.getAnalytics);
 
 module.exports = router;
