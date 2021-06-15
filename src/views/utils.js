@@ -17,6 +17,11 @@ $('#logout').click(function(){
 	});
 })
 
+function notify(message){
+	$('.notif_bar').html(message);
+	$('.notif_bar').slideDown(400).delay(2000).slideUp(400);
+}
+
 function durationText(date){
 		var now = new Date();
 		var milliseconds = now-date;

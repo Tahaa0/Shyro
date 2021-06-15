@@ -17,6 +17,9 @@
 	<link href="/views/gfx/fonts/flaticon.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+	<div class="notif_bar" style="display: none;">
+	
+	</div>
     <script type="text/javascript">
 		$.getJSON('http://ipinfo.io/?token=87ed38221c7ade', function(data){
 		    console.log(data);
@@ -94,7 +97,19 @@
 	
 	</div>
 	</div>
+
 <script>
+	function notify(message){
+		$('.notif_bar').removeClass('redalert');
+		$('.notif_bar').html(message);
+		$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
+	}
+	function notifyRed(message){
+		$('.notif_bar').addClass('redalert');
+		$('.notif_bar').html(message);
+		$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
+	}
+
 	$('#switchreg').click(function() {
 		$('#log').hide();
 		$('#reg').show();
@@ -135,7 +150,8 @@ if(logform){
 			localStorage.setItem("token",data.token);
 			window.location = '/dashboard';
 		}).fail(function(data,status,xhr){
-			alert(status+' : '+data.responseText);
+
+			notifyRed(JSON.stringify(data.responseJSON.error));
 		});
 	});
 }
@@ -150,10 +166,10 @@ if(regform){
 			'lastName' : r_ln.value
 		}
 		$.post('/api/auth/register',data,function(data,status,xhr){
-			alert("We sent you a link for verification on your email please verify.");
-			window.location.reload();
+			notify("We sent you a link for verification on your email please verify.");
+			setTimeout(function(){window.location.reload()},2500);
 		}).fail(function(data,status,xhr){
-			alert(status+' : '+data.responseText);
+			notifyRed(JSON.stringify(data.responseJSON.error));
 		});
 	});
 }
@@ -174,6 +190,7 @@ if(regform){
 	  }
 	});
 });*/
+
 </script>
 <%- include('snippets/livechat'); %>
 </body>

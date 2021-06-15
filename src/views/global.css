@@ -743,7 +743,7 @@ hr{
 }
 #sidebar_menu{
 	padding: 20px;
-	padding-right: 40px;
+	padding-right: 20px;
 }
 #sidebar_menu>h4{
 	color:#808191;
@@ -2280,4 +2280,25 @@ cursor: not-allowed;
 }
 .an_icon.yellow,.an_progress.yellow{
 	background-color: #FF754C;
+}
+
+.tag_.sidebartag{
+	font-size: 11px;
+	padding: 2.5px 10px;
+	margin-left: 10px;
+	color: #3F8CFF;
+	background-color: #E2F3F8;	
+}
+
+.notif_bar{
+	position: fixed;
+	width: 100vw;
+	text-align: center;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #82C263;
+	color: #FFF;
+}
+.notif_bar.redalert{
+	background-color: #E04A3A;
 }

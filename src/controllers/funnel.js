@@ -206,7 +206,7 @@ exports.checkMembership = async function (req,res){
         var membershipLevel = user.membershipLevel;
 
         if(membershipLevel == -1){
-            return res.render('dashboard.ejs',{sidebar_index:0,popup:1});
+            return res.render('dashboard.ejs',{sidebar_index:0,popup:0});
         }else{
             return res.render('dashboard.ejs',{sidebar_index:0,popup:0});
         }

@@ -17,7 +17,12 @@ exports.getIndex = async function (req,res){
             res.cookie('aff', req.query['aff'], {maxAge: 2592000000});
         }
 
-        res.render('landing/index.ejs')
+        if(req.session['token']){
+            res.render('landing/index.ejs',{logged:true});
+        }else{
+            res.render('landing/index.ejs',{logged:false});
+        }
+        
         
     } catch (error) {
         res.status(500).json({message: error.message})

@@ -51,7 +51,7 @@ const UserSchema = new mongoose.Schema({
     
     isVerified: {
         type: Boolean,
-        default: true
+        default: false
     },
     
     resetPasswordToken: {
@@ -67,7 +67,7 @@ const UserSchema = new mongoose.Schema({
     membershipLevel : {
         type: Number,
         required: true,
-        default: -1
+        default: 1
     },
 
     nextBilling: {

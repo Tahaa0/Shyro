@@ -82,7 +82,7 @@ module.exports = app => {
             res.redirect('/login');
         }
     });
-
+    /*
     app.get('/marketplace', (req,res)=>{
         if(req.session['token']){
             res.render('marketplace.ejs',{sidebar_index:3});
@@ -121,7 +121,7 @@ module.exports = app => {
         }else{
             res.redirect('/login');
         }
-    });
+    });*/
 
 
     app.get('/paypaltest', (req,res)=>{
