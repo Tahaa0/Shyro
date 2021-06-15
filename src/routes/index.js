@@ -17,6 +17,28 @@ const authenticate = require('../middlewares/authenticate');
 module.exports = app => {
     app.get('/', AffiliateController.getIndex);
 
+    app.get('/privacy-statement', (req, res) => {
+        if(req.session['token']){
+            res.render('landing/privacy.ejs',{logged:true});
+        }else{
+            res.render('landing/privacy.ejs',{logged:false});
+        }
+    });
+    app.get('/terms-of-service', (req, res) => {
+        if(req.session['token']){
+            res.render('landing/terms.ejs',{logged:true});
+        }else{
+            res.render('landing/terms.ejs',{logged:false});
+        }
+    });
+    app.get('/refund-policy', (req, res) => {
+        if(req.session['token']){
+            res.render('landing/refund.ejs',{logged:true});
+        }else{
+            res.render('landing/refund.ejs',{logged:false});
+        }
+    });
+
     app.get('/index.html', (req, res) => {
         res.redirect('/')
     });
