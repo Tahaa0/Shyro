@@ -1041,10 +1041,10 @@ vertical-align: top;
 	margin-top: 10px;
 	font-family: 'Inter';
 	font-size: 12px;
-	width: 800px;
+	width: 940px;
 }
 .select_tab{
-	flex: 0 0 16.6666%;
+	flex: 0 0 14.2857%;
 	padding: 8px;
 	text-align: center;
 	border-radius: 12px;
@@ -1114,16 +1114,16 @@ vertical-align: top;
 }
 
 .s_icon{
-	min-width: 88px;
-	width: 88px;
-	height: 70px;
+	min-width: 70px;
+	width: 70px;
+	height: 64px;
 	background-color: #FFEBF6;
 	border-radius: 12px;
 	margin-right: 16px;
 	color:#11142D;
 	text-align: center;
 	vertical-align: middle;
-	padding-top: 5px;	
+	padding-top: 12px;	
 	font-size: 28px;
 	-webkit-transition: 	400ms all;
 	-o-transition: 	400ms all;
@@ -2302,3 +2302,7 @@ cursor: not-allowed;
 .notif_bar.redalert{
 	background-color: #E04A3A;
 }
+.reply_date{
+	color: #AAA;
+	font-weight: 300;
+	float: right;

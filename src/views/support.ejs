@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Support Center - Shyro</title>
-	<link rel="shortcut icon" href="images/favicon.ico" />
+	<<link rel="shortcut icon" href="/views/favicon.ico" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -251,7 +251,7 @@
 				if(i>0){
 					code+="<div class='sep'></div>";
 				}
-				code += "<h4>"+t.replies[i].full_name+"</h4>";
+				code += "<h4>"+t.replies[i].full_name+"<span class='reply_date'>"+durationTextSupport(new Date(t.replies[i].timestamp))+"</span></h4>";
 				code += "<p>"+t.replies[i].message+"</p>";
 			}
 			$('#replies').html(code);
