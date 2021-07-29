@@ -331,7 +331,7 @@ window.onload = function(){
         $("#pid-"+STEP.products[I].stripe+"-0").data('quantity',q);
         $('#xxq'+I).html(q);
         //
-        CHOSEN_ID = $('input[name=xxprod]:checked').val();
+        CHOSEN_ID = STEP.products[I].quantity[q-2].stripe;
         console.log('3',CHOSEN_ID);
         if($('input[name=xxprod]:checked').data('quantity')){
           console.log('4A');
