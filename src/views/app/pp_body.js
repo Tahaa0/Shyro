@@ -108,7 +108,7 @@ if(VALID){ //IF THIS IS A STEP
         var inHTML = $('#pid-'+STEP.products[i].stripe+'-0').parent().find('.elOrderProductOptinPrice').html();
         $('#pid-'+STEP.products[i].stripe+'-0').parent().find('.elOrderProductOptinPrice').html("<span class='xxprice' data-value="+STEP.products[i].price+">"+inHTML+"</span>");
         //QUANTITY
-        if(STEP.products[i].quantity){
+        if(STEP.products[i].quantityApp && STEP.products[i].quantity){
           if(STEP.products[i].quantity.length > 0){
             //REMOVE Quantity Product (pp & stripe)
             for(var j=0;j<STEP.products[i].quantity.length;j++){
