@@ -316,8 +316,10 @@ window.onload = function(){
       $('.xxqp').click(function(){
         var I = $(this).data('prod');
         if($("#pid-"+STEP.products[I].stripe+"-0").data('quantity')){
+          console.log('1A');
           var q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
         }else{
+          console.log('1B');
           var q = 1;
         }
         if(q <= STEP.products[I].quantity.length){
