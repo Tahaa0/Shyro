@@ -317,7 +317,12 @@ window.onload = function(){
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
         if($('input[name=xxprod]:checked').data('quantity')){
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
-          $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[QUANTITY-2].price);
+          if(QUANTITY > 1){
+            $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[QUANTITY-2].price);
+          }else{
+            $('input[name=xxprod]:checked').data('price',STEP.products[I].price);
+          }
+          
         }else{
           QUANTITY = 1;
         }
