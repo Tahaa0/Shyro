@@ -1,4 +1,29 @@
-
+function calculateID() {
+    for(var i=0;i<STEP.products.length;i++){
+      if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
+          console.log('QUANTITY',QUANTITY);
+          console.log('isPAYPAL',isPAYPAL);
+          console.log('PAYPALAPP',paypalAPP);
+          if(QUANTITY == 1){
+            if(isPAYPAL){
+              console.log('X1');
+              return STEP.products[i].paypal;
+            }else{
+              console.log('X2');
+              return STEP.products[i].stripe;
+            }
+          }else{
+            if(isPAYPAL){
+              console.log('X1');
+              return STEP.products[i].quantity[QUANTITY-2].paypal;
+            }else{
+              console.log('X2');
+              return STEP.products[i].quantity[QUANTITY-2].stripe;
+            }
+          }
+      }
+    }
+  }
 window.onload = function(){
 
   //Hide variant box
@@ -38,32 +63,7 @@ window.onload = function(){
   FORM.html(serializeToForm($form.serializeArray()));
 
   //Gets the right product ID by indentifying which payment method is chosen
-  function calculateID() {
-    for(var i=0;i<STEP.products.length;i++){
-      if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
-          console.log('QUANTITY',QUANTITY);
-          console.log('isPAYPAL',isPAYPAL);
-          console.log('PAYPALAPP',paypalAPP);
-          if(QUANTITY == 1){
-            if(isPAYPAL){
-              console.log('X1');
-              return STEP.products[i].paypal;
-            }else{
-              console.log('X2');
-              return STEP.products[i].stripe;
-            }
-          }else{
-            if(isPAYPAL){
-              console.log('X1');
-              return STEP.products[i].quantity[QUANTITY-2].paypal;
-            }else{
-              console.log('X2');
-              return STEP.products[i].quantity[QUANTITY-2].stripe;
-            }
-          }
-      }
-    }
-  }
+  
 
   function serializeToForm(arr){
     var html = "";
