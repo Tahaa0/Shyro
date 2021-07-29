@@ -292,10 +292,11 @@ window.onload = function(){
       //quantity
       $('.xxqm').click(function(){
         var I = $(this).data('prod');
+        var q = 1;
         if($("#pid-"+STEP.products[I].stripe+"-0").data('quantity')){
-          var q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
+          q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
         }else{
-          var q = 1;
+          q = 1;
         }
         if(q > 1){
           q--;
@@ -315,24 +316,29 @@ window.onload = function(){
 
       $('.xxqp').click(function(){
         var I = $(this).data('prod');
+        var q = 1;
         if($("#pid-"+STEP.products[I].stripe+"-0").data('quantity')){
           console.log('1A');
-          var q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
+          q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
         }else{
           console.log('1B');
-          var q = 1;
+          q = 1;
         }
         if(q <= STEP.products[I].quantity.length){
+          console.log('2');
           q++;
         }
         $("#pid-"+STEP.products[I].stripe+"-0").data('quantity',q);
         $('#xxq'+I).html(q);
         //
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
+        console.log('3',CHOSEN_ID);
         if($('input[name=xxprod]:checked').data('quantity')){
+          console.log('4A');
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
           $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[QUANTITY-2].price);
         }else{
+          console.log('4B');
           QUANTITY = 1;
         }
         checkProd(calculateID());
