@@ -105,7 +105,7 @@ window.onload = function(){
       _price = "<span class='xxprice' data-value="+$('input[name=xxprod]:checked').data('price')+">$"+$('input[name=xxprod]:checked').data('price')+"</span>";
     }
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
-    
+    console.log(hh+ht+hb);
     $('.elOrderProductOptions tbody').html(hh+ht+hb);
     FORM.html(serializeToForm($form.serializeArray()));
 
