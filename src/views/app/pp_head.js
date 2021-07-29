@@ -341,7 +341,9 @@ window.onload = function(){
           console.log('4B');
           QUANTITY = 1;
         }
-        checkProd(calculateID());
+        var _id = calculateID();
+        console.log(_id);
+        checkProd(_id);
       });
 
       //Actually Appending the PAYMENT METHOD CHOICE FORM
