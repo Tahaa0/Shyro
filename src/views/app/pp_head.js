@@ -40,6 +40,7 @@ window.onload = function(){
   //Gets the right product ID by indentifying which payment method is chosen
   window.calculateID = function() {
     for(var i=0;i<STEP.products.length;i++){
+      console.log(STEP.products[i]);
       if(STEP.products[i].paypal == CHOSEN_ID || STEP.products[i].stripe == CHOSEN_ID){
           console.log('QUANTITY',QUANTITY);
           console.log('isPAYPAL',isPAYPAL);
