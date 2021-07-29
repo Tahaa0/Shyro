@@ -96,10 +96,12 @@ window.onload = function(){
 
     var _name = $('input[name=xxprod]:checked').attr('data-product-name');
     var _prc = $('input[name=xxprod]:checked').data('price');
+    console.log(_prc);
     var _price= "<span class='xxprice' data-value="+_prc+">$"+_prc+"</span>";
     var hh = "<tr class=\"clearfix elOrderProductOptinLabel elOrderProductOptinLabelTable\">\r\n<th class=\"pull-left elOrderProductOptinItem\" width=\"70%\">Item<\/th>\r\n<th class=\"pull-right elOrderProductOptinLabelPrice elOrderProductOptinPriceTable\" width=\"30%\">amount<\/th>\r\n<\/tr>";
     if($('input[name=xxprod]:checked').data('quantity') > 1){
       _name += " (x"+$('input[name=xxprod]:checked').data('quantity')+")";
+      console.log('A',$('input[name=xxprod]:checked').data('price'));
       _price = "<span class='xxprice' data-value="+$('input[name=xxprod]:checked').data('price')+">$"+$('input[name=xxprod]:checked').data('price')+"</span>";
     }
     var ht = "<tr class=\"clearfix elOrderProductOptinProducts\"><td class=\"pull-left elOrderProductOptinProductName product-name\" style=\"width: inherit;\">"+_name+"<\/td><td class=\"pull-right elOrderProductOptinPrice product-price\">"+_price+"<\/td><\/tr>";
@@ -326,32 +328,26 @@ window.onload = function(){
         var I = $(this).data('prod');
         var q = 1;
         if($("#pid-"+STEP.products[I].stripe+"-0").data('quantity')){
-          console.log('1A');
           q = $("#pid-"+STEP.products[I].stripe+"-0").data('quantity');
         }else{
-          console.log('1B');
           q = 1;
         }
         if(q <= STEP.products[I].quantity.length){
-          console.log('2');
           q++;
         }
         $("#pid-"+STEP.products[I].stripe+"-0").data('quantity',q);
         $('#xxq'+I).html(q);
         //
         CHOSEN_ID = $('input[name=xxprod]:checked').val();
-        console.log('3',CHOSEN_ID);
+
         if($('input[name=xxprod]:checked').data('quantity')){
-          console.log('4A');
           QUANTITY = $('input[name=xxprod]:checked').data('quantity');
           $('input[name=xxprod]:checked').data('price',STEP.products[I].quantity[QUANTITY-2].price);
         }else{
-          console.log('4B');
+
           QUANTITY = 1;
         }
-        var _id = calculateID();
-        console.log(_id);
-        checkProd(_id);
+        checkProd(calculateID());
       });
 
       //Actually Appending the PAYMENT METHOD CHOICE FORM
