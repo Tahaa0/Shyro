@@ -824,6 +824,7 @@
 							</div>
 							
 						</div>
+                        <div class="spacer20"></div>
                         <div class="row dbox">
                             <div class="field col-md-12">
                                 <div class="field_label">Webhook Link :</div>
@@ -1673,6 +1674,11 @@
 		
 		var code = "<div class=\"prod_headrow\">\r\n<div class=\"prod_cell\">Name<\/div>\r\n<div class=\"prod_cell\">Stripe ID<\/div>\r\n<div class=\"prod_cell\">Paypal ID<\/div>\r\n<div class=\"prod_cell\">Price<\/div>\r\n<\/div>";
 		if(funnelSteps[SELECTED_STEP]){
+            if(funnelSteps[SELECTED_STEP].products.length == 0){
+                $('#prod_table').hide();
+            }else{
+                $('#prod_table').show();
+            }
             for(var j=0;j<funnelSteps[SELECTED_STEP].products.length;j++){
                 var product = funnelSteps[SELECTED_STEP].products[j];
                 code += productHTML(product,SELECTED_STEP,j);

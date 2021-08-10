@@ -39,7 +39,7 @@ a, button, input { outline: medium none !important; color: #2575fc; }
 /* ------------------------
     Transition
 ------------------------*/
-/*a, i, .btn, .btn span, button, img, span, .dropdown-item, .social-icons li:hover a, .owl-item, .featured-item:after, .featured-item::before, .featured-item, .featured-icon, .featured-item .featured-icon i, .price-table, .post, .post .post-image::before, .post .post-image::after, .post .post-desc, .team-description, .team-social-icon, .team-member.style-3:before, .team-member.style-3:after, .timeline-content:before, .timeline-content:after{-webkit-transition: all 0.5s ease-in-out 0s; -moz-transition: all 0.5s ease-in-out 0s; -ms-transition: all 0.5s ease-in-out 0s; -o-transition: all 0.5s ease-in-out 0s; transition: all 0.5s ease-in-out 0s; }*/
+a, i, .btn, .btn span, button, img, span, .dropdown-item, .social-icons li:hover a, .owl-item, .featured-item:after, .featured-item::before, .featured-item, .featured-icon, .featured-item .featured-icon i, .price-table, .post, .post .post-image::before, .post .post-image::after, .post .post-desc, .team-description, .team-social-icon, .team-member.style-3:before, .team-member.style-3:after, .timeline-content:before, .timeline-content:after{-webkit-transition: all 0.5s ease-in-out 0s; -moz-transition: all 0.5s ease-in-out 0s; -ms-transition: all 0.5s ease-in-out 0s; -o-transition: all 0.5s ease-in-out 0s; transition: all 0.5s ease-in-out 0s; }
  
 
 /* ------------------------

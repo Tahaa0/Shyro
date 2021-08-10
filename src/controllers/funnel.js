@@ -6,7 +6,7 @@ const cc = require('iso-country-currency');
 const request = require('request');
 
 exports.index = async function (req, res) {
-    const funnels = await Funnels.find({userId:req.session['user_id']});
+    const funnels = await Funnels.find({userId:req.session['user_id']}).sort({updatedAt:-1});
     res.status(200).json({funnels});
 };
 
