@@ -2306,3 +2306,17 @@ cursor: not-allowed;
 	color: #AAA;
 	font-weight: 300;
 	float: right;
+}
+
+.documentation {
+	font-size: 20px;
+	color: #333;
+}
+
+.documentation a {
+	color: #6C5DD3; text-decoration: none;
+}
+
+.documentation a:hover {
+	color: #333; text-decoration: none;
+}
