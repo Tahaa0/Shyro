@@ -1,197 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sign In - Shyro</title>
 	<link rel="shortcut icon" href="/views/favicon.ico" />
-	
+
+	<link href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+		rel="stylesheet">
+
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script
-			  src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'></script>
 	<script defer src="/views/gfx/fontawesome/js/all.min.js"></script>
 	<link rel="stylesheet" href="/views/global.css">
 	<link href="/views/gfx/fonts/flaticon.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
 	<div class="notif_bar" style="display: none;">
-	
+
 	</div>
-    <script type="text/javascript">
-		$.getJSON('http://ipinfo.io/?token=87ed38221c7ade', function(data){
-		    console.log(data);
+
+	<script type="text/javascript">
+		$.getJSON('http://ipinfo.io/?token=87ed38221c7ade', function (data) {
+			console.log(data);
 		});
-    </script>
+
+		startTimer();
+	</script>
 
 	<div id="logcont">
-	<div id="reglog" class="dbox">
-	<div id="log">
-		<div class="field"><h1>Sign In</h1></div>
-		
-		<span id='logError' class="error"></span>
-		<form id='logform'>
-			<div class="field">
-				<div class="field_label">Your Email</div>
-				<div class="field_input"><input type="text" id="email"></div>
-			</div>
-			<div class="field">
-				<div class="field_label">Your Password</div>
-				<div class="field_input"><input type="password" id="pwd"></div>
-			</div>
-			
-			
-			<br>
-			<button class='black_button central' type="submit" id="submit">Log In</button>
-		</form>
-			<div style="text-align: center;">
-				<button class='fbutton' id='switchreg'>Create an account</button>
-				<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
-			</div>
-	</div>
-	<div id="reg" style='display:none'>
-		<div class="field"><h1>Sign Up</h1></div>
-		<!--<span id='regError' class="error" style="text-align: center; color: ; display: block; width:100%; margin-bottom: 20px;">Sign Up Not Available</span>-->
-		<form id="regform">
-			<div class="field">
-				<div class="field_label">Username</div>
-				<div class="field_input"><input type="text" name='username' id="r_username" ></div>
-			</div>
-			<div class="field">
-				<div class="field_label">Email</div>
-				<div class="field_input"><input type="text" name='email' id="r_email" ></div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="field_label">First Name</div>
-					<div class="field_input"><input type="text" name='firstName' id="r_fn"></div>
+		<div class="split left">
+				<div id="reglog" class="dbox">
+					<div id="log">
+						<div class="field">
+							<h1>Sign In</h1>
+						</div>
+
+						<span id='logError' class="error"></span>
+						<form id='logform'>
+							<div class="field">
+								<div class="field_label">Your Email</div>
+								<div class="field_input"><input type="text" id="email"></div>
+							</div>
+							<div class="field">
+								<div class="field_label">Your Password</div>
+								<div class="field_input"><input type="password" id="pwd"></div>
+							</div>
+
+
+							<br>
+							<button class='black_button central' type="submit" id="submit">Log In</button>
+						</form>
+						<div style="text-align: center;">
+							<button class='fbutton' id='switchreg'>Create an account</button>
+							<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password
+								Forgotten</button>
+						</div>
+					</div>
+					<div id="reg" style='display:none'>
+						<div class="field">
+							<h1>Sign Up</h1>
+						</div>
+						<!--<span id='regError' class="error" style="text-align: center; color: ; display: block; width:100%; margin-bottom: 20px;">Sign Up Not Available</span>-->
+						<form id="regform">
+							<div class="field">
+								<div class="field_label">Username</div>
+								<div class="field_input"><input type="text" name='username' id="r_username"></div>
+							</div>
+							<div class="field">
+								<div class="field_label">Email</div>
+								<div class="field_input"><input type="text" name='email' id="r_email"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">First Name</div>
+									<div class="field_input"><input type="text" name='firstName' id="r_fn"></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Last Name</div>
+									<div class="field_input"><input type="text" name='lastName' id="r_ln"></div>
+								</div>
+
+							</div>
+							<div class="field"> </div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="field_label">Password</div>
+									<div class="field_input"><input type="password" name='password' id="r_pwd"></div>
+								</div>
+								<div class="col-md-6">
+									<div class="field_label">Confirm Password</div>
+									<div class="field_input"><input type="password" name='password_confirm'
+											id="r_pwd_confirm">
+									</div>
+								</div>
+
+							</div>
+							<br>
+							<button class='black_button central' type="submit" id="r_submit">Sign Up</button>
+						</form>
+						<div style="text-align: center;">
+							<button class='fbutton' id='switchlog'>Log In to existing account</button>
+							<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password
+								Forgotten</button>
+						</div>
+					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="field_label">Last Name</div>
-					<div class="field_input"><input type="text" name='lastName' id="r_ln"></div>
+		</div>
+		<div class="split right" style="background-image: url('images/bg/07.png');">
+			<div class="centered">
+
+				<h1 class="text-login-1">Special Bonus!</h1>
+				<h4 class="text-login-2">Unlike others, our Social Proof is complete!</h4>
+				<h4  class="text-login-21">with every Shyro Account comes a Free Premium -Lifetime- account at VerifiedSource</h4>
+				<h4  class="text-login-3">Save on More than <span class="text-bold">$3000+</span> Annually</h4>
+
+				<img class="reviews" id="img" src="views/images/all.png" />
+
+				<h4  class="text-login-22">No Hidden Terms, Free Social Proof for life for the first <span class="text-bold">499 Users Only!</span></h4>
+
+				<div class="blink">
+					<button class="black_button central">Yes! Let Me In Now</button>
 				</div>
-				
+
 			</div>
-			<div class="field">	</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="field_label">Password</div>
-					<div class="field_input"><input type="password"  name='password' id="r_pwd"></div>
-				</div>
-				<div class="col-md-6">
-					<div class="field_label">Confirm Password</div>
-					<div class="field_input"><input type="password"  name='password_confirm' id="r_pwd_confirm"></div>
-				</div>
-				
-			</div>
-			<br>
-			<button class='black_button central' type="submit" id="r_submit">Sign Up</button>
-		</form>
-			<div style="text-align: center;">
-				<button class='fbutton' id='switchlog'>Log In to existing account</button>
-				<button class='fbutton' id='reset' onclick='window.location = "/recover"'>Password Forgotten</button>
-			</div>
-	</div>
-	
-	</div>
+
+
+		</div>
 	</div>
 
-<script>
-	function notify(message){
-		$('.notif_bar').removeClass('redalert');
-		$('.notif_bar').html(message);
-		$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
-	}
-	function notifyRed(message){
-		$('.notif_bar').addClass('redalert');
-		$('.notif_bar').html(message);
-		$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
-	}
-
-	$('#switchreg').click(function() {
-		$('#log').hide();
-		$('#reg').show();
-	});
-	$('#switchlog').click(function() {
-		$('#reg').hide();
-		$('#log').show();
-	});
-
-	var logform = document.getElementById('logform');
-	var regform = document.getElementById('regform');
-
-	var r_username = document.getElementById('r_username');
-	var r_email = document.getElementById('r_email');
-	var r_fn = document.getElementById('r_fn');
-	var r_ln = document.getElementById('r_ln');
-	var r_pwd = document.getElementById('r_pwd');
-	var r_pwd_confirm = document.getElementById('r_pwd_confirm');
-
-	var r_username = document.getElementById('r_username');
-	var r_email = document.getElementById('r_email');
-	var r_fn = document.getElementById('r_fn');
-	var r_ln = document.getElementById('r_ln');
-	var r_pwd = document.getElementById('r_pwd');
-	var r_pwd_confirm = document.getElementById('r_pwd_confirm');
-
-	var email = document.getElementById('email');
-	var pwd = document.getElementById('pwd');
-
-if(logform){
-	logform.addEventListener('submit',function(e){
-		e.preventDefault();
-		var data = {
-			'email' : email.value,
-			'password' : pwd.value,
+	<script type="text/javascript">
+		function displayNextImage() {
+			x = (x === images.length - 1) ? 0 : x + 1;
+			document.getElementById("img").src = images[x];
 		}
-		$.post('/api/auth/login',data,function(data,status,xhr){
-			localStorage.setItem("token",data.token);
-			window.location = '/dashboard';
-		}).fail(function(data,status,xhr){
 
-			notifyRed(JSON.stringify(data.responseJSON.error));
-		});
-	});
-}
-if(regform){
-	regform.addEventListener('submit',function(e){
-		e.preventDefault();
-		var data = {
-			'username' : r_username.value,
-			'email' : r_email.value,
-			'password' : r_pwd.value,
-			'firstName' : r_fn.value,
-			'lastName' : r_ln.value
+		function displayPreviousImage() {
+			x = (x <= 0) ? images.length - 1 : x - 1;
+			document.getElementById("img").src = images[x];
 		}
-		$.post('/api/auth/register',data,function(data,status,xhr){
-			notify("We sent you a link for verification on your email please verify.");
-			setTimeout(function(){window.location.reload()},2500);
-		}).fail(function(data,status,xhr){
-			notifyRed(JSON.stringify(data.responseJSON.error));
+
+		function startTimer() {
+			setInterval(displayNextImage, 1500);
+		}
+
+		var images = [], x = -1;
+		// images[0] = "views/images/review-1.png";
+		// images[1] = "views/images/review-2.webp";
+		// images[2] = "views/images/review-3.webp";
+		// images[3] = "views/images/review-4.png";
+		images[0] = "views/images/all.png";
+
+		// startTimer();
+	</script>
+
+	<script>
+		function notify(message) {
+			$('.notif_bar').removeClass('redalert');
+			$('.notif_bar').html(message);
+			$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
+		}
+		function notifyRed(message) {
+			$('.notif_bar').addClass('redalert');
+			$('.notif_bar').html(message);
+			$('.notif_bar').slideDown(400).delay(4000).slideUp(400);
+		}
+
+		$('#switchreg').click(function () {
+			$('#log').hide();
+			$('#reg').show();
 		});
-	});
-}
+		$('#switchlog').click(function () {
+			$('#reg').hide();
+			$('#log').show();
+		});
 
-/*$('#usertoken').click(function(){
-	$.ajax({
-	  url: "/api/user",
-	  type: "GET",
-	  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
-	  data: {},
-	  error: function(err) {
-	    alert(err);
-	    console.log(err);
-	  },
-	  success: function(data) {
-	    alert(data);
-	    console.log(data);
-	  }
-	});
-});*/
+		var logform = document.getElementById('logform');
+		var regform = document.getElementById('regform');
 
-</script>
-<%- include('snippets/livechat'); %>
+		var r_username = document.getElementById('r_username');
+		var r_email = document.getElementById('r_email');
+		var r_fn = document.getElementById('r_fn');
+		var r_ln = document.getElementById('r_ln');
+		var r_pwd = document.getElementById('r_pwd');
+		var r_pwd_confirm = document.getElementById('r_pwd_confirm');
+
+		var r_username = document.getElementById('r_username');
+		var r_email = document.getElementById('r_email');
+		var r_fn = document.getElementById('r_fn');
+		var r_ln = document.getElementById('r_ln');
+		var r_pwd = document.getElementById('r_pwd');
+		var r_pwd_confirm = document.getElementById('r_pwd_confirm');
+
+		var email = document.getElementById('email');
+		var pwd = document.getElementById('pwd');
+
+		if (logform) {
+			logform.addEventListener('submit', function (e) {
+				e.preventDefault();
+				var data = {
+					'email': email.value,
+					'password': pwd.value,
+				}
+				$.post('/api/auth/login', data, function (data, status, xhr) {
+					localStorage.setItem("token", data.token);
+					window.location = '/dashboard';
+				}).fail(function (data, status, xhr) {
+
+					notifyRed(JSON.stringify(data.responseJSON.error));
+				});
+			});
+		}
+		if (regform) {
+			regform.addEventListener('submit', function (e) {
+				e.preventDefault();
+				var data = {
+					'username': r_username.value,
+					'email': r_email.value,
+					'password': r_pwd.value,
+					'firstName': r_fn.value,
+					'lastName': r_ln.value
+				}
+				$.post('/api/auth/register', data, function (data, status, xhr) {
+					notify("We sent you a link for verification on your email please verify.");
+					setTimeout(function () { window.location.reload() }, 2500);
+				}).fail(function (data, status, xhr) {
+					notifyRed(JSON.stringify(data.responseJSON.error));
+				});
+			});
+		}
+
+		/*$('#usertoken').click(function(){
+			$.ajax({
+			  url: "/api/user",
+			  type: "GET",
+			  headers: { Authorization: "Bearer "+localStorage.getItem("token") },
+			  data: {},
+			  error: function(err) {
+				alert(err);
+				console.log(err);
+			  },
+			  success: function(data) {
+				alert(data);
+				console.log(data);
+			  }
+			});
+		});*/
+
+	</script>
+	<%- include('snippets/livechat'); %>
 </body>
+
 </html>
