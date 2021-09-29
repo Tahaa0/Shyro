@@ -351,6 +351,7 @@ function indexUsers(cb){
 }
 
 function indexFunnels(cb){
+	console.log();
 	$.ajax({
 	  url: "/api/funnel/",
 	  type: "GET",

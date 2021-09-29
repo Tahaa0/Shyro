@@ -117,14 +117,14 @@
 				<h1 class="text-login-1">Special Bonus!</h1>
 				<h4 class="text-login-2">Unlike others, our Social Proof is complete!</h4>
 				<h4  class="text-login-21">with every Shyro Account comes a Free Premium -Lifetime- account at VerifiedSource</h4>
-				<h4  class="text-login-3">Save on More than <span class="text-bold">$3000+</span> Annually</h4>
+				<h4  class="text-login-3">Save on More than <span class="text-bold" style="color: yellow;">$3000+</span> Annually</h4>
 
 				<img class="reviews" id="img" src="views/images/all.png" />
 
 				<h4  class="text-login-22">No Hidden Terms, Free Social Proof for life for the first <span class="text-bold">499 Users Only!</span></h4>
 
 				<div class="blink">
-					<button class="black_button central">Yes! Let Me In Now</button>
+					<button class="black_button_new central"  id='letmein'>Yes! Let Me In Now</button>
 				</div>
 
 			</div>
@@ -178,6 +178,11 @@
 			$('#reg').hide();
 			$('#log').show();
 		});
+		$('#letmein').click(function () {
+			$('#log').hide();
+			$('#reg').show();
+		});
+		
 
 		var logform = document.getElementById('logform');
 		var regform = document.getElementById('regform');
